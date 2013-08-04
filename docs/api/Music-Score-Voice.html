@@ -5,7 +5,6 @@ window.onload = function () {pageLoad();setSynopsis("mini_Music-Score-Voice.html
 </p></div></div><div id="synopsis"><p id="control.syn" class="caption expander" onclick="toggleSection('syn')">Synopsis</p><ul id="section.syn" class="hide" onclick="toggleSection('syn')"><li class="src short"><span class="keyword">data</span>  <a href="#t:Voice">Voice</a> a</li><li class="src short"><a href="#v:voice">voice</a> :: Real d =&gt; [(d, a)] -&gt; <a href="Music-Score-Voice.html#t:Voice">Voice</a> a</li><li class="src short"><a href="#v:getVoice">getVoice</a> :: Fractional d =&gt; <a href="Music-Score-Voice.html#t:Voice">Voice</a> a -&gt; [(d, a)]</li></ul></div><div id="interface"><h1>Documentation</h1><div class="top"><p class="src"><span class="keyword">data</span>  <a name="t:Voice" class="def">Voice</a> a </p><div class="doc"><p>A voice is a list of events with explicit duration. Events can not overlap.
 </p><p>Voice is a <code>Monoid</code> under sequential composition. <code>mempty</code> is the empty part and <code>mappend</code>
  appends parts.
-</p><p>Voice has an <code>Applicative</code> instance derived from the <code>Monad</code> instance.
 </p><p>Voice is a <code>Monad</code>. <code>return</code> creates a part containing a single value of duration
  one, and <code>&gt;&gt;=</code> transforms the values of a part, allowing the addition and
  removal of values under relative duration. Perhaps more intuitively, <code>join</code> scales
