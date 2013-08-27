@@ -195,7 +195,7 @@ $ ./test</code></pre>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">c</code></pre>
 </div>
 
-<p>As you might have guessed, entering a single note name will render a note in the middle octave with duration one. This can be changed by applying transformations such as <a href="docs/api/Music-Score-Pitch.html#v:up"><code>up</code></a>, <a href="docs/api/Music-Score-Pitch.html#v:down"><code>down</code></a>, <a href="docs/api/Music-Time-Delayable.html#v:delay"><code>delay</code></a> or <a href="docs/api/Music-Time-Stretchable.html#v:stretch"><code>stretch</code></a>.</p>
+<p>As you might have guessed, entering a single note name will render a note in the middle octave with duration one. This can be changed by applying transformations such as <a href="/docs/api/Music-Score-Pitch.html#v:up"><code>up</code></a>, <a href="/docs/api/Music-Score-Pitch.html#v:down"><code>down</code></a>, <a href="/docs/api/Music-Time-Delayable.html#v:delay"><code>delay</code></a> or <a href="/docs/api/Music-Time-Stretchable.html#v:stretch"><code>stretch</code></a>.</p>
 <p>Allthough the actual types are more general, you can think of <code>c</code> as an expression of type <code>Score Note</code>, and the transformations as functions <code>Score Note -&gt; Score Note</code>.</p>
 <div class='haskell-music'>
 
@@ -218,7 +218,7 @@ $ ./test</code></pre>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">c <span class="fu">&lt;&gt;</span> e <span class="fu">&lt;&gt;</span> g</code></pre>
 </div>
 
-<p>Or in sequence using <a href="docs/api/Music-Time-Juxtapose.html#v:-124--62-"><code>|&gt;</code></a>:</p>
+<p>Or in sequence using <a href="/docs/api/Music-Time-Juxtapose.html#v:-124--62-"><code>|&gt;</code></a>:</p>
 <div class='haskell-music'>
 
 
@@ -229,7 +229,7 @@ $ ./test</code></pre>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">c <span class="fu">|&gt;</span> d <span class="fu">|&gt;</span> e</code></pre>
 </div>
 
-<p>Or partwise using <a href="docs/api/Music-Score-Combinators.html#v:-60--47--62-"><code>&lt;/&gt;</code></a>:</p>
+<p>Or partwise using <a href="/docs/api/Music-Score-Combinators.html#v:-60--47--62-"><code>&lt;/&gt;</code></a>:</p>
 <div class='haskell-music'>
 
 
@@ -264,7 +264,7 @@ $ ./test</code></pre>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">(c <span class="fu">|&gt;</span> d <span class="fu">|&gt;</span> e <span class="fu">|&gt;</span> c <span class="fu">|&gt;</span> d<span class="fu">^*</span><span class="dv">2</span> <span class="fu">|&gt;</span> d<span class="fu">^*</span><span class="dv">2</span>)<span class="fu">^/</span><span class="dv">16</span></code></pre>
 </div>
 
-<p>As a shorthand for <code>x |&gt; y |&gt; z ..</code>, we can write <code>scat [x, y, z]</code>. <a href="docs/api/Music-Time-Juxtapose.html#v:scat"><code>scat</code></a></p>
+<p>As a shorthand for <code>x |&gt; y |&gt; z ..</code>, we can write <code>scat [x, y, z]</code>. <a href="/docs/api/Music-Time-Juxtapose.html#v:scat"><code>scat</code></a></p>
 <div class='haskell-music'>
 
 
@@ -275,7 +275,7 @@ $ ./test</code></pre>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">scat [c,e<span class="fu">..</span>g]<span class="fu">^/</span><span class="dv">4</span></code></pre>
 </div>
 
-<p>For <code>x &lt;&gt; y &lt;&gt; z ..</code>, we can write <code>pcat [x, y, z]</code>. <a href="docs/api/Music-Time-Juxtapose.html#v:pcat"><code>pcat</code></a></p>
+<p>For <code>x &lt;&gt; y &lt;&gt; z ..</code>, we can write <code>pcat [x, y, z]</code>. <a href="/docs/api/Music-Time-Juxtapose.html#v:pcat"><code>pcat</code></a></p>
 <div class='haskell-music'>
 
 
@@ -355,7 +355,7 @@ flatten d             <span class="fu">==</span> d flat        <span class="fu">
 (flatten <span class="fu">.</span> flatten) d <span class="fu">==</span> d doubleFlat  <span class="fu">==</span> dss</code></pre>
 <p>Note that there is no guarantee that your pitch representation use enharmonic equivalence, so <code>cs == db</code> may or may not hold.</p>
 <h2 id="dynamics"><a href="#dynamics">Dynamics</a></h2>
-<p><a href="docs/api/Music-Score-Dynamics.html#v:dynamics"><code>dynamics</code></a></p>
+<p><a href="/docs/api/Music-Score-Dynamics.html#v:dynamics"><code>dynamics</code></a></p>
 <div class='haskell-music'>
 
 
@@ -367,7 +367,7 @@ flatten d             <span class="fu">==</span> d flat        <span class="fu">
 </div>
 
 <h2 id="articulation"><a href="#articulation">Articulation</a></h2>
-<p>Some basic articulation functions are <a href="docs/api/Music-Score-Articulation.html#v:legato"><code>legato</code></a>, <a href="docs/api/Music-Score-Articulation.html#v:staccato"><code>staccato</code></a>, <a href="docs/api/Music-Score-Articulation.html#v:portato"><code>portato</code></a>, <a href="docs/api/Music-Score-Articulation.html#v:tenuto"><code>tenuto</code></a>, <a href="docs/api/Music-Score-Articulation.html#v:separated"><code>separated</code></a>, <a href="docs/api/Music-Score-Articulation.html#v:spiccato"><code>spiccato</code></a>:</p>
+<p>Some basic articulation functions are <a href="/docs/api/Music-Score-Articulation.html#v:legato"><code>legato</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:staccato"><code>staccato</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:portato"><code>portato</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:tenuto"><code>tenuto</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:separated"><code>separated</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:spiccato"><code>spiccato</code></a>:</p>
 <div class='haskell-music'>
 
 
@@ -388,7 +388,7 @@ separated (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 spiccato (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span class="dv">8</span>)</code></pre>
 </div>
 
-<p><a href="docs/api/Music-Score-Articulation.html#v:accent"><code>accent</code></a> <a href="docs/api/Music-Score-Articulation.html#v:marcato"><code>marcato</code></a></p>
+<p><a href="/docs/api/Music-Score-Articulation.html#v:accent"><code>accent</code></a> <a href="/docs/api/Music-Score-Articulation.html#v:marcato"><code>marcato</code></a></p>
 <div class='haskell-music'>
 
 
@@ -401,7 +401,7 @@ spiccato (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cla
 marcato (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span class="dv">8</span>)</code></pre>
 </div>
 
-<p><a href="docs/api/Music-Score-Articulation.html#v:accentLast"><code>accentLast</code></a> <a href="docs/api/Music-Score-Articulation.html#v:accentAll"><code>accentAll</code></a></p>
+<p><a href="/docs/api/Music-Score-Articulation.html#v:accentLast"><code>accentLast</code></a> <a href="/docs/api/Music-Score-Articulation.html#v:accentAll"><code>accentAll</code></a></p>
 <div class='haskell-music'>
 
 
@@ -430,7 +430,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 </div>
 
 <h2 id="tremolo"><a href="#tremolo">Tremolo</a></h2>
-<p><a href="docs/api/Music-Score-Ornaments.html#v:tremolo"><code>tremolo</code></a></p>
+<p><a href="/docs/api/Music-Score-Ornaments.html#v:tremolo"><code>tremolo</code></a></p>
 <div class='haskell-music'>
 
 
@@ -442,7 +442,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 </div>
 
 <h2 id="slides-and-glissando"><a href="#slides-and-glissando">Slides and glissando</a></h2>
-<p><a href="docs/api/Music-Score-Ornaments.html#v:slide"><code>slide</code></a> <a href="docs/api/Music-Score-Ornaments.html#v:glissando"><code>glissando</code></a></p>
+<p><a href="/docs/api/Music-Score-Ornaments.html#v:slide"><code>slide</code></a> <a href="/docs/api/Music-Score-Ornaments.html#v:glissando"><code>glissando</code></a></p>
 <div class='haskell-music'>
 
 
@@ -454,7 +454,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 </div>
 
 <h2 id="harmonics"><a href="#harmonics">Harmonics</a></h2>
-<p>Use the <a href="docs/api/Music-Score-Ornaments.html#v:harmonic"><code>harmonic</code></a> function:</p>
+<p>Use the <a href="/docs/api/Music-Score-Ornaments.html#v:harmonic"><code>harmonic</code></a> function:</p>
 <div class='haskell-music'>
 
 
@@ -468,9 +468,9 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
     <span class="fu">&lt;/&gt;</span>
 (harmonic <span class="dv">3</span> <span class="fu">$</span> c<span class="fu">^/</span><span class="dv">2</span>)</code></pre>
 </div>
-<p><a href="docs/api/Music-Score-Ornaments.html#v:artificial"><code>artificial</code></a></p>
+<p><a href="/docs/api/Music-Score-Ornaments.html#v:artificial"><code>artificial</code></a></p>
 <h2 id="text"><a href="#text">Text</a></h2>
-<p><a href="docs/api/Music-Score-Ornaments.html#v:text"><code>text</code></a></p>
+<p><a href="/docs/api/Music-Score-Ornaments.html#v:text"><code>text</code></a></p>
 <div class='haskell-music'>
 
 
@@ -482,7 +482,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 </div>
 
 <h2 id="rests"><a href="#rests">Rests</a></h2>
-<p>Sometimes it is useful to work with scores that have a duration but no events. This kind of score is represented by <code>rest</code> and has the type <code>Score (Maybe Note)</code>. We use <a href="docs/api/Music-Score-Combinators.html#v:removeRests"><code>removeRests</code></a> to convert a <code>Score (Maybe a)</code> into a <code>Score a</code>.</p>
+<p>Sometimes it is useful to work with scores that have a duration but no events. This kind of score is represented by <code>rest</code> and has the type <code>Score (Maybe Note)</code>. We use <a href="/docs/api/Music-Score-Combinators.html#v:removeRests"><code>removeRests</code></a> to convert a <code>Score (Maybe a)</code> into a <code>Score a</code>.</p>
 <div class='haskell-music'>
 
 
@@ -498,7 +498,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 
 <h1 id="transformations"><a href="#transformations">Transformations</a></h1>
 <h2 id="time"><a href="#time">Time</a></h2>
-<p><a href="docs/api/Music-Score-Combinators.html#v:retrograde"><code>retrograde</code></a> <a href="docs/api/Music-Time-Juxtapose.html#v:times"><code>times</code></a></p>
+<p><a href="/docs/api/Music-Score-Combinators.html#v:retrograde"><code>retrograde</code></a> <a href="/docs/api/Music-Time-Juxtapose.html#v:times"><code>times</code></a></p>
 <div class='haskell-music'>
 
 
@@ -566,7 +566,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <h3 id="extracting-and-modifying-parts"><a href="#extracting-and-modifying-parts">Extracting and modifying parts</a></h3>
 <h3 id="part-composition"><a href="#part-composition">Part composition</a></h3>
 <h1 id="time-based-structures"><a href="#time-based-structures">Time-based structures</a></h1>
-<p><a href="docs/api/Music-Score-Score.html#v:Score"><code>Score</code></a> <a href="docs/api/Music-Score-Score.html#v:Voice"><code>Voice</code></a> <a href="docs/api/Music-Score-Score.html#v:Track"><code>Track</code></a> <a href="docs/api/Music-Time-Delayable.html#v:Delayable"><code>Delayable</code></a> <a href="docs/api/Music-Time-Stretchable.html#v:Stretchable"><code>Stretchable</code></a></p>
+<p><a href="/docs/api/Music-Score-Score.html#v:Score"><code>Score</code></a> <a href="/docs/api/Music-Score-Score.html#v:Voice"><code>Voice</code></a> <a href="/docs/api/Music-Score-Score.html#v:Track"><code>Track</code></a> <a href="/docs/api/Music-Time-Delayable.html#v:Delayable"><code>Delayable</code></a> <a href="/docs/api/Music-Time-Stretchable.html#v:Stretchable"><code>Stretchable</code></a></p>
 <h1 id="meta-information"><a href="#meta-information">Meta-information</a></h1>
 <h2 id="basic-information"><a href="#basic-information">Basic information</a></h2>
 <h2 id="time-signatures"><a href="#time-signatures">Time signatures</a></h2>
