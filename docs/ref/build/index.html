@@ -30,6 +30,11 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <body>
 <div id="TOC">
 <ul>
+<li><a href="#the-music-suite">The Music Suite</a><ul>
+<li><a href="#an-example">An example</a></li>
+<li><a href="#input-and-output">Input and output</a></li>
+<li><a href="#more-information">More information</a></li>
+</ul></li>
 <li><a href="#user-guide">User Guide</a><ul>
 <li><a href="#installation">Installation</a></li>
 <li><a href="#generating-music">Generating music</a></li>
@@ -89,6 +94,47 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#examples">Examples</a></li>
 </ul>
 </div>
+<h2 id="the-music-suite"><a href="#the-music-suite">The Music Suite</a></h2>
+<blockquote>
+<p><em>Please note:</em> The API and docs are not particularly stable at the moment. An official release note will appear in due time.</p>
+</blockquote>
+<p>The Music Suite is a declarative language embedded in <a href="http://www.haskell.org/haskellwiki/Haskell">Haskell</a> for generation and manipulation of music. It is is similar to <a href="http://www.haskell.org/haskellwiki/Haskore">Haskore</a> and <a href="http://haskell.cs.yale.edu/euterpea">Euterpea</a>, but its design and general philosophy is more inspired by <a href="http://projects.haskell.org/diagrams">Diagrams</a> and <a href="http://hackage.haskell.org/package/reactive">Reactive</a>.</p>
+<p>The Music Suite was designed with the dual goal of:</p>
+<ul>
+<li><p>Being usable with all <em>theories of music</em>. In particular, it does <em>not</em> assume a Western classical notion of time and pitch.</p></li>
+<li><p>Include Western classical music theory as a <em>special case</em>. Conventional scores can be represented in full, with correct part structure, pitch, rhythm, dynamics, articulation and so on. Many function are generalized to work on any music representation.</p></li>
+</ul>
+<h3 id="an-example"><a href="#an-example">An example</a></h3>
+<p>To generate music we write an <em>expressions</em> such as this one:</p>
+<div class='haskell-music'>
+
+
+
+<div class="figure">
+<img src="4ea6815a58473e70x.png" />
+</div>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span>
+    m <span class="fu">=</span> staccato (scat [c,d,e,c]<span class="fu">^/</span><span class="dv">2</span>) <span class="fu">|&gt;</span> ab <span class="fu">|&gt;</span> b_ <span class="fu">|&gt;</span> legato (d <span class="fu">|&gt;</span> c)<span class="fu">^*</span><span class="dv">2</span>
+<span class="kw">in</span> stretch (<span class="dv">1</span><span class="fu">/</span><span class="dv">8</span>) m</code></pre>
+</div>
+
+<p>To transform music, we write a <em>function</em>. For example the following function halves all durations and transposes all pitches up a minor sixth:</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">up (minor sixth) <span class="fu">.</span> compress <span class="dv">2</span></code></pre>
+<p>Applied to the above music we get:</p>
+<div class="figure">
+<img src="1dfd7766e2c33bbex.png" />
+</div>
+<h3 id="input-and-output"><a href="#input-and-output">Input and output</a></h3>
+<p>The Music Suite works well with the following input and output formats:</p>
+<ul>
+<li>MusicXML</li>
+<li>Lilypond</li>
+<li>ABC notation</li>
+<li>Midi</li>
+</ul>
+<h3 id="more-information"><a href="#more-information">More information</a></h3>
+<p>For a complete reference, see the <a href="http://musicsuite.github.io/docs/api">API documentation</a>.</p>
+<p>For an introduction, see <a href="User-Guide">User Guide</a>.</p>
 <h1 id="user-guide"><a href="#user-guide">User Guide</a></h1>
 <h2 id="installation"><a href="#installation">Installation</a></h2>
 <p>The Music Suite depends on the <a href="http://www.haskell.org/platform/">Haskell platform</a> as well as some other Haskell libraries which can be installed automatically. To install the suite with all its dependencies:</p>
