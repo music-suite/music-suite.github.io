@@ -4,15 +4,14 @@
 
 ## Installation
 
-The Music Suite depends on the [Haskell platform][HaskellPlatform] as well as some
-other Haskell libraries which can be installed automatically. To install the suite
-with all its dependencies:
+The Music Suite depends on the [Haskell platform][HaskellPlatform].
+
+While not strictly required,[Lilypond][Lilypond] is highly recommended as it allow you to
+preview musical scores. See [Import and Export](#import-and-export) for other formats.
+
+To install the suite with all its dependencies:
 
     cabal install music-preludes
-
-It is recommended to also install [Lilypond][Lilypond], which allow you to
-view musical scores. You can also use other software as long as it supports
-the input and output formats used by the Music Suite.
 
 
 ## Generating music
@@ -73,15 +72,15 @@ In fact, the `music2pdf` program is a simple utility that substitutes a single e
 
 # Writing music
 
-## Preludes and music representations
+## Music representations
 
-The Music Suite is partially a framework for describing various musical representations.
-However for most practical purposes, we will not want to invent a new representation from
-scratch, but rather start with a standard representation.
+One of the main points of the Music Suite is to avoid committing to a *single*, closed music representation. Instead it provides a set of types and type constructors that can be used to construct an arbitrary representation of music. 
+
+Usually you will not want to invent a new representation from scratch, but rather start with a standard representation and customize it when needed.
 
 ## Basics
 
-The simplest music expression is just a single note.
+A single note can be entered by its name. This will render a note in the middle octave with position zero and duration one. Note that note values and durations correspond exactly, a duration of `1` is a whole note, a duration of `1/2` is a half note, and so on.
 
 <div class='haskell-music'>
 
@@ -96,10 +95,59 @@ c
 
 </div>
 
-As you might have guessed, entering a single note name will render a note in
-the middle octave with duration one. This can be changed by applying
-transformations such as [`up`][up], [`down`][down], [`delay`][delay] or
-[`stretch`][stretch].
+To change the duration of a note, use `stretch` or `compress`.
+
+<div class='haskell-music'>
+
+
+
+![](54b82b4652237d1x.png)
+
+```haskell
+stretch (1/2) c
+    </>
+stretch 1 c         
+    </>
+stretch 2 c
+
+```
+
+</div>
+
+TODO delay
+
+Offset and duration is not limited to simple numbers. Here are some more complex examples:
+
+<div class='haskell-music'>
+
+
+
+![](b9d603a19d975bdx.png)
+
+```haskell
+(c^*(9/8) |> d^*(3/8))
+    </>
+(compress 3 (scat [c,d,e]) |> f^*(3/4))
+
+```
+
+</div>
+
+The `^*` and `^/` operators can be used as shorthands for `delay` and `compress`.
+
+<div class='haskell-music'>
+
+
+
+![](6e082ce15a9e3be5x.png)
+
+```haskell
+(c |> d |> e |> c |> d^*2 |> d^*2)^/16
+
+```
+
+</div>
+
 
 Allthough the actual types are more general, you can think of `c` as an expression
 of type `Score Note`, and the transformations as functions `Score Note -> Score Note`.
@@ -117,6 +165,9 @@ up (perfect octave) . compress 2 . delay 3 $ c
 
 </div>
 
+
+## Composing
+
 Music expressions can be composed [`<>`][<>]:
 
 <div class='haskell-music'>
@@ -131,6 +182,8 @@ c <> e <> g
 ```
 
 </div>
+
+TODO fundamentally, `<>` is the only way to compose music...
 
 Or in sequence using [`|>`][|>]:
 
@@ -162,7 +215,7 @@ c </> e </> g
 
 </div>
 
-These can be combined:
+Here is a more complex example:
 
 <div class='haskell-music'>
 
@@ -179,23 +232,8 @@ in up _P8 (scat [c,d,e,f,g,a,g,f]^/8) </> (triad c)^/2 |> (triad g_)^/2
 
 </div>
 
-The `^*` and `^/` operators can be used as shorthands for `delay` and `compress`.
-
-<div class='haskell-music'>
-
-
-
-![](6e082ce15a9e3be5x.png)
-
-```haskell
-(c |> d |> e |> c |> d^*2 |> d^*2)^/16
-
-```
-
-</div>
-
 As a shorthand for `x |> y |> z ..`, we can write `scat [x, y, z]`.
-[`scat`][scat]
+[`scat`][scat] (this is short for *sequential concatenation*).
 
 <div class='haskell-music'>
 
@@ -211,7 +249,7 @@ scat [c,e..g]^/4
 </div>
 
 For `x <> y <> z ..`, we can write `pcat [x, y, z]`.
-[`pcat`][pcat]
+[`pcat`][pcat] (short for *parallel concatenation*).
 
 <div class='haskell-music'>
 
@@ -230,6 +268,8 @@ pcat [c,e..g]^/2
 
 ## Pitch
 
+To facilitate the use of non-standard pitch, the standard pitch and interval names are provided as overloaded values, referred to as *literals*. This is very similar to how numeric overloading works in Haskell. The number literals `0,1,2,3,4...` can be used with any type that is an instance of `Num`, similarly, the pitch literals `c,d,e,f...` can be used with any type that is an instance of `IsPitch`.
+
 Standard pitch names:
 
 <div class='haskell-music'>
@@ -240,6 +280,25 @@ Standard pitch names:
 
 ```haskell
 scat [c, d, e, f, g, a, b]
+
+```
+
+</div>
+
+You can change octave using `octavesUp` and `octavesDown`:
+
+<div class='haskell-music'>
+
+
+
+![](5ee112ca5880e24ax.png)
+
+```haskell
+octavesUp 4 c
+    </>
+octavesUp (-1) c
+    </>
+octavesDown 2 c
 
 ```
 
@@ -321,6 +380,14 @@ flatten d             == d flat        == ds
 ```
 
 Note that there is no guarantee that your pitch representation use enharmonic equivalence, so `cs == db` may or may not hold.
+
+There is nothing special about the pitch and interval literals, they are simply values exported by the `Music.Pitch.Literal` module. While this module is reexported by the standard music preludes, you can also import it qualified if you want to avoid bringing the single-letter pitch names into scope.
+
+```haskell
+Pitch.c |> Pitch.d
+
+```
+
 
 ## Dynamics
 
@@ -525,7 +592,6 @@ removeRests $ times 4 (accent g^*2 |> rest |> scat [d,d]^/2)^/8
 ## Time
 
 [`retrograde`][retrograde]
-[`times`][times]
 
 <div class='haskell-music'>
 
@@ -542,6 +608,8 @@ in melody |> retrograde melody
 
 </div>
 
+[`times`][times]
+
 <div class='haskell-music'>
 
 
@@ -556,6 +624,8 @@ in times 4 $ melody
 ```
 
 </div>
+
+[`repeated`][repeated]
 
 <div class='haskell-music'>
 
@@ -591,6 +661,26 @@ in compress 4 $ melody </> pedal
 </div>
 
 ## Pitch
+
+[`invertAround`][invertAround]
+
+<div class='haskell-music'>
+
+
+
+![](bd806eefa75df64x.png)
+
+```haskell
+(scat [c..g]^*(2/5))
+    </>
+(invertAround c $ scat [c..g]^*(2/5))
+    </>
+(invertAround e $ scat [c..g]^*(2/5))
+
+```
+
+</div>
+
 
 ### Pitches and intervals
 
