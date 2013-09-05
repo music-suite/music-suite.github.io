@@ -268,9 +268,11 @@ pcat [c,e..g]^/2
 
 ## Pitch
 
-To facilitate the use of non-standard pitch, the standard pitch and interval names are provided as overloaded values, referred to as *literals*. This is very similar to how numeric overloading works in Haskell. The number literals `0,1,2,3,4...` can be used with any type that is an instance of `Num`, similarly, the pitch literals `c,d,e,f...` can be used with any type that is an instance of `IsPitch`.
+To facilitate the use of non-standard pitch, the standard pitch names are provided as overloaded values, referred to as *pitch literals*. 
 
-Standard pitch names:
+To understand how this works, think about the type of numeric literal. The values $0, 1, 2$ etc. have type `Num a => a`, similarly, the pitch literals $c, d, e, f ...$ have type `IsPitch a => a`.
+
+For Western-style pitch types, the standard pitch names can be used:
 
 <div class='haskell-music'>
 
@@ -284,6 +286,15 @@ scat [c, d, e, f, g, a, b]
 ```
 
 </div>
+
+Pitch names in other languages work as well, for example `ut, do, re, mi, fa, so, la, ti, si`. To use German pitch names you can explicitly hide the `b`:
+
+```haskell
+import Music.Preludes.Basic hiding (b)
+import Music.Pitch.Literal.German
+
+```
+
 
 You can change octave using `octavesUp` and `octavesDown`:
 

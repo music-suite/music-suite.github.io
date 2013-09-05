@@ -11,5 +11,5 @@
 \layout {
 }
 <<
-    \new Staff { \set Staff.instrumentName = "" <g' e' c'>1 }
+    \new Staff { \set Staff.instrumentName = "" <c' e' g'>1 }
 >>

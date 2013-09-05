@@ -99,7 +99,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <blockquote>
 <p><em>Please note:</em> The API and docs are not particularly stable at the moment. An official release note will appear in due time.</p>
 </blockquote>
-<p>The Music Suite is a declarative language embedded in <a href="http://www.haskell.org/haskellwiki/Haskell">Haskell</a> for generation and manipulation of music. It is is similar to <a href="http://www.haskell.org/haskellwiki/Haskore">Haskore</a> and <a href="http://haskell.cs.yale.edu/euterpea">Euterpea</a>, but its design and general philosophy is more inspired by <a href="http://projects.haskell.org/diagrams">Diagrams</a> and <a href="http://hackage.haskell.org/package/reactive">Reactive</a>.</p>
+<p>The Music Suite is a declarative language embedded in <a href="http://www.haskell.org/haskellwiki/Haskell">Haskell</a> for generation and manipulation of music.<!-- It is is similar to [Haskore][Haskore] and [Euterpea][Euterpea], but its design and general philosophy is more inspired by [Diagrams][Diagrams] and [Reactive][Reactive]. --></p>
 <p>The Music Suite was designed with the dual goal of:</p>
 <ul>
 <li><p>Being usable with all <em>theories of music</em>. In particular, it does <em>not</em> assume a Western classical notion of time and pitch.</p></li>
@@ -134,7 +134,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>Midi</li>
 </ul>
 <h3 id="more-information"><a href="#more-information">More information</a></h3>
-<p>For a complete reference, see the <a href="http://musicsuite.github.io/docs/api">API documentation</a>.</p>
+<p>For a complete reference, see the <a href="/docs/api">API documentation</a>.</p>
 <!--
 For an introduction, see [User Guide](User-Guide).
 -->
@@ -327,8 +327,9 @@ stretch <span class="dv">2</span> c</code></pre>
 
 
 <h2 id="pitch"><a href="#pitch">Pitch</a></h2>
-<p>To facilitate the use of non-standard pitch, the standard pitch and interval names are provided as overloaded values, referred to as <em>literals</em>. This is very similar to how numeric overloading works in Haskell. The number literals <code>0,1,2,3,4...</code> can be used with any type that is an instance of <code>Num</code>, similarly, the pitch literals <code>c,d,e,f...</code> can be used with any type that is an instance of <code>IsPitch</code>.</p>
-<p>Standard pitch names:</p>
+<p>To facilitate the use of non-standard pitch, the standard pitch names are provided as overloaded values, referred to as <em>pitch literals</em>.</p>
+<p>To understand how this works, think about the type of numeric literal. The values <span class="math">0, 1, 2</span> etc. have type <code>Num a =&gt; a</code>, similarly, the pitch literals <span class="math"><em>c</em>, <em>d</em>, <em>e</em>, <em>f</em>. . . </span> have type <code>IsPitch a =&gt; a</code>.</p>
+<p>For Western-style pitch types, the standard pitch names can be used:</p>
 <div class='haskell-music'>
 
 
@@ -339,6 +340,9 @@ stretch <span class="dv">2</span> c</code></pre>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">scat [c, d, e, f, g, a, b]</code></pre>
 </div>
 
+<p>Pitch names in other languages work as well, for example <code>ut, do, re, mi, fa, so, la, ti, si</code>. To use German pitch names you can explicitly hide the <code>b</code>:</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import</span> Music.Preludes.Basic <span class="kw">hiding</span> (b)
+<span class="kw">import</span> Music.Pitch.Literal.German</code></pre>
 <p>You can change octave using <code>octavesUp</code> and <code>octavesDown</code>:</p>
 <div class='haskell-music'>
 
