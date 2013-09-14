@@ -558,17 +558,17 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 
 <h1 id="transformations"><a href="#transformations">Transformations</a></h1>
 <h2 id="time"><a href="#time">Time</a></h2>
-<p><a href="/docs/api/Music-Score-Combinators.html#v:retrograde"><code>retrograde</code></a></p>
+<p><a href="/docs/api/Music-Time-Reverse.html#v:rev"><code>rev</code></a></p>
 <div class='haskell-music'>
 
 
 
 <div class="figure">
-<img src="65329ddee37e18ebx.png" />
+<img src="db23e0f35665305x.png" />
 </div>
 <pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span>
     melody <span class="fu">=</span> legato <span class="fu">$</span> scat [d, scat [g,fs]<span class="fu">^/</span><span class="dv">2</span>,bb<span class="fu">^*</span><span class="dv">2</span>]<span class="fu">^/</span><span class="dv">4</span>
-<span class="kw">in</span> melody <span class="fu">|&gt;</span> retrograde melody</code></pre>
+<span class="kw">in</span> melody <span class="fu">|&gt;</span> rev melody</code></pre>
 </div>
 
 <p><a href="/docs/api/Music-Time-Juxtapose.html#v:times"><code>times</code></a></p>
