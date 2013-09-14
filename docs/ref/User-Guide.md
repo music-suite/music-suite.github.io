@@ -287,11 +287,14 @@ scat [c, d, e, f, g, a, b]
 
 </div>
 
-Pitch names in other languages work as well, for example `ut, do, re, mi, fa, so, la, ti, si`. To use German pitch names you can explicitly hide the `b`:
+Pitch names in other languages work as well, for example `ut, do, re, mi, fa, so, la, ti, si`. German names (using `h` and `b` instead of `b` and `bb`) can be approximated as follows:
 
 ```haskell
 import Music.Preludes.Basic hiding (b)
-import Music.Pitch.Literal.German
+import qualified Music.Pitch.Literal as P
+
+h = P.b
+b = P.bb
 
 ```
 

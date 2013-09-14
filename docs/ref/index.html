@@ -340,9 +340,12 @@ stretch <span class="dv">2</span> c</code></pre>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">scat [c, d, e, f, g, a, b]</code></pre>
 </div>
 
-<p>Pitch names in other languages work as well, for example <code>ut, do, re, mi, fa, so, la, ti, si</code>. To use German pitch names you can explicitly hide the <code>b</code>:</p>
+<p>Pitch names in other languages work as well, for example <code>ut, do, re, mi, fa, so, la, ti, si</code>. German names (using <code>h</code> and <code>b</code> instead of <code>b</code> and <code>bb</code>) can be approximated as follows:</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import</span> Music.Preludes.Basic <span class="kw">hiding</span> (b)
-<span class="kw">import</span> Music.Pitch.Literal.German</code></pre>
+<span class="kw">import</span> <span class="kw">qualified</span> Music.Pitch.Literal <span class="kw">as</span> P
+
+h <span class="fu">=</span> P.b
+b <span class="fu">=</span> P.bb</code></pre>
 <p>You can change octave using <code>octavesUp</code> and <code>octavesDown</code>:</p>
 <div class='haskell-music'>
 
