@@ -846,6 +846,9 @@ in (delay (6/4) $ up (perfect fifth) subj) </> subj
 
 [up]:           /docs/api/Music-Score-Pitch.html#v:up
 [down]:         /docs/api/Music-Score-Pitch.html#v:down
+[octavesUp]:    /docs/api/Music-Score-Pitch.html#v:octavesUp
+[octavesDown]:  /docs/api/Music-Score-Pitch.html#v:octavesDown
+[invertAround]: /docs/api/Music-Score-Pitch.html#v:invertAround
 
 [catMaybes]:    http://hackage.haskell.org/packages/archive/base/latest/doc/html/Data-Maybe.html#v:catMaybes
 
