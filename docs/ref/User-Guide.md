@@ -9,7 +9,7 @@ The Music Suite depends on the [Haskell platform][HaskellPlatform].
 While not strictly required,[Lilypond][Lilypond] is highly recommended as it allow you to
 preview musical scores. See [Import and Export](#import-and-export) for other formats.
 
-To install the suite with all its dependencies:
+To install the suite, simply install the Haskell platform, and then run:
 
     cabal install music-preludes
 
