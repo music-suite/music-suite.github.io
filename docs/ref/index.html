@@ -97,9 +97,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul>
 </div>
 <h2 id="the-music-suite"><a href="#the-music-suite">The Music Suite</a></h2>
-<blockquote>
-<p><em>Please note:</em> The API and docs are not particularly stable at the moment. An official release note will appear in due time.</p>
-</blockquote>
+<!--
+> *Please note:* The API and docs are not particularly stable at the moment. An official release note will appear in due time.
+-->
+
 <p>The Music Suite is a declarative language embedded in <a href="http://www.haskell.org/haskellwiki/Haskell">Haskell</a> for generation and manipulation of music.<!-- It is is similar to [Haskore][Haskore] and [Euterpea][Euterpea], but its design and general philosophy is more inspired by [Diagrams][Diagrams] and [Reactive][Reactive]. --></p>
 <p>The Music Suite was designed with the dual goal of:</p>
 <ul>
@@ -189,7 +190,7 @@ $ ./test</code></pre>
 <h1 id="writing-music"><a href="#writing-music">Writing music</a></h1>
 <h2 id="music-representations"><a href="#music-representations">Music representations</a></h2>
 <p>One of the main points of the Music Suite is to avoid committing to a <em>single</em>, closed music representation. Instead it provides a set of types and type constructors that can be used to construct an arbitrary representation of music.</p>
-<p>Usually you will not want to invent a new representation from scratch, but rather start with a standard representation and customize it when needed.</p>
+<p>Usually you will not want to invent a new representation from scratch, but rather start with a standard representation and customize it when needed. The default representation is defined in the <code>Music.Prelude.Basic</code> module, which is implicitly imported in all the examples below. See <a href="#customizing-music-representation">Customizing the Music Representation</a> for other examples.</p>
 <h2 id="basics"><a href="#basics">Basics</a></h2>
 <p>A single note can be entered by its name. This will render a note in the middle octave with position zero and duration one. Note that note values and durations correspond exactly, a duration of <code>1</code> is a whole note, a duration of <code>1/2</code> is a half note, and so on.</p>
 <div class='haskell-music'>
@@ -746,11 +747,11 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
   &lt;/part&gt;
 &lt;/score-partwise&gt;</code></pre>
 <h2 id="abc-notation"><a href="#abc-notation">ABC Notation</a></h2>
-<p>ABC notation (for use with <a href="http://code.google.com/p/abcjs/">abcjs</a> or similar engines) is still experimental.</p>
+<p>ABC notation (for use with <a href="http://code.google.com/p/abcjs/">abcjs</a>) or similar engines) is still experimental.</p>
 <h2 id="guido"><a href="#guido">Guido</a></h2>
-<p>Guido output (for use with the <a href="http://guidolib.sourceforge.net/">GUIDO engine</a> is not supported yet. This would be useful, as it allow real-time rendering of scores.</p>
+<p>Guido output (for use with the <a href="http://guidolib.sourceforge.net/">GUIDO engine</a>) is not supported yet. This would be useful, as it allow real-time rendering of scores.</p>
 <h2 id="vextab"><a href="#vextab">Vextab</a></h2>
-<p>Vextab output (for use with <a href="http://www.vexflow.com/">Vexflow</a> is not supported yet.</p>
+<p>Vextab output (for use with <a href="http://www.vexflow.com/">Vexflow</a>) is not supported yet.</p>
 <h2 id="sibelius"><a href="#sibelius">Sibelius</a></h2>
 <p>The <code>music-sibelius</code> provides experimental import of Sibelius scores (as MusicXML import is <a href="#musicxml">not supported</a>). This works by installing a Sibelius plugin that renders the internal score representation of Sibelius to a JSON-based representation which can be read by Haskell. This feature could of course also be used to convert Sibelius scores to other formats such as Guido or ABC without having to write in the ManuScript language used by Sibelius.</p>
 <h1 id="customizing-music-representation"><a href="#customizing-music-representation">Customizing music representation</a></h1>

@@ -76,7 +76,7 @@ In fact, the `music2pdf` program is a simple utility that substitutes a single e
 
 One of the main points of the Music Suite is to avoid committing to a *single*, closed music representation. Instead it provides a set of types and type constructors that can be used to construct an arbitrary representation of music. 
 
-Usually you will not want to invent a new representation from scratch, but rather start with a standard representation and customize it when needed.
+Usually you will not want to invent a new representation from scratch, but rather start with a standard representation and customize it when needed. The default representation is defined in the `Music.Prelude.Basic` module, which is implicitly imported in all the examples below. See [Customizing the Music Representation](#customizing-music-representation) for other examples.
 
 ## Basics
 
@@ -870,15 +870,15 @@ putStrLn $ Xml.showXml $ toXml $ asScore $ scat [c,d,e]
 
 ## ABC Notation
 
-ABC notation (for use with [abcjs](http://code.google.com/p/abcjs/) or similar engines) is still experimental.
+ABC notation (for use with [abcjs](http://code.google.com/p/abcjs/)) or similar engines) is still experimental.
 
 ## Guido
 
-Guido output (for use with the [GUIDO engine](http://guidolib.sourceforge.net/) is not supported yet. This would be useful, as it allow real-time rendering of scores.
+Guido output (for use with the [GUIDO engine](http://guidolib.sourceforge.net/)) is not supported yet. This would be useful, as it allow real-time rendering of scores.
 
 ## Vextab
 
-Vextab output (for use with [Vexflow](http://www.vexflow.com/) is not supported yet.
+Vextab output (for use with [Vexflow](http://www.vexflow.com/)) is not supported yet.
 
 ## Sibelius
 

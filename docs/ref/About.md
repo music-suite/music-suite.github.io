@@ -2,7 +2,9 @@
 
 ## The Music Suite
 
+<!--
 > *Please note:* The API and docs are not particularly stable at the moment. An official release note will appear in due time.
+-->
 
 The Music Suite is a declarative language embedded in [Haskell][Haskell] for generation and manipulation of music.<!-- It is is similar to [Haskore][Haskore] and [Euterpea][Euterpea], but its design and general philosophy is more inspired by [Diagrams][Diagrams] and [Reactive][Reactive]. -->
 
