@@ -37,7 +37,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul></li>
 <li><a href="#user-guide">User Guide</a><ul>
 <li><a href="#installation">Installation</a></li>
-<li><a href="#generating-music">Generating music</a></li>
+<li><a href="#generating-music">Generating music</a><ul>
+<li><a href="#with-music-files">With music files</a></li>
+<li><a href="#with-haskell-files">With Haskell files</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#writing-music">Writing music</a><ul>
 <li><a href="#music-representations">Music representations</a></li>
@@ -153,33 +156,23 @@ For an introduction, see [User Guide](User-Guide).
 <p>To install the suite, simply install the Haskell platform, and then run:</p>
 <pre><code>cabal install music-preludes</code></pre>
 <h2 id="generating-music"><a href="#generating-music">Generating music</a></h2>
-<!--
-A piece of music is described by a *expressions* such as this one:
-
-```haskell
-c |> d |> e
-
-```
-
-The simplest way to render this expression is to save it in a file named
-`foo.music` (or similar) and convert it using `music2pdf foo.music`. This
-should render a file called `foo.pdf` containing the following:
-
-
-
-![](e812b3370beb65fx.png)
-
-There are several programs for converting music expressions:
-
-* `music2musicxml` converts a Music file to MusicXML
-* `music2mid` converts a Music file to MIDI
-* `music2ly` converts a Music file to a Lilypond file
-* `music2wav` converts a Music file to audio (using Timidity)
-* `music2pdf` converts a Music file to graphics (using Lilypond)
-
-## Generating music with explicit Haskell modules
--->
-
+<p>This chapter will cover how to use the Music Suite to generate music. Later on we will cover how to <em>import</em> and <em>transform</em> music.</p>
+<h3 id="with-music-files"><a href="#with-music-files">With music files</a></h3>
+<p>A piece of music is described by a <em>expressions</em> such as this one:</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">c <span class="fu">|&gt;</span> d <span class="fu">|&gt;</span> e</code></pre>
+<p>The simplest way to render this expression is to save it in a file named <code>foo.music</code> (or similar) and convert it using <code>music2pdf foo.music</code>. This should render a file called <code>foo.pdf</code> containing the following:</p>
+<div class="figure">
+<img src="e812b3370beb65fx.png" />
+</div>
+<p>There are several programs for converting music expressions:</p>
+<ul>
+<li><code>music2mid</code></li>
+<li><code>music2musicxml</code></li>
+<li><code>music2ly</code></li>
+<li><code>music2wav</code></li>
+<li><code>music2pdf</code></li>
+</ul>
+<h3 id="with-haskell-files"><a href="#with-haskell-files">With Haskell files</a></h3>
 <p>Alternatively, you can create a file called <code>test.hs</code> (or similar) with the following structure:</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import</span> Music.Prelude.Basic
 

@@ -16,7 +16,10 @@ To install the suite, simply install the Haskell platform, and then run:
 
 ## Generating music
 
-<!--
+This chapter will cover how to use the Music Suite to generate music. Later on we will cover how to *import* and *transform* music.
+
+### With music files
+
 A piece of music is described by a *expressions* such as this one:
 
 ```haskell
@@ -34,14 +37,13 @@ should render a file called `foo.pdf` containing the following:
 
 There are several programs for converting music expressions:
 
-* `music2musicxml` converts a Music file to MusicXML
-* `music2mid` converts a Music file to MIDI
-* `music2ly` converts a Music file to a Lilypond file
-* `music2wav` converts a Music file to audio (using Timidity)
-* `music2pdf` converts a Music file to graphics (using Lilypond)
+* `music2mid` 
+* `music2musicxml` 
+* `music2ly` 
+* `music2wav` 
+* `music2pdf`
 
-## Generating music with explicit Haskell modules
--->
+### With Haskell files
 
 Alternatively, you can create a file called `test.hs` (or similar) with the following structure:
 
