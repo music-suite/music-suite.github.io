@@ -665,7 +665,11 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <p>The standard distribution (installed as part of <code>music-preludes</code>) of the Music Suite includes a variety of input and output formats. There are also some experimental formats, which are distributed in separate packages, these are marked as experimental below.</p>
 <p>The conventions for input or output formats is similar to the convention for properties (TODO ref above): for any type <code>a</code> and format <code>T a</code>, input formats are defined by a class or constraint <code>IsT</code>, and output by a format <code>HasT a</code>. For example, types that can be exported to Lilypond are defined by the constraint <code>HasLilypond a</code>, while types that can be imported from MIDI are defined by the constraint <code>IsMidi a</code>.</p>
 <h2 id="midi"><a href="#midi">MIDI</a></h2>
-<p>All standard representations support MIDI input and output. The MIDI representation uses <a href="http://hackage.haskell.org/package/HCodecs">HCodecs</a> and the real-time support uses <a href="http://hackage.haskell.org/package/hamid">hamid</a>. You can read and write MIDI files using the functions [<code>readMidi</code>][readMidi] and [<code>writeMidi</code>][writeMidi]. To play MIDI back in real-time, use [<code>playMidi</code>][playMidi] or [<code>playMidiIO</code>][playMidiIO], which uses <a href="http://hackage.haskell.org/package/reenact">reenact</a>.</p>
+<p>All standard representations support MIDI input and output. The MIDI representation uses <a href="http://hackage.haskell.org/package/HCodecs">HCodecs</a> and the real-time support uses <a href="http://hackage.haskell.org/package/hamid">hamid</a>.</p>
+<!--
+You can read and write MIDI files using the functions [`readMidi`][readMidi] and [`writeMidi`][writeMidi]. To play MIDI back in real-time, use [`playMidi`][playMidi] or [`playMidiIO`][playMidiIO], which uses [reenact](http://hackage.haskell.org/package/reenact).
+-->
+
 <p>Beware that MIDI input may contain time and pitch values that yield a non-readable notation, you need a proper quantization software such as <a href="http://scorecleaner.com">ScoreCleaner</a> to convert raw MIDI input to quantized input.</p>
 <h2 id="lilypond"><a href="#lilypond">Lilypond</a></h2>
 <p>All standard representations support Lilypond output. The <a href="http://hackage.haskell.org/package/lilypond">lilypond</a> package is used for parsing and pretty printing of Lilypond syntax. Lilypond is the recommended way of rendering music.</p>
