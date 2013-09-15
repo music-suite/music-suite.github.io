@@ -781,7 +781,7 @@ This feature could of course also be used to convert Sibelius scores to other fo
 
 
 <div class="figure">
-<img src="5c63147a8994815x.png" />
+<img src="509e242376de176ex.png" />
 </div>
 <pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> subj <span class="fu">=</span> removeRests <span class="fu">$</span> scat [ 
             scat [rest,c,d,e], 
@@ -789,7 +789,7 @@ This feature could of course also be used to convert Sibelius scores to other fo
             scat [a,g,f,e,f,e,d]<span class="fu">^/</span><span class="dv">2</span>, c<span class="fu">^*</span><span class="dv">2</span> 
         ]<span class="fu">^/</span><span class="dv">8</span>
 
-<span class="kw">in</span> (delay (<span class="dv">6</span><span class="fu">/</span><span class="dv">4</span>) <span class="fu">$</span> up (perfect fifth) subj) <span class="fu">&lt;/&gt;</span> subj</code></pre>
+<span class="kw">in</span> (delay <span class="dv">1</span><span class="fu">.</span><span class="dv">5</span> <span class="fu">.</span> up _<span class="dt">P5</span>) subj <span class="fu">&lt;/&gt;</span> subj</code></pre>
 </div>
 
 <h2 id="generative-music"><a href="#generative-music">Generative music</a></h2>

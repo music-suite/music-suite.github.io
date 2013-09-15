@@ -923,7 +923,7 @@ TODO about
 
 
 
-![](5c63147a8994815x.png)
+![](509e242376de176ex.png)
 
 ```haskell
 let subj = removeRests $ scat [ 
@@ -932,7 +932,7 @@ let subj = removeRests $ scat [
             scat [a,g,f,e,f,e,d]^/2, c^*2 
         ]^/8
 
-in (delay (6/4) $ up (perfect fifth) subj) </> subj
+in (delay 1.5 . up _P5) subj </> subj
 
 ```
 
