@@ -760,13 +760,33 @@ The conventions for input or output formats is similar to the convention for pro
 
 ## MIDI
 
-All representations support MIDI input and output. The MIDI representation uses [HCodecs](http://hackage.haskell.org/package/HCodecs) and the real-time support uses [hamid](http://hackage.haskell.org/package/hamid). You can read and write MIDI files using the functions [`readMidi`][readMidi] and [`writeMidi`][writeMidi]. To play MIDI back in real-time, use [`playMidi`][playMidi] or [`playMidiIO`][playMidiIO], which uses [reenact](http://hackage.haskell.org/package/reenact).
+All standard representations support MIDI input and output. The MIDI representation uses [HCodecs](http://hackage.haskell.org/package/HCodecs) and the real-time support uses [hamid](http://hackage.haskell.org/package/hamid). You can read and write MIDI files using the functions [`readMidi`][readMidi] and [`writeMidi`][writeMidi]. To play MIDI back in real-time, use [`playMidi`][playMidi] or [`playMidiIO`][playMidiIO], which uses [reenact](http://hackage.haskell.org/package/reenact).
 
-Beware that MIDI input may contain time and pitch values that yield a non-readable notation, you need a proper quantization software such as [ScoreCleaner](http://scorecleaner.com) to convert raw MIDI input to quantized input.
+Beware that MIDI input may contain time and pitch values that yield a non-readable notation, you need a proper quantization software such as [
+ScoreCleaner](http://scorecleaner.com) to convert raw MIDI input to quantized input.
+
+## Lilypond
+
+All standard representations support Lilypond output. 
+
+Lilypond input is not available yet but will hopefully be added soon.
+
+```haskell
+putStrLn $ show $ Text.Pretty.pretty $ toLy $ asScore $ scat [c,d,e]
+
+```
+
+    <<
+        \new Staff { \set Staff.instrumentName = "" <c'>1 <d'>1 <e'>1 }
+    >>
+
 
 ## MusicXML
 
-MusicXML output is generally well supported, with some minor limitations. Bug reports are much welcome. There are no plans to support MusicXML import in the near future.
+All standard representations support MusicXML output. The `musicxml2` package is used for 
+parsing and pretty printing. 
+
+The output is fairly complete, with some minor limitations. Bug reports are much welcome. There are no plans to support MusicXML import in the near future.
 
 ```haskell
 putStrLn $ Xml.showXml $ toXml $ asScore $ scat [c,d,e]
@@ -848,7 +868,6 @@ putStrLn $ Xml.showXml $ toXml $ asScore $ scat [c,d,e]
     </score-partwise>
     
 
-## Lilypond
 ## ABC Notation
 ## Guido
 ## Vextab

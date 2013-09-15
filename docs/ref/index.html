@@ -85,8 +85,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul></li>
 <li><a href="#import-and-export">Import and export</a><ul>
 <li><a href="#midi">MIDI</a></li>
-<li><a href="#musicxml">MusicXML</a></li>
 <li><a href="#lilypond">Lilypond</a></li>
+<li><a href="#musicxml">MusicXML</a></li>
 <li><a href="#abc-notation">ABC Notation</a></li>
 <li><a href="#guido">Guido</a></li>
 <li><a href="#vextab">Vextab</a></li>
@@ -658,10 +658,18 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <p>The standard distribution (installed as part of <code>music-preludes</code>) of the Music Suite includes a variety of input and output formats. There are also some experimental formats, which are distributed in separate packages, these are marked as experimental below.</p>
 <p>The conventions for input or output formats is similar to the convention for properties (TODO ref above): for any type <code>a</code> and format <code>T a</code>, input formats are defined by a class or constraint <code>IsT</code>, and output by a format <code>HasT a</code>. For example, types that can be exported to Lilypond are defined by the constraint <code>HasLilypond a</code>, while types that can be imported from MIDI are defined by the constraint <code>IsMidi a</code>.</p>
 <h2 id="midi"><a href="#midi">MIDI</a></h2>
-<p>All representations support MIDI input and output. The MIDI representation uses <a href="http://hackage.haskell.org/package/HCodecs">HCodecs</a> and the real-time support uses <a href="http://hackage.haskell.org/package/hamid">hamid</a>. You can read and write MIDI files using the functions [<code>readMidi</code>][readMidi] and [<code>writeMidi</code>][writeMidi]. To play MIDI back in real-time, use [<code>playMidi</code>][playMidi] or [<code>playMidiIO</code>][playMidiIO], which uses <a href="http://hackage.haskell.org/package/reenact">reenact</a>.</p>
+<p>All standard representations support MIDI input and output. The MIDI representation uses <a href="http://hackage.haskell.org/package/HCodecs">HCodecs</a> and the real-time support uses <a href="http://hackage.haskell.org/package/hamid">hamid</a>. You can read and write MIDI files using the functions [<code>readMidi</code>][readMidi] and [<code>writeMidi</code>][writeMidi]. To play MIDI back in real-time, use [<code>playMidi</code>][playMidi] or [<code>playMidiIO</code>][playMidiIO], which uses <a href="http://hackage.haskell.org/package/reenact">reenact</a>.</p>
 <p>Beware that MIDI input may contain time and pitch values that yield a non-readable notation, you need a proper quantization software such as <a href="http://scorecleaner.com">ScoreCleaner</a> to convert raw MIDI input to quantized input.</p>
+<h2 id="lilypond"><a href="#lilypond">Lilypond</a></h2>
+<p>All standard representations support Lilypond output.</p>
+<p>Lilypond input is not available yet but will hopefully be added soon.</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">putStrLn</span> <span class="fu">$</span> <span class="fu">show</span> <span class="fu">$</span> Text.Pretty.pretty <span class="fu">$</span> toLy <span class="fu">$</span> asScore <span class="fu">$</span> scat [c,d,e]</code></pre>
+<pre><code>&lt;&lt;
+    \new Staff { \set Staff.instrumentName = &quot;&quot; &lt;c&#39;&gt;1 &lt;d&#39;&gt;1 &lt;e&#39;&gt;1 }
+&gt;&gt;</code></pre>
 <h2 id="musicxml"><a href="#musicxml">MusicXML</a></h2>
-<p>MusicXML output is generally well supported, with some minor limitations. Bug reports are much welcome. There are no plans to support MusicXML import in the near future.</p>
+<p>All standard representations support MusicXML output. The <code>musicxml2</code> package is used for parsing and pretty printing.</p>
+<p>The output is fairly complete, with some minor limitations. Bug reports are much welcome. There are no plans to support MusicXML import in the near future.</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">putStrLn</span> <span class="fu">$</span> Xml.showXml <span class="fu">$</span> toXml <span class="fu">$</span> asScore <span class="fu">$</span> scat [c,d,e]</code></pre>
 <pre><code>&lt;?xml version=&#39;1.0&#39; ?&gt;
 &lt;score-partwise&gt;
@@ -736,7 +744,6 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
     &lt;/measure&gt;
   &lt;/part&gt;
 &lt;/score-partwise&gt;</code></pre>
-<h2 id="lilypond"><a href="#lilypond">Lilypond</a></h2>
 <h2 id="abc-notation"><a href="#abc-notation">ABC Notation</a></h2>
 <h2 id="guido"><a href="#guido">Guido</a></h2>
 <h2 id="vextab"><a href="#vextab">Vextab</a></h2>
