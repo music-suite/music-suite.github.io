@@ -767,7 +767,7 @@ ScoreCleaner](http://scorecleaner.com) to convert raw MIDI input to quantized in
 
 ## Lilypond
 
-All standard representations support Lilypond output. 
+All standard representations support Lilypond output. The `lilypond` package is used for parsing and pretty printing of Lilypond syntax. Lilypond is the recommended way of rendering music.
 
 Lilypond input is not available yet but will hopefully be added soon.
 
@@ -869,8 +869,17 @@ putStrLn $ Xml.showXml $ toXml $ asScore $ scat [c,d,e]
     
 
 ## ABC Notation
+
+ABC notation is still experimental.
+
 ## Guido
+
+Guido output (for use with the [GUIDO engine](http://guidolib.sourceforge.net/) is not supported yet. This would be useful, as it allow real-time rendering of scores.
+
+
 ## Vextab
+
+Vextab output (for use with [Vexflow](http://www.vexflow.com/) is not supported yet.
 
 
 # Customizing music representation

@@ -661,7 +661,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <p>All standard representations support MIDI input and output. The MIDI representation uses <a href="http://hackage.haskell.org/package/HCodecs">HCodecs</a> and the real-time support uses <a href="http://hackage.haskell.org/package/hamid">hamid</a>. You can read and write MIDI files using the functions [<code>readMidi</code>][readMidi] and [<code>writeMidi</code>][writeMidi]. To play MIDI back in real-time, use [<code>playMidi</code>][playMidi] or [<code>playMidiIO</code>][playMidiIO], which uses <a href="http://hackage.haskell.org/package/reenact">reenact</a>.</p>
 <p>Beware that MIDI input may contain time and pitch values that yield a non-readable notation, you need a proper quantization software such as <a href="http://scorecleaner.com">ScoreCleaner</a> to convert raw MIDI input to quantized input.</p>
 <h2 id="lilypond"><a href="#lilypond">Lilypond</a></h2>
-<p>All standard representations support Lilypond output.</p>
+<p>All standard representations support Lilypond output. The <code>lilypond</code> package is used for parsing and pretty printing of Lilypond syntax. Lilypond is the recommended way of rendering music.</p>
 <p>Lilypond input is not available yet but will hopefully be added soon.</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">putStrLn</span> <span class="fu">$</span> <span class="fu">show</span> <span class="fu">$</span> Text.Pretty.pretty <span class="fu">$</span> toLy <span class="fu">$</span> asScore <span class="fu">$</span> scat [c,d,e]</code></pre>
 <pre><code>&lt;&lt;
@@ -745,8 +745,11 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
   &lt;/part&gt;
 &lt;/score-partwise&gt;</code></pre>
 <h2 id="abc-notation"><a href="#abc-notation">ABC Notation</a></h2>
+<p>ABC notation is still experimental.</p>
 <h2 id="guido"><a href="#guido">Guido</a></h2>
+<p>Guido output (for use with the <a href="http://guidolib.sourceforge.net/">GUIDO engine</a> is not supported yet. This would be useful, as it allow real-time rendering of scores.</p>
 <h2 id="vextab"><a href="#vextab">Vextab</a></h2>
+<p>Vextab output (for use with <a href="http://www.vexflow.com/">Vexflow</a> is not supported yet.</p>
 <h1 id="customizing-music-representation"><a href="#customizing-music-representation">Customizing music representation</a></h1>
 <h1 id="examples"><a href="#examples">Examples</a></h1>
 <div class='haskell-music'>
