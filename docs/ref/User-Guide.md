@@ -760,7 +760,7 @@ The conventions for input or output formats is similar to the convention for pro
 
 ## MIDI
 
-
+All representations support MIDI input and output. Beware that MIDI input may contain time and pitch values that yield a non-readable notation, you need a proper quantization software such as [ScoreCleaner](http://scorecleaner.com) to convert raw MIDI input to quantized input.
 
 ## MusicXML
 ## Lilypond
