@@ -404,6 +404,12 @@ Pitch.c |> Pitch.d
 
 ```
 
+TODO overloading, explain why the following works:
+
+```haskell
+return (c::Note) == (c::Score Note)
+
+```
 
 ## Dynamics
 
@@ -424,6 +430,7 @@ scat $ zipWith dynamics [fff,ff,_f,mf,mp,_p,pp,ppp] [c..]
 
 </div>
 
+TODO other ways of applying dynamics
 
 ## Articulation
 

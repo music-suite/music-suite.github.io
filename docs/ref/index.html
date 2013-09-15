@@ -417,6 +417,8 @@ flatten d             <span class="fu">==</span> d flat        <span class="fu">
 <p>Note that there is no guarantee that your pitch representation use enharmonic equivalence, so <code>cs == db</code> may or may not hold.</p>
 <p>There is nothing special about the pitch and interval literals, they are simply values exported by the <code>Music.Pitch.Literal</code> module. While this module is reexported by the standard music preludes, you can also import it qualified if you want to avoid bringing the single-letter pitch names into scope.</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">Pitch.c <span class="fu">|&gt;</span> Pitch.d</code></pre>
+<p>TODO overloading, explain why the following works:</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">return</span> (<span class="ot">c::</span><span class="dt">Note</span>) <span class="fu">==</span> (<span class="ot">c::</span><span class="dt">Score</span> <span class="dt">Note</span>)</code></pre>
 <h2 id="dynamics"><a href="#dynamics">Dynamics</a></h2>
 <p>Dynamic values are overloaded in the same way as pitches. The dynamic literals are defined in <code>Music.Dynamics.Literal</code> and have type <code>IsDynamics a =&gt; a</code>.</p>
 <p>An overview of the dynamic values:</p>
@@ -430,7 +432,7 @@ flatten d             <span class="fu">==</span> d flat        <span class="fu">
 <pre class="sourceCode haskell"><code class="sourceCode haskell">scat <span class="fu">$</span> <span class="fu">zipWith</span> dynamics [fff,ff,_f,mf,mp,_p,pp,ppp] [c<span class="fu">..</span>]</code></pre>
 </div>
 
-
+<p>TODO other ways of applying dynamics</p>
 <h2 id="articulation"><a href="#articulation">Articulation</a></h2>
 <p>Some basic articulation functions are <a href="/docs/api/Music-Score-Articulation.html#v:legato"><code>legato</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:staccato"><code>staccato</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:portato"><code>portato</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:tenuto"><code>tenuto</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:separated"><code>separated</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:spiccato"><code>spiccato</code></a>:</p>
 <div class='haskell-music'>
