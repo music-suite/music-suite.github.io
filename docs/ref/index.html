@@ -677,7 +677,7 @@ You can read and write MIDI files using the functions [`readMidi`][readMidi] and
 <p>An example:</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">putStrLn</span> <span class="fu">$</span> toLyString <span class="fu">$</span> asScore <span class="fu">$</span> scat [c,d,e]</code></pre>
 <pre><code>&lt;&lt;
-    \new Staff { \set Staff.instrumentName = &quot;&quot; &lt;c&#39;&gt;1 &lt;d&#39;&gt;1 &lt;e&#39;&gt;1 }
+    \new Staff { &lt;c&#39;&gt;1 &lt;d&#39;&gt;1 &lt;e&#39;&gt;1 }
 &gt;&gt;</code></pre>
 <h2 id="musicxml"><a href="#musicxml">MusicXML</a></h2>
 <p>All standard representations support MusicXML output. The <a href="http://hackage.haskell.org/package/musicxml2">musicxml2</a> package is used for parsing and pretty printing.</p>

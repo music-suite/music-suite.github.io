@@ -794,7 +794,7 @@ putStrLn $ toLyString $ asScore $ scat [c,d,e]
 ```
 
     <<
-        \new Staff { \set Staff.instrumentName = "" <c'>1 <d'>1 <e'>1 }
+        \new Staff { <c'>1 <d'>1 <e'>1 }
     >>
 
 
