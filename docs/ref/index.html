@@ -670,14 +670,16 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <h2 id="lilypond"><a href="#lilypond">Lilypond</a></h2>
 <p>All standard representations support Lilypond output. The <code>lilypond</code> package is used for parsing and pretty printing of Lilypond syntax. Lilypond is the recommended way of rendering music.</p>
 <p>Lilypond input is not available yet but will hopefully be added soon.</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">putStrLn</span> <span class="fu">$</span> <span class="fu">show</span> <span class="fu">$</span> Text.Pretty.pretty <span class="fu">$</span> toLy <span class="fu">$</span> asScore <span class="fu">$</span> scat [c,d,e]</code></pre>
+<p>An example:</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">putStrLn</span> <span class="fu">$</span> toLyString <span class="fu">$</span> asScore <span class="fu">$</span> scat [c,d,e]</code></pre>
 <pre><code>&lt;&lt;
     \new Staff { \set Staff.instrumentName = &quot;&quot; &lt;c&#39;&gt;1 &lt;d&#39;&gt;1 &lt;e&#39;&gt;1 }
 &gt;&gt;</code></pre>
 <h2 id="musicxml"><a href="#musicxml">MusicXML</a></h2>
 <p>All standard representations support MusicXML output. The <code>musicxml2</code> package is used for parsing and pretty printing.</p>
 <p>The output is fairly complete, with some minor limitations. Bug reports are much welcome. There are no plans to support MusicXML import in the near future.</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">putStrLn</span> <span class="fu">$</span> Xml.showXml <span class="fu">$</span> toXml <span class="fu">$</span> asScore <span class="fu">$</span> scat [c,d,e]</code></pre>
+<p>Beware of the extreme verboseness of XML, for example:</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">putStrLn</span> <span class="fu">$</span> toXmlString <span class="fu">$</span> asScore <span class="fu">$</span> scat [c,d,e]</code></pre>
 <pre><code>&lt;?xml version=&#39;1.0&#39; ?&gt;
 &lt;score-partwise&gt;
   &lt;movement-title&gt;Title&lt;/movement-title&gt;
@@ -758,7 +760,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <h2 id="vextab"><a href="#vextab">Vextab</a></h2>
 <p>Vextab output (for use with <a href="http://www.vexflow.com/">Vexflow</a>) is not supported yet.</p>
 <h2 id="sibelius"><a href="#sibelius">Sibelius</a></h2>
-<p>The <code>music-sibelius</code> provides experimental import of Sibelius scores (as MusicXML import is <a href="#musicxml">not supported</a>).</p>
+<p>The <code>music-sibelius</code> package provides experimental import of Sibelius scores (as MusicXML import is <a href="#musicxml">not supported</a>).</p>
 <!--
 This feature could of course also be used to convert Sibelius scores to other formats such as Guido or ABC without having to write in the ManuScript language used by Sibelius.
 -->

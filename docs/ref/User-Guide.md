@@ -771,8 +771,10 @@ All standard representations support Lilypond output. The `lilypond` package is 
 
 Lilypond input is not available yet but will hopefully be added soon.
 
+An example:
+
 ```haskell
-putStrLn $ show $ Text.Pretty.pretty $ toLy $ asScore $ scat [c,d,e]
+putStrLn $ toLyString $ asScore $ scat [c,d,e]
 
 ```
 
@@ -788,8 +790,10 @@ parsing and pretty printing.
 
 The output is fairly complete, with some minor limitations. Bug reports are much welcome. There are no plans to support MusicXML import in the near future.
 
+Beware of the extreme verboseness of XML, for example:
+
 ```haskell
-putStrLn $ Xml.showXml $ toXml $ asScore $ scat [c,d,e]
+putStrLn $ toXmlString $ asScore $ scat [c,d,e]
 
 ```
 
@@ -882,7 +886,7 @@ Vextab output (for use with [Vexflow](http://www.vexflow.com/)) is not supported
 
 ## Sibelius
 
-The `music-sibelius` provides experimental import of Sibelius scores (as MusicXML import is [not supported](#musicxml)).
+The `music-sibelius` package provides experimental import of Sibelius scores (as MusicXML import is [not supported](#musicxml)).
 
 <!--
 This feature could of course also be used to convert Sibelius scores to other formats such as Guido or ABC without having to write in the ManuScript language used by Sibelius.
