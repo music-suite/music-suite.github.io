@@ -102,11 +102,12 @@ code > span.er { color: #ff0000; font-weight: bold; }
 -->
 
 <p>The Music Suite is a declarative language embedded in <a href="http://www.haskell.org/haskellwiki/Haskell">Haskell</a> for generation and manipulation of music.<!-- It is is similar to [Haskore][Haskore] and [Euterpea][Euterpea], but its design and general philosophy is more inspired by [Diagrams][Diagrams] and [Reactive][Reactive]. --></p>
-<p>The Music Suite was designed with the dual goal of:</p>
+<p>The Music Suite was designed with two key properties in mind:</p>
 <ul>
-<li><p>Being usable with all <em>theories of music</em>. In particular, it does <em>not</em> assume a Western classical notion of time and pitch.</p></li>
-<li><p>Include Western classical music theory as a <em>special case</em>. Conventional scores can be represented in full, with correct part structure, pitch, rhythm, dynamics, articulation and so on. Many function are generalized to work on any music representation.</p></li>
+<li><p>It should be usable with any kind of music. It should allow time, pitch and other properties to be represented in any way the user desires.</p></li>
+<li><p>It should include Western classical music theory as a <em>special case</em>, including a full representation of time, pitch, rhythm, dynamics, articulation, voice- and part structure, and so on.</p></li>
 </ul>
+<p>For this purpose, the Music Suite makes use of some advanced type system features in Haskell, in particular type classes and type families. Many function are generalized to work on any music representation, for example the function used to transpose music up one octave has the type <code>octavesUp :: (HasPitch' a, IsInterval (IntervalOf a)) =&gt; Integer -&gt; a -&gt; a</code>, meaning that octave transposition work on any type whose pitch type form an affine space.</p>
 <h3 id="an-example"><a href="#an-example">An example</a></h3>
 <p>To generate music we write an <em>expressions</em> such as this one:</p>
 <div class='haskell-music'>
