@@ -661,6 +661,81 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <p>All representations support MIDI input and output. The MIDI representation uses <a href="http://hackage.haskell.org/package/HCodecs">HCodecs</a> and the real-time support uses <a href="http://hackage.haskell.org/package/hamid">hamid</a>. You can read and write MIDI files using the functions [<code>readMidi</code>][readMidi] and [<code>writeMidi</code>][writeMidi]. To play MIDI back in real-time, use [<code>playMidi</code>][playMidi] or [<code>playMidiIO</code>][playMidiIO], which uses <a href="http://hackage.haskell.org/package/reenact">reenact</a>.</p>
 <p>Beware that MIDI input may contain time and pitch values that yield a non-readable notation, you need a proper quantization software such as <a href="http://scorecleaner.com">ScoreCleaner</a> to convert raw MIDI input to quantized input.</p>
 <h2 id="musicxml"><a href="#musicxml">MusicXML</a></h2>
+<p>MusicXML output is generally well supported, with some minor limitations. Bug reports are much welcome. There are no plans to support MusicXML import in the near future.</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">putStrLn</span> <span class="fu">$</span> Xml.showXml <span class="fu">$</span> toXml <span class="fu">$</span> asScore <span class="fu">$</span> scat [c,d,e]</code></pre>
+<pre><code>&lt;?xml version=&#39;1.0&#39; ?&gt;
+&lt;score-partwise&gt;
+  &lt;movement-title&gt;Title&lt;/movement-title&gt;
+  &lt;identification&gt;
+    &lt;creator type=&quot;composer&quot;&gt;Composer&lt;/creator&gt;
+  &lt;/identification&gt;
+  &lt;part-list&gt;
+    &lt;score-part id=&quot;P1&quot;&gt;
+      &lt;part-name&gt;&lt;/part-name&gt;
+    &lt;/score-part&gt;
+  &lt;/part-list&gt;
+  &lt;part id=&quot;P1&quot;&gt;
+    &lt;measure number=&quot;1&quot;&gt;
+      &lt;attributes&gt;
+        &lt;key&gt;
+          &lt;fifths&gt;0&lt;/fifths&gt;
+          &lt;mode&gt;major&lt;/mode&gt;
+        &lt;/key&gt;
+      &lt;/attributes&gt;
+      &lt;attributes&gt;
+        &lt;divisions&gt;768&lt;/divisions&gt;
+      &lt;/attributes&gt;
+      &lt;direction&gt;
+        &lt;direction-type&gt;
+          &lt;metronome&gt;
+            &lt;beat-unit&gt;quarter&lt;/beat-unit&gt;
+            &lt;per-minute&gt;60&lt;/per-minute&gt;
+          &lt;/metronome&gt;
+        &lt;/direction-type&gt;
+      &lt;/direction&gt;
+      &lt;attributes&gt;
+        &lt;time symbol=&quot;common&quot;&gt;
+          &lt;beats&gt;4&lt;/beats&gt;
+          &lt;beat-type&gt;4&lt;/beat-type&gt;
+        &lt;/time&gt;
+      &lt;/attributes&gt;
+      &lt;note&gt;
+        &lt;pitch&gt;
+          &lt;step&gt;C&lt;/step&gt;
+          &lt;alter&gt;0.0&lt;/alter&gt;
+          &lt;octave&gt;4&lt;/octave&gt;
+        &lt;/pitch&gt;
+        &lt;duration&gt;3072&lt;/duration&gt;
+        &lt;voice&gt;1&lt;/voice&gt;
+        &lt;type&gt;whole&lt;/type&gt;
+      &lt;/note&gt;
+    &lt;/measure&gt;
+    &lt;measure number=&quot;2&quot;&gt;
+      &lt;note&gt;
+        &lt;pitch&gt;
+          &lt;step&gt;D&lt;/step&gt;
+          &lt;alter&gt;0.0&lt;/alter&gt;
+          &lt;octave&gt;4&lt;/octave&gt;
+        &lt;/pitch&gt;
+        &lt;duration&gt;3072&lt;/duration&gt;
+        &lt;voice&gt;1&lt;/voice&gt;
+        &lt;type&gt;whole&lt;/type&gt;
+      &lt;/note&gt;
+    &lt;/measure&gt;
+    &lt;measure number=&quot;3&quot;&gt;
+      &lt;note&gt;
+        &lt;pitch&gt;
+          &lt;step&gt;E&lt;/step&gt;
+          &lt;alter&gt;0.0&lt;/alter&gt;
+          &lt;octave&gt;4&lt;/octave&gt;
+        &lt;/pitch&gt;
+        &lt;duration&gt;3072&lt;/duration&gt;
+        &lt;voice&gt;1&lt;/voice&gt;
+        &lt;type&gt;whole&lt;/type&gt;
+      &lt;/note&gt;
+    &lt;/measure&gt;
+  &lt;/part&gt;
+&lt;/score-partwise&gt;</code></pre>
 <h2 id="lilypond"><a href="#lilypond">Lilypond</a></h2>
 <h2 id="abc-notation"><a href="#abc-notation">ABC Notation</a></h2>
 <h2 id="guido"><a href="#guido">Guido</a></h2>

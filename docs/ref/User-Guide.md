@@ -764,9 +764,90 @@ All representations support MIDI input and output. The MIDI representation uses 
 
 Beware that MIDI input may contain time and pitch values that yield a non-readable notation, you need a proper quantization software such as [ScoreCleaner](http://scorecleaner.com) to convert raw MIDI input to quantized input.
 
-
-
 ## MusicXML
+
+MusicXML output is generally well supported, with some minor limitations. Bug reports are much welcome. There are no plans to support MusicXML import in the near future.
+
+```haskell
+putStrLn $ Xml.showXml $ toXml $ asScore $ scat [c,d,e]
+
+```
+
+    <?xml version='1.0' ?>
+    <score-partwise>
+      <movement-title>Title</movement-title>
+      <identification>
+        <creator type="composer">Composer</creator>
+      </identification>
+      <part-list>
+        <score-part id="P1">
+          <part-name></part-name>
+        </score-part>
+      </part-list>
+      <part id="P1">
+        <measure number="1">
+          <attributes>
+            <key>
+              <fifths>0</fifths>
+              <mode>major</mode>
+            </key>
+          </attributes>
+          <attributes>
+            <divisions>768</divisions>
+          </attributes>
+          <direction>
+            <direction-type>
+              <metronome>
+                <beat-unit>quarter</beat-unit>
+                <per-minute>60</per-minute>
+              </metronome>
+            </direction-type>
+          </direction>
+          <attributes>
+            <time symbol="common">
+              <beats>4</beats>
+              <beat-type>4</beat-type>
+            </time>
+          </attributes>
+          <note>
+            <pitch>
+              <step>C</step>
+              <alter>0.0</alter>
+              <octave>4</octave>
+            </pitch>
+            <duration>3072</duration>
+            <voice>1</voice>
+            <type>whole</type>
+          </note>
+        </measure>
+        <measure number="2">
+          <note>
+            <pitch>
+              <step>D</step>
+              <alter>0.0</alter>
+              <octave>4</octave>
+            </pitch>
+            <duration>3072</duration>
+            <voice>1</voice>
+            <type>whole</type>
+          </note>
+        </measure>
+        <measure number="3">
+          <note>
+            <pitch>
+              <step>E</step>
+              <alter>0.0</alter>
+              <octave>4</octave>
+            </pitch>
+            <duration>3072</duration>
+            <voice>1</voice>
+            <type>whole</type>
+          </note>
+        </measure>
+      </part>
+    </score-partwise>
+    
+
 ## Lilypond
 ## ABC Notation
 ## Guido
