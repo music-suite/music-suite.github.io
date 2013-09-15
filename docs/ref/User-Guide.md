@@ -407,21 +407,15 @@ Pitch.c |> Pitch.d
 
 ## Dynamics
 
+Dynamic values are overloaded in the same way as pitches. The dynamic literals are defined in `Music.Dynamics.Literal` and have type `IsDynamics a => a`.
 
-[`dynamics`][dynamics]
-
-<div class='haskell-music'>
-
-
-
-![](312f3abfc8d2e31dx.png)
+An overview of the dynamic values:
 
 ```haskell
-dynamics _p c
+scat $ zipWith dynamics [fff,ff,_f,mf,mp,_p,pp,ppp] [c..]
 
 ```
 
-</div>
 
 ## Articulation
 
