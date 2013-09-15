@@ -6,7 +6,7 @@
 
 The Music Suite depends on the [Haskell platform][HaskellPlatform].
 
-While not strictly required,[Lilypond][Lilypond] is highly recommended as it allow you to
+While not strictly required, [Lilypond][Lilypond] is highly recommended as it allow you to
 preview musical scores. See [Import and Export](#import-and-export) for other formats.
 
 To install the suite, simply install the Haskell platform, and then run:
@@ -803,7 +803,7 @@ putStrLn $ toLyString $ asScore $ scat [c,d,e]
 All standard representations support MusicXML output. The [musicxml2](http://hackage.haskell.org/package/musicxml2) package is used for 
 parsing and pretty printing. 
 
-The output is fairly complete, with some minor limitations. Bug reports are much welcome. There are no plans to support MusicXML import in the near future.
+The output is fairly complete, with some limitations ([reports][issue-tracker] welcome). There are no plans to support MusicXML import in the near future.
 
 Beware of the extreme verboseness of XML, for example:
 
@@ -1030,6 +1030,9 @@ in (take 25 $ row) `repeated` (\p -> up (asPitch p .-. c) mel)
 [Lilypond]:         http://lilypond.org
 [Timidity]:         http://timidity.sourceforge.net/
 [HaskellPlatform]:  http://www.haskell.org/platform/
+
+[issue-tracker]:    https://github.com/hanshoglund/music-score/issues
+
 
 
 

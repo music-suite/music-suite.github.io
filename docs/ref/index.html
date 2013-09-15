@@ -155,7 +155,7 @@ For an introduction, see [User Guide](User-Guide).
 <h1 id="user-guide"><a href="#user-guide">User Guide</a></h1>
 <h2 id="installation"><a href="#installation">Installation</a></h2>
 <p>The Music Suite depends on the <a href="http://www.haskell.org/platform/">Haskell platform</a>.</p>
-<p>While not strictly required,<a href="http://lilypond.org">Lilypond</a> is highly recommended as it allow you to preview musical scores. See <a href="#import-and-export">Import and Export</a> for other formats.</p>
+<p>While not strictly required, <a href="http://lilypond.org">Lilypond</a> is highly recommended as it allow you to preview musical scores. See <a href="#import-and-export">Import and Export</a> for other formats.</p>
 <p>To install the suite, simply install the Haskell platform, and then run:</p>
 <pre><code>cabal install music-preludes</code></pre>
 <h2 id="generating-music"><a href="#generating-music">Generating music</a></h2>
@@ -681,7 +681,7 @@ You can read and write MIDI files using the functions [`readMidi`][readMidi] and
 &gt;&gt;</code></pre>
 <h2 id="musicxml"><a href="#musicxml">MusicXML</a></h2>
 <p>All standard representations support MusicXML output. The <a href="http://hackage.haskell.org/package/musicxml2">musicxml2</a> package is used for parsing and pretty printing.</p>
-<p>The output is fairly complete, with some minor limitations. Bug reports are much welcome. There are no plans to support MusicXML import in the near future.</p>
+<p>The output is fairly complete, with some limitations (<a href="https://github.com/hanshoglund/music-score/issues">reports</a> welcome). There are no plans to support MusicXML import in the near future.</p>
 <p>Beware of the extreme verboseness of XML, for example:</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">putStrLn</span> <span class="fu">$</span> toXmlString <span class="fu">$</span> asScore <span class="fu">$</span> scat [c,d,e]</code></pre>
 <pre><code>&lt;?xml version=&#39;1.0&#39; ?&gt;
