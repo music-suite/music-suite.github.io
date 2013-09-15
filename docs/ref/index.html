@@ -96,7 +96,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#sibelius">Sibelius</a></li>
 </ul></li>
 <li><a href="#customizing-music-representation">Customizing music representation</a></li>
-<li><a href="#examples">Examples</a></li>
+<li><a href="#examples">Examples</a><ul>
+<li><a href="#counterpoint">Counterpoint</a></li>
+<li><a href="#generative-music">Generative music</a></li>
+</ul></li>
 </ul>
 </div>
 <h2 id="the-music-suite"><a href="#the-music-suite">The Music Suite</a></h2>
@@ -766,6 +769,9 @@ This feature could of course also be used to convert Sibelius scores to other fo
 
 <h1 id="customizing-music-representation"><a href="#customizing-music-representation">Customizing music representation</a></h1>
 <h1 id="examples"><a href="#examples">Examples</a></h1>
+<p>Some more involved examples:</p>
+<h2 id="counterpoint"><a href="#counterpoint">Counterpoint</a></h2>
+<p>TODO about</p>
 <div class='haskell-music'>
 
 
@@ -780,6 +786,20 @@ This feature could of course also be used to convert Sibelius scores to other fo
         ]<span class="fu">^/</span><span class="dv">8</span>
 
 <span class="kw">in</span> (delay (<span class="dv">6</span><span class="fu">/</span><span class="dv">4</span>) <span class="fu">$</span> up (perfect fifth) subj) <span class="fu">&lt;/&gt;</span> subj</code></pre>
+</div>
+
+<h2 id="generative-music"><a href="#generative-music">Generative music</a></h2>
+<div class='haskell-music'>
+
+
+
+<div class="figure">
+<img src="6e89c3525b872b20x.png" />
+</div>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span>
+    row <span class="fu">=</span> <span class="fu">cycle</span> [c,eb,ab,asPitch g]
+    mel <span class="fu">=</span> asScore <span class="fu">$</span> scat [d, scat [g,fs]<span class="fu">^/</span><span class="dv">2</span>,bb<span class="fu">^*</span><span class="dv">2</span>]<span class="fu">^/</span><span class="dv">4</span>
+<span class="kw">in</span> (<span class="fu">take</span> <span class="dv">25</span> <span class="fu">$</span> row) <span class="ot">`repeated`</span> (\p <span class="ot">-&gt;</span> up (asPitch p <span class="fu">.-.</span> c) mel)</code></pre>
 </div>
 
 

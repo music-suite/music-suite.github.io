@@ -909,6 +909,12 @@ This feature could of course also be used to convert Sibelius scores to other fo
 
 # Examples
 
+Some more involved examples:
+
+## Counterpoint
+
+TODO about
+
 <div class='haskell-music'>
 
 
@@ -923,6 +929,24 @@ let subj = removeRests $ scat [
         ]^/8
 
 in (delay (6/4) $ up (perfect fifth) subj) </> subj
+
+```
+
+</div>
+
+## Generative music
+
+<div class='haskell-music'>
+
+
+
+![](6e89c3525b872b20x.png)
+
+```haskell
+let
+    row = cycle [c,eb,ab,asPitch g]
+    mel = asScore $ scat [d, scat [g,fs]^/2,bb^*2]^/4
+in (take 25 $ row) `repeated` (\p -> up (asPitch p .-. c) mel)
 
 ```
 
