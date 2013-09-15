@@ -14,7 +14,9 @@ The Music Suite was designed with two key properties in mind:
 
 * It should include Western classical music theory as a *special case*, including a full representation of time, pitch, rhythm, dynamics, articulation, voice- and part structure, and so on. 
 
+<!--
 For this purpose, the Music Suite makes use of some advanced type system features in Haskell, in particular type classes and type families. Many function are generalized to work on any music representation, for example the function used to transpose music up one octave has the type `octavesUp :: (HasPitch' a, IsInterval (IntervalOf a)) => Integer -> a -> a`, meaning that octave transposition work on any type whose pitch type form an affine space.
+-->
 
 
 ### An example
