@@ -767,7 +767,7 @@ ScoreCleaner](http://scorecleaner.com) to convert raw MIDI input to quantized in
 
 ## Lilypond
 
-All standard representations support Lilypond output. The `lilypond` package is used for parsing and pretty printing of Lilypond syntax. Lilypond is the recommended way of rendering music.
+All standard representations support Lilypond output. The [lilypond](http://hackage.haskell.org/package/lilypond) package is used for parsing and pretty printing of Lilypond syntax. Lilypond is the recommended way of rendering music.
 
 Lilypond input is not available yet but will hopefully be added soon.
 
@@ -785,7 +785,7 @@ putStrLn $ toLyString $ asScore $ scat [c,d,e]
 
 ## MusicXML
 
-All standard representations support MusicXML output. The `musicxml2` package is used for 
+All standard representations support MusicXML output. The [musicxml2](http://hackage.haskell.org/package/musicxml2) package is used for 
 parsing and pretty printing. 
 
 The output is fairly complete, with some minor limitations. Bug reports are much welcome. There are no plans to support MusicXML import in the near future.
@@ -886,7 +886,7 @@ Vextab output (for use with [Vexflow](http://www.vexflow.com/)) is not supported
 
 ## Sibelius
 
-The `music-sibelius` package provides experimental import of Sibelius scores (as MusicXML import is [not supported](#musicxml)).
+The [music-sibelius](http://hackage.haskell.org/package/music-sibelius) package provides experimental import of Sibelius scores (as MusicXML import is [not supported](#musicxml)).
 
 <!--
 This feature could of course also be used to convert Sibelius scores to other formats such as Guido or ABC without having to write in the ManuScript language used by Sibelius.
