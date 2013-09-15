@@ -54,7 +54,7 @@ The Music Suite works well with the following input and output formats:
 * MusicXML
 * Lilypond
 * ABC notation
-* Midi
+* MIDI
 
 ### More information
 

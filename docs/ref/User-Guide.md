@@ -870,7 +870,7 @@ putStrLn $ Xml.showXml $ toXml $ asScore $ scat [c,d,e]
 
 ## ABC Notation
 
-ABC notation (for use with [abcjs](http://code.google.com/p/abcjs/)) or similar engines) is still experimental.
+ABC notation (for use with [abcjs](http://code.google.com/p/abcjs/) or similar engines) is still experimental.
 
 ## Guido
 
@@ -882,7 +882,11 @@ Vextab output (for use with [Vexflow](http://www.vexflow.com/)) is not supported
 
 ## Sibelius
 
-The `music-sibelius` provides experimental import of Sibelius scores (as MusicXML import is [not supported](#musicxml)). This works by installing a Sibelius plugin that renders the internal score representation of Sibelius to a JSON-based representation which can be read by Haskell. This feature could of course also be used to convert Sibelius scores to other formats such as Guido or ABC without having to write in the ManuScript language used by Sibelius.
+The `music-sibelius` provides experimental import of Sibelius scores (as MusicXML import is [not supported](#musicxml)).
+
+<!--
+This feature could of course also be used to convert Sibelius scores to other formats such as Guido or ABC without having to write in the ManuScript language used by Sibelius.
+-->
 
 
 
