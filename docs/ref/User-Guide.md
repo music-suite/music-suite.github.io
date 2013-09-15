@@ -411,10 +411,18 @@ Dynamic values are overloaded in the same way as pitches. The dynamic literals a
 
 An overview of the dynamic values:
 
+<div class='haskell-music'>
+
+
+
+![](73dd0a315ca1480x.png)
+
 ```haskell
 scat $ zipWith dynamics [fff,ff,_f,mf,mp,_p,pp,ppp] [c..]
 
 ```
+
+</div>
 
 
 ## Articulation

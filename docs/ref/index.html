@@ -420,7 +420,17 @@ flatten d             <span class="fu">==</span> d flat        <span class="fu">
 <h2 id="dynamics"><a href="#dynamics">Dynamics</a></h2>
 <p>Dynamic values are overloaded in the same way as pitches. The dynamic literals are defined in <code>Music.Dynamics.Literal</code> and have type <code>IsDynamics a =&gt; a</code>.</p>
 <p>An overview of the dynamic values:</p>
+<div class='haskell-music'>
+
+
+
+<div class="figure">
+<img src="73dd0a315ca1480x.png" />
+</div>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">scat <span class="fu">$</span> <span class="fu">zipWith</span> dynamics [fff,ff,_f,mf,mp,_p,pp,ppp] [c<span class="fu">..</span>]</code></pre>
+</div>
+
+
 <h2 id="articulation"><a href="#articulation">Articulation</a></h2>
 <p>Some basic articulation functions are <a href="/docs/api/Music-Score-Articulation.html#v:legato"><code>legato</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:staccato"><code>staccato</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:portato"><code>portato</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:tenuto"><code>tenuto</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:separated"><code>separated</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:spiccato"><code>spiccato</code></a>:</p>
 <div class='haskell-music'>
