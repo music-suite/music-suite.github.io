@@ -13,5 +13,5 @@
 <<
     \new Staff {   \set Staff.instrumentName = "" <c''>8 <d''>8 <e''>8 <f''>8 <g''>8 <a''>8 <g''>8 <f''>8
                }
-    \new Staff { \set Staff.instrumentName = "" <g' e' c'>2 <d' b g>2 }
+    \new Staff { \set Staff.instrumentName = "" <c' e' g'>2 <g b d'>2 }
 >>
