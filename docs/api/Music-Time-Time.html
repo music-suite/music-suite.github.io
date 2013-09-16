@@ -2,19 +2,15 @@
 window.onload = function () {pageLoad();setSynopsis("mini_Music-Time-Time.html");};
 //]]>
 </script></head><body><div id="package-header"><ul class="links" id="page-menu"><li><a href="index.html">Contents</a></li><li><a href="doc-index.html">Index</a></li></ul><p class="caption">The&#160;Music&#160;Suite</p></div><div id="content"><div id="module-header"><table class="info"><tr><th>Portability</th><td>non-portable (TF,GNTD)</td></tr><tr><th>Stability</th><td>experimental</td></tr><tr><th>Maintainer</th><td>hans@hanshoglund.se</td></tr><tr><th>Safe Haskell</th><td>None</td></tr></table><p class="caption">Music.Time.Time</p></div><div id="table-of-contents"><p class="caption">Contents</p><ul><li><a href="#g:1">Time and duration types
-</a></li><li><a href="#g:2">Basic time and duration types
-</a></li></ul></div><div id="description"><p class="caption">Description</p><div class="doc empty">&nbsp;</div></div><div id="synopsis"><p id="control.syn" class="caption expander" onclick="toggleSection('syn')">Synopsis</p><ul id="section.syn" class="hide" onclick="toggleSection('syn')"><li class="src short"><span class="keyword">type</span> <a href="#t:Time">Time</a> a = Point (<a href="Music-Time-Time.html#t:Duration">Duration</a> a)</li><li class="src short"><span class="keyword">type family</span> <a href="#t:Duration">Duration</a> s :: *</li><li class="src short"><span class="keyword">type</span> <a href="#t:DurationT">DurationT</a> = Rational</li><li class="src short"><span class="keyword">type</span> <a href="#t:TimeT">TimeT</a> = Point <a href="Music-Time-Time.html#t:DurationT">DurationT</a></li></ul></div><div id="interface"><h1 id="g:1">Time and duration types
-</h1><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:Time" class="def">Time</a> a = Point (<a href="Music-Time-Time.html#t:Duration">Duration</a> a)</p><div class="doc"><p>This type function returns the duration type for a given type.
-</p></div></div><div class="top"><p class="src"><span class="keyword">type family</span> <a name="t:Duration" class="def">Duration</a> s :: *</p><div class="doc"><p>This type function returns the duration type for a given type.
-</p></div></div><div class="doc"><p>Note that you should use <code>.-.</code> and <code>.+^</code> to convert between time and
- duration. To refer to time zero (the beginning of the music), use
- <code>origin</code>.
-</p></div><h1 id="g:2">Basic time and duration types
-</h1><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:DurationT" class="def">DurationT</a> = Rational</p><div class="doc"><p>This type represents relative time in seconds.
-</p></div></div><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:TimeT" class="def">TimeT</a> = Point <a href="Music-Time-Time.html#t:DurationT">DurationT</a></p><div class="doc"><p>This type represents absolute time in seconds since the start time. Note
+</a></li></ul></div><div id="description"><p class="caption">Description</p><div class="doc empty">&nbsp;</div></div><div id="synopsis"><p id="control.syn" class="caption expander" onclick="toggleSection('syn')">Synopsis</p><ul id="section.syn" class="hide" onclick="toggleSection('syn')"><li class="src short"><span class="keyword">type</span> <a href="#t:Time">Time</a> = Point <a href="Music-Time-Time.html#t:Duration">Duration</a></li><li class="src short"><span class="keyword">type</span> <a href="#t:Duration">Duration</a> = Rational</li></ul></div><div id="interface"><h1 id="g:1">Time and duration types
+</h1><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:Time" class="def">Time</a> = Point <a href="Music-Time-Time.html#t:Duration">Duration</a></p><div class="doc"><p>This type represents absolute time in seconds since the start time. Note
  that time can be negative, representing events occuring before the start time.
  The start time is usually the the beginning of the musical performance.
 </p><p>Time forms an affine space with durations as the underlying vector space,
  that is, we can add a time to a duration to get a new time using <code>.+^</code>,
  take the difference of two times to get a duration using <code>.-.</code>.
-</p></div></div></div></div><div id="footer"><p>Produced by <a href="http://www.haskell.org/haddock/">Haddock</a> version 2.13.2</p></div></body></html>
+</p></div></div><div class="top"><p class="src"><span class="keyword">type</span> <a name="t:Duration" class="def">Duration</a> = Rational</p><div class="doc"><p>This type represents relative time in seconds.
+</p></div></div><div class="doc"><p>Note that you should use <code>.-.</code> and <code>.+^</code> to convert between time and
+ duration. To refer to time zero (the beginning of the music), use
+ <code>origin</code>.
+</p></div></div></div><div id="footer"><p>Produced by <a href="http://www.haskell.org/haddock/">Haddock</a> version 2.13.2</p></div></body></html>
