@@ -289,7 +289,10 @@ scat [c, d, e, f, g, a, b]
 
 </div>
 
-Pitch names in other languages work as well, for example `ut, do, re, mi, fa, so, la, ti, si`. German names (using `h` and `b` instead of `b` and `bb`) can be approximated as follows:
+Pitch names in other languages work as well, for example `ut, do, re, mi, fa, so, la, ti, si`. 
+
+<!--
+German names (using `h` and `b` instead of `b` and `bb`) can be approximated as follows:
 
 ```haskell
 import Music.Preludes.Basic hiding (b)
@@ -299,6 +302,7 @@ h = P.b
 b = P.bb
 
 ```
+-->
 
 
 You can change octave using `octavesUp` and `octavesDown`:

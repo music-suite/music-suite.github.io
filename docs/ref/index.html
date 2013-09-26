@@ -107,17 +107,12 @@ code > span.er { color: #ff0000; font-weight: bold; }
 > *Please note:* The API and docs are not particularly stable at the moment. An official release note will appear in due time.
 -->
 
-<p>The Music Suite is a declarative language embedded in <a href="http://www.haskell.org/haskellwiki/Haskell">Haskell</a> for generation and manipulation of music.<!-- It is is similar to [Haskore][Haskore] and [Euterpea][Euterpea], but its design and general philosophy is more inspired by [Diagrams][Diagrams] and [Reactive][Reactive]. --></p>
-<p>The Music Suite was designed with two key properties in mind:</p>
+<p>The Music Suite is a language for representing, creating, transforming or analysing music, based on the <a href="http://www.haskell.org/haskellwiki/Haskell">Haskell programming language</a>.</p>
+<p>The Music Suite is designed to:</p>
 <ul>
-<li><p>It should be usable with any kind of music. It should allow time, pitch and other properties to be represented in any way the user desires.</p></li>
-<li><p>It should include Western classical music theory as a <em>special case</em>, including a full representation of time, pitch, rhythm, dynamics, articulation, voice- and part structure, and so on.</p></li>
+<li><p>Be usable with various types of music. It should allow custom representation of time, pitch, dynamics and so on.</p></li>
+<li><p>It should include standard notation as a <em>special case</em>, including a full representation of time, pitch, rhythm, dynamics, articulation, part structure, and so on.</p></li>
 </ul>
-<!--
-For this purpose, the Music Suite makes use of some advanced type system features in Haskell, in particular type classes and type families. Many function are generalized to work on any music representation, for example the function used to transpose music up one octave has the type `octavesUp :: (HasPitch' a, IsInterval (IntervalOf a)) => Integer -> a -> a`, meaning that octave transposition work on any type whose pitch type form an affine space.
--->
-
-
 <h3 id="an-example"><a href="#an-example">An example</a></h3>
 <p>To generate music we write an <em>expressions</em> such as this one:</p>
 <div class='haskell-music'>
@@ -343,12 +338,21 @@ stretch <span class="dv">2</span> c</code></pre>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">scat [c, d, e, f, g, a, b]</code></pre>
 </div>
 
-<p>Pitch names in other languages work as well, for example <code>ut, do, re, mi, fa, so, la, ti, si</code>. German names (using <code>h</code> and <code>b</code> instead of <code>b</code> and <code>bb</code>) can be approximated as follows:</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import</span> Music.Preludes.Basic <span class="kw">hiding</span> (b)
-<span class="kw">import</span> <span class="kw">qualified</span> Music.Pitch.Literal <span class="kw">as</span> P
+<p>Pitch names in other languages work as well, for example <code>ut, do, re, mi, fa, so, la, ti, si</code>.</p>
+<!--
+German names (using `h` and `b` instead of `b` and `bb`) can be approximated as follows:
 
-h <span class="fu">=</span> P.b
-b <span class="fu">=</span> P.bb</code></pre>
+```haskell
+import Music.Preludes.Basic hiding (b)
+import qualified Music.Pitch.Literal as P
+
+h = P.b
+b = P.bb
+
+```
+-->
+
+
 <p>You can change octave using <code>octavesUp</code> and <code>octavesDown</code>:</p>
 <div class='haskell-music'>
 
