@@ -38,10 +38,10 @@ window.onload = function () {pageLoad();setSynopsis("mini_Music-Score-Combinator
 </p></div></div><h2 id="g:5">Map over phrases
 </h2><div class="top"><p class="src"><a name="v:mapFirst" class="def">mapFirst</a> :: <a href="Music-Score-Part.html#t:HasPart-39-">HasPart'</a> a =&gt; (a -&gt; b) -&gt; (a -&gt; b) -&gt; <a href="Music-Score-Score.html#t:Score">Score</a> a -&gt; <a href="Music-Score-Score.html#t:Score">Score</a> b</p><div class="doc"><p>Map over the first, and remaining notes in each part.
 </p><p>If a part has only one notes, the first function is applied.
- If a part has no notes, the given score is returned unchanged.
+ If a part has no notes, it is returned unchanged.
 </p></div></div><div class="top"><p class="src"><a name="v:mapLast" class="def">mapLast</a> :: <a href="Music-Score-Part.html#t:HasPart-39-">HasPart'</a> a =&gt; (a -&gt; b) -&gt; (a -&gt; b) -&gt; <a href="Music-Score-Score.html#t:Score">Score</a> a -&gt; <a href="Music-Score-Score.html#t:Score">Score</a> b</p><div class="doc"><p>Map over the last, and preceding notes in each part.
 </p><p>If a part has only one notes, the first function is applied.
- If a part has no notes, the given score is returned unchanged.
+ If a part has no notes, it is returned unchanged.
 </p></div></div><div class="top"><p class="src"><a name="v:mapPhrase" class="def">mapPhrase</a> :: <a href="Music-Score-Part.html#t:HasPart-39-">HasPart'</a> a =&gt; (a -&gt; b) -&gt; (a -&gt; b) -&gt; (a -&gt; b) -&gt; <a href="Music-Score-Score.html#t:Score">Score</a> a -&gt; <a href="Music-Score-Score.html#t:Score">Score</a> b</p><div class="doc"><p>Map over the first, middle and last note in each part.
 </p><p>If a part has fewer than three notes the first takes precedence over the last,
  and last takes precedence over the middle.
