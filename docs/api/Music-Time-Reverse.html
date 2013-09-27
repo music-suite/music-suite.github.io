@@ -5,7 +5,7 @@ window.onload = function () {pageLoad();setSynopsis("mini_Music-Time-Reverse.htm
 </a></li></ul></div><div id="description"><p class="caption">Description</p><div class="doc"><p>Provides reversible values.
 </p></div></div><div id="synopsis"><p id="control.syn" class="caption expander" onclick="toggleSection('syn')">Synopsis</p><ul id="section.syn" class="hide" onclick="toggleSection('syn')"><li class="src short"><span class="keyword">class</span>  <a href="#t:Reversible">Reversible</a> a  <span class="keyword">where</span><ul class="subs"><li><a href="#v:rev">rev</a> :: a -&gt; a</li></ul></li></ul></div><div id="interface"><h1 id="g:1">Reversible class
 </h1><div class="top"><p class="src"><span class="keyword">class</span>  <a name="t:Reversible" class="def">Reversible</a> a  <span class="keyword">where</span></p><div class="doc"><p>Reversible values.
-</p><p>For instances of <code><a href="Music-Time-Reverse.html#t:Reversible">Reversible</a></code> and <code><a href="Music-Time-Onset.html#t:HasOnset">HasOnset</a></code>, the following laws should hold:
+</p><p>For instances of <code><a href="Music-Time-Reverse.html#t:Reversible">Reversible</a></code> and <code>HasOnset</code>, the following laws should hold:
 </p><pre> onset a    = onset (rev a)
  duration a = duration (rev a)
 </pre></div><div class="subs methods"><p class="caption">Methods</p><p class="src"><a name="v:rev" class="def">rev</a> :: a -&gt; a</p><div class="doc"><p>Reverse a value.
