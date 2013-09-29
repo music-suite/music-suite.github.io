@@ -61,17 +61,13 @@ window.onload = function () {pageLoad();setSynopsis("mini_Music-Pitch-Common-Int
 </p><pre> (perfect octave)^*x + y = z  iff  y = simple z
 </pre></div></div><h3 id="g:5">Inversion
 </h3><div class="top"><p class="src"><a name="v:invert" class="def">invert</a> :: <a href="Music-Pitch-Common-Interval.html#t:Interval">Interval</a> -&gt; <a href="Music-Pitch-Common-Interval.html#t:Interval">Interval</a></p><div class="doc"><p>Intervallic inversion.
-</p><p>The inversion of a simple interval is determined by the following rules:
-</p><ul><li> The interval number and the number of its inversion always add up to nine
-   (i.e. 4 + 5 = 9).
-</li><li> The inversion of a major interval is a minor interval, and vice versa;
-   the inversion of a perfect interval is also perfect; the inversion of an
-   augmented interval is a diminished interval, and vice versa; the
-   inversion of a doubly augmented interval is a doubly diminished interval,
-   and vice versa.
-</li></ul><p>The inversion of any compound interval is always the same as the inversion
- of the simple interval from which it is compounded, i.e.:
-</p><pre> invert = simple . negate
+</p><p>The inversion an interval is determined as follows:
+</p><ul><li> The number of a simple interval the difference of nine and the number of its inversion.
+</li><li> The quality of a simple interval is the inversion of the quality of its inversion.
+</li><li> The inversion of a compound interval is the inversion of its simple component.
+</li></ul><pre> number (invert a) = 9 - number a
+ quality (invert a) = invertQ (quality a)
+ invert = simple . negate
 </pre></div></div><h1 id="g:6">Utility
 </h1><div class="top"><p class="src"><a name="v:asInterval" class="def">asInterval</a> :: <a href="Music-Pitch-Common-Interval.html#t:Interval">Interval</a> -&gt; <a href="Music-Pitch-Common-Interval.html#t:Interval">Interval</a></p><div class="doc"><p>This is just the identity function, but is useful to fix the type of <code><a href="Music-Pitch-Common-Interval.html#t:Interval">Interval</a></code>.
 </p></div></div><div class="top"><p class="src"><a name="v:intervalDiff" class="def">intervalDiff</a> :: <a href="Music-Pitch-Common-Interval.html#t:Interval">Interval</a> -&gt; Int</p><div class="doc"><div class="warning"><p>Deprecated: This should be hidden
