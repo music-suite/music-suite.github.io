@@ -757,8 +757,6 @@ TODO
 
 # Meta-information
 
-## Basic information
-
 ## Time signatures          
 
 ## Key signatures
