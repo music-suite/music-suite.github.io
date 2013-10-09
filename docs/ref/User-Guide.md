@@ -170,7 +170,7 @@ up (perfect octave) . compress 2 . delay 3 $ c
 
 ## Composing
 
-Music expressions can be composed @[<>]:
+Music expressions can be composed [`<>`][<>]:
 
 <div class='haskell-music'>
 
@@ -187,7 +187,7 @@ c <> e <> g
 
 TODO fundamentally, `<>` is the only way to compose music...
 
-Or in sequence using @[|>]:
+Or in sequence using [`|>`][|>]:
 
 <div class='haskell-music'>
 
@@ -202,7 +202,7 @@ c |> d |> e
 
 </div>
 
-Or partwise using @[</>]:
+Or partwise using [`</>`][</>]:
 
 <div class='haskell-music'>
 
@@ -481,8 +481,8 @@ marcato (scat [c..g]^/8)
 
 </div>
 
-@[accentLast]
-@[accentAll]
+[`accentLast`][accentLast]
+[`accentAll`][accentAll]
 
 <div class='haskell-music'>
 
@@ -597,7 +597,7 @@ text "pizz." $ c^/2
 
 Sometimes it is useful to work with scores that have a duration but no events.
 This kind of score is represented by `rest` and has the type `Score (Maybe
-Note)`. We use @[removeRests] to convert a `Score (Maybe a)`
+Note)`. We use [`removeRests`][removeRests] to convert a `Score (Maybe a)`
 into a `Score a`.
 
 <div class='haskell-music'>
@@ -709,7 +709,7 @@ in compress 4 $ melody </> pedal
 
 ## Pitch
 
-@[invertAround]
+[`invertAround`][invertAround]
 
 <div class='haskell-music'>
 
@@ -766,11 +766,11 @@ TODO
 
 # Time-based structures
 
-@[Score]
-@[Voice]
-@[Track]
-@[Delayable]
-@[Stretchable]
+[`Score`][Score]
+[`Voice`][Voice]
+[`Track`][Track]
+[`Delayable`][Delayable]
+[`Stretchable`][Stretchable]
 
 
 # Meta-information
@@ -794,7 +794,7 @@ The conventions for input or output formats is similar to the convention for pro
 All standard representations support MIDI input and output. The MIDI representation uses [HCodecs](http://hackage.haskell.org/package/HCodecs) and the real-time support uses [hamid](http://hackage.haskell.org/package/hamid). 
 
 <!--
-You can read and write MIDI files using the functions @[readMidi] and @[writeMidi]. To play MIDI back in real-time, use @[playMidi] or @[playMidiIO], which uses [reenact](http://hackage.haskell.org/package/reenact).
+You can read and write MIDI files using the functions [`readMidi`][readMidi] and [`writeMidi`][writeMidi]. To play MIDI back in real-time, use [`playMidi`][playMidi] or [`playMidiIO`][playMidiIO], which uses [reenact](http://hackage.haskell.org/package/reenact).
 -->
 
 Beware that MIDI input may contain time and pitch values that yield a non-readable notation, you need a proper quantization software such as [
@@ -976,6 +976,9 @@ in (take 25 $ row) `repeated` (\p -> up (asPitch p .-. c) mel)
 
 </div>
 
+[<>]: /docs/api/Music-Pitch.html#v:-60--62-
+[|>]: /docs/api/Music-Time-Juxtapose.html#v:-124--62-
+[</>]: /docs/api/Music-Score-Combinators.html#v:-60--47--62-
 [scat]: /docs/api/Music-Time-Juxtapose.html#v:scat
 [pcat]: /docs/api/Music-Time-Juxtapose.html#v:pcat
 [sharp]: /docs/api/Music-Pitch-Common-Accidental.html#v:sharp
@@ -988,17 +991,32 @@ in (take 25 $ row) `repeated` (\p -> up (asPitch p .-. c) mel)
 [spiccato]: /docs/api/Music-Score-Articulation.html#v:spiccato
 [accent]: /docs/api/Music-Score-Articulation.html#v:accent
 [marcato]: /docs/api/Music-Score-Articulation.html#v:marcato
+[accentLast]: /docs/api/Music-Score-Articulation.html#v:accentLast
+[accentAll]: /docs/api/Music-Score-Articulation.html#v:accentAll
 [tremolo]: /docs/api/Music-Score-Ornaments.html#v:tremolo
 [slide]: /docs/api/Music-Score-Ornaments.html#v:slide
 [glissando]: /docs/api/Music-Score-Ornaments.html#v:glissando
 [harmonic]: /docs/api/Music-Score-Ornaments.html#v:harmonic
 [artificial]: /docs/api/Music-Score-Ornaments.html#v:artificial
 [text]: /docs/api/Music-Score-Ornaments.html#v:text
+[removeRests]: /docs/api/Music-Score-Combinators.html#v:removeRests
 [rev]: /docs/api/Music-Time-Reverse.html#v:rev
 [times]: /docs/api/Music-Time-Juxtapose.html#v:times
 [sustain]: /docs/api/Music-Time-Juxtapose.html#v:sustain
 [anticipate]: /docs/api/Music-Time-Juxtapose.html#v:anticipate
 [repeated]: /docs/api/Music-Time-Juxtapose.html#v:repeated
+[invertAround]: /docs/api/Music-Score-Pitch.html#v:invertAround
+[Score]: /docs/api/Music-Score-Score.html#t:Score
+[Voice]: /docs/api/Music-Score-Voice.html#t:Voice
+[Track]: /docs/api/Music-Score-Track.html#t:Track
+[Delayable]: /docs/api/Music-Time-Delayable.html#t:Delayable
+[Stretchable]: /docs/api/Music-Time-Stretchable.html#t:Stretchable
+
+<!-- Unknown: readMidi No such identifier: readMidi-->
+
+[writeMidi]: /docs/api/Music-Score-Export-Midi.html#v:writeMidi
+[playMidi]: /docs/api/Music-Score-Export-Midi.html#v:playMidi
+[playMidiIO]: /docs/api/Music-Score-Export-Midi.html#v:playMidiIO
 
 [Lilypond]:         http://lilypond.org
 [Timidity]:         http://timidity.sourceforge.net/

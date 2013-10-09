@@ -252,7 +252,7 @@ stretch <span class="dv">2</span> c</code></pre>
 
 
 <h2 id="composing"><a href="#composing">Composing</a></h2>
-<p>Music expressions can be composed @[&lt;&gt;]:</p>
+<p>Music expressions can be composed <a href="/docs/api/Music-Pitch.html#v:-60--62-"><code>&lt;&gt;</code></a>:</p>
 <div class='haskell-music'>
 
 
@@ -264,7 +264,7 @@ stretch <span class="dv">2</span> c</code></pre>
 </div>
 
 <p>TODO fundamentally, <code>&lt;&gt;</code> is the only way to compose music...</p>
-<p>Or in sequence using @[|&gt;]:</p>
+<p>Or in sequence using <a href="/docs/api/Music-Time-Juxtapose.html#v:-124--62-"><code>|&gt;</code></a>:</p>
 <div class='haskell-music'>
 
 
@@ -275,7 +275,7 @@ stretch <span class="dv">2</span> c</code></pre>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">c <span class="fu">|&gt;</span> d <span class="fu">|&gt;</span> e</code></pre>
 </div>
 
-<p>Or partwise using @[&lt;/&gt;]:</p>
+<p>Or partwise using <a href="/docs/api/Music-Score-Combinators.html#v:-60--47--62-"><code>&lt;/&gt;</code></a>:</p>
 <div class='haskell-music'>
 
 
@@ -474,7 +474,7 @@ spiccato (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cla
 marcato (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span class="dv">8</span>)</code></pre>
 </div>
 
-<p>@[accentLast] @[accentAll]</p>
+<p><a href="/docs/api/Music-Score-Articulation.html#v:accentLast"><code>accentLast</code></a> <a href="/docs/api/Music-Score-Articulation.html#v:accentAll"><code>accentAll</code></a></p>
 <div class='haskell-music'>
 
 
@@ -555,7 +555,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 </div>
 
 <h2 id="rests"><a href="#rests">Rests</a></h2>
-<p>Sometimes it is useful to work with scores that have a duration but no events. This kind of score is represented by <code>rest</code> and has the type <code>Score (Maybe Note)</code>. We use @[removeRests] to convert a <code>Score (Maybe a)</code> into a <code>Score a</code>.</p>
+<p>Sometimes it is useful to work with scores that have a duration but no events. This kind of score is represented by <code>rest</code> and has the type <code>Score (Maybe Note)</code>. We use <a href="/docs/api/Music-Score-Combinators.html#v:removeRests"><code>removeRests</code></a> to convert a <code>Score (Maybe a)</code> into a <code>Score a</code>.</p>
 <div class='haskell-music'>
 
 
@@ -638,7 +638,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 </div>
 
 <h2 id="pitch-1"><a href="#pitch-1">Pitch</a></h2>
-<p>@[invertAround]</p>
+<p><a href="/docs/api/Music-Score-Pitch.html#v:invertAround"><code>invertAround</code></a></p>
 <div class='haskell-music'>
 
 
@@ -670,7 +670,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <h3 id="extracting-and-modifying-parts"><a href="#extracting-and-modifying-parts">Extracting and modifying parts</a></h3>
 <h3 id="part-composition"><a href="#part-composition">Part composition</a></h3>
 <h1 id="time-based-structures"><a href="#time-based-structures">Time-based structures</a></h1>
-<p>@[Score] @[Voice] @[Track] @[Delayable] @[Stretchable]</p>
+<p><a href="/docs/api/Music-Score-Score.html#t:Score"><code>Score</code></a> <a href="/docs/api/Music-Score-Voice.html#t:Voice"><code>Voice</code></a> <a href="/docs/api/Music-Score-Track.html#t:Track"><code>Track</code></a> <a href="/docs/api/Music-Time-Delayable.html#t:Delayable"><code>Delayable</code></a> <a href="/docs/api/Music-Time-Stretchable.html#t:Stretchable"><code>Stretchable</code></a></p>
 <h1 id="meta-information"><a href="#meta-information">Meta-information</a></h1>
 <h2 id="time-signatures"><a href="#time-signatures">Time signatures</a></h2>
 <h2 id="key-signatures"><a href="#key-signatures">Key signatures</a></h2>
@@ -682,7 +682,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <h2 id="midi"><a href="#midi">MIDI</a></h2>
 <p>All standard representations support MIDI input and output. The MIDI representation uses <a href="http://hackage.haskell.org/package/HCodecs">HCodecs</a> and the real-time support uses <a href="http://hackage.haskell.org/package/hamid">hamid</a>.</p>
 <!--
-You can read and write MIDI files using the functions @[readMidi] and @[writeMidi]. To play MIDI back in real-time, use @[playMidi] or @[playMidiIO], which uses [reenact](http://hackage.haskell.org/package/reenact).
+You can read and write MIDI files using the functions [`readMidi`][readMidi] and [`writeMidi`][writeMidi]. To play MIDI back in real-time, use [`playMidi`][playMidi] or [`playMidiIO`][playMidiIO], which uses [reenact](http://hackage.haskell.org/package/reenact).
 -->
 
 <p>Beware that MIDI input may contain time and pitch values that yield a non-readable notation, you need a proper quantization software such as <a href="http://scorecleaner.com">ScoreCleaner</a> to convert raw MIDI input to quantized input.</p>
@@ -820,6 +820,8 @@ This feature could of course also be used to convert Sibelius scores to other fo
     mel <span class="fu">=</span> asScore <span class="fu">$</span> scat [d, scat [g,fs]<span class="fu">^/</span><span class="dv">2</span>,bb<span class="fu">^*</span><span class="dv">2</span>]<span class="fu">^/</span><span class="dv">4</span>
 <span class="kw">in</span> (<span class="fu">take</span> <span class="dv">25</span> <span class="fu">$</span> row) <span class="ot">`repeated`</span> (\p <span class="ot">-&gt;</span> up (asPitch p <span class="fu">.-.</span> c) mel)</code></pre>
 </div>
+
+<!-- Unknown: readMidi No such identifier: readMidi-->
 </body>
 </html>
 
