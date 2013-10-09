@@ -170,7 +170,7 @@ up (perfect octave) . compress 2 . delay 3 $ c
 
 ## Composing
 
-Music expressions can be composed [`<>`][<>]:
+Music expressions can be composed @[<>]:
 
 <div class='haskell-music'>
 
@@ -187,7 +187,7 @@ c <> e <> g
 
 TODO fundamentally, `<>` is the only way to compose music...
 
-Or in sequence using [`|>`][|>]:
+Or in sequence using @[|>]:
 
 <div class='haskell-music'>
 
@@ -202,7 +202,7 @@ c |> d |> e
 
 </div>
 
-Or partwise using [`</>`][</>]:
+Or partwise using @[</>]:
 
 <div class='haskell-music'>
 
@@ -481,8 +481,8 @@ marcato (scat [c..g]^/8)
 
 </div>
 
-[`accentLast`][accentLast]
-[`accentAll`][accentAll]
+@[accentLast]
+@[accentAll]
 
 <div class='haskell-music'>
 
@@ -597,7 +597,7 @@ text "pizz." $ c^/2
 
 Sometimes it is useful to work with scores that have a duration but no events.
 This kind of score is represented by `rest` and has the type `Score (Maybe
-Note)`. We use [`removeRests`][removeRests] to convert a `Score (Maybe a)`
+Note)`. We use @[removeRests] to convert a `Score (Maybe a)`
 into a `Score a`.
 
 <div class='haskell-music'>
@@ -691,7 +691,7 @@ in compress 4 $ melody </> pedal
 
 ## Pitch
 
-[`invertAround`][invertAround]
+@[invertAround]
 
 <div class='haskell-music'>
 
@@ -748,11 +748,11 @@ TODO
 
 # Time-based structures
 
-[`Score`][Score]
-[`Voice`][Voice]
-[`Track`][Track]
-[`Delayable`][Delayable]
-[`Stretchable`][Stretchable]
+@[Score]
+@[Voice]
+@[Track]
+@[Delayable]
+@[Stretchable]
 
 
 # Meta-information
@@ -776,7 +776,7 @@ The conventions for input or output formats is similar to the convention for pro
 All standard representations support MIDI input and output. The MIDI representation uses [HCodecs](http://hackage.haskell.org/package/HCodecs) and the real-time support uses [hamid](http://hackage.haskell.org/package/hamid). 
 
 <!--
-You can read and write MIDI files using the functions [`readMidi`][readMidi] and [`writeMidi`][writeMidi]. To play MIDI back in real-time, use [`playMidi`][playMidi] or [`playMidiIO`][playMidiIO], which uses [reenact](http://hackage.haskell.org/package/reenact).
+You can read and write MIDI files using the functions @[readMidi] and @[writeMidi]. To play MIDI back in real-time, use @[playMidi] or @[playMidiIO], which uses [reenact](http://hackage.haskell.org/package/reenact).
 -->
 
 Beware that MIDI input may contain time and pitch values that yield a non-readable notation, you need a proper quantization software such as [
@@ -958,76 +958,27 @@ in (take 25 $ row) `repeated` (\p -> up (asPitch p .-. c) mel)
 
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-[scat]:         /docs/api/Music-Time-Juxtapose.html#v:scat
-[pcat]:         /docs/api/Music-Time-Juxtapose.html#v:pcat
-[times]:        /docs/api/Music-Time-Juxtapose.html#v:times
-[<>]:           http://hackage.haskell.org/packages/archive/semigroups/0.9.2/doc/html/Data-Semigroup.html#v:-60--62-
-[|>]:           /docs/api/Music-Time-Juxtapose.html#v:-124--62-
-[</>]:          /docs/api/Music-Score-Combinators.html#v:-60--47--62-
-
-[delay]:        /docs/api/Music-Time-Delayable.html#v:delay
-[stretch]:      /docs/api/Music-Time-Stretchable.html#v:stretch
-[compress]:     /docs/api/Music-Time-Stretchable.html#v:compress
-[removeRests]:  /docs/api/Music-Score-Combinators.html#v:removeRests
-
-[dynamics]:     /docs/api/Music-Score-Dynamics.html#v:dynamics
-
-[Score]:        /docs/api/Music-Score-Score.html#v:Score
-[Voice]:        /docs/api/Music-Score-Score.html#v:Voice
-[Track]:        /docs/api/Music-Score-Score.html#v:Track
-[Delayable]:    /docs/api/Music-Time-Delayable.html#v:Delayable
-[Stretchable]:  /docs/api/Music-Time-Stretchable.html#v:Stretchable
-
-
-[legato]:       /docs/api/Music-Score-Articulation.html#v:legato
-[staccato]:     /docs/api/Music-Score-Articulation.html#v:staccato
-[portato]:      /docs/api/Music-Score-Articulation.html#v:portato
-[tenuto]:       /docs/api/Music-Score-Articulation.html#v:tenuto
-[separated]:    /docs/api/Music-Score-Articulation.html#v:separated
-[spiccato]:     /docs/api/Music-Score-Articulation.html#v:spiccato
-
-[accent]:       /docs/api/Music-Score-Articulation.html#v:accent
-[marcato]:      /docs/api/Music-Score-Articulation.html#v:marcato
-[accentLast]:   /docs/api/Music-Score-Articulation.html#v:accentLast
-[accentAll]:    /docs/api/Music-Score-Articulation.html#v:accentAll
-
-[rev]:          /docs/api/Music-Time-Reverse.html#v:rev
-
-[harmonic]:     /docs/api/Music-Score-Ornaments.html#v:harmonic
-[artificial]:   /docs/api/Music-Score-Ornaments.html#v:artificial
-[tremolo]:      /docs/api/Music-Score-Ornaments.html#v:tremolo
-[glissando]:    /docs/api/Music-Score-Ornaments.html#v:glissando
-[slide]:        /docs/api/Music-Score-Ornaments.html#v:slide
-[text]:         /docs/api/Music-Score-Ornaments.html#v:text
-
-[up]:           /docs/api/Music-Score-Pitch.html#v:up
-[down]:         /docs/api/Music-Score-Pitch.html#v:down
-[octavesUp]:    /docs/api/Music-Score-Pitch.html#v:octavesUp
-[octavesDown]:  /docs/api/Music-Score-Pitch.html#v:octavesDown
-[invertAround]: /docs/api/Music-Score-Pitch.html#v:invertAround
-
-[catMaybes]:    http://hackage.haskell.org/packages/archive/base/latest/doc/html/Data-Maybe.html#v:catMaybes
-
+[scat]: /docs/api/Music-Prelude-Basic.html#v:scat
+[pcat]: /docs/api/Music-Prelude-Basic.html#v:pcat
+[sharp]: /docs/api/Music-Pitch-Common-Accidental.html#v:sharp
+[flat]: /docs/api/Music-Pitch-Common-Accidental.html#v:flat
+[legato]: /docs/api/Music-Prelude-Basic.html#v:legato
+[staccato]: /docs/api/Music-Prelude-Basic.html#v:staccato
+[portato]: /docs/api/Music-Prelude-Basic.html#v:portato
+[tenuto]: /docs/api/Music-Prelude-Basic.html#v:tenuto
+[separated]: /docs/api/Music-Prelude-Basic.html#v:separated
+[spiccato]: /docs/api/Music-Prelude-Basic.html#v:spiccato
+[accent]: /docs/api/Music-Prelude-Basic.html#v:accent
+[marcato]: /docs/api/Music-Prelude-Basic.html#v:marcato
+[tremolo]: /docs/api/Music-Prelude-Basic.html#v:tremolo
+[slide]: /docs/api/Music-Prelude-Basic.html#v:slide
+[glissando]: /docs/api/Music-Prelude-Basic.html#v:glissando
+[harmonic]: /docs/api/Music-Prelude-Basic.html#v:harmonic
+[artificial]: /docs/api/Music-Prelude-Basic.html#v:artificial
+[text]: /docs/api/Music-Prelude-Basic.html#v:text
+[rev]: /docs/api/Music-Prelude-Basic.html#v:rev
+[times]: /docs/api/Music-Prelude-Basic.html#v:times
+[repeated]: /docs/api/Music-Prelude-Basic.html#v:repeated
 
 [Lilypond]:         http://lilypond.org
 [Timidity]:         http://timidity.sourceforge.net/
