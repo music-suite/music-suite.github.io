@@ -299,7 +299,7 @@ stretch <span class="dv">2</span> c</code></pre>
 <span class="kw">in</span> up _<span class="dt">P8</span> (scat [c,d,e,f,g,a,g,f]<span class="fu">^/</span><span class="dv">8</span>) <span class="fu">&lt;/&gt;</span> (triad c)<span class="fu">^/</span><span class="dv">2</span> <span class="fu">|&gt;</span> (triad g_)<span class="fu">^/</span><span class="dv">2</span></code></pre>
 </div>
 
-<p>As a shorthand for <code>x |&gt; y |&gt; z ..</code>, we can write <code>scat [x, y, z]</code>. <a href="/docs/api/Music-Prelude-Basic.html#v:scat"><code>scat</code></a> (this is short for <em>sequential concatenation</em>).</p>
+<p>As a shorthand for <code>x |&gt; y |&gt; z ..</code>, we can write <code>scat [x, y, z]</code>. <a href="/docs/api/Music-Time-Juxtapose.html#v:scat"><code>scat</code></a> (this is short for <em>sequential concatenation</em>).</p>
 <div class='haskell-music'>
 
 
@@ -310,7 +310,7 @@ stretch <span class="dv">2</span> c</code></pre>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">scat [c,e<span class="fu">..</span>g]<span class="fu">^/</span><span class="dv">4</span></code></pre>
 </div>
 
-<p>For <code>x &lt;&gt; y &lt;&gt; z ..</code>, we can write <code>pcat [x, y, z]</code>. <a href="/docs/api/Music-Prelude-Basic.html#v:pcat"><code>pcat</code></a> (short for <em>parallel concatenation</em>).</p>
+<p>For <code>x &lt;&gt; y &lt;&gt; z ..</code>, we can write <code>pcat [x, y, z]</code>. <a href="/docs/api/Music-Time-Juxtapose.html#v:pcat"><code>pcat</code></a> (short for <em>parallel concatenation</em>).</p>
 <div class='haskell-music'>
 
 
@@ -440,7 +440,7 @@ flatten d             <span class="fu">==</span> d flat        <span class="fu">
 
 <p>TODO other ways of applying dynamics</p>
 <h2 id="articulation"><a href="#articulation">Articulation</a></h2>
-<p>Some basic articulation functions are <a href="/docs/api/Music-Prelude-Basic.html#v:legato"><code>legato</code></a>, <a href="/docs/api/Music-Prelude-Basic.html#v:staccato"><code>staccato</code></a>, <a href="/docs/api/Music-Prelude-Basic.html#v:portato"><code>portato</code></a>, <a href="/docs/api/Music-Prelude-Basic.html#v:tenuto"><code>tenuto</code></a>, <a href="/docs/api/Music-Prelude-Basic.html#v:separated"><code>separated</code></a>, <a href="/docs/api/Music-Prelude-Basic.html#v:spiccato"><code>spiccato</code></a>:</p>
+<p>Some basic articulation functions are <a href="/docs/api/Music-Score-Articulation.html#v:legato"><code>legato</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:staccato"><code>staccato</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:portato"><code>portato</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:tenuto"><code>tenuto</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:separated"><code>separated</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:spiccato"><code>spiccato</code></a>:</p>
 <div class='haskell-music'>
 
 
@@ -461,7 +461,7 @@ separated (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 spiccato (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span class="dv">8</span>)</code></pre>
 </div>
 
-<p><a href="/docs/api/Music-Prelude-Basic.html#v:accent"><code>accent</code></a> <a href="/docs/api/Music-Prelude-Basic.html#v:marcato"><code>marcato</code></a></p>
+<p><a href="/docs/api/Music-Score-Articulation.html#v:accent"><code>accent</code></a> <a href="/docs/api/Music-Score-Articulation.html#v:marcato"><code>marcato</code></a></p>
 <div class='haskell-music'>
 
 
@@ -503,7 +503,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 </div>
 
 <h2 id="tremolo"><a href="#tremolo">Tremolo</a></h2>
-<p><a href="/docs/api/Music-Prelude-Basic.html#v:tremolo"><code>tremolo</code></a></p>
+<p><a href="/docs/api/Music-Score-Ornaments.html#v:tremolo"><code>tremolo</code></a></p>
 <div class='haskell-music'>
 
 
@@ -515,7 +515,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 </div>
 
 <h2 id="slides-and-glissando"><a href="#slides-and-glissando">Slides and glissando</a></h2>
-<p><a href="/docs/api/Music-Prelude-Basic.html#v:slide"><code>slide</code></a> <a href="/docs/api/Music-Prelude-Basic.html#v:glissando"><code>glissando</code></a></p>
+<p><a href="/docs/api/Music-Score-Ornaments.html#v:slide"><code>slide</code></a> <a href="/docs/api/Music-Score-Ornaments.html#v:glissando"><code>glissando</code></a></p>
 <div class='haskell-music'>
 
 
@@ -527,7 +527,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 </div>
 
 <h2 id="harmonics"><a href="#harmonics">Harmonics</a></h2>
-<p>Use the <a href="/docs/api/Music-Prelude-Basic.html#v:harmonic"><code>harmonic</code></a> function:</p>
+<p>Use the <a href="/docs/api/Music-Score-Ornaments.html#v:harmonic"><code>harmonic</code></a> function:</p>
 <div class='haskell-music'>
 
 
@@ -541,9 +541,9 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
     <span class="fu">&lt;/&gt;</span>
 (harmonic <span class="dv">3</span> <span class="fu">$</span> c<span class="fu">^/</span><span class="dv">2</span>)</code></pre>
 </div>
-<p><a href="/docs/api/Music-Prelude-Basic.html#v:artificial"><code>artificial</code></a></p>
+<p><a href="/docs/api/Music-Score-Ornaments.html#v:artificial"><code>artificial</code></a></p>
 <h2 id="text"><a href="#text">Text</a></h2>
-<p><a href="/docs/api/Music-Prelude-Basic.html#v:text"><code>text</code></a></p>
+<p><a href="/docs/api/Music-Score-Ornaments.html#v:text"><code>text</code></a></p>
 <div class='haskell-music'>
 
 
@@ -571,7 +571,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 
 <h1 id="transformations"><a href="#transformations">Transformations</a></h1>
 <h2 id="time"><a href="#time">Time</a></h2>
-<p><a href="/docs/api/Music-Prelude-Basic.html#v:rev"><code>rev</code></a></p>
+<p><a href="/docs/api/Music-Time-Reverse.html#v:rev"><code>rev</code></a></p>
 <div class='haskell-music'>
 
 
@@ -584,7 +584,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <span class="kw">in</span> melody <span class="fu">|&gt;</span> rev melody</code></pre>
 </div>
 
-<p><a href="/docs/api/Music-Prelude-Basic.html#v:times"><code>times</code></a></p>
+<p><a href="/docs/api/Music-Time-Juxtapose.html#v:times"><code>times</code></a></p>
 <div class='haskell-music'>
 
 
@@ -597,7 +597,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <span class="kw">in</span> times <span class="dv">4</span> <span class="fu">$</span> melody</code></pre>
 </div>
 
-<p><a href="/docs/api/Music-Prelude-Basic.html#v:sustain"><code>sustain</code></a></p>
+<p><a href="/docs/api/Music-Time-Juxtapose.html#v:sustain"><code>sustain</code></a></p>
 <div class='haskell-music'>
 
 
@@ -609,8 +609,8 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 </div>
 
 
-<p><a href="/docs/api/Music-Prelude-Basic.html#v:anticipate"><code>anticipate</code></a></p>
-<p><a href="/docs/api/Music-Prelude-Basic.html#v:repeated"><code>repeated</code></a></p>
+<p><a href="/docs/api/Music-Time-Juxtapose.html#v:anticipate"><code>anticipate</code></a></p>
+<p><a href="/docs/api/Music-Time-Juxtapose.html#v:repeated"><code>repeated</code></a></p>
 <div class='haskell-music'>
 
 

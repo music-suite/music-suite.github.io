@@ -976,29 +976,29 @@ in (take 25 $ row) `repeated` (\p -> up (asPitch p .-. c) mel)
 
 </div>
 
-[scat]: /docs/api/Music-Prelude-Basic.html#v:scat
-[pcat]: /docs/api/Music-Prelude-Basic.html#v:pcat
+[scat]: /docs/api/Music-Time-Juxtapose.html#v:scat
+[pcat]: /docs/api/Music-Time-Juxtapose.html#v:pcat
 [sharp]: /docs/api/Music-Pitch-Common-Accidental.html#v:sharp
 [flat]: /docs/api/Music-Pitch-Common-Accidental.html#v:flat
-[legato]: /docs/api/Music-Prelude-Basic.html#v:legato
-[staccato]: /docs/api/Music-Prelude-Basic.html#v:staccato
-[portato]: /docs/api/Music-Prelude-Basic.html#v:portato
-[tenuto]: /docs/api/Music-Prelude-Basic.html#v:tenuto
-[separated]: /docs/api/Music-Prelude-Basic.html#v:separated
-[spiccato]: /docs/api/Music-Prelude-Basic.html#v:spiccato
-[accent]: /docs/api/Music-Prelude-Basic.html#v:accent
-[marcato]: /docs/api/Music-Prelude-Basic.html#v:marcato
-[tremolo]: /docs/api/Music-Prelude-Basic.html#v:tremolo
-[slide]: /docs/api/Music-Prelude-Basic.html#v:slide
-[glissando]: /docs/api/Music-Prelude-Basic.html#v:glissando
-[harmonic]: /docs/api/Music-Prelude-Basic.html#v:harmonic
-[artificial]: /docs/api/Music-Prelude-Basic.html#v:artificial
-[text]: /docs/api/Music-Prelude-Basic.html#v:text
-[rev]: /docs/api/Music-Prelude-Basic.html#v:rev
-[times]: /docs/api/Music-Prelude-Basic.html#v:times
-[sustain]: /docs/api/Music-Prelude-Basic.html#v:sustain
-[anticipate]: /docs/api/Music-Prelude-Basic.html#v:anticipate
-[repeated]: /docs/api/Music-Prelude-Basic.html#v:repeated
+[legato]: /docs/api/Music-Score-Articulation.html#v:legato
+[staccato]: /docs/api/Music-Score-Articulation.html#v:staccato
+[portato]: /docs/api/Music-Score-Articulation.html#v:portato
+[tenuto]: /docs/api/Music-Score-Articulation.html#v:tenuto
+[separated]: /docs/api/Music-Score-Articulation.html#v:separated
+[spiccato]: /docs/api/Music-Score-Articulation.html#v:spiccato
+[accent]: /docs/api/Music-Score-Articulation.html#v:accent
+[marcato]: /docs/api/Music-Score-Articulation.html#v:marcato
+[tremolo]: /docs/api/Music-Score-Ornaments.html#v:tremolo
+[slide]: /docs/api/Music-Score-Ornaments.html#v:slide
+[glissando]: /docs/api/Music-Score-Ornaments.html#v:glissando
+[harmonic]: /docs/api/Music-Score-Ornaments.html#v:harmonic
+[artificial]: /docs/api/Music-Score-Ornaments.html#v:artificial
+[text]: /docs/api/Music-Score-Ornaments.html#v:text
+[rev]: /docs/api/Music-Time-Reverse.html#v:rev
+[times]: /docs/api/Music-Time-Juxtapose.html#v:times
+[sustain]: /docs/api/Music-Time-Juxtapose.html#v:sustain
+[anticipate]: /docs/api/Music-Time-Juxtapose.html#v:anticipate
+[repeated]: /docs/api/Music-Time-Juxtapose.html#v:repeated
 
 [Lilypond]:         http://lilypond.org
 [Timidity]:         http://timidity.sourceforge.net/
