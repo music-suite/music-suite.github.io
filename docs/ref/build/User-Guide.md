@@ -654,6 +654,24 @@ in times 4 $ melody
 
 </div>
 
+[`sustain`][sustain]
+
+<div class='haskell-music'>
+
+
+
+![](60dc3260048dae39x.png)
+
+```haskell
+scat [e,d,f,e] <> c
+
+```
+
+</div>
+
+
+[`anticipate`][anticipate]
+
 [`repeated`][repeated]
 
 <div class='haskell-music'>
@@ -978,6 +996,8 @@ in (take 25 $ row) `repeated` (\p -> up (asPitch p .-. c) mel)
 [text]: /docs/api/Music-Prelude-Basic.html#v:text
 [rev]: /docs/api/Music-Prelude-Basic.html#v:rev
 [times]: /docs/api/Music-Prelude-Basic.html#v:times
+[sustain]: /docs/api/Music-Prelude-Basic.html#v:sustain
+[anticipate]: /docs/api/Music-Prelude-Basic.html#v:anticipate
 [repeated]: /docs/api/Music-Prelude-Basic.html#v:repeated
 
 [Lilypond]:         http://lilypond.org
