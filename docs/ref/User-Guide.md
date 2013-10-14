@@ -931,6 +931,8 @@ This feature could of course also be used to convert Sibelius scores to other fo
 
 # Customizing music representation
 
+TODO
+
 # Examples
 
 Some more involved examples:
@@ -975,6 +977,12 @@ in (take 25 $ row) `repeated` (\p -> up (asPitch p .-. c) mel)
 ```
 
 </div>
+
+# Development
+
+TODO
+
+
 
 [<>]: /docs/api/Music-Pitch.html#v:-60--62-
 [|>]: /docs/api/Music-Time-Juxtapose.html#v:-124--62-
