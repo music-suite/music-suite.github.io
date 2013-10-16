@@ -1,0 +1,62 @@
+cd /Users/hans/Documents/Kod/hs
+echo ''
+echo '======================================================================'
+echo 'Making API documentation'
+echo '======================================================================'
+find /Users/hans/Documents/Kod/hs/abcnotation/src
+find /Users/hans/Documents/Kod/hs/abcnotation/src/Music
+find /Users/hans/Documents/Kod/hs/abcnotation/src/Music/Abc
+find /Users/hans/Documents/Kod/hs/musicxml2/src
+find /Users/hans/Documents/Kod/hs/musicxml2/src/Music
+find /Users/hans/Documents/Kod/hs/musicxml2/src/Music/MusicXml
+find /Users/hans/Documents/Kod/hs/musicxml2/src/Music/MusicXml/Write
+find /Users/hans/Documents/Kod/hs/lilypond/src
+find /Users/hans/Documents/Kod/hs/lilypond/src/Music
+find /Users/hans/Documents/Kod/hs/lilypond/src/Music/Lilypond
+find /Users/hans/Documents/Kod/hs/music-pitch-literal/src
+find /Users/hans/Documents/Kod/hs/music-pitch-literal/src/Music
+find /Users/hans/Documents/Kod/hs/music-pitch-literal/src/Music/Pitch
+find /Users/hans/Documents/Kod/hs/music-pitch-literal/src/Music/Pitch/Literal
+find /Users/hans/Documents/Kod/hs/music-dynamics-literal/src
+find /Users/hans/Documents/Kod/hs/music-dynamics-literal/src/Music
+find /Users/hans/Documents/Kod/hs/music-dynamics-literal/src/Music/Dynamics
+find /Users/hans/Documents/Kod/hs/music-score/src
+find /Users/hans/Documents/Kod/hs/music-score/src/Music
+find /Users/hans/Documents/Kod/hs/music-score/src/Music/Score
+find /Users/hans/Documents/Kod/hs/music-score/src/Music/Score/Export
+find /Users/hans/Documents/Kod/hs/music-score/src/Music/Score/Import
+find /Users/hans/Documents/Kod/hs/music-score/src/Music/Time
+find /Users/hans/Documents/Kod/hs/music-pitch/src
+find /Users/hans/Documents/Kod/hs/music-pitch/src/Music
+find /Users/hans/Documents/Kod/hs/music-pitch/src/Music/Pitch
+find /Users/hans/Documents/Kod/hs/music-pitch/src/Music/Pitch/Absolute
+find /Users/hans/Documents/Kod/hs/music-pitch/src/Music/Pitch/Common
+find /Users/hans/Documents/Kod/hs/music-dynamics/src
+find /Users/hans/Documents/Kod/hs/music-dynamics/src/Music
+find /Users/hans/Documents/Kod/hs/music-dynamics/src/Music/Dynamics
+find /Users/hans/Documents/Kod/hs/music-articulation/src
+find /Users/hans/Documents/Kod/hs/music-articulation/src/Music
+find /Users/hans/Documents/Kod/hs/music-parts/src
+find /Users/hans/Documents/Kod/hs/music-parts/src/Music
+find /Users/hans/Documents/Kod/hs/music-preludes/src
+find /Users/hans/Documents/Kod/hs/music-preludes/src/Music
+find /Users/hans/Documents/Kod/hs/music-preludes/src/Music/Prelude
+find /Users/hans/Documents/Kod/hs/music-sibelius/src
+find /Users/hans/Documents/Kod/hs/music-sibelius/src/Music
+find /Users/hans/Documents/Kod/hs/music-sibelius/src/Music/Score
+find /Users/hans/Documents/Kod/hs/music-sibelius/src/Music/Score/Import
+find /Users/hans/Documents/Kod/hs/music-sibelius/src/Music/Sibelius
+mkdir -p /Users/hans/Documents/Kod/hs/musicsuite.github.io/docs/api/src
+echo 'haddock -h --odir=musicsuite.github.io/docs/api '--title=The Music Suite' abcnotation/src/Music/Abc/Parser.hs abcnotation/src/Music/Abc.hs musicxml2/src/Music/MusicXml/Dynamics.hs musicxml2/src/Music/MusicXml/Pitch.hs musicxml2/src/Music/MusicXml/Read.hs musicxml2/src/Music/MusicXml/Score.hs musicxml2/src/Music/MusicXml/Simple.hs musicxml2/src/Music/MusicXml/Time.hs musicxml2/src/Music/MusicXml/Write/Score.hs musicxml2/src/Music/MusicXml/Write.hs musicxml2/src/Music/MusicXml.hs lilypond/src/Music/Lilypond/Dynamics.hs lilypond/src/Music/Lilypond/Expression.hs lilypond/src/Music/Lilypond/IO.hs lilypond/src/Music/Lilypond/Pitch.hs lilypond/src/Music/Lilypond/Repeats.hs lilypond/src/Music/Lilypond/Rhythms.hs lilypond/src/Music/Lilypond/Value.hs lilypond/src/Music/Lilypond.hs music-pitch-literal/src/Music/Pitch/Literal/Interval.hs music-pitch-literal/src/Music/Pitch/Literal/Pitch.hs music-pitch-literal/src/Music/Pitch/Literal.hs music-dynamics-literal/src/Music/Dynamics/Literal.hs music-score/src/Music/Score/Articulation.hs music-score/src/Music/Score/Chord.hs music-score/src/Music/Score/Combinators.hs music-score/src/Music/Score/Convert.hs music-score/src/Music/Score/Dynamics.hs music-score/src/Music/Score/Export/Lilypond.hs music-score/src/Music/Score/Export/Midi.hs music-score/src/Music/Score/Export/MusicXml.hs music-score/src/Music/Score/Export/Util.hs music-score/src/Music/Score/Instances.hs music-score/src/Music/Score/Meta.hs music-score/src/Music/Score/Ornaments.hs music-score/src/Music/Score/Part.hs music-score/src/Music/Score/Pitch.hs music-score/src/Music/Score/Rhythm.hs music-score/src/Music/Score/Score.hs music-score/src/Music/Score/Ties.hs music-score/src/Music/Score/Track.hs music-score/src/Music/Score/Voice.hs music-score/src/Music/Score.hs music-score/src/Music/Time/Delayable.hs music-score/src/Music/Time/Juxtapose.hs music-score/src/Music/Time/Onset.hs music-score/src/Music/Time/Performable.hs music-score/src/Music/Time/Reverse.hs music-score/src/Music/Time/Stretchable.hs music-score/src/Music/Time/Time.hs music-score/src/Music/Time.hs music-pitch/src/Music/Pitch/Absolute.hs music-pitch/src/Music/Pitch/Alterable.hs music-pitch/src/Music/Pitch/Augmentable.hs music-pitch/src/Music/Pitch/Common/Accidental.hs music-pitch/src/Music/Pitch/Common/Interval.hs music-pitch/src/Music/Pitch/Common/Name.hs music-pitch/src/Music/Pitch/Common/Number.hs music-pitch/src/Music/Pitch/Common/Pitch.hs music-pitch/src/Music/Pitch/Common/Quality.hs music-pitch/src/Music/Pitch/Common/Semitones.hs music-pitch/src/Music/Pitch/Common/Spell.hs music-pitch/src/Music/Pitch/Common.hs music-pitch/src/Music/Pitch/Intonation.hs music-pitch/src/Music/Pitch/Octaves.hs music-pitch/src/Music/Pitch.hs music-dynamics/src/Music/Dynamics/Absolute.hs music-dynamics/src/Music/Dynamics/Balance.hs music-dynamics/src/Music/Dynamics/Relative.hs music-dynamics/src/Music/Dynamics.hs music-articulation/src/Music/Articulation.hs music-parts/src/Music/Parts.hs music-preludes/src/Music/Prelude/Basic.hs music-preludes/src/Music/Prelude/Piano.hs music-preludes/src/Music/Prelude/StringQuartet.hs music-sibelius/src/Music/Score/Import/Sibelius.hs music-sibelius/src/Music/Sibelius.hs'
+haddock -h --odir=musicsuite.github.io/docs/api '--title=The Music Suite' abcnotation/src/Music/Abc/Parser.hs abcnotation/src/Music/Abc.hs musicxml2/src/Music/MusicXml/Dynamics.hs musicxml2/src/Music/MusicXml/Pitch.hs musicxml2/src/Music/MusicXml/Read.hs musicxml2/src/Music/MusicXml/Score.hs musicxml2/src/Music/MusicXml/Simple.hs musicxml2/src/Music/MusicXml/Time.hs musicxml2/src/Music/MusicXml/Write/Score.hs musicxml2/src/Music/MusicXml/Write.hs musicxml2/src/Music/MusicXml.hs lilypond/src/Music/Lilypond/Dynamics.hs lilypond/src/Music/Lilypond/Expression.hs lilypond/src/Music/Lilypond/IO.hs lilypond/src/Music/Lilypond/Pitch.hs lilypond/src/Music/Lilypond/Repeats.hs lilypond/src/Music/Lilypond/Rhythms.hs lilypond/src/Music/Lilypond/Value.hs lilypond/src/Music/Lilypond.hs music-pitch-literal/src/Music/Pitch/Literal/Interval.hs music-pitch-literal/src/Music/Pitch/Literal/Pitch.hs music-pitch-literal/src/Music/Pitch/Literal.hs music-dynamics-literal/src/Music/Dynamics/Literal.hs music-score/src/Music/Score/Articulation.hs music-score/src/Music/Score/Chord.hs music-score/src/Music/Score/Combinators.hs music-score/src/Music/Score/Convert.hs music-score/src/Music/Score/Dynamics.hs music-score/src/Music/Score/Export/Lilypond.hs music-score/src/Music/Score/Export/Midi.hs music-score/src/Music/Score/Export/MusicXml.hs music-score/src/Music/Score/Export/Util.hs music-score/src/Music/Score/Instances.hs music-score/src/Music/Score/Meta.hs music-score/src/Music/Score/Ornaments.hs music-score/src/Music/Score/Part.hs music-score/src/Music/Score/Pitch.hs music-score/src/Music/Score/Rhythm.hs music-score/src/Music/Score/Score.hs music-score/src/Music/Score/Ties.hs music-score/src/Music/Score/Track.hs music-score/src/Music/Score/Voice.hs music-score/src/Music/Score.hs music-score/src/Music/Time/Delayable.hs music-score/src/Music/Time/Juxtapose.hs music-score/src/Music/Time/Onset.hs music-score/src/Music/Time/Performable.hs music-score/src/Music/Time/Reverse.hs music-score/src/Music/Time/Stretchable.hs music-score/src/Music/Time/Time.hs music-score/src/Music/Time.hs music-pitch/src/Music/Pitch/Absolute.hs music-pitch/src/Music/Pitch/Alterable.hs music-pitch/src/Music/Pitch/Augmentable.hs music-pitch/src/Music/Pitch/Common/Accidental.hs music-pitch/src/Music/Pitch/Common/Interval.hs music-pitch/src/Music/Pitch/Common/Name.hs music-pitch/src/Music/Pitch/Common/Number.hs music-pitch/src/Music/Pitch/Common/Pitch.hs music-pitch/src/Music/Pitch/Common/Quality.hs music-pitch/src/Music/Pitch/Common/Semitones.hs music-pitch/src/Music/Pitch/Common/Spell.hs music-pitch/src/Music/Pitch/Common.hs music-pitch/src/Music/Pitch/Intonation.hs music-pitch/src/Music/Pitch/Octaves.hs music-pitch/src/Music/Pitch.hs music-dynamics/src/Music/Dynamics/Absolute.hs music-dynamics/src/Music/Dynamics/Balance.hs music-dynamics/src/Music/Dynamics/Relative.hs music-dynamics/src/Music/Dynamics.hs music-articulation/src/Music/Articulation.hs music-parts/src/Music/Parts.hs music-preludes/src/Music/Prelude/Basic.hs music-preludes/src/Music/Prelude/Piano.hs music-preludes/src/Music/Prelude/StringQuartet.hs music-sibelius/src/Music/Score/Import/Sibelius.hs music-sibelius/src/Music/Sibelius.hs
+which haddock
+echo ''
+echo '======================================================================'
+echo 'Making reference documentation'
+echo '======================================================================'
+cd /Users/hans/Documents/Kod/hs/music-docs
+echo 'make html'
+make html
+which make
+cd /Users/hans/Documents/Kod/hs
+cd /Users/hans/Documents/Kod/hs/music-docs/build
