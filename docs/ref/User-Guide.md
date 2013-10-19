@@ -1133,7 +1133,7 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 [common-music]:     http://commonmusic.sourceforge.net/
 [temporal-media]:   http://hackage.haskell.org/package/temporal-media
 [abjad]:            https://pypi.python.org/pypi/Abjad/2.3
-[max-msp]:          httphttp://cycling74.com/products/max/
+[max-msp]:          http://cycling74.com/products/max/
 [reactive]:         http://www.haskell.org/haskellwiki/Reactive
 [diagrams]:         http://projects.haskell.org/diagrams/
 [supercollider]:    http://supercollider.sourceforge.net/
