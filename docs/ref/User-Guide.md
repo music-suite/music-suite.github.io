@@ -1130,23 +1130,21 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 [haskell-suite]:    https://github.com/haskell-suite
 [music-util-docs]:  https://github.com/hanshoglund/music-util/blob/master/README.md#music-util
 
-[common-music]:     http://musicsuite.github.io/
-[temporal-media]:   http://musicsuite.github.io/
-[abjad]:            http://musicsuite.github.io/
-[max-msp]:          http://musicsuite.github.io/
-[reactive]:         http://musicsuite.github.io/
-[diagrams]:         http://musicsuite.github.io/
-[temporal]:         http://musicsuite.github.io/-media
-[supercollider]:    http://musicsuite.github.io/
-[common]:           http://musicsuite.github.io/-music
-[music21]:          http://musicsuite.github.io/
-[guido]:            http://musicsuite.github.io/
-[lilypond]:         http://musicsuite.github.io/
-[fomus]:            http://musicsuite.github.io/
-[haskore]:          http://musicsuite.github.io/
-[euterpea]:         http://musicsuite.github.io/
-[haskell]:          http://musicsuite.github.io/-suite
-[pandoc]:           http://musicsuite.github.io/
+[common-music]:     http://commonmusic.sourceforge.net/
+[temporal-media]:   http://hackage.haskell.org/package/temporal-media
+[abjad]:            https://pypi.python.org/pypi/Abjad/2.3
+[max-msp]:          httphttp://cycling74.com/products/max/
+[reactive]:         http://www.haskell.org/haskellwiki/Reactive
+[diagrams]:         http://projects.haskell.org/diagrams/
+[supercollider]:    http://supercollider.sourceforge.net/
+[music21]:          http://music21-mit.blogspot.se/
+[guido]:            http://guidolib.sourceforge.net/
+[lilypond]:         http://lilypond.org/
+[fomus]:            http://fomus.sourceforge.net/
+[haskore]:          http://www.haskell.org/haskellwiki/Haskore
+[euterpea]:         http://haskell.cs.yale.edu/euterpea/
+[haskell]:          http://haskell.org
+[pandoc]:           http://johnmacfarlane.net/pandoc/
 
 
 
