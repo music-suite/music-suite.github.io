@@ -33,17 +33,22 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#the-music-suite">The Music Suite</a><ul>
 <li><a href="#an-example">An example</a></li>
 <li><a href="#input-and-output">Input and output</a></li>
+<li><a href="#a-note-on-the-versioning">A note on the versioning</a></li>
 <li><a href="#more-information">More information</a></li>
 </ul></li>
 <li><a href="#getting-started">Getting Started</a><ul>
-<li><a href="#installation">Installation</a></li>
+<li><a href="#installing-the-suite">Installing the Suite</a></li>
 <li><a href="#writing-music">Writing music</a><ul>
 <li><a href="#with-music-files">With music files</a></li>
 <li><a href="#with-haskell-files">With Haskell files</a></li>
 </ul></li>
-<li><a href="#notes-time-and-duration">Notes, time and duration</a></li>
-<li><a href="#composing">Composing</a></li>
-<li><a href="#pitch">Pitch</a></li>
+<li><a href="#time-and-duration">Time and duration</a></li>
+<li><a href="#composition">Composition</a></li>
+<li><a href="#pitch">Pitch</a><ul>
+<li><a href="#pitch-names">Pitch names</a></li>
+<li><a href="#interval-names">Interval names</a></li>
+<li><a href="#qualified-pitch-and-interval-names">Qualified pitch and interval names</a></li>
+</ul></li>
 <li><a href="#dynamics">Dynamics</a></li>
 <li><a href="#articulation">Articulation</a></li>
 <li><a href="#parts">Parts</a></li>
@@ -52,6 +57,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#slides-and-glissando">Slides and glissando</a></li>
 <li><a href="#harmonics">Harmonics</a></li>
 <li><a href="#text">Text</a></li>
+<li><a href="#chords">Chords</a></li>
 <li><a href="#rests">Rests</a></li>
 </ul></li>
 <li><a href="#transformations">Transformations</a><ul>
@@ -67,14 +73,21 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#semitones-and-enharmonic-equivalence">Semitones and enharmonic equivalence</a></li>
 <li><a href="#spelling-1">Spelling</a></li>
 <li><a href="#scales">Scales</a></li>
-<li><a href="#chords">Chords</a></li>
+<li><a href="#chords-1">Chords</a></li>
 <li><a href="#parts-1">Parts</a></li>
 <li><a href="#instrument-part-and-sub-part">Instrument, part and sub-part</a></li>
 <li><a href="#extracting-and-modifying-parts">Extracting and modifying parts</a></li>
 <li><a href="#part-composition">Part composition</a></li>
 </ul></li>
-<li><a href="#time-based-structures">Time-based structures</a></li>
+<li><a href="#time-based-structures">Time-based structures</a><ul>
+<li><a href="#time-and-duration-1">Time and duration</a></li>
+<li><a href="#spans">Spans</a></li>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#voice">Voice</a></li>
+<li><a href="#tracks">Tracks</a></li>
+</ul></li>
 <li><a href="#meta-information">Meta-information</a><ul>
+<li><a href="#clefs">Clefs</a></li>
 <li><a href="#time-signatures">Time signatures</a></li>
 <li><a href="#key-signatures">Key signatures</a></li>
 <li><a href="#rehearsal-marks">Rehearsal marks</a></li>
@@ -92,7 +105,9 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#customizing-music-representation">Customizing music representation</a></li>
 <li><a href="#examples">Examples</a><ul>
 <li><a href="#counterpoint">Counterpoint</a></li>
-<li><a href="#generative-music">Generative music</a></li>
+<li><a href="#generative-music">Generative music</a><ul>
+<li><a href="#duo">Duo</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#design-overview">Design overview</a><ul>
 <li><a href="#compability-with-other-libraries">Compability with other libraries</a></li>
@@ -105,12 +120,16 @@ code > span.er { color: #ff0000; font-weight: bold; }
 > *Please note:* The API and docs are not particularly stable at the moment. An official release note will appear in due time.
 -->
 
-<p>The Music Suite is a language for creating, processing or analyzing music. It is based on <a href="http://haskell.org">Haskell</a>, the world's greatest functional programming language<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>.</p>
+<p>The Music Suite is a language based on <a href="http://haskell.org">Haskell</a> for creating, processing or analyzing music. It can be used on its own or as a Haskell library.</p>
 <p>The Music Suite is designed to:</p>
 <ul>
-<li>Be usable with any kind of music. There are no stylistic or theoretical assumptions on how music should be described.</li>
-<li>It should include standard notation as a <em>special case</em>.</li>
+<li>Describe what the music <em>is</em>, rather than how it is to be performed.</li>
+<li>Avoid imposing stylistic or theoretical assumptions on the music.</li>
+<li>Include common notation and theory as a <em>special case</em>.</li>
+<li>Allow customization of the music representation.</li>
 </ul>
+<p>The Music Suite is both an <em>embedded</em> language and a Haskell library. Being embedded in Haskell has several advantages, it allow the developers to focus on the contents and the users to make use of any feature in the Haskell language.</p>
+<p>The Music Suite uses several advanced language constructs internally and requires a relatively new Haskell compiler (see <a href="#installing-the-suite">Installing the Suite</a>).</p>
 <h3 id="an-example"><a href="#an-example">An example</a></h3>
 <p>To generate music we write an <em>expressions</em> such as this one:</p>
 <div class='haskell-music'>
@@ -139,6 +158,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>ABC notation</li>
 <li>MIDI</li>
 </ul>
+<h3 id="a-note-on-the-versioning"><a href="#a-note-on-the-versioning">A note on the versioning</a></h3>
+<p>The Music Suite consists of a group of packages released concurrently under a common <a href="http://semver.org/">semantic version number</a>. The library was deliberately released <em>prematurely</em> in order to encourage its creator to work on it more: we expect the first truly stable version to be <em>2.0</em>.</p>
 <h3 id="more-information"><a href="#more-information">More information</a></h3>
 <p>For a complete reference, see the <a href="/docs/api">reference documentation</a>.</p>
 <!--
@@ -146,7 +167,7 @@ For an introduction, see [User Guide](User-Guide).
 -->
 
 <h1 id="getting-started"><a href="#getting-started">Getting Started</a></h1>
-<h2 id="installation"><a href="#installation">Installation</a></h2>
+<h2 id="installing-the-suite"><a href="#installing-the-suite">Installing the Suite</a></h2>
 <p>The Music Suite depends on the <a href="http://www.haskell.org/platform/">Haskell platform</a>.</p>
 <p>While not strictly required, <a href="http://lilypond.org/">Lilypond</a> is highly recommended as it allow you to preview musical scores. See <a href="#import-and-export">Import and Export</a> for other formats.</p>
 <p>To install the suite, simply install the Haskell platform, and then run:</p>
@@ -174,16 +195,16 @@ For an introduction, see [User Guide](User-Guide).
 <p>Alternatively, you can create a file called <code>test.hs</code> (or similar) with the following structure:</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import</span> Music.Prelude.Basic
 
-music <span class="fu">=</span> c <span class="fu">|&gt;</span> d <span class="fu">|&gt;</span> e
-main <span class="fu">=</span> defaultMain music</code></pre>
+main <span class="fu">=</span> defaultMain music
+music <span class="fu">=</span> c <span class="fu">|&gt;</span> d <span class="fu">|&gt;</span> e</code></pre>
 <p>Then either execute it using:</p>
 <pre><code>$ runhaskell test.hs</code></pre>
 <p>or compile and run it with</p>
 <pre><code>$ ghc --make test
 $ ./test</code></pre>
-<p>However, <code>music.hs</code> can also be loaded into a Haskell interpreter or compiled. In this case the resulting program will generate and open a file called <code>test.pdf</code> containing the output seen above.</p>
-<p>In fact, the <code>music2pdf</code> program is a simple utility that substitutes a single expression into a Haskell module such as the one above and executes the resulting main function.</p>
-<h2 id="notes-time-and-duration"><a href="#notes-time-and-duration">Notes, time and duration</a></h2>
+<p>In this case the resulting program will generate and open a file called <code>test.pdf</code> containing the output seen above.</p>
+<p>Music files and Haskell files using <code>defaultMain</code> are equivalent in every aspect. In fact, the <code>music2...</code> programs are simple utilities that substitutes a single expression into a Haskell module such as the one above and executes the resulting main function.</p>
+<h2 id="time-and-duration"><a href="#time-and-duration">Time and duration</a></h2>
 <p>A single note can be entered by its name. This will render a note in the middle octave with a duration of one. Note that note values and durations correspond exactly, a duration of <code>1</code> is a whole note, a duration of <code>1/2</code> is a half note, and so on.</p>
 <div class='haskell-music'>
 
@@ -245,11 +266,12 @@ $ ./test</code></pre>
 
 
 <div class="figure">
-<img src="4e13077bab5486bex.png" />
+<img src="4247fd44e823a93fx.png" />
 </div>
-<pre class="sourceCode haskell"><code class="sourceCode haskell">stretch (<span class="dv">2</span><span class="fu">/</span><span class="dv">3</span>) (scat [c,d,e]) <span class="fu">|&gt;</span> f<span class="fu">^*</span>(<span class="dv">3</span><span class="fu">/</span><span class="dv">2</span>)</code></pre>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">stretch (<span class="dv">2</span><span class="fu">/</span><span class="dv">3</span>) (scat [c,d,e]) <span class="fu">|&gt;</span> f<span class="fu">^*</span><span class="dv">2</span></code></pre>
 </div>
 
+<p>As you can see, note values, tuplets and ties are added automatically</p>
 <p>The <code>^*</code> and <code>^/</code> operators can be used as shorthands for <code>delay</code> and <code>compress</code>.</p>
 <div class='haskell-music'>
 
@@ -274,7 +296,7 @@ $ ./test</code></pre>
 </div>
 
 
-<h2 id="composing"><a href="#composing">Composing</a></h2>
+<h2 id="composition"><a href="#composition">Composition</a></h2>
 <p>Music expressions can be composed <a href="/docs/api/Music-Pitch.html#v:-60--62-"><code>&lt;&gt;</code></a>:</p>
 <div class='haskell-music'>
 
@@ -323,7 +345,7 @@ $ ./test</code></pre>
 <span class="kw">in</span> up _<span class="dt">P8</span> scale <span class="fu">&lt;/&gt;</span> (triad c)<span class="fu">^/</span><span class="dv">2</span> <span class="fu">|&gt;</span> (triad g_)<span class="fu">^/</span><span class="dv">2</span></code></pre>
 </div>
 
-<p>As a shorthand for <code>x |&gt; y |&gt; z ..</code>, we can write <code>scat [x, y, z]</code>. <a href="/docs/api/Music-Time-Juxtapose.html#v:scat"><code>scat</code></a> (this is short for <em>sequential concatenation</em>).</p>
+<p>As a shorthand for <code>x |&gt; y |&gt; z ..</code>, we can write <a href="/docs/api/Music-Time-Juxtapose.html#v:scat"><code>scat</code></a> <code>[x, y, z]</code> (short for <em>sequential concatenation</em>).</p>
 <div class='haskell-music'>
 
 
@@ -334,7 +356,7 @@ $ ./test</code></pre>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">scat [c,e<span class="fu">..</span>g]<span class="fu">^/</span><span class="dv">4</span></code></pre>
 </div>
 
-<p>For <code>x &lt;&gt; y &lt;&gt; z ..</code>, we can write <code>pcat [x, y, z]</code>. <a href="/docs/api/Music-Time-Juxtapose.html#v:pcat"><code>pcat</code></a> (short for <em>parallel concatenation</em>).</p>
+<p>For <code>x &lt;&gt; y &lt;&gt; z ..</code>, we can write <a href="/docs/api/Music-Time-Juxtapose.html#v:pcat"><code>pcat</code></a> <code>[x, y, z]</code> (short for <em>parallel concatenation</em>).</p>
 <div class='haskell-music'>
 
 
@@ -345,11 +367,11 @@ $ ./test</code></pre>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">pcat [c,e<span class="fu">..</span>g]<span class="fu">^/</span><span class="dv">2</span></code></pre>
 </div>
 
-
-
+<p>Actually, <a href="/docs/api/Music-Time-Juxtapose.html#v:scat"><code>scat</code></a> and <a href="/docs/api/Music-Time-Juxtapose.html#v:pcat"><code>pcat</code></a> used to be called <code>melody</code> and <code>chord</code> back in the days, but I figured out that these are names that you actually want to use in your own code.</p>
 <h2 id="pitch"><a href="#pitch">Pitch</a></h2>
+<h3 id="pitch-names"><a href="#pitch-names">Pitch names</a></h3>
 <p>To facilitate the use of non-standard pitch, the standard pitch names are provided as overloaded values, referred to as <em>pitch literals</em>.</p>
-<p>To understand how this works, think about the type of numeric literal. The values <span class="math">0, 1, 2</span> etc. have type <code>Num a =&gt; a</code>, similarly, the pitch literals <span class="math"><em>c</em>, <em>d</em>, <em>e</em>, <em>f</em>. . . </span> have type <code>IsPitch a =&gt; a</code>.</p>
+<p>To understand how this works, think about the type of numeric literal. The values <span class="math">0, 1, 2</span> etc. have type <code>Num a =&gt; a</code>, similarly, the pitch literals <span class="math"><em>c</em>, <em>d</em>, <em>e</em>, <em>f</em>. . . </span> have type <a href="/docs/api/Music-Pitch-Literal-Pitch.html#t:IsPitch"><code>IsPitch</code></a> <code>a =&gt; a</code>.</p>
 <p>For Western-style pitch types, the standard pitch names can be used:</p>
 <div class='haskell-music'>
 
@@ -391,7 +413,7 @@ octavesUp (<span class="fu">-</span><span class="dv">1</span>) c
 octavesDown <span class="dv">2</span> c</code></pre>
 </div>
 
-<p>Shorter syntax for other octaves:</p>
+<p>There is also a shorthand for other octaves:</p>
 <div class='haskell-music'>
 
 
@@ -426,7 +448,7 @@ octavesDown <span class="dv">2</span> c</code></pre>
 (sharpen <span class="fu">.</span> sharpen) c</code></pre>
 </div>
 
-<p>Shorter syntax for sharp and flat notes:</p>
+<p>As you might expect, there is also a shorthand for sharp and flat notes:</p>
 <div class='haskell-music'>
 
 
@@ -444,9 +466,43 @@ octavesDown <span class="dv">2</span> c</code></pre>
 flatten d             <span class="fu">==</span> d flat        <span class="fu">==</span> ds
 (sharpen <span class="fu">.</span> sharpen) c <span class="fu">==</span> c doubleSharp <span class="fu">==</span> css
 (flatten <span class="fu">.</span> flatten) d <span class="fu">==</span> d doubleFlat  <span class="fu">==</span> dss</code></pre>
-<p>Note that there is no guarantee that your pitch representation use enharmonic equivalence, so <code>cs == db</code> may or may not hold.</p>
+<p>Note that <code>cs == db</code> may or may not hold depending on which pitch representation you use.</p>
+<h3 id="interval-names"><a href="#interval-names">Interval names</a></h3>
+<p>Interval names are overloaded in a manner similar to pitches, and are consequently referred to as <em>interval literals</em>. The corresponding class is called <a href="/docs/api/Music-Pitch-Literal-Interval.html#t:IsInterval"><code>IsInterval</code></a>.</p>
+<p>Here and elsewhere in the Music Suite, the convention is to follow standard theoretical notation, so <em>minor</em> and <em>diminished</em> intervals are written in lower-case, while <em>major</em> and <em>perfect</em> intervals are written in upper-case. Unfortunately, Haskell does not support overloaded upper-case values, so we have to adopt an underscore prefix:</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">minor third      <span class="fu">==</span> m3
+major third      <span class="fu">==</span> _<span class="dt">M3</span>
+perfect fifth    <span class="fu">==</span> _<span class="dt">P5</span>
+diminished fifth <span class="fu">==</span> d5
+minor ninth      <span class="fu">==</span> m9</code></pre>
+<p>Similar to <a href="/docs/api/Music-Pitch-Alterable.html#v:sharpen"><code>sharpen</code></a> and <a href="/docs/api/Music-Pitch-Alterable.html#v:flatten"><code>flatten</code></a>, the <a href="/docs/api/Music-Pitch-Augmentable.html#v:augment"><code>augment</code></a> and <a href="/docs/api/Music-Pitch-Augmentable.html#v:diminish"><code>diminish</code></a> functions can be used to alter the size of an interval. For example:</p>
+<div class='haskell-music'>
+
+
+
+<div class="figure">
+<img src="72c9aad78038ac0cx.png" />
+</div>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span>
+    intervals <span class="fu">=</span> [diminish (perfect fifth), (diminish <span class="fu">.</span> diminish) (perfect fifth)]
+<span class="kw">in</span> scat <span class="fu">$</span> <span class="fu">fmap</span> (<span class="ot">`up`</span> c) intervals</code></pre>
+</div>
+
+<p>You can add pitches and intervals using the <a href="/docs/api/Music-Pitch.html#v:-46--45--46-"><code>.-.</code></a> and <a href="/docs/api/Music-Pitch.html#v:-46--43--94-"><code>.+^</code></a> operators. To memorize these operators, think of pitches and points <code>.</code> and intervals as vectors <code>^</code>.</p>
+<div class='haskell-music'>
+
+
+
+<div class="figure">
+<img src="43d6c0b4d2b8d1b0x.png" />
+</div>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">setPitch (c <span class="fu">.+^</span> m3) <span class="fu">$</span> <span class="fu">return</span> c_</code></pre>
+</div>
+
+
+<h3 id="qualified-pitch-and-interval-names"><a href="#qualified-pitch-and-interval-names">Qualified pitch and interval names</a></h3>
 <p>There is nothing special about the pitch and interval literals, they are simply values exported by the <code>Music.Pitch.Literal</code> module. While this module is reexported by the standard music preludes, you can also import it qualified if you want to avoid bringing the single-letter pitch names into scope.</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell">Pitch.c <span class="fu">|&gt;</span> Pitch.d</code></pre>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">Pitch.c <span class="fu">|&gt;</span> Pitch.d <span class="fu">.+^</span> Interval.m3</code></pre>
 <p>TODO overloading, explain why the following works:</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">return</span> (<span class="ot">c::</span><span class="dt">Note</span>) <span class="fu">==</span> (<span class="ot">c::</span><span class="dt">Score</span> <span class="dt">Note</span>)</code></pre>
 <h2 id="dynamics"><a href="#dynamics">Dynamics</a></h2>
@@ -527,7 +583,9 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 </div>
 
 <h2 id="parts"><a href="#parts">Parts</a></h2>
+<p>TODO</p>
 <h2 id="space"><a href="#space">Space</a></h2>
+<p>TODO</p>
 <h2 id="tremolo"><a href="#tremolo">Tremolo</a></h2>
 <p><a href="/docs/api/Music-Score-Ornaments.html#v:tremolo"><code>tremolo</code></a></p>
 <div class='haskell-music'>
@@ -579,7 +637,8 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 </div>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">text <span class="st">&quot;pizz.&quot;</span> <span class="fu">$</span> c<span class="fu">^/</span><span class="dv">2</span></code></pre>
 </div>
-
+<h2 id="chords"><a href="#chords">Chords</a></h2>
+<p>TODO</p>
 <h2 id="rests"><a href="#rests">Rests</a></h2>
 <p>Sometimes it is useful to work with scores that have a duration but no events. This kind of score is represented by <code>rest</code> and has the type <code>Score (Maybe Note)</code>. We use <a href="/docs/api/Music-Score-Combinators.html#v:removeRests"><code>removeRests</code></a> to convert a <code>Score (Maybe a)</code> into a <code>Score a</code>.</p>
 <div class='haskell-music'>
@@ -603,11 +662,11 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 
 
 <div class="figure">
-<img src="db23e0f35665305x.png" />
+<img src="40e9ac5d562b8c56x.png" />
 </div>
 <pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span>
     melody <span class="fu">=</span> legato <span class="fu">$</span> scat [d, scat [g,fs]<span class="fu">^/</span><span class="dv">2</span>,bb<span class="fu">^*</span><span class="dv">2</span>]<span class="fu">^/</span><span class="dv">4</span>
-<span class="kw">in</span> melody <span class="fu">|&gt;</span> rev melody</code></pre>
+<span class="kw">in</span> melody <span class="fu">|&gt;</span> melody</code></pre>
 </div>
 
 <p><a href="/docs/api/Music-Time-Juxtapose.html#v:times"><code>times</code></a></p>
@@ -690,14 +749,104 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <h2 id="semitones-and-enharmonic-equivalence"><a href="#semitones-and-enharmonic-equivalence">Semitones and enharmonic equivalence</a></h2>
 <h2 id="spelling-1"><a href="#spelling-1">Spelling</a></h2>
 <h2 id="scales"><a href="#scales">Scales</a></h2>
-<h2 id="chords"><a href="#chords">Chords</a></h2>
+<h2 id="chords-1"><a href="#chords-1">Chords</a></h2>
 <h2 id="parts-1"><a href="#parts-1">Parts</a></h2>
 <h2 id="instrument-part-and-sub-part"><a href="#instrument-part-and-sub-part">Instrument, part and sub-part</a></h2>
 <h2 id="extracting-and-modifying-parts"><a href="#extracting-and-modifying-parts">Extracting and modifying parts</a></h2>
 <h2 id="part-composition"><a href="#part-composition">Part composition</a></h2>
 <h1 id="time-based-structures"><a href="#time-based-structures">Time-based structures</a></h1>
 <p><a href="/docs/api/Music-Score-Score.html#t:Score"><code>Score</code></a> <a href="/docs/api/Music-Score-Voice.html#t:Voice"><code>Voice</code></a> <a href="/docs/api/Music-Score-Track.html#t:Track"><code>Track</code></a> <a href="/docs/api/Music-Time-Delayable.html#t:Delayable"><code>Delayable</code></a> <a href="/docs/api/Music-Time-Stretchable.html#t:Stretchable"><code>Stretchable</code></a></p>
+<h2 id="time-and-duration-1"><a href="#time-and-duration-1">Time and duration</a></h2>
+<p>TODO</p>
+<h2 id="spans"><a href="#spans">Spans</a></h2>
+<p>TODO</p>
+<h2 id="notes"><a href="#notes">Notes</a></h2>
+<p>TODO</p>
+<h2 id="voice"><a href="#voice">Voice</a></h2>
+<p>A <a href="/docs/api/Music-Score-Voice.html#t:Voice"><code>Voice</code></a> represents a single voice of music. It consists of a sequence of values with duration, but no time.</p>
+<p>It can be converted into a score by stretching each element and composing in sequence.</p>
+<div class='haskell-music'>
+
+
+
+<div class="figure">
+<img src="28277393e1e71d7x.png" />
+</div>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span>
+    x,<span class="ot"> y ::</span> <span class="dt">Voice</span> <span class="dt">Note</span>
+
+    x <span class="fu">=</span> voice [ (<span class="dv">1</span>, c),
+                (<span class="dv">1</span>, d),
+                (<span class="dv">1</span>, f),
+                (<span class="dv">1</span>, e) ]
+
+    y <span class="fu">=</span> join <span class="fu">$</span> voice [ (<span class="dv">1</span>, x), 
+                       (<span class="dv">0</span><span class="fu">.</span><span class="dv">5</span>, up _<span class="dt">P5</span> x), 
+                       (<span class="dv">4</span>, up _<span class="dt">P8</span> x) ]
+
+<span class="kw">in</span> stretch (<span class="dv">1</span><span class="fu">/</span><span class="dv">8</span>) <span class="fu">$</span> voiceToScore <span class="fu">$</span> y</code></pre>
+</div>
+
+<h2 id="tracks"><a href="#tracks">Tracks</a></h2>
+<p>A <a href="/docs/api/Music-Score-Track.html#t:Track"><code>Track</code></a> is similar to a score, except that it events have no offset or duration. It is useful for representing point-wise occurrences such as samples, cues or percussion notes.</p>
+<p>It can be converted into a score by delaying each element and composing in parallel. An explicit duration has to be provided.</p>
+<div class='haskell-music'>
+
+
+
+<div class="figure">
+<img src="27394e353aafbec4x.png" />
+</div>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span>
+    x,<span class="ot"> y ::</span> <span class="dt">Track</span> <span class="dt">Note</span>
+
+    x <span class="fu">=</span> track [ (<span class="dv">0</span>, c), 
+                (<span class="dv">1</span>, d), 
+                (<span class="dv">2</span>, e) ]
+
+    y <span class="fu">=</span> join <span class="fu">$</span> track [ (<span class="dv">0</span>, x), 
+                       (<span class="dv">1</span><span class="fu">.</span><span class="dv">5</span>,  up _<span class="dt">P5</span> x), 
+                       (<span class="dv">3</span><span class="fu">.</span><span class="dv">25</span>, up _<span class="dt">P8</span> x) ]
+
+<span class="kw">in</span> trackToScore (<span class="dv">1</span><span class="fu">/</span><span class="dv">8</span>) y</code></pre>
+</div>
+
+
 <h1 id="meta-information"><a href="#meta-information">Meta-information</a></h1>
+<p>It is often desirable to annotate music with extraneous information, such as title, creator, time signature and so on. In the Music Suite these are grouped together under the common label <em>meta-information</em>.</p>
+<p>The distinction between ordinary musical data and meta-data is not always clear cut. For example, while a clef is clearly a presentation detail, a key signature might be considered both a presentation aspect and a fundamental aspect of the musical syntax.</p>
+<p>TODO while we only consider notes as non-meta etc</p>
+<p>TODO attributes (same as in Diagrams)</p>
+<p>Each attribute value may apply either to a <em>whole</em> score (i.e. from beginning to end), or to a <em>section</em> of the score.</p>
+<h2 id="clefs"><a href="#clefs">Clefs</a></h2>
+<p>To set the clef for a whole passage, use <a href="/docs/api/Music-Score-Meta.html#v:setClef"><code>setClef</code></a>. The clef is used by most notation backends and ignored by audio backends.</p>
+<div class='haskell-music'>
+
+
+
+<div class="figure">
+<img src="15619c9b3f4e426bx.png" />
+</div>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span>
+    part1 <span class="fu">=</span> setClef <span class="dt">FClef</span> <span class="fu">$</span> staccato <span class="fu">$</span> scat [c_,g_,c,g_]
+    part2 <span class="fu">=</span> setClef <span class="dt">CClef</span> <span class="fu">$</span> staccato <span class="fu">$</span> scat [ab_,eb,d,a]
+    part3 <span class="fu">=</span> setClef <span class="dt">GClef</span> <span class="fu">$</span> staccato <span class="fu">$</span> accentLast <span class="fu">$</span> scat [g,fs,e,d]
+<span class="kw">in</span> compress <span class="dv">8</span> <span class="fu">$</span> part1 <span class="fu">|&gt;</span> part2 <span class="fu">|&gt;</span> part3</code></pre>
+</div>
+
+<p>To set the clef for a preexisting passage in an existing score, use <a href="/docs/api/Music-Score-Meta.html#v:setClefDuring"><code>setClefDuring</code></a>.</p>
+<div class='haskell-music'>
+
+
+
+<div class="figure">
+<img src="2e371040c015a646x.png" />
+</div>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">setClefDuring (<span class="dv">0</span><span class="fu">.</span><span class="dv">25</span> <span class="ot">&lt;-</span><span class="fu">&gt;</span> <span class="dv">0</span><span class="fu">.</span><span class="dv">5</span>) <span class="dt">CClef</span> <span class="fu">$</span> setClefDuring (<span class="dv">0</span><span class="fu">.</span><span class="dv">75</span> <span class="ot">&lt;-</span><span class="fu">&gt;</span> <span class="dv">1</span>) <span class="dt">FClef</span> <span class="fu">$</span> compress <span class="dv">8</span> <span class="fu">$</span> scat [c_<span class="fu">..</span>c&#39;]</code></pre>
+</div>
+
+
+
 <h2 id="time-signatures"><a href="#time-signatures">Time signatures</a></h2>
 <h2 id="key-signatures"><a href="#key-signatures">Key signatures</a></h2>
 <h2 id="rehearsal-marks"><a href="#rehearsal-marks">Rehearsal marks</a></h2>
@@ -711,20 +860,20 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 You can read and write MIDI files using the functions [`readMidi`][readMidi] and [`writeMidi`][writeMidi]. To play MIDI back in real-time, use [`playMidi`][playMidi] or [`playMidiIO`][playMidiIO], which uses [reenact](http://hackage.haskell.org/package/reenact).
 -->
 
-<p>Beware that MIDI input may contain time and pitch values that yield a non-readable notation, you need a proper quantization software such as <a href="http://scorecleaner.com">ScoreCleaner</a> to convert raw MIDI input to quantized input.</p>
+<p>Beware that MIDI input may contain time and pitch values that yield a non-readable notation, you need an sophisticated piece of analysis software to convert raw MIDI input to quantized input.</p>
 <h2 id="lilypond"><a href="#lilypond">Lilypond</a></h2>
 <p>All standard representations support Lilypond output. The <a href="http://hackage.haskell.org/package/lilypond">lilypond</a> package is used for parsing and pretty printing of Lilypond syntax. Lilypond is the recommended way of rendering music.</p>
 <p>Lilypond input is not available yet but will hopefully be added soon.</p>
 <p>An example:</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">putStrLn</span> <span class="fu">$</span> toLyString <span class="fu">$</span> asScore <span class="fu">$</span> scat [c,d,e]</code></pre>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">toLyString <span class="fu">$</span> asScore <span class="fu">$</span> scat [c,d,e]</code></pre>
 <pre><code>&lt;&lt;
     \new Staff { &lt;c&#39;&gt;1 &lt;d&#39;&gt;1 &lt;e&#39;&gt;1 }
 &gt;&gt;</code></pre>
 <h2 id="musicxml"><a href="#musicxml">MusicXML</a></h2>
 <p>All standard representations support MusicXML output. The <a href="http://hackage.haskell.org/package/musicxml2">musicxml2</a> package is used for parsing and pretty printing.</p>
-<p>The output is fairly complete, with some limitations (<a href="https://github.com/hanshoglund/music-score/issues">reports</a> welcome). There are no plans to support MusicXML import in the near future.</p>
+<p>The output is fairly complete, with some limitations (<a href="https://github.com/hanshoglund/music-score/issues">reports</a> welcome). There are no plans to support input in the near future.</p>
 <p>Beware of the extreme verboseness of XML, for example:</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">putStrLn</span> <span class="fu">$</span> toXmlString <span class="fu">$</span> asScore <span class="fu">$</span> scat [c,d,e]</code></pre>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">toXmlString <span class="fu">$</span> asScore <span class="fu">$</span> scat [c,d,e]</code></pre>
 <pre><code>&lt;?xml version=&#39;1.0&#39; ?&gt;
 &lt;score-partwise&gt;
   &lt;movement-title&gt;Title&lt;/movement-title&gt;
@@ -817,6 +966,19 @@ This feature could of course also be used to convert Sibelius scores to other fo
 <h1 id="examples"><a href="#examples">Examples</a></h1>
 <p>Some more involved examples:</p>
 <h2 id="counterpoint"><a href="#counterpoint">Counterpoint</a></h2>
+<div class='haskell-music'>
+
+
+
+<div class="figure">
+<img src="3147fc3d10ebefd6x.png" />
+</div>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span>                      
+    subj <span class="fu">=</span> asScore <span class="fu">$</span> scat [ c,       d,        f,          e           ]
+    cs1  <span class="fu">=</span> asScore <span class="fu">$</span> scat [ g,f,e,g, f,a,g,d&#39;, c&#39;,b,c&#39;,d&#39;, e&#39;,g&#39;,f&#39;,e&#39; ]
+<span class="kw">in</span> compress <span class="dv">4</span> cs1 <span class="fu">&lt;/&gt;</span> subj</code></pre>
+</div>
+
 <p>TODO about</p>
 <div class='haskell-music'>
 
@@ -848,6 +1010,54 @@ This feature could of course also be used to convert Sibelius scores to other fo
 <span class="kw">in</span> (<span class="fu">take</span> <span class="dv">25</span> <span class="fu">$</span> row) <span class="ot">`repeated`</span> (\p <span class="ot">-&gt;</span> up (asPitch p <span class="fu">.-.</span> c) mel)</code></pre>
 </div>
 
+<h3 id="duo"><a href="#duo">Duo</a></h3>
+<div class='haskell-music'>
+
+
+
+<div class="figure">
+<img src="51f14d14cd881ca6x.png" />
+</div>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span>
+    toLydian <span class="fu">=</span> modifyPitch (\p <span class="ot">-&gt;</span> <span class="kw">if</span> p <span class="fu">==</span> c <span class="kw">then</span> cs <span class="kw">else</span> p)
+
+    subj1 <span class="fu">=</span> (<span class="fu">^/</span><span class="dv">2</span>) <span class="fu">$</span>
+        legato (b_ <span class="fu">|&gt;</span> c) <span class="fu">|&gt;</span> legato (c <span class="fu">|&gt;</span> b_<span class="fu">^*</span><span class="dv">2</span>)
+            <span class="fu">|&gt;</span> legato (scat [b_, c, d])
+            <span class="fu">|&gt;</span> b_ <span class="fu">|&gt;</span> c <span class="fu">|&gt;</span> b_<span class="fu">^*</span><span class="dv">2</span>
+        <span class="fu">|&gt;</span> legato (scat [e, d, b_, c]) <span class="fu">|&gt;</span> b_<span class="fu">^*</span><span class="dv">2</span>
+        <span class="fu">|&gt;</span> scat [d, e, b_] <span class="fu">|&gt;</span> c<span class="fu">^*</span><span class="dv">2</span> <span class="fu">|&gt;</span> b_
+
+    pres1 <span class="fu">=</span> subj1<span class="fu">^*</span>(<span class="dv">2</span><span class="fu">/</span><span class="dv">2</span>)
+    pres2 <span class="fu">=</span> subj1<span class="fu">^*</span>(<span class="dv">2</span><span class="fu">/</span><span class="dv">2</span>) <span class="fu">&lt;/&gt;</span> delay <span class="dv">2</span> (subj1<span class="fu">^*</span>(<span class="dv">3</span><span class="fu">/</span><span class="dv">2</span>))
+
+    part1 <span class="fu">=</span> pres1 <span class="fu">|&gt;</span> pres2
+    part2 <span class="fu">=</span> pres1 <span class="fu">|&gt;</span> pres2
+
+<span class="kw">in</span> dynamics pp <span class="fu">$</span> compress <span class="dv">2</span> <span class="fu">$</span> part1 <span class="fu">|&gt;</span> setClef <span class="dt">CClef</span> (toLydian part2)  </code></pre>
+</div>
+
+<!--
+### Schubert
+
+```music+haskellx
+let
+    motive = (legato $ stretchTo 2 $ scat [g,a,bb,c',d',eb']) |> staccato (scat [d', bb, g])
+    bar    = rest^*4
+
+    song    = mempty
+    left    = times 4 (times 4 $ removeRests $ triplet g)
+    right   = removeRests $ times 2 (delay 4 motive |> rest^*3)
+
+    triplet = group 3
+
+    a `x` b = a^*(3/4) |> b^*(1/4)
+    a `l` b = (a |> b)^/2
+
+in  stretch (1/4) $ song </> left </> down _P8 right      
+```
+-->
+
 
 <h1 id="design-overview"><a href="#design-overview">Design overview</a></h1>
 <!--
@@ -878,7 +1088,7 @@ There is a utility program called `music-util`, which simplifies the kind of cro
 <li><p>The <code>music-preludes</code> provides modules that import modules from both <code>music-score</code> and <code>music-pitch</code> and its sister packages.</p></li>
 </ul>
 <h3 id="compability-with-other-libraries"><a href="#compability-with-other-libraries">Compability with other libraries</a></h3>
-<p>The Music Suite libraries does not profess to be compatible with any other music <em>representation</em> library<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup>, and deliberately claims the whole <code>Music</code> top-level package. The aim is that functionality from these packages should eventually be included into the Music Suite packages. However it can be used with packages that implement audio processing, synthesis, interaction with musical instruments, FRP libraries and so on.</p>
+<p>The Music Suite libraries does not profess to be compatible with any other music <em>representation</em> library<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>, and deliberately claims the whole <code>Music</code> top-level package. The aim is that functionality from these packages should eventually be included into the Music Suite packages. However it can be used with packages that implement audio processing, synthesis, interaction with musical instruments, FRP libraries and so on.</p>
 <p>The concepts and abstractions used in the suite overlap with some fundamental concepts form FRP, but the focus is fundamentally different. While FRP libraries focus on reacting to the external world, the Music Suite focus on modeling temporal values and musical concepts.</p>
 <h3 id="acknowledgements"><a href="#acknowledgements">Acknowledgements</a></h3>
 <p>The Music Suite is indebted to many other previous libraries and computer music environments, particularly <a href="http://commonmusic.sourceforge.net/">Common Music</a>, <a href="http://cycling74.com/products/max/">Max/MSP</a>, <a href="http://supercollider.sourceforge.net/">SuperCollider</a>, <a href="http://music21-mit.blogspot.se/">music21</a>, <a href="http://guidolib.sourceforge.net/">Guido</a>, <a href="http://lilypond.org/">Lilypond</a> and <a href="https://pypi.python.org/pypi/Abjad/2.3">Abjad</a>. Some of the ideas for the quantization algorithms came from <a href="http://fomus.sourceforge.net/">Fomus</a>.</p>
@@ -894,8 +1104,7 @@ There is a utility program called `music-util`, which simplifies the kind of cro
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>In fact it is a so-called embedded domain-specific language, see http://www.haskell.org/haskellwiki/Embedded_domain_specific_language<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>Including Haskore, Euterpea, hts and temporal-media<a href="#fnref2">↩</a></p></li>
+<li id="fn1"><p>Including Haskore, Euterpea, hts and temporal-media<a href="#fnref1">↩</a></p></li>
 </ol>
 </div>
 </body>

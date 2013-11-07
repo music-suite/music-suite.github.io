@@ -2,7 +2,7 @@
 
 # Getting Started
 
-## Installation
+## Installing the Suite
 
 The Music Suite depends on the [Haskell platform][HaskellPlatform].
 
@@ -55,8 +55,8 @@ Alternatively, you can create a file called `test.hs` (or similar) with the foll
 ```haskell
 import Music.Prelude.Basic
 
-music = c |> d |> e
 main = defaultMain music
+music = c |> d |> e
 
 ```
 
@@ -69,15 +69,12 @@ or compile and run it with
     $ ghc --make test
     $ ./test
 
-However, `music.hs` can also be loaded into a Haskell interpreter or compiled.
 In this case the resulting program will generate and open a file called
 `test.pdf` containing the output seen above.
 
-In fact, the `music2pdf` program is a simple utility that substitutes a single expression into a Haskell module such as the one above and executes the resulting main function.
+Music files and Haskell files using `defaultMain` are equivalent in every aspect. In fact, the `music2...` programs are simple utilities that substitutes a single expression into a Haskell module such as the one above and executes the resulting main function.
 
-
-
-## Notes, time and duration
+## Time and duration
 
 A single note can be entered by its name. This will render a note in the middle octave with a duration of one. Note that note values and durations correspond exactly, a duration of `1` is a whole note, a duration of `1/2` is a half note, and so on.
 
@@ -163,14 +160,16 @@ c^*(9/8) |> d^*(7/8)
 
 
 
-![](4e13077bab5486bex.png)
+![](4247fd44e823a93fx.png)
 
 ```haskell
-stretch (2/3) (scat [c,d,e]) |> f^*(3/2)
+stretch (2/3) (scat [c,d,e]) |> f^*2
 
 ```
 
 </div>
+
+As you can see, note values, tuplets and ties are added automatically
 
 The `^*` and `^/` operators can be used as shorthands for `delay` and `compress`.
 
@@ -205,7 +204,7 @@ up (perfect octave) . compress 2 . delay 3 $ c
 </div>
 
 
-## Composing
+## Composition
 
 Music expressions can be composed [`<>`][<>]:
 
@@ -272,8 +271,7 @@ in up _P8 scale </> (triad c)^/2 |> (triad g_)^/2
 
 </div>
 
-As a shorthand for `x |> y |> z ..`, we can write `scat [x, y, z]`.
-[`scat`][scat] (this is short for *sequential concatenation*).
+As a shorthand for `x |> y |> z ..`, we can write [`scat`][scat] `[x, y, z]` (short for *sequential concatenation*).
 
 <div class='haskell-music'>
 
@@ -288,8 +286,7 @@ scat [c,e..g]^/4
 
 </div>
 
-For `x <> y <> z ..`, we can write `pcat [x, y, z]`.
-[`pcat`][pcat] (short for *parallel concatenation*).
+For `x <> y <> z ..`, we can write [`pcat`][pcat] `[x, y, z]` (short for *parallel concatenation*).
 
 <div class='haskell-music'>
 
@@ -304,13 +301,16 @@ pcat [c,e..g]^/2
 
 </div>
 
-
+Actually, [`scat`][scat] and [`pcat`][pcat] used to be called `melody` and `chord` back in the days, but
+I figured out that these are names that you actually want to use in your own code.
 
 ## Pitch
 
+### Pitch names
+
 To facilitate the use of non-standard pitch, the standard pitch names are provided as overloaded values, referred to as *pitch literals*. 
 
-To understand how this works, think about the type of numeric literal. The values $0, 1, 2$ etc. have type `Num a => a`, similarly, the pitch literals $c, d, e, f ...$ have type `IsPitch a => a`.
+To understand how this works, think about the type of numeric literal. The values $0, 1, 2$ etc. have type `Num a => a`, similarly, the pitch literals $c, d, e, f ...$ have type [`IsPitch`][IsPitch] `a => a`.
 
 For Western-style pitch types, the standard pitch names can be used:
 
@@ -362,7 +362,7 @@ octavesDown 2 c
 
 </div>
 
-Shorter syntax for other octaves:
+There is also a shorthand for other octaves:
 
 <div class='haskell-music'>
 
@@ -410,7 +410,7 @@ sharpen c
 
 </div>
 
-Shorter syntax for sharp and flat notes:
+As you might expect, there is also a shorthand for sharp and flat notes:
 
 <div class='haskell-music'>
 
@@ -437,12 +437,67 @@ flatten d             == d flat        == ds
 
 ```
 
-Note that there is no guarantee that your pitch representation use enharmonic equivalence, so `cs == db` may or may not hold.
+Note that `cs == db` may or may not hold depending on which pitch representation you use.
+
+### Interval names
+
+Interval names are overloaded in a manner similar to pitches, and are consequently referred to as *interval literals*. The corresponding class is called [`IsInterval`][IsInterval].
+
+Here and elsewhere in the Music Suite, the convention is to follow standard theoretical
+notation, so *minor* and *diminished* intervals are written in lower-case, while *major*
+and *perfect* intervals are written in upper-case. Unfortunately, Haskell does not support
+overloaded upper-case values, so we have to adopt an underscore prefix:
+
+```haskell
+minor third      == m3
+major third      == _M3
+perfect fifth    == _P5
+diminished fifth == d5
+minor ninth      == m9
+
+```
+
+Similar to [`sharpen`][sharpen] and [`flatten`][flatten], the [`augment`][augment] and [`diminish`][diminish] functions can be used
+to alter the size of an interval. For example:
+
+<div class='haskell-music'>
+
+
+
+![](72c9aad78038ac0cx.png)
+
+```haskell
+let
+    intervals = [diminish (perfect fifth), (diminish . diminish) (perfect fifth)]
+in scat $ fmap (`up` c) intervals
+
+```
+
+</div>
+
+You can add pitches and intervals using the [`.-.`][.-.] and [`.+^`][.+^] operators. To memorize these
+operators, think of pitches and points `.` and intervals as vectors `^`.
+
+<div class='haskell-music'>
+
+
+
+![](43d6c0b4d2b8d1b0x.png)
+
+```haskell
+setPitch (c .+^ m3) $ return c_
+
+```
+
+</div>
+
+
+### Qualified pitch and interval names
 
 There is nothing special about the pitch and interval literals, they are simply values exported by the `Music.Pitch.Literal` module. While this module is reexported by the standard music preludes, you can also import it qualified if you want to avoid bringing the single-letter pitch names into scope.
 
 ```haskell
-Pitch.c |> Pitch.d
+Pitch.c |> Pitch.d .+^ Interval.m3
 
 ```
 
@@ -558,7 +613,11 @@ in (accent . legato) (p1 </> p2 </> p3)
 
 ## Parts
 
+TODO
+
 ## Space
+
+TODO
 
 ## Tremolo
 
@@ -634,6 +693,9 @@ text "pizz." $ c^/2
 ```
 
 </div>
+## Chords
+
+TODO
 
 ## Rests
 
@@ -668,12 +730,12 @@ removeRests $ times 4 (accent g^*2 |> rest |> scat [d,d]^/2)^/8
 
 
 
-![](db23e0f35665305x.png)
+![](40e9ac5d562b8c56x.png)
 
 ```haskell
 let
     melody = legato $ scat [d, scat [g,fs]^/2,bb^*2]^/4
-in melody |> rev melody
+in melody |> melody
 
 ```
 
@@ -815,7 +877,130 @@ TODO
 [`Stretchable`][Stretchable]
 
 
+## Time and duration
+
+TODO
+
+## Spans
+
+TODO
+
+## Notes
+
+TODO
+
+## Voice
+
+A [`Voice`][Voice] represents a single voice of music. It consists of a sequence of values with duration, but no time. 
+
+It can be converted into a score by stretching each element and composing in sequence.
+
+<div class='haskell-music'>
+
+
+
+![](28277393e1e71d7x.png)
+
+```haskell
+let
+    x, y :: Voice Note
+
+    x = voice [ (1, c),
+                (1, d),
+                (1, f),
+                (1, e) ]
+
+    y = join $ voice [ (1, x), 
+                       (0.5, up _P5 x), 
+                       (4, up _P8 x) ]
+
+in stretch (1/8) $ voiceToScore $ y
+
+```
+
+</div>
+
+## Tracks
+
+A [`Track`][Track] is similar to a score, except that it events have no offset or duration. It is useful for representing point-wise occurrences such as samples, cues or percussion notes.
+
+It can be converted into a score by delaying each element and composing in parallel. An explicit duration has to be provided.
+
+<div class='haskell-music'>
+
+
+
+![](27394e353aafbec4x.png)
+
+```haskell
+let
+    x, y :: Track Note
+
+    x = track [ (0, c), 
+                (1, d), 
+                (2, e) ]
+
+    y = join $ track [ (0, x), 
+                       (1.5,  up _P5 x), 
+                       (3.25, up _P8 x) ]
+
+in trackToScore (1/8) y
+
+```
+
+</div>
+
+
 # Meta-information
+
+It is often desirable to annotate music with extraneous information, such as title, creator, time signature and so on. In the Music Suite these are grouped together under the common label *meta-information*.
+
+The distinction between ordinary musical data and meta-data is not always clear cut. For example, while a clef is clearly a presentation detail, a key signature might be considered both a presentation aspect and a fundamental aspect of the musical syntax.
+
+TODO while we only consider notes as non-meta etc
+
+TODO attributes (same as in Diagrams)
+
+Each attribute value may apply either to a *whole* score (i.e. from beginning to end), or to a *section* of the score.
+
+
+## Clefs
+
+To set the clef for a whole passage, use [`setClef`][setClef]. The clef is used by most notation backends and ignored by audio backends.
+
+<div class='haskell-music'>
+
+
+
+![](15619c9b3f4e426bx.png)
+
+```haskell
+let
+    part1 = setClef FClef $ staccato $ scat [c_,g_,c,g_]
+    part2 = setClef CClef $ staccato $ scat [ab_,eb,d,a]
+    part3 = setClef GClef $ staccato $ accentLast $ scat [g,fs,e,d]
+in compress 8 $ part1 |> part2 |> part3
+
+```
+
+</div>
+
+To set the clef for a preexisting passage in an existing score, use [`setClefDuring`][setClefDuring].
+
+<div class='haskell-music'>
+
+
+
+![](2e371040c015a646x.png)
+
+```haskell
+setClefDuring (0.25 <-> 0.5) CClef $ setClefDuring (0.75 <-> 1) FClef $ compress 8 $ scat [c_..c']
+
+```
+
+</div>
+
+
 
 ## Time signatures          
 
@@ -839,8 +1024,7 @@ All standard representations support MIDI input and output. The MIDI representat
 You can read and write MIDI files using the functions [`readMidi`][readMidi] and [`writeMidi`][writeMidi]. To play MIDI back in real-time, use [`playMidi`][playMidi] or [`playMidiIO`][playMidiIO], which uses [reenact](http://hackage.haskell.org/package/reenact).
 -->
 
-Beware that MIDI input may contain time and pitch values that yield a non-readable notation, you need a proper quantization software such as [
-ScoreCleaner](http://scorecleaner.com) to convert raw MIDI input to quantized input.
+Beware that MIDI input may contain time and pitch values that yield a non-readable notation, you need an sophisticated piece of analysis software to convert raw MIDI input to quantized input.
 
 ## Lilypond
 
@@ -851,7 +1035,7 @@ Lilypond input is not available yet but will hopefully be added soon.
 An example:
 
 ```haskell
-putStrLn $ toLyString $ asScore $ scat [c,d,e]
+toLyString $ asScore $ scat [c,d,e]
 
 ```
 
@@ -865,12 +1049,12 @@ putStrLn $ toLyString $ asScore $ scat [c,d,e]
 All standard representations support MusicXML output. The [musicxml2](http://hackage.haskell.org/package/musicxml2) package is used for 
 parsing and pretty printing. 
 
-The output is fairly complete, with some limitations ([reports][issue-tracker] welcome). There are no plans to support MusicXML import in the near future.
+The output is fairly complete, with some limitations ([reports][issue-tracker] welcome). There are no plans to support input in the near future.
 
 Beware of the extreme verboseness of XML, for example:
 
 ```haskell
-putStrLn $ toXmlString $ asScore $ scat [c,d,e]
+toXmlString $ asScore $ scat [c,d,e]
 
 ```
 
@@ -981,6 +1165,23 @@ Some more involved examples:
 
 ## Counterpoint
 
+
+<div class='haskell-music'>
+
+
+
+![](3147fc3d10ebefd6x.png)
+
+```haskell
+let                      
+    subj = asScore $ scat [ c,       d,        f,          e           ]
+    cs1  = asScore $ scat [ g,f,e,g, f,a,g,d', c',b,c',d', e',g',f',e' ]
+in compress 4 cs1 </> subj
+
+```
+
+</div>
+
 TODO about
 
 <div class='haskell-music'>
@@ -1019,6 +1220,58 @@ in (take 25 $ row) `repeated` (\p -> up (asPitch p .-. c) mel)
 ```
 
 </div>
+
+### Duo
+
+<div class='haskell-music'>
+
+
+
+![](51f14d14cd881ca6x.png)
+
+```haskell
+let
+    toLydian = modifyPitch (\p -> if p == c then cs else p)
+
+    subj1 = (^/2) $
+        legato (b_ |> c) |> legato (c |> b_^*2)
+            |> legato (scat [b_, c, d])
+            |> b_ |> c |> b_^*2
+        |> legato (scat [e, d, b_, c]) |> b_^*2
+        |> scat [d, e, b_] |> c^*2 |> b_
+
+    pres1 = subj1^*(2/2)
+    pres2 = subj1^*(2/2) </> delay 2 (subj1^*(3/2))
+
+    part1 = pres1 |> pres2
+    part2 = pres1 |> pres2
+
+in dynamics pp $ compress 2 $ part1 |> setClef CClef (toLydian part2)  
+
+```
+
+</div>
+
+<!--
+### Schubert
+
+```music+haskellx
+let
+    motive = (legato $ stretchTo 2 $ scat [g,a,bb,c',d',eb']) |> staccato (scat [d', bb, g])
+    bar    = rest^*4
+
+    song    = mempty
+    left    = times 4 (times 4 $ removeRests $ triplet g)
+    right   = removeRests $ times 2 (delay 4 motive |> rest^*3)
+
+    triplet = group 3
+
+    a `x` b = a^*(3/4) |> b^*(1/4)
+    a `l` b = (a |> b)^/2
+
+in  stretch (1/4) $ song </> left </> down _P8 right      
+```
+-->
 
 
 # Design overview
@@ -1083,8 +1336,16 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 [</>]: /docs/api/Music-Score-Combinators.html#v:-60--47--62-
 [scat]: /docs/api/Music-Time-Juxtapose.html#v:scat
 [pcat]: /docs/api/Music-Time-Juxtapose.html#v:pcat
+[IsPitch]: /docs/api/Music-Pitch-Literal-Pitch.html#t:IsPitch
 [sharp]: /docs/api/Music-Pitch-Common-Accidental.html#v:sharp
 [flat]: /docs/api/Music-Pitch-Common-Accidental.html#v:flat
+[IsInterval]: /docs/api/Music-Pitch-Literal-Interval.html#t:IsInterval
+[sharpen]: /docs/api/Music-Pitch-Alterable.html#v:sharpen
+[flatten]: /docs/api/Music-Pitch-Alterable.html#v:flatten
+[augment]: /docs/api/Music-Pitch-Augmentable.html#v:augment
+[diminish]: /docs/api/Music-Pitch-Augmentable.html#v:diminish
+[.-.]: /docs/api/Music-Pitch.html#v:-46--45--46-
+[.+^]: /docs/api/Music-Pitch.html#v:-46--43--94-
 [legato]: /docs/api/Music-Score-Articulation.html#v:legato
 [staccato]: /docs/api/Music-Score-Articulation.html#v:staccato
 [portato]: /docs/api/Music-Score-Articulation.html#v:portato
@@ -1113,6 +1374,8 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 [Track]: /docs/api/Music-Score-Track.html#t:Track
 [Delayable]: /docs/api/Music-Time-Delayable.html#t:Delayable
 [Stretchable]: /docs/api/Music-Time-Stretchable.html#t:Stretchable
+[setClef]: /docs/api/Music-Score-Meta.html#v:setClef
+[setClefDuring]: /docs/api/Music-Score-Meta.html#v:setClefDuring
 
 <!-- Unknown: readMidi No such identifier: readMidi-->
 

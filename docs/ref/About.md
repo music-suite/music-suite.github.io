@@ -6,13 +6,18 @@
 > *Please note:* The API and docs are not particularly stable at the moment. An official release note will appear in due time.
 -->
 
-The Music Suite is a language for creating, processing or analyzing music. It is based on [Haskell][Haskell], the world's greatest functional programming language^[In fact it is a so-called embedded domain-specific language, see http://www.haskell.org/haskellwiki/Embedded_domain_specific_language].
+The Music Suite is a language based on [Haskell][Haskell] for creating, processing or analyzing music. It can be used on its own or as a Haskell library.
 
 The Music Suite is designed to:
 
-* Be usable with any kind of music. There are no stylistic or theoretical assumptions on how music should be described.
-* It should include standard notation as a *special case*. 
+* Describe what the music *is*, rather than how it is to be performed.
+* Avoid imposing stylistic or theoretical assumptions on the music.
+* Include common notation and theory as a *special case*.
+* Allow customization of the music representation.
 
+The Music Suite is both an *embedded* language and a Haskell library. Being embedded in Haskell has several advantages, it allow the developers to focus on the contents and the users to make use of any feature in the Haskell language.
+
+The Music Suite uses several advanced language constructs internally and requires a relatively new Haskell compiler (see [Installing the Suite](#installing-the-suite)).
 
 
 ### An example
@@ -56,9 +61,14 @@ The Music Suite works well with the following input and output formats:
 * ABC notation
 * MIDI
 
+### A note on the versioning
+
+The Music Suite consists of a group of packages released concurrently under a common [semantic version number](http://semver.org/). The library was deliberately released *prematurely* in order to encourage its creator to work on it more: we expect the first truly stable version to be *2.0*.
+
 ### More information
 
 For a complete reference, see the [reference documentation](/docs/api).
+
 
 <!--
 For an introduction, see [User Guide](User-Guide).
