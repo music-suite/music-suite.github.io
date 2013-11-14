@@ -8,9 +8,15 @@
   force-assignment = #""
   line-width = #(- line-width (* mm  3.000000))
 }
+\header {
+  title = ""
+  composer = ""
+}
 \layout {
 }
+
 <<
-    \new Staff { \set Staff.instrumentName = "" <cis'>1 }
-    \new Staff { \set Staff.instrumentName = "" <cisis'>1 }
+    \new Staff { \set Staff.instrumentName = "" \clef treble <cis'>1 }
+    \new Staff { \set Staff.instrumentName = "" \clef treble <cisis'>1
+               }
 >>

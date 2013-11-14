@@ -11,6 +11,6 @@
 \layout {
 }
 <<
-    \new Staff {   \set Staff.instrumentName = "" <d'>4( <g'>8 <fis'>8 <bes'>2) <d'>4( <g'>8 <fis'>8 <bes'>2)
+    \new Staff {   \set Staff.instrumentName = "" \clef treble <d'>4( <g'>8 <fis'>8 <bes'>2) <d'>4( <g'>8 <fis'>8 <bes'>2)
                }
 >>

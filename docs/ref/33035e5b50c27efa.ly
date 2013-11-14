@@ -8,13 +8,18 @@
   force-assignment = #""
   line-width = #(- line-width (* mm  3.000000))
 }
+\header {
+  title = ""
+  composer = ""
+}
 \layout {
 }
+
 <<
-    \new Staff {   \set Staff.instrumentName = "" \repeat tremolo 8
-                                                                  <c'>16 \repeat tremolo 8
-                                                                                         <d'>16 \repeat tremolo 8
-                                                                                                                <c'>16 \repeat tremolo 8
-                                                                                                                                       <d'>16
+    \new Staff {   \set Staff.instrumentName = "" \clef treble \repeat tremolo 8
+                                                                               <c'>16 \repeat tremolo 8
+                                                                                                      <d'>16 \repeat tremolo 8
+                                                                                                                             <c'>16 \repeat tremolo 8
+                                                                                                                                                    <d'>16
                }
 >>

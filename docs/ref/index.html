@@ -87,6 +87,9 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#tracks">Tracks</a></li>
 </ul></li>
 <li><a href="#meta-information">Meta-information</a><ul>
+<li><a href="#title">Title</a></li>
+<li><a href="#movement-title-and-number">Movement title and number</a></li>
+<li><a href="#attribution">Attribution</a></li>
 <li><a href="#clefs">Clefs</a></li>
 <li><a href="#time-signatures">Time signatures</a></li>
 <li><a href="#key-signatures">Key signatures</a></li>
@@ -105,9 +108,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#customizing-music-representation">Customizing music representation</a></li>
 <li><a href="#examples">Examples</a><ul>
 <li><a href="#counterpoint">Counterpoint</a></li>
-<li><a href="#generative-music">Generative music</a><ul>
-<li><a href="#duo">Duo</a></li>
-</ul></li>
+<li><a href="#generative-music">Generative music</a></li>
+<li><a href="#viola-duo">Viola duo</a></li>
 </ul></li>
 <li><a href="#design-overview">Design overview</a><ul>
 <li><a href="#compability-with-other-libraries">Compability with other libraries</a></li>
@@ -662,11 +664,11 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 
 
 <div class="figure">
-<img src="40e9ac5d562b8c56x.png" />
+<img src="339ae0c0fd3b9259x.png" />
 </div>
 <pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span>
-    melody <span class="fu">=</span> legato <span class="fu">$</span> scat [d, scat [g,fs]<span class="fu">^/</span><span class="dv">2</span>,bb<span class="fu">^*</span><span class="dv">2</span>]<span class="fu">^/</span><span class="dv">4</span>
-<span class="kw">in</span> melody <span class="fu">|&gt;</span> melody</code></pre>
+    melody <span class="fu">=</span> accent <span class="fu">$</span> legato <span class="fu">$</span> scat [d, scat [g,fs]<span class="fu">^/</span><span class="dv">2</span>,bb<span class="fu">^*</span><span class="dv">2</span>]<span class="fu">^/</span><span class="dv">4</span>
+<span class="kw">in</span> melody <span class="fu">|&gt;</span> rev melody</code></pre>
 </div>
 
 <p><a href="/docs/api/Music-Time-Juxtapose.html#v:times"><code>times</code></a></p>
@@ -755,7 +757,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <h2 id="extracting-and-modifying-parts"><a href="#extracting-and-modifying-parts">Extracting and modifying parts</a></h2>
 <h2 id="part-composition"><a href="#part-composition">Part composition</a></h2>
 <h1 id="time-based-structures"><a href="#time-based-structures">Time-based structures</a></h1>
-<p><a href="/docs/api/Music-Score-Score.html#t:Score"><code>Score</code></a> <a href="/docs/api/Music-Score-Voice.html#t:Voice"><code>Voice</code></a> <a href="/docs/api/Music-Score-Track.html#t:Track"><code>Track</code></a> <a href="/docs/api/Music-Time-Delayable.html#t:Delayable"><code>Delayable</code></a> <a href="/docs/api/Music-Time-Stretchable.html#t:Stretchable"><code>Stretchable</code></a></p>
+<p><a href="/docs/api/Music-Score-Export-Lilypond.html#t:Score"><code>Score</code></a> <a href="/docs/api/Music-Score-Voice.html#t:Voice"><code>Voice</code></a> <a href="/docs/api/Music-Score-Track.html#t:Track"><code>Track</code></a> <a href="/docs/api/Music-Time-Delayable.html#t:Delayable"><code>Delayable</code></a> <a href="/docs/api/Music-Time-Stretchable.html#t:Stretchable"><code>Stretchable</code></a></p>
 <h2 id="time-and-duration-1"><a href="#time-and-duration-1">Time and duration</a></h2>
 <p>TODO</p>
 <h2 id="spans"><a href="#spans">Spans</a></h2>
@@ -764,6 +766,27 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <p>TODO</p>
 <h2 id="voice"><a href="#voice">Voice</a></h2>
 <p>A <a href="/docs/api/Music-Score-Voice.html#t:Voice"><code>Voice</code></a> represents a single voice of music. It consists of a sequence of values with duration, but no time.</p>
+<div class='haskell-music'>
+
+
+
+<div class="figure">
+<img src="786d2383245b9c9dx.png" />
+</div>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">stretch (<span class="dv">1</span><span class="fu">/</span><span class="dv">4</span>) <span class="fu">$</span> scat [c<span class="fu">..</span>a]<span class="fu">^/</span><span class="dv">2</span> <span class="fu">|&gt;</span> b <span class="fu">|&gt;</span> c&#39;<span class="fu">^*</span><span class="dv">4</span></code></pre>
+</div>
+
+<div class='haskell-music'>
+
+
+
+<div class="figure">
+<img src="6391c8a4c4a26fdbx.png" />
+</div>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">stretch (<span class="dv">1</span><span class="fu">/</span><span class="dv">2</span>) <span class="fu">$</span> scat [c<span class="fu">..</span>e]<span class="fu">^/</span><span class="dv">3</span> <span class="fu">|&gt;</span> f <span class="fu">|&gt;</span> g<span class="fu">^*</span><span class="dv">2</span></code></pre>
+</div>
+
+
 <p>It can be converted into a score by stretching each element and composing in sequence.</p>
 <div class='haskell-music'>
 
@@ -795,19 +818,12 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 
 
 <div class="figure">
-<img src="27394e353aafbec4x.png" />
+<img src="202ddfede2859c40x.png" />
 </div>
 <pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span>
     x,<span class="ot"> y ::</span> <span class="dt">Track</span> <span class="dt">Note</span>
-
-    x <span class="fu">=</span> track [ (<span class="dv">0</span>, c), 
-                (<span class="dv">1</span>, d), 
-                (<span class="dv">2</span>, e) ]
-
-    y <span class="fu">=</span> join <span class="fu">$</span> track [ (<span class="dv">0</span>, x), 
-                       (<span class="dv">1</span><span class="fu">.</span><span class="dv">5</span>,  up _<span class="dt">P5</span> x), 
-                       (<span class="dv">3</span><span class="fu">.</span><span class="dv">25</span>, up _<span class="dt">P8</span> x) ]
-
+    x <span class="fu">=</span> track [ (<span class="dv">0</span>, c), (<span class="dv">1</span>, d), (<span class="dv">2</span>, e) ]
+    y <span class="fu">=</span> join <span class="fu">$</span> track [ (<span class="dv">0</span>, x), (<span class="dv">1</span><span class="fu">.</span><span class="dv">5</span>,  up _<span class="dt">P5</span> x), (<span class="dv">3</span><span class="fu">.</span><span class="dv">25</span>, up _<span class="dt">P8</span> x) ]
 <span class="kw">in</span> trackToScore (<span class="dv">1</span><span class="fu">/</span><span class="dv">8</span>) y</code></pre>
 </div>
 
@@ -818,6 +834,14 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <p>TODO while we only consider notes as non-meta etc</p>
 <p>TODO attributes (same as in Diagrams)</p>
 <p>Each attribute value may apply either to a <em>whole</em> score (i.e. from beginning to end), or to a <em>section</em> of the score.</p>
+<h2 id="title"><a href="#title">Title</a></h2>
+<p>TODO</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">title <span class="st">&quot;Frere Jaques&quot;</span> <span class="fu">$</span> scat [c,d,e,c]</code></pre>
+<h2 id="movement-title-and-number"><a href="#movement-title-and-number">Movement title and number</a></h2>
+<p>TODO</p>
+<h2 id="attribution"><a href="#attribution">Attribution</a></h2>
+<p>TODO</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">composer <span class="st">&quot;Anonymous&quot;</span> <span class="fu">$</span> scat [c,d,e,c]</code></pre>
 <h2 id="clefs"><a href="#clefs">Clefs</a></h2>
 <p>To set the clef for a whole passage, use <a href="/docs/api/Music-Score-Meta.html#v:setClef"><code>setClef</code></a>. The clef is used by most notation backends and ignored by audio backends.</p>
 <div class='haskell-music'>
@@ -845,12 +869,23 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <pre class="sourceCode haskell"><code class="sourceCode haskell">setClefDuring (<span class="dv">0</span><span class="fu">.</span><span class="dv">25</span> <span class="ot">&lt;-</span><span class="fu">&gt;</span> <span class="dv">0</span><span class="fu">.</span><span class="dv">5</span>) <span class="dt">CClef</span> <span class="fu">$</span> setClefDuring (<span class="dv">0</span><span class="fu">.</span><span class="dv">75</span> <span class="ot">&lt;-</span><span class="fu">&gt;</span> <span class="dv">1</span>) <span class="dt">FClef</span> <span class="fu">$</span> compress <span class="dv">8</span> <span class="fu">$</span> scat [c_<span class="fu">..</span>c&#39;]</code></pre>
 </div>
 
-
-
 <h2 id="time-signatures"><a href="#time-signatures">Time signatures</a></h2>
+<p>TODO</p>
 <h2 id="key-signatures"><a href="#key-signatures">Key signatures</a></h2>
+<div class='haskell-music'>
+
+
+
+<div class="figure">
+<img src="1bab6df801a2845dx.png" />
+</div>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">setKeySignature (key cs <span class="kw">True</span>) c <span class="fu">|&gt;</span> setKeySignature (key ab <span class="kw">False</span>) c</code></pre>
+</div>
+
 <h2 id="rehearsal-marks"><a href="#rehearsal-marks">Rehearsal marks</a></h2>
+<p>TODO</p>
 <h2 id="miscellaneous"><a href="#miscellaneous">Miscellaneous</a></h2>
+<p>TODO</p>
 <h1 id="import-and-export"><a href="#import-and-export">Import and export</a></h1>
 <p>The standard distribution (installed as part of <code>music-preludes</code>) of the Music Suite includes a variety of input and output formats. There are also some experimental formats, which are distributed in separate packages, these are marked as experimental below.</p>
 <p>The conventions for input or output formats is similar to the convention for properties (TODO ref above): for any type <code>a</code> and format <code>T a</code>, input formats are defined by a class or constraint <code>IsT</code>, and output by a format <code>HasT a</code>. For example, types that can be exported to Lilypond are defined by the constraint <code>HasLilypond a</code>, while types that can be imported from MIDI are defined by the constraint <code>IsMidi a</code>.</p>
@@ -1010,19 +1045,19 @@ This feature could of course also be used to convert Sibelius scores to other fo
 <span class="kw">in</span> (<span class="fu">take</span> <span class="dv">25</span> <span class="fu">$</span> row) <span class="ot">`repeated`</span> (\p <span class="ot">-&gt;</span> up (asPitch p <span class="fu">.-.</span> c) mel)</code></pre>
 </div>
 
-<h3 id="duo"><a href="#duo">Duo</a></h3>
+<h2 id="viola-duo"><a href="#viola-duo">Viola duo</a></h2>
 <div class='haskell-music'>
 
 
 
 <div class="figure">
-<img src="51f14d14cd881ca6x.png" />
+<img src="73802e9c0977a59x.png" />
 </div>
 <pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span>
     toLydian <span class="fu">=</span> modifyPitch (\p <span class="ot">-&gt;</span> <span class="kw">if</span> p <span class="fu">==</span> c <span class="kw">then</span> cs <span class="kw">else</span> p)
 
     subj1 <span class="fu">=</span> (<span class="fu">^/</span><span class="dv">2</span>) <span class="fu">$</span>
-        legato (b_ <span class="fu">|&gt;</span> c) <span class="fu">|&gt;</span> legato (c <span class="fu">|&gt;</span> b_<span class="fu">^*</span><span class="dv">2</span>)
+        (legato<span class="fu">.</span>accent) (b_ <span class="fu">|&gt;</span> c) <span class="fu">|&gt;</span> (legato<span class="fu">.</span>accent) (c <span class="fu">|&gt;</span> b_<span class="fu">^*</span><span class="dv">2</span>)
             <span class="fu">|&gt;</span> legato (scat [b_, c, d])
             <span class="fu">|&gt;</span> b_ <span class="fu">|&gt;</span> c <span class="fu">|&gt;</span> b_<span class="fu">^*</span><span class="dv">2</span>
         <span class="fu">|&gt;</span> legato (scat [e, d, b_, c]) <span class="fu">|&gt;</span> b_<span class="fu">^*</span><span class="dv">2</span>
@@ -1034,7 +1069,7 @@ This feature could of course also be used to convert Sibelius scores to other fo
     part1 <span class="fu">=</span> pres1 <span class="fu">|&gt;</span> pres2
     part2 <span class="fu">=</span> pres1 <span class="fu">|&gt;</span> pres2
 
-<span class="kw">in</span> dynamics pp <span class="fu">$</span> compress <span class="dv">2</span> <span class="fu">$</span> part1 <span class="fu">|&gt;</span> setClef <span class="dt">CClef</span> (toLydian part2)  </code></pre>
+<span class="kw">in</span> setClef <span class="dt">CClef</span> <span class="fu">$</span> dynamics pp <span class="fu">$</span> compress <span class="dv">2</span> <span class="fu">$</span> part1 <span class="fu">|&gt;</span> toLydian part2</code></pre>
 </div>
 
 <!--

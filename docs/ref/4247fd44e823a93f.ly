@@ -8,12 +8,17 @@
   force-assignment = #""
   line-width = #(- line-width (* mm  3.000000))
 }
+\header {
+  title = ""
+  composer = ""
+}
 \layout {
 }
+
 <<
     \new Staff {   \set Staff.instrumentName = "" \times 2/3
-                                                         { <c'>1 <d'>2~ } \times 2/3
-                                                                                 { <d'>2 <e'>1
-                                                                                 } <f'>1~ <f'>1
+                                                         { \clef treble <c'>1 <d'>2~ } \times 2/3
+                                                                                              {   <d'>2 <e'>1
+                                                                                              } <f'>1~ <f'>1
                }
 >>

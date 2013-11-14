@@ -730,12 +730,12 @@ removeRests $ times 4 (accent g^*2 |> rest |> scat [d,d]^/2)^/8
 
 
 
-![](40e9ac5d562b8c56x.png)
+![](339ae0c0fd3b9259x.png)
 
 ```haskell
 let
-    melody = legato $ scat [d, scat [g,fs]^/2,bb^*2]^/4
-in melody |> melody
+    melody = accent $ legato $ scat [d, scat [g,fs]^/2,bb^*2]^/4
+in melody |> rev melody
 
 ```
 
@@ -893,6 +893,33 @@ TODO
 
 A [`Voice`][Voice] represents a single voice of music. It consists of a sequence of values with duration, but no time. 
 
+<div class='haskell-music'>
+
+
+
+![](786d2383245b9c9dx.png)
+
+```haskell
+stretch (1/4) $ scat [c..a]^/2 |> b |> c'^*4
+
+```
+
+</div>
+
+<div class='haskell-music'>
+
+
+
+![](6391c8a4c4a26fdbx.png)
+
+```haskell
+stretch (1/2) $ scat [c..e]^/3 |> f |> g^*2
+
+```
+
+</div>
+
+
 It can be converted into a score by stretching each element and composing in sequence.
 
 <div class='haskell-music'>
@@ -930,20 +957,13 @@ It can be converted into a score by delaying each element and composing in paral
 
 
 
-![](27394e353aafbec4x.png)
+![](202ddfede2859c40x.png)
 
 ```haskell
 let
     x, y :: Track Note
-
-    x = track [ (0, c), 
-                (1, d), 
-                (2, e) ]
-
-    y = join $ track [ (0, x), 
-                       (1.5,  up _P5 x), 
-                       (3.25, up _P8 x) ]
-
+    x = track [ (0, c), (1, d), (2, e) ]
+    y = join $ track [ (0, x), (1.5,  up _P5 x), (3.25, up _P8 x) ]
 in trackToScore (1/8) y
 
 ```
@@ -963,6 +983,27 @@ TODO attributes (same as in Diagrams)
 
 Each attribute value may apply either to a *whole* score (i.e. from beginning to end), or to a *section* of the score.
 
+## Title
+
+TODO
+
+```haskell
+title "Frere Jaques" $ scat [c,d,e,c]
+
+```
+
+## Movement title and number
+
+TODO
+
+## Attribution
+
+TODO
+
+```haskell
+composer "Anonymous" $ scat [c,d,e,c]
+
+```
 
 ## Clefs
 
@@ -1000,15 +1041,32 @@ setClefDuring (0.25 <-> 0.5) CClef $ setClefDuring (0.75 <-> 1) FClef $ compres
 
 </div>
 
-
-
 ## Time signatures          
+
+TODO
 
 ## Key signatures
 
+<div class='haskell-music'>
+
+
+
+![](1bab6df801a2845dx.png)
+
+```haskell
+setKeySignature (key cs True) c |> setKeySignature (key ab False) c
+
+```
+
+</div>
+
 ## Rehearsal marks
 
+TODO
+
 ## Miscellaneous
+
+TODO
 
 # Import and export
 
@@ -1221,20 +1279,20 @@ in (take 25 $ row) `repeated` (\p -> up (asPitch p .-. c) mel)
 
 </div>
 
-### Duo
+## Viola duo
 
 <div class='haskell-music'>
 
 
 
-![](51f14d14cd881ca6x.png)
+![](73802e9c0977a59x.png)
 
 ```haskell
 let
     toLydian = modifyPitch (\p -> if p == c then cs else p)
 
     subj1 = (^/2) $
-        legato (b_ |> c) |> legato (c |> b_^*2)
+        (legato.accent) (b_ |> c) |> (legato.accent) (c |> b_^*2)
             |> legato (scat [b_, c, d])
             |> b_ |> c |> b_^*2
         |> legato (scat [e, d, b_, c]) |> b_^*2
@@ -1246,7 +1304,7 @@ let
     part1 = pres1 |> pres2
     part2 = pres1 |> pres2
 
-in dynamics pp $ compress 2 $ part1 |> setClef CClef (toLydian part2)  
+in setClef CClef $ dynamics pp $ compress 2 $ part1 |> toLydian part2
 
 ```
 
@@ -1369,7 +1427,7 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 [anticipate]: /docs/api/Music-Time-Juxtapose.html#v:anticipate
 [repeated]: /docs/api/Music-Time-Juxtapose.html#v:repeated
 [invertAround]: /docs/api/Music-Score-Pitch.html#v:invertAround
-[Score]: /docs/api/Music-Score-Score.html#t:Score
+[Score]: /docs/api/Music-Score-Export-Lilypond.html#t:Score
 [Voice]: /docs/api/Music-Score-Voice.html#t:Voice
 [Track]: /docs/api/Music-Score-Track.html#t:Track
 [Delayable]: /docs/api/Music-Time-Delayable.html#t:Delayable

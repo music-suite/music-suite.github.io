@@ -8,19 +8,24 @@
   force-assignment = #""
   line-width = #(- line-width (* mm  3.000000))
 }
+\header {
+  title = ""
+  composer = ""
+}
 \layout {
 }
+
 <<
-    \new Staff {   \set Staff.instrumentName = "" <c'>8( <d'>8 <e'>8 <f'>8 <g'>8)
+    \new Staff {   \set Staff.instrumentName = "" \clef treble <c'>8( <d'>8 <e'>8 <f'>8 <g'>8)
                }
-    \new Staff {   \set Staff.instrumentName = "" <c'>8-. <d'>8-. <e'>8-. <f'>8-. <g'>8-.
+    \new Staff {   \set Staff.instrumentName = "" \clef treble <c'>8-. <d'>8-. <e'>8-. <f'>8-. <g'>8-.
                }
-    \new Staff {   \set Staff.instrumentName = "" <c'>8(-. <d'>8-. <e'>8-. <f'>8-. <g'>8-.)
+    \new Staff {   \set Staff.instrumentName = "" \clef treble <c'>8(-. <d'>8-. <e'>8-. <f'>8-. <g'>8-.)
                }
-    \new Staff {   \set Staff.instrumentName = "" <c'>8-- <d'>8-- <e'>8-- <f'>8-- <g'>8--
+    \new Staff {   \set Staff.instrumentName = "" \clef treble <c'>8-- <d'>8-- <e'>8-- <f'>8-- <g'>8--
                }
-    \new Staff {   \set Staff.instrumentName = "" <c'>8-_ <d'>8-_ <e'>8-_ <f'>8-_ <g'>8-_
+    \new Staff {   \set Staff.instrumentName = "" \clef treble <c'>8-_ <d'>8-_ <e'>8-_ <f'>8-_ <g'>8-_
                }
-    \new Staff {   \set Staff.instrumentName = "" <c'>8-| <d'>8-| <e'>8-| <f'>8-| <g'>8-|
+    \new Staff {   \set Staff.instrumentName = "" \clef treble <c'>8-| <d'>8-| <e'>8-| <f'>8-| <g'>8-|
                }
 >>
