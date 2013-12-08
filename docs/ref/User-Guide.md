@@ -613,7 +613,16 @@ in (accent . legato) (p1 </> p2 </> p3)
 
 ## Parts
 
-TODO
+[`Division`][Division]
+
+[`Subpart`][Subpart]
+
+[`Part`][Part]
+
+[`Instrument`][Instrument]
+
+[`Solo`][Solo]
+
 
 ## Space
 
@@ -635,6 +644,8 @@ tremolo 2 $ times 2 $ (c |> d)^/2
 ```
 
 </div>
+
+TODO chord tremolo
 
 ## Slides and glissando
 
@@ -674,10 +685,15 @@ Use the [`harmonic`][harmonic] function:
 ```
 
 </div>
+
+TODO artificial harmonics
+
 [`artificial`][artificial]
 
 
 ## Text
+
+TODO
 
 [`text`][text]
 
@@ -693,9 +709,23 @@ text "pizz." $ c^/2
 ```
 
 </div>
+
 ## Chords
 
 TODO
+
+<div class='haskell-music'>
+
+
+
+![](758a40f40aac0f5bx.png)
+
+```haskell
+compress 4 $ scat [c,d,e,c] <> scat [e,f,g,e]
+
+```
+
+</div>
 
 ## Rests
 
@@ -835,11 +865,19 @@ in compress 4 $ melody </> pedal
 
 ## Pitches and intervals
 
+TODO
+
 ## Name and accidental
+
+TODO
 
 ## Spelling
 
+TODO
+
 ## Quality and number
+
+TODO
 
 
 ## Intonation
@@ -848,13 +886,23 @@ TODO
 
 ## Inspecting dissonant intervals
 
+TODO
+
 ## Semitones and enharmonic equivalence
+
+TODO
 
 ## Spelling
 
+TODO
+
 ## Scales
 
+TODO
+
 ## Chords
+
+TODO
 
 
 
@@ -867,27 +915,32 @@ TODO
 ## Part composition
 
 
-
 # Time-based structures
 
-[`Score`][Score]
-[`Voice`][Voice]
-[`Track`][Track]
 [`Delayable`][Delayable]
+
 [`Stretchable`][Stretchable]
+
+[`HasOnset`][HasOnset]
+
+[`HasOffset`][HasOffset]
+
+[`HasDuration`][HasDuration]
 
 
 ## Time and duration
 
-TODO
+[`Time`][Time]
+
+[`Duration`][Duration]
 
 ## Spans
 
-TODO
+[`Span`][Span]
 
 ## Notes
 
-TODO
+[`Note`][Note]
 
 ## Voice
 
@@ -970,6 +1023,11 @@ in trackToScore (1/8) y
 
 </div>
 
+## Scores
+
+[`Score`][Score]
+
+
 
 # Meta-information
 
@@ -987,10 +1045,18 @@ Each attribute value may apply either to a *whole* score (i.e. from beginning to
 
 TODO
 
+<div class='haskell-music'>
+
+
+
+![](3b7a5d1936343a84x.png)
+
 ```haskell
 title "Frere Jaques" $ scat [c,d,e,c]
 
 ```
+
+</div>
 
 ## Movement title and number
 
@@ -1000,42 +1066,66 @@ TODO
 
 TODO
 
+<div class='haskell-music'>
+
+
+
+![](7a6e97aaa81dd848x.png)
+
 ```haskell
 composer "Anonymous" $ scat [c,d,e,c]
 
 ```
 
-## Clefs
-
-To set the clef for a whole passage, use [`setClef`][setClef]. The clef is used by most notation backends and ignored by audio backends.
+</div>
 
 <div class='haskell-music'>
 
 
 
-![](15619c9b3f4e426bx.png)
+![](f327339c1ea4233x.png)
+
+```haskell
+composer "Rodgers" $ lyricist "Hammerstein" $ arranger "Bennet" $ scat [c,d,e,c]
+
+```
+
+</div>
+
+
+
+
+## Clefs
+
+To set the clef for a whole passage, use [`clef`][clef]. The clef is used by most notation backends and ignored by audio backends.
+
+<div class='haskell-music'>
+
+
+
+![](1380bb5639887bcfx.png)
 
 ```haskell
 let
-    part1 = setClef FClef $ staccato $ scat [c_,g_,c,g_]
-    part2 = setClef CClef $ staccato $ scat [ab_,eb,d,a]
-    part3 = setClef GClef $ staccato $ accentLast $ scat [g,fs,e,d]
+    part1 = clef FClef $ staccato $ scat [c_,g_,c,g_]
+    part2 = clef CClef $ staccato $ scat [ab_,eb,d,a]
+    part3 = clef GClef $ staccato $ accentLast $ scat [g,fs,e,d]
 in compress 8 $ part1 |> part2 |> part3
 
 ```
 
 </div>
 
-To set the clef for a preexisting passage in an existing score, use [`setClefDuring`][setClefDuring].
+To set the clef for a preexisting passage in an existing score, use [`clefDuring`][clefDuring].
 
 <div class='haskell-music'>
 
 
 
-![](2e371040c015a646x.png)
+![](25cfb506e740628ax.png)
 
 ```haskell
-setClefDuring (0.25 <-> 0.5) CClef $ setClefDuring (0.75 <-> 1) FClef $ compress 8 $ scat [c_..c']
+clefDuring (0.25 <-> 0.5) CClef $ clefDuring (0.75 <-> 1) FClef $ compress 8 $ scat [c_..c']
 
 ```
 
@@ -1043,36 +1133,103 @@ setClefDuring (0.25 <-> 0.5) CClef $ setClefDuring (0.75 <-> 1) FClef $ compres
 
 ## Time signatures          
 
-TODO
+[`time`][time]
+
+[`compoundTime`][compoundTime]
+
+[`timeSignature`][timeSignature]
+
+[`timeSignatureDuring`][timeSignatureDuring]
+
+[`withTimeSignature`][withTimeSignature]
 
 ## Key signatures
 
-<div class='haskell-music'>
+[`key`][key]
 
+[`keySignature`][keySignature]
 
+[`keySignatureDuring`][keySignatureDuring]
 
-![](1bab6df801a2845dx.png)
+[`withKeySignature`][withKeySignature]
 
-```haskell
-setKeySignature (key cs True) c |> setKeySignature (key ab False) c
+## Tempo
 
-```
+[`metronome`][metronome]
 
-</div>
+[`tempo`][tempo]
+
+[`tempoDuring`][tempoDuring]
+
+[`withTempo`][withTempo]
+
+[`renderTempo`][renderTempo]
+
+TODO Fermatas, acc, rit and tempo operators
 
 ## Rehearsal marks
 
 TODO
 
-## Miscellaneous
+[`rehearsalMark`][rehearsalMark]
+
+[`rehearsalMarkAt`][rehearsalMarkAt]
+
+[`withRehearsalMarks`][withRehearsalMarks]
+
+## Barlines and separators
 
 TODO
+
+
+## Annotations
+
+Annotations are simply textual values attached to a specific section of the score. In contrast to other types of meta-information annotations always apply to the whole score, not to a single part. To annotate a score use [`annotate`][annotate], to annotate a specific span, use [`annotateSpan`][annotateSpan].
+
+Annotations are invisible by default. To show annotations in the generated output, use
+[`showAnnotations`][showAnnotations].
+
+<div class='haskell-music'>
+
+
+
+![](5753dd6f3c2997e3x.png)
+
+```haskell
+showAnnotations $ annotate "First note" c |> d |> annotate "Last note" d
+
+```
+
+</div>
+
+## Custom meta-information
+
+Meta-information is not restricted to the types described above. In fact, the user can add meta-information of any type that satisfies the `IsAttribute` constraint, including user-defined types. Each type of meta-information is stored separately from other types, and is invisible to the user by default. You might think of each score as having one an infinite set of associated meta-scores, each containing both part-specific and global meta information.
+
+Meta-information is required to implement `Monoid`. The `mempty` value is used as a default value for the type, while the `mappend` function is used to combine the default value and all values added by the user.
+
+[`addMetaNote`][addMetaNote]
+
+[`addGlobalMetaNote`][addGlobalMetaNote]
+
+[`withMeta`][withMeta]
+
+[`withGlobalMeta`][withGlobalMeta]
+
+[`withMetaAtStart`][withMetaAtStart]
+
+[`withGlobalMetaAtStart`][withGlobalMetaAtStart]
+
+Typically, you want to use a monoid similar to `Maybe`, `First` or `Last`, but not one derived from the list type. The reason for this is that meta-scores compose, so that `getMeta (x <> y) = getMeta x <> getMeta y`.
+
+TODO unexpected results with filter and recompose, solve by using a good Monoid, see issue 103
+
 
 # Import and export
 
 The standard distribution (installed as part of `music-preludes`) of the Music Suite includes a variety of input and output formats. There are also some experimental formats, which are distributed in separate packages, these are marked as experimental below.
 
-The conventions for input or output formats is similar to the convention for properties (TODO ref above): for any type `a` and format `T a`, input formats are defined by a class or constraint `IsT`, and output by a format `HasT a`. For example, types that can be exported to Lilypond are defined by the constraint `HasLilypond a`, while types that can be imported from MIDI are defined by the constraint `IsMidi a`.
+The conventions for input or output formats is similar to the convention for properties (TODO ref above): for any type `a` and format `T a`, input formats are defined by an *is* constraint, and output format by a *has* constraint. For example, types that can be exported to Lilypond are defined by the constraint `HasLilypond a`, while types that can be imported from MIDI are defined by the constraint `IsMidi a`.
 
 ## MIDI
 
@@ -1285,7 +1442,7 @@ in (take 25 $ row) `repeated` (\p -> up (asPitch p .-. c) mel)
 
 
 
-![](73802e9c0977a59x.png)
+![](6d03cd27809e5097x.png)
 
 ```haskell
 let
@@ -1304,7 +1461,7 @@ let
     part1 = pres1 |> pres2
     part2 = pres1 |> pres2
 
-in setClef CClef $ dynamics pp $ compress 2 $ part1 |> toLydian part2
+in clef CClef $ dynamics pp $ compress 2 $ part1 |> toLydian part2
 
 ```
 
@@ -1395,8 +1552,8 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 [scat]: /docs/api/Music-Time-Juxtapose.html#v:scat
 [pcat]: /docs/api/Music-Time-Juxtapose.html#v:pcat
 [IsPitch]: /docs/api/Music-Pitch-Literal-Pitch.html#t:IsPitch
-[sharp]: /docs/api/Music-Pitch-Common-Accidental.html#v:sharp
-[flat]: /docs/api/Music-Pitch-Common-Accidental.html#v:flat
+[sharp]: /docs/api/Music-Pitch-Common-Pitch.html#v:sharp
+[flat]: /docs/api/Music-Pitch-Common-Pitch.html#v:flat
 [IsInterval]: /docs/api/Music-Pitch-Literal-Interval.html#t:IsInterval
 [sharpen]: /docs/api/Music-Pitch-Alterable.html#v:sharpen
 [flatten]: /docs/api/Music-Pitch-Alterable.html#v:flatten
@@ -1414,6 +1571,11 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 [marcato]: /docs/api/Music-Score-Articulation.html#v:marcato
 [accentLast]: /docs/api/Music-Score-Articulation.html#v:accentLast
 [accentAll]: /docs/api/Music-Score-Articulation.html#v:accentAll
+[Division]: /docs/api/Music-Parts.html#t:Division
+[Subpart]: /docs/api/Music-Parts.html#t:Subpart
+[Part]: /docs/api/Music-Score-Part.html#t:Part
+[Instrument]: /docs/api/Music-Parts.html#t:Instrument
+[Solo]: /docs/api/Music-Parts.html#t:Solo
 [tremolo]: /docs/api/Music-Score-Ornaments.html#v:tremolo
 [slide]: /docs/api/Music-Score-Ornaments.html#v:slide
 [glissando]: /docs/api/Music-Score-Ornaments.html#v:glissando
@@ -1427,13 +1589,52 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 [anticipate]: /docs/api/Music-Time-Juxtapose.html#v:anticipate
 [repeated]: /docs/api/Music-Time-Juxtapose.html#v:repeated
 [invertAround]: /docs/api/Music-Score-Pitch.html#v:invertAround
-[Score]: /docs/api/Music-Score-Export-Lilypond.html#t:Score
-[Voice]: /docs/api/Music-Score-Voice.html#t:Voice
-[Track]: /docs/api/Music-Score-Track.html#t:Track
 [Delayable]: /docs/api/Music-Time-Delayable.html#t:Delayable
 [Stretchable]: /docs/api/Music-Time-Stretchable.html#t:Stretchable
-[setClef]: /docs/api/Music-Score-Meta.html#v:setClef
-[setClefDuring]: /docs/api/Music-Score-Meta.html#v:setClefDuring
+[HasOnset]: /docs/api/Music-Time-Onset.html#t:HasOnset
+[HasOffset]: /docs/api/Music-Time-Onset.html#t:HasOffset
+[HasDuration]: /docs/api/Music-Time-Onset.html#t:HasDuration
+[Time]: /docs/api/Music-Time-Time.html#t:Time
+[Duration]: /docs/api/Music-Time-Time.html#t:Duration
+[Span]: /docs/api/Music-Time-Span.html#t:Span
+[Note]: /docs/api/Music-Score-Note.html#t:Note
+[Voice]: /docs/api/Music-Score-Voice.html#t:Voice
+[Track]: /docs/api/Music-Score-Track.html#t:Track
+[Score]: /docs/api/Music-Score-Export-Lilypond.html#t:Score
+[clef]: /docs/api/Music-Score-Meta-Clef.html#v:clef
+[clefDuring]: /docs/api/Music-Score-Meta-Clef.html#v:clefDuring
+[time]: /docs/api/Music-Score-Meta-Time.html#v:time
+[compoundTime]: /docs/api/Music-Score-Meta-Time.html#v:compoundTime
+[timeSignature]: /docs/api/Music-Score-Meta-Time.html#v:timeSignature
+[timeSignatureDuring]: /docs/api/Music-Score-Meta-Time.html#v:timeSignatureDuring
+[withTimeSignature]: /docs/api/Music-Score-Meta-Time.html#v:withTimeSignature
+[key]: /docs/api/Music-Score-Meta-Key.html#v:key
+[keySignature]: /docs/api/Music-Score-Meta-Key.html#v:keySignature
+[keySignatureDuring]: /docs/api/Music-Score-Meta-Key.html#v:keySignatureDuring
+[withKeySignature]: /docs/api/Music-Score-Meta-Key.html#v:withKeySignature
+[metronome]: /docs/api/Music-Score-Meta-Tempo.html#v:metronome
+[tempo]: /docs/api/Music-Score-Meta-Tempo.html#v:tempo
+[tempoDuring]: /docs/api/Music-Score-Meta-Tempo.html#v:tempoDuring
+[withTempo]: /docs/api/Music-Score-Meta-Tempo.html#v:withTempo
+[renderTempo]: /docs/api/Music-Score-Meta-Tempo.html#v:renderTempo
+
+<!-- Unknown: rehearsalMark No such identifier: rehearsalMark-->
+
+
+<!-- Unknown: rehearsalMarkAt No such identifier: rehearsalMarkAt-->
+
+
+<!-- Unknown: withRehearsalMarks No such identifier: withRehearsalMarks-->
+
+[annotate]: /docs/api/Music-Score-Annotations.html#v:annotate
+[annotateSpan]: /docs/api/Music-Score-Annotations.html#v:annotateSpan
+[showAnnotations]: /docs/api/Music-Score-Annotations.html#v:showAnnotations
+[addMetaNote]: /docs/api/Music-Score-Meta.html#v:addMetaNote
+[addGlobalMetaNote]: /docs/api/Music-Score-Meta.html#v:addGlobalMetaNote
+[withMeta]: /docs/api/Music-Score-Combinators.html#v:withMeta
+[withGlobalMeta]: /docs/api/Music-Score-Combinators.html#v:withGlobalMeta
+[withMetaAtStart]: /docs/api/Music-Score-Combinators.html#v:withMetaAtStart
+[withGlobalMetaAtStart]: /docs/api/Music-Score-Combinators.html#v:withGlobalMetaAtStart
 
 <!-- Unknown: readMidi No such identifier: readMidi-->
 

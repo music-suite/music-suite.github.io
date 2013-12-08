@@ -16,6 +16,6 @@
 }
 
 <<
-    \new Staff {   \set Staff.instrumentName = "" \clef treble <c'>1-\fff <d'>1-\ff <e'>1-\f <f'>1-\mf <g'>1-\mp <a'>1-\p <b'>1-\pp <c''>1-\ppp
+    \new Staff {   \set Staff.instrumentName = "" \set Staff.shortInstrumentName = "" \clef treble <c'>1-\fff <d'>1-\ff <e'>1-\f <f'>1-\mf <g'>1-\mp <a'>1-\p <b'>1-\pp <c''>1-\ppp
                }
 >>

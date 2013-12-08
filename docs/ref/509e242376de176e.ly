@@ -16,8 +16,8 @@
 }
 
 <<
-    \new Staff {   \set Staff.instrumentName = "" r1 r8 r2 \clef treble <g'>8 <a'>8 <b'>8 <c''>8. <d''>32 <c''>32 <b'>8 <e''>8 <a'>8 <d''>8. <e''>16 <d''>16 <c''>16 <b'>16 <c''>16 <b'>16 <a'>16 <g'>4
+    \new Staff {   \set Staff.instrumentName = "" \set Staff.shortInstrumentName = "" r1 r8 r2 \clef treble <g'>8 <a'>8 <b'>8 <c''>8. <d''>32 <c''>32 <b'>8 <e''>8 <a'>8 <d''>8. <e''>16 <d''>16 <c''>16 <b'>16 <c''>16 <b'>16 <a'>16 <g'>4
                }
-    \new Staff {   \set Staff.instrumentName = "" r8 \clef treble <c'>8 <d'>8 <e'>8 <f'>8. <g'>32 <f'>32 <e'>8 <a'>8 <d'>8 <g'>8. <a'>16 <g'>16 <f'>16 <e'>16 <f'>16 <e'>16 <d'>16 <c'>4
+    \new Staff {   \set Staff.instrumentName = "" \set Staff.shortInstrumentName = "" r8 \clef treble <c'>8 <d'>8 <e'>8 <f'>8. <g'>32 <f'>32 <e'>8 <a'>8 <d'>8 <g'>8. <a'>16 <g'>16 <f'>16 <e'>16 <f'>16 <e'>16 <d'>16 <c'>4
                }
 >>
