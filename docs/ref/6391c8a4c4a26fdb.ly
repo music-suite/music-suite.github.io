@@ -16,9 +16,10 @@
 }
 
 <<
-    \new Staff {   \set Staff.instrumentName = "" \set Staff.shortInstrumentName = "" \times 2/3
-                                                                                             {   \clef treble <c'>4 <d'>4 <e'>4
-                                                                                             } \times 2/3
-                                                                                                      <f'>2. <g'>1
+    \new Staff {   \set Staff.instrumentName = "" \set Staff.shortInstrumentName = "" \time 4/4 \clef treble {   \times 2/3
+                                                                                                                        {   c'4 d'4 e'4
+                                                                                                                        } \times 2/3
+                                                                                                                                 f'2.
+                                                                                                             } g'1
                }
 >>

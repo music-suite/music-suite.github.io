@@ -1,0 +1,5051 @@
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  31 JAN 2014 17:54
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**\documentclass[]{article}
+
+*\usepackage[T1]{fontenc}
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+*\usepackage{lmodern}
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+))
+*\usepackage{amssymb,amsmath}
+(/usr/local/texlive/2012/texmf-dist/tex/latex/lm/lmodern.sty
+Package: lmodern 2009/10/30 v1.6 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+)
+*\usepackage{ifxetex,ifluatex}
+(/usr/local/texlive/2012/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2009/06/22 v3.00
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
+\@emptytoks=\toks14
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
+))
+(/usr/local/texlive/2012/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2012/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks15
+\ex@=\dimen103
+))
+(/usr/local/texlive/2012/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen104
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count87
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count88
+\leftroot@=\count89
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count90
+\DOTSCASE@=\count91
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen105
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count92
+\c@MaxMatrixCols=\count93
+\dotsspace@=\muskip10
+\c@parentequation=\count94
+\dspbrk@lvl=\count95
+\tag@help=\toks16
+\row@=\count96
+\column@=\count97
+\maxfields@=\count98
+\andhelp@=\toks17
+\eqnshift@=\dimen106
+\alignsep@=\dimen107
+\tagshift@=\dimen108
+\tagwidth@=\dimen109
+\totwidth@=\dimen110
+\lineht@=\dimen111
+\@envbody=\toks18
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks19
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+*\usepackage{fixltx2e} % provides \textsubscript
+(/usr/local/texlive/2012/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+*% use upquote if available, for straight quotes in verbatim environments
+
+*\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/fixltx2e.sty
+Package: fixltx2e 2006/09/13 v1.1m fixes to LaTeX
+LaTeX Info: Redefining \em on input line 420.
+LaTeX Info: The control sequence `\[' is already robust on input line 471.
+LaTeX Info: The control sequence `\]' is already robust on input line 472.
+)
+*\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+(/usr/local/texlive/2012/texmf-dist/tex/latex/upquote/upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2005/09/27 v1.99g Standard LaTeX package
+Package textcomp Info: Sub-encoding information:
+(textcomp)               5 = only ISO-Adobe without \textcurrency
+(textcomp)               4 = 5 + \texteuro
+(textcomp)               3 = 4 + \textohm
+(textcomp)               2 = 3 + \textestimated + \textcurrency
+(textcomp)               1 = TS1 - \textcircled - \t
+(textcomp)               0 = TS1 (full)
+(textcomp)             Font families with sub-encoding setting implement
+(textcomp)             only a restricted character set as indicated.
+(textcomp)             Family '?' is the default used for unknown fonts.
+(textcomp)             See the documentation for details.
+Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 71.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+)
+LaTeX Info: Redefining \oldstylenums on input line 266.
+Package textcomp Info: Setting cmr sub-encoding to TS1/0 on input line 281.
+Package textcomp Info: Setting cmss sub-encoding to TS1/0 on input line 282.
+Package textcomp Info: Setting cmtt sub-encoding to TS1/0 on input line 283.
+Package textcomp Info: Setting cmvtt sub-encoding to TS1/0 on input line 284.
+Package textcomp Info: Setting cmbr sub-encoding to TS1/0 on input line 285.
+Package textcomp Info: Setting cmtl sub-encoding to TS1/0 on input line 286.
+Package textcomp Info: Setting ccr sub-encoding to TS1/0 on input line 287.
+Package textcomp Info: Setting ptm sub-encoding to TS1/4 on input line 288.
+Package textcomp Info: Setting pcr sub-encoding to TS1/4 on input line 289.
+Package textcomp Info: Setting phv sub-encoding to TS1/4 on input line 290.
+Package textcomp Info: Setting ppl sub-encoding to TS1/3 on input line 291.
+Package textcomp Info: Setting pag sub-encoding to TS1/4 on input line 292.
+Package textcomp Info: Setting pbk sub-encoding to TS1/4 on input line 293.
+Package textcomp Info: Setting pnc sub-encoding to TS1/4 on input line 294.
+Package textcomp Info: Setting pzc sub-encoding to TS1/4 on input line 295.
+Package textcomp Info: Setting bch sub-encoding to TS1/4 on input line 296.
+Package textcomp Info: Setting put sub-encoding to TS1/5 on input line 297.
+Package textcomp Info: Setting uag sub-encoding to TS1/5 on input line 298.
+Package textcomp Info: Setting ugq sub-encoding to TS1/5 on input line 299.
+Package textcomp Info: Setting ul8 sub-encoding to TS1/4 on input line 300.
+Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 301.
+Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 302.
+Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 303.
+Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 304.
+
+Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 305.
+Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 306.
+Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 307.
+Package textcomp Info: Setting txr sub-encoding to TS1/0 on input line 308.
+Package textcomp Info: Setting txss sub-encoding to TS1/0 on input line 309.
+Package textcomp Info: Setting txtt sub-encoding to TS1/0 on input line 310.
+Package textcomp Info: Setting lmr sub-encoding to TS1/0 on input line 311.
+Package textcomp Info: Setting lmdh sub-encoding to TS1/0 on input line 312.
+Package textcomp Info: Setting lmss sub-encoding to TS1/0 on input line 313.
+Package textcomp Info: Setting lmssq sub-encoding to TS1/0 on input line 314.
+Package textcomp Info: Setting lmvtt sub-encoding to TS1/0 on input line 315.
+Package textcomp Info: Setting qhv sub-encoding to TS1/0 on input line 316.
+Package textcomp Info: Setting qag sub-encoding to TS1/0 on input line 317.
+Package textcomp Info: Setting qbk sub-encoding to TS1/0 on input line 318.
+Package textcomp Info: Setting qcr sub-encoding to TS1/0 on input line 319.
+Package textcomp Info: Setting qcs sub-encoding to TS1/0 on input line 320.
+Package textcomp Info: Setting qpl sub-encoding to TS1/0 on input line 321.
+Package textcomp Info: Setting qtm sub-encoding to TS1/0 on input line 322.
+Package textcomp Info: Setting qzc sub-encoding to TS1/0 on input line 323.
+Package textcomp Info: Setting qhvc sub-encoding to TS1/0 on input line 324.
+Package textcomp Info: Setting futs sub-encoding to TS1/4 on input line 325.
+Package textcomp Info: Setting futx sub-encoding to TS1/4 on input line 326.
+Package textcomp Info: Setting futj sub-encoding to TS1/4 on input line 327.
+Package textcomp Info: Setting hlh sub-encoding to TS1/3 on input line 328.
+Package textcomp Info: Setting hls sub-encoding to TS1/3 on input line 329.
+Package textcomp Info: Setting hlst sub-encoding to TS1/3 on input line 330.
+Package textcomp Info: Setting hlct sub-encoding to TS1/5 on input line 331.
+Package textcomp Info: Setting hlx sub-encoding to TS1/5 on input line 332.
+Package textcomp Info: Setting hlce sub-encoding to TS1/5 on input line 333.
+Package textcomp Info: Setting hlcn sub-encoding to TS1/5 on input line 334.
+Package textcomp Info: Setting hlcw sub-encoding to TS1/5 on input line 335.
+Package textcomp Info: Setting hlcf sub-encoding to TS1/5 on input line 336.
+Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 337.
+Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 338.
+Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 339.
+Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 340.
+))
+*  \usepackage[utf8]{inputenc}
+
+*\else % if luatex or xelatex
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2008/03/30 v1.1d Input encoding file
+\inpenc@prehook=\toks20
+\inpenc@posthook=\toks21
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+Now handling font encoding OML ...
+... no UTF-8 mapping file for font encoding OML
+Now handling font encoding T1 ...
+... processing UTF-8 mapping file for font encoding T1
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/t1enc.dfu
+File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A1 (decimal 161)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00AB (decimal 171)
+   defining Unicode char U+00BB (decimal 187)
+   defining Unicode char U+00BF (decimal 191)
+   defining Unicode char U+00C0 (decimal 192)
+   defining Unicode char U+00C1 (decimal 193)
+   defining Unicode char U+00C2 (decimal 194)
+   defining Unicode char U+00C3 (decimal 195)
+   defining Unicode char U+00C4 (decimal 196)
+   defining Unicode char U+00C5 (decimal 197)
+   defining Unicode char U+00C6 (decimal 198)
+   defining Unicode char U+00C7 (decimal 199)
+   defining Unicode char U+00C8 (decimal 200)
+   defining Unicode char U+00C9 (decimal 201)
+   defining Unicode char U+00CA (decimal 202)
+   defining Unicode char U+00CB (decimal 203)
+   defining Unicode char U+00CC (decimal 204)
+   defining Unicode char U+00CD (decimal 205)
+   defining Unicode char U+00CE (decimal 206)
+   defining Unicode char U+00CF (decimal 207)
+   defining Unicode char U+00D0 (decimal 208)
+   defining Unicode char U+00D1 (decimal 209)
+   defining Unicode char U+00D2 (decimal 210)
+   defining Unicode char U+00D3 (decimal 211)
+   defining Unicode char U+00D4 (decimal 212)
+   defining Unicode char U+00D5 (decimal 213)
+   defining Unicode char U+00D6 (decimal 214)
+   defining Unicode char U+00D8 (decimal 216)
+   defining Unicode char U+00D9 (decimal 217)
+   defining Unicode char U+00DA (decimal 218)
+   defining Unicode char U+00DB (decimal 219)
+   defining Unicode char U+00DC (decimal 220)
+   defining Unicode char U+00DD (decimal 221)
+   defining Unicode char U+00DE (decimal 222)
+   defining Unicode char U+00DF (decimal 223)
+   defining Unicode char U+00E0 (decimal 224)
+   defining Unicode char U+00E1 (decimal 225)
+   defining Unicode char U+00E2 (decimal 226)
+   defining Unicode char U+00E3 (decimal 227)
+   defining Unicode char U+00E4 (decimal 228)
+   defining Unicode char U+00E5 (decimal 229)
+   defining Unicode char U+00E6 (decimal 230)
+   defining Unicode char U+00E7 (decimal 231)
+   defining Unicode char U+00E8 (decimal 232)
+   defining Unicode char U+00E9 (decimal 233)
+   defining Unicode char U+00EA (decimal 234)
+   defining Unicode char U+00EB (decimal 235)
+   defining Unicode char U+00EC (decimal 236)
+   defining Unicode char U+00ED (decimal 237)
+   defining Unicode char U+00EE (decimal 238)
+   defining Unicode char U+00EF (decimal 239)
+   defining Unicode char U+00F0 (decimal 240)
+   defining Unicode char U+00F1 (decimal 241)
+   defining Unicode char U+00F2 (decimal 242)
+   defining Unicode char U+00F3 (decimal 243)
+   defining Unicode char U+00F4 (decimal 244)
+   defining Unicode char U+00F5 (decimal 245)
+   defining Unicode char U+00F6 (decimal 246)
+   defining Unicode char U+00F8 (decimal 248)
+   defining Unicode char U+00F9 (decimal 249)
+   defining Unicode char U+00FA (decimal 250)
+   defining Unicode char U+00FB (decimal 251)
+   defining Unicode char U+00FC (decimal 252)
+   defining Unicode char U+00FD (decimal 253)
+   defining Unicode char U+00FE (decimal 254)
+   defining Unicode char U+00FF (decimal 255)
+   defining Unicode char U+0102 (decimal 258)
+   defining Unicode char U+0103 (decimal 259)
+   defining Unicode char U+0104 (decimal 260)
+   defining Unicode char U+0105 (decimal 261)
+   defining Unicode char U+0106 (decimal 262)
+   defining Unicode char U+0107 (decimal 263)
+   defining Unicode char U+010C (decimal 268)
+   defining Unicode char U+010D (decimal 269)
+   defining Unicode char U+010E (decimal 270)
+   defining Unicode char U+010F (decimal 271)
+   defining Unicode char U+0110 (decimal 272)
+   defining Unicode char U+0111 (decimal 273)
+   defining Unicode char U+0118 (decimal 280)
+   defining Unicode char U+0119 (decimal 281)
+   defining Unicode char U+011A (decimal 282)
+   defining Unicode char U+011B (decimal 283)
+   defining Unicode char U+011E (decimal 286)
+   defining Unicode char U+011F (decimal 287)
+   defining Unicode char U+0130 (decimal 304)
+   defining Unicode char U+0131 (decimal 305)
+   defining Unicode char U+0132 (decimal 306)
+   defining Unicode char U+0133 (decimal 307)
+   defining Unicode char U+0139 (decimal 313)
+   defining Unicode char U+013A (decimal 314)
+   defining Unicode char U+013D (decimal 317)
+   defining Unicode char U+013E (decimal 318)
+   defining Unicode char U+0141 (decimal 321)
+   defining Unicode char U+0142 (decimal 322)
+   defining Unicode char U+0143 (decimal 323)
+   defining Unicode char U+0144 (decimal 324)
+   defining Unicode char U+0147 (decimal 327)
+   defining Unicode char U+0148 (decimal 328)
+   defining Unicode char U+014A (decimal 330)
+   defining Unicode char U+014B (decimal 331)
+   defining Unicode char U+0150 (decimal 336)
+   defining Unicode char U+0151 (decimal 337)
+   defining Unicode char U+0152 (decimal 338)
+   defining Unicode char U+0153 (decimal 339)
+   defining Unicode char U+0154 (decimal 340)
+   defining Unicode char U+0155 (decimal 341)
+   defining Unicode char U+0158 (decimal 344)
+   defining Unicode char U+0159 (decimal 345)
+   defining Unicode char U+015A (decimal 346)
+   defining Unicode char U+015B (decimal 347)
+   defining Unicode char U+015E (decimal 350)
+   defining Unicode char U+015F (decimal 351)
+   defining Unicode char U+0160 (decimal 352)
+   defining Unicode char U+0161 (decimal 353)
+   defining Unicode char U+0162 (decimal 354)
+   defining Unicode char U+0163 (decimal 355)
+   defining Unicode char U+0164 (decimal 356)
+   defining Unicode char U+0165 (decimal 357)
+   defining Unicode char U+016E (decimal 366)
+   defining Unicode char U+016F (decimal 367)
+   defining Unicode char U+0170 (decimal 368)
+   defining Unicode char U+0171 (decimal 369)
+   defining Unicode char U+0178 (decimal 376)
+   defining Unicode char U+0179 (decimal 377)
+   defining Unicode char U+017A (decimal 378)
+   defining Unicode char U+017B (decimal 379)
+   defining Unicode char U+017C (decimal 380)
+   defining Unicode char U+017D (decimal 381)
+   defining Unicode char U+017E (decimal 382)
+   defining Unicode char U+200C (decimal 8204)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2018 (decimal 8216)
+   defining Unicode char U+2019 (decimal 8217)
+   defining Unicode char U+201A (decimal 8218)
+   defining Unicode char U+201C (decimal 8220)
+   defining Unicode char U+201D (decimal 8221)
+   defining Unicode char U+201E (decimal 8222)
+   defining Unicode char U+2030 (decimal 8240)
+   defining Unicode char U+2031 (decimal 8241)
+   defining Unicode char U+2039 (decimal 8249)
+   defining Unicode char U+203A (decimal 8250)
+   defining Unicode char U+2423 (decimal 9251)
+)
+Now handling font encoding OT1 ...
+... processing UTF-8 mapping file for font encoding OT1
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/ot1enc.dfu
+File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A1 (decimal 161)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00B8 (decimal 184)
+   defining Unicode char U+00BF (decimal 191)
+   defining Unicode char U+00C5 (decimal 197)
+   defining Unicode char U+00C6 (decimal 198)
+   defining Unicode char U+00D8 (decimal 216)
+   defining Unicode char U+00DF (decimal 223)
+   defining Unicode char U+00E6 (decimal 230)
+   defining Unicode char U+00EC (decimal 236)
+   defining Unicode char U+00ED (decimal 237)
+   defining Unicode char U+00EE (decimal 238)
+   defining Unicode char U+00EF (decimal 239)
+   defining Unicode char U+00F8 (decimal 248)
+   defining Unicode char U+0131 (decimal 305)
+   defining Unicode char U+0141 (decimal 321)
+   defining Unicode char U+0142 (decimal 322)
+   defining Unicode char U+0152 (decimal 338)
+   defining Unicode char U+0153 (decimal 339)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2018 (decimal 8216)
+   defining Unicode char U+2019 (decimal 8217)
+   defining Unicode char U+201C (decimal 8220)
+   defining Unicode char U+201D (decimal 8221)
+)
+Now handling font encoding OMS ...
+... processing UTF-8 mapping file for font encoding OMS
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/omsenc.dfu
+File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A7 (decimal 167)
+   defining Unicode char U+00B6 (decimal 182)
+   defining Unicode char U+00B7 (decimal 183)
+   defining Unicode char U+2020 (decimal 8224)
+   defining Unicode char U+2021 (decimal 8225)
+   defining Unicode char U+2022 (decimal 8226)
+)
+Now handling font encoding OMX ...
+... no UTF-8 mapping file for font encoding OMX
+Now handling font encoding U ...
+... no UTF-8 mapping file for font encoding U
+Now handling font encoding TS1 ...
+... processing UTF-8 mapping file for font encoding TS1
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/ts1enc.dfu
+File: ts1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A2 (decimal 162)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00A4 (decimal 164)
+   defining Unicode char U+00A5 (decimal 165)
+   defining Unicode char U+00A6 (decimal 166)
+   defining Unicode char U+00A7 (decimal 167)
+   defining Unicode char U+00A8 (decimal 168)
+   defining Unicode char U+00A9 (decimal 169)
+   defining Unicode char U+00AA (decimal 170)
+   defining Unicode char U+00AC (decimal 172)
+   defining Unicode char U+00AE (decimal 174)
+   defining Unicode char U+00AF (decimal 175)
+   defining Unicode char U+00B0 (decimal 176)
+   defining Unicode char U+00B1 (decimal 177)
+   defining Unicode char U+00B2 (decimal 178)
+   defining Unicode char U+00B3 (decimal 179)
+   defining Unicode char U+00B4 (decimal 180)
+   defining Unicode char U+00B5 (decimal 181)
+   defining Unicode char U+00B6 (decimal 182)
+   defining Unicode char U+00B7 (decimal 183)
+   defining Unicode char U+00B9 (decimal 185)
+   defining Unicode char U+00BA (decimal 186)
+   defining Unicode char U+00BC (decimal 188)
+   defining Unicode char U+00BD (decimal 189)
+   defining Unicode char U+00BE (decimal 190)
+   defining Unicode char U+00D7 (decimal 215)
+   defining Unicode char U+00F7 (decimal 247)
+   defining Unicode char U+0192 (decimal 402)
+   defining Unicode char U+02C7 (decimal 711)
+   defining Unicode char U+02D8 (decimal 728)
+   defining Unicode char U+02DD (decimal 733)
+   defining Unicode char U+0E3F (decimal 3647)
+   defining Unicode char U+2016 (decimal 8214)
+   defining Unicode char U+2020 (decimal 8224)
+   defining Unicode char U+2021 (decimal 8225)
+   defining Unicode char U+2022 (decimal 8226)
+   defining Unicode char U+2030 (decimal 8240)
+   defining Unicode char U+2031 (decimal 8241)
+   defining Unicode char U+203B (decimal 8251)
+   defining Unicode char U+203D (decimal 8253)
+   defining Unicode char U+2044 (decimal 8260)
+   defining Unicode char U+204E (decimal 8270)
+   defining Unicode char U+2052 (decimal 8274)
+   defining Unicode char U+20A1 (decimal 8353)
+   defining Unicode char U+20A4 (decimal 8356)
+   defining Unicode char U+20A6 (decimal 8358)
+   defining Unicode char U+20A9 (decimal 8361)
+   defining Unicode char U+20AB (decimal 8363)
+   defining Unicode char U+20AC (decimal 8364)
+   defining Unicode char U+20B1 (decimal 8369)
+   defining Unicode char U+2103 (decimal 8451)
+   defining Unicode char U+2116 (decimal 8470)
+   defining Unicode char U+2117 (decimal 8471)
+   defining Unicode char U+211E (decimal 8478)
+   defining Unicode char U+2120 (decimal 8480)
+   defining Unicode char U+2122 (decimal 8482)
+   defining Unicode char U+2126 (decimal 8486)
+   defining Unicode char U+2127 (decimal 8487)
+   defining Unicode char U+212E (decimal 8494)
+   defining Unicode char U+2190 (decimal 8592)
+   defining Unicode char U+2191 (decimal 8593)
+   defining Unicode char U+2192 (decimal 8594)
+   defining Unicode char U+2193 (decimal 8595)
+   defining Unicode char U+2329 (decimal 9001)
+   defining Unicode char U+232A (decimal 9002)
+   defining Unicode char U+2422 (decimal 9250)
+   defining Unicode char U+25E6 (decimal 9702)
+   defining Unicode char U+25EF (decimal 9711)
+   defining Unicode char U+266A (decimal 9834)
+)
+   defining Unicode char U+00A9 (decimal 169)
+   defining Unicode char U+00AA (decimal 170)
+   defining Unicode char U+00AE (decimal 174)
+   defining Unicode char U+00BA (decimal 186)
+   defining Unicode char U+02C6 (decimal 710)
+   defining Unicode char U+02DC (decimal 732)
+   defining Unicode char U+200C (decimal 8204)
+   defining Unicode char U+2026 (decimal 8230)
+   defining Unicode char U+2122 (decimal 8482)
+   defining Unicode char U+2423 (decimal 9251)
+))
+*  \usepackage{fontspec}
+
+*  \ifxetex
+
+*    \usepackage{xltxtra,xunicode}
+
+*  \fi
+
+*  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+
+*  \newcommand{\euro}{€}
+
+*\fi
+
+*% use microtype if available
+
+*\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+
+*\usepackage{color}
+(/usr/local/texlive/2012/texmf-dist/tex/latex/microtype/microtype.sty
+Package: microtype 2010/01/10 v2.4 Micro-typography with pdfTeX (RS)
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks22
+)
+\MT@toks=\toks23
+\MT@count=\count99
+LaTeX Info: Redefining \lsstyle on input line 1597.
+LaTeX Info: Redefining \lslig on input line 1597.
+\MT@outer@space=\skip46
+LaTeX Info: Redefining \textls on input line 1605.
+\MT@outer@kern=\dimen112
+LaTeX Info: Redefining \textmicrotypecontext on input line 2156.
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/microtype/microtype.cfg
+File: microtype.cfg 2010/01/10 v2.4 microtype main configuration file (RS)
+))
+*\usepackage{fancyvrb}
+(/usr/local/texlive/2012/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count100
+))
+*\newcommand{\VerbBar}{|}
+(/usr/local/texlive/2012/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2008/02/07
+
+Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
+<2008/02/07> (tvz)
+\FV@CodeLineNo=\count101
+\FV@InFile=\read1
+\FV@TabBox=\box28
+\c@FancyVerbLine=\count102
+\FV@StepNumber=\count103
+\FV@OutFile=\write3
+)
+*\DefineShortVerb[commandchars=\\\{\}]{\|}
+
+*\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+
+*% Add ',fontsize=\small' for more characters per line
+
+*\newenvironment{Shaded}{}{}
+
+*\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+
+*\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+
+*\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+
+*\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+
+*\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+
+*\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+
+*\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+
+*\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+
+*\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+
+*\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+
+*\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+
+*\newcommand{\RegionMarkerTok}[1]{{#1}}
+
+*\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+
+*\newcommand{\NormalTok}[1]{{#1}}
+
+*\usepackage{graphicx}
+
+*% We will generate all images so they have a width \maxwidth. This means
+
+*% that they will get their normal width if they fit onto the page, but
+
+*% are scaled down if they would overflow the margins.
+
+*\makeatletter
+(/usr/local/texlive/2012/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+)
+\Gin@req@height=\dimen113
+\Gin@req@width=\dimen114
+)
+*\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+
+*\else\Gin@nat@width\fi}
+
+*\makeatother
+
+*\let\Oldincludegraphics\includegraphics
+
+*\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth]{#1}}
+
+*\ifxetex
+
+*  \usepackage[setpagesize=false, % page size defined by xetex
+
+*              unicode=false, % unicode breaks when used with xetex
+
+*              xetex]{hyperref}
+
+*\else
+
+*  \usepackage[unicode=true]{hyperref}
+
+*\fi
+(/usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2012/05/13 v6.82q Hypertext links for LaTeX
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+Package: hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
+
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+Package: hobsub-generic 2012/05/28 v1.13 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2012/05/28 v1.13 Construct package bundles (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
+Package hobsub Info: Skipping package `ifluatex' (already loaded).
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+Package: intcalc 2007/09/27 v1.1 Expandable calculations with integers (HO)
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
+)
+Package: bitset 2011/01/30 v1.1 Handle bit-vector datatype (HO)
+Package: uniquecounter 2011/01/30 v1.2 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+Package: hopatch 2012/05/28 v1.2 Wrapper for package hooks (HO)
+Package: xcolor-patch 2011/01/30 xcolor patch
+Package: atveryend 2011/06/30 v1.8 Hooks at the very end of document (HO)
+Package atveryend Info: \enddocument detected (standard20110627).
+Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
+Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+)
+\@linkdim=\dimen115
+\Hy@linkcounter=\count104
+\Hy@pagecounter=\count105
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2012/05/13 v6.82q Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+\Hy@SavedSpaceFactor=\count106
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Option `unicode' set `true' on input line 3941.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2012/05/13 v6.82q Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4062.
+Package hyperref Info: Link nesting OFF on input line 4067.
+Package hyperref Info: Hyper index ON on input line 4070.
+Package hyperref Info: Plain pages OFF on input line 4077.
+Package hyperref Info: Backreferencing OFF on input line 4082.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4300.
+\c@Hy@tempcnt=\count107
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip11
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4653.
+\Fld@menulength=\count108
+\Field@Width=\dimen116
+\Fld@charsize=\dimen117
+Package hyperref Info: Hyper figures OFF on input line 5773.
+Package hyperref Info: Link nesting OFF on input line 5778.
+Package hyperref Info: Hyper index ON on input line 5781.
+Package hyperref Info: backreferencing OFF on input line 5788.
+Package hyperref Info: Link coloring OFF on input line 5793.
+Package hyperref Info: Link coloring with OCG OFF on input line 5798.
+Package hyperref Info: PDF/A mode OFF on input line 5803.
+LaTeX Info: Redefining \ref on input line 5843.
+LaTeX Info: Redefining \pageref on input line 5847.
+\Hy@abspage=\count109
+\c@Item=\count110
+\c@Hfootnote=\count111
+)
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2012/05/13 v6.82q Hyperref driver for pdfTeX
+\Fld@listcount=\count112
+\c@bookmark@seq@number=\count113
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip47
+)
+*\hypersetup{breaklinks=true,
+
+*            bookmarks=true,
+
+*            pdfauthor={},
+
+*            pdftitle={},
+
+*            colorlinks=true,
+
+*            urlcolor=blue,
+
+*            linkcolor=magenta,
+
+*            pdfborder={0 0 0}}
+Package hyperref Info: Option `breaklinks' set `true' on input line 0.
+
+Package hyperref Warning: Option `bookmarks' has already been used,
+(hyperref)                setting the option has no effect on input line 0.
+
+Package hyperref Info: Option `colorlinks' set `true' on input line 0.
+
+*\urlstyle{same}  % don't use monospace font for urls
+
+*\setlength{\parindent}{0pt}
+
+*\setlength{\parskip}{6pt plus 2pt minus 1pt}
+
+*\setlength{\emergencystretch}{3em}  % prevent overfull lines
+
+*\setcounter{secnumdepth}{0}
+
+*
+(Please type a command or say `\end')
+*\author{}
+
+*\date{}
+
+*
+(Please type a command or say `\end')
+*\begin{document}
+No file texput.aux.
+\openout1 = `texput.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 0.
+LaTeX Font Info:    ... okay on input line 0.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 0.
+LaTeX Font Info:    ... okay on input line 0.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 0.
+LaTeX Font Info:    ... okay on input line 0.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 0.
+LaTeX Font Info:    ... okay on input line 0.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 0.
+LaTeX Font Info:    ... okay on input line 0.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 0.
+LaTeX Font Info:    ... okay on input line 0.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 0.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 0.
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 0.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 0.
+LaTeX Font Info:    ... okay on input line 0.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 0.
+LaTeX Font Info:    ... okay on input line 0.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 0.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/lm/t1lmr.fd
+File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Info: Redefining \microtypecontext on input line 0.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `basictext'.
+Package microtype Info: No tracking.
+Package microtype Info: No adjustment of interword spacing.
+Package microtype Info: No adjustment of character kerning.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+File: mt-cmr.cfg 2009/11/09 v2.0 microtype config. file: Computer Modern Roman 
+(RS)
+)
+(/usr/local/texlive/2012/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count114
+\scratchdimen=\dimen118
+\scratchbox=\box29
+\nofMPsegments=\count115
+\nofMParguments=\count116
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count117
+\MPscratchDim=\dimen119
+\MPnumerator=\count118
+\makeMPintoPDFobject=\count119
+\everyMPtoPDFconversion=\toks25
+) (/usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\AtBeginShipoutBox=\box30
+Package hyperref Info: Link coloring ON on input line 0.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+)
+\c@section@level=\count120
+)
+LaTeX Info: Redefining \ref on input line 0.
+LaTeX Info: Redefining \pageref on input line 0.
+LaTeX Info: Redefining \nameref on input line 0.
+\@outlinefile=\write4
+\openout4 = `texput.out'.
+
+
+*
+(Please type a command or say `\end')
+*{
+
+*\hypersetup{linkcolor=black}
+
+*\setcounter{tocdepth}{3}
+
+*\tableofcontents
+\tf@toc=\write5
+\openout5 = `texput.toc'.
+
+
+*}
+
+*\subsection{The Music Suite}
+
+*
+(Please type a command or say `\end')
+*The Music Suite is a system for creating, processing or analyzing music.
+
+*It is based on the \href{http://haskell.org}{Haskell} language. It is
+
+*designed with three goals in mind:
+
+*
+(Please type a command or say `\end')
+*\begin{itemize}
+
+*\itemsep1pt\parskip0pt\parsep0pt
+
+*\item
+
+*  Describe what the music \emph{is}, rather than how it is to be
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 0.
+(/usr/local/texlive/2012/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+*  performed.
+
+*\item
+
+*  Avoid imposing stylistic or theoretical assumptions on the music.
+
+*\item
+
+*  Include common notation and theory as a \emph{special case}.
+
+*\end{itemize}
+
+*
+(Please type a command or say `\end')
+*The Music Suite is both a language in its own right and a Haskell
+
+*library. Being embedded in Haskell has several advantages, it allow the
+
+*developers to focus on the contents and the users to make use of any
+
+*feature in the Haskell language.
+
+*
+(Please type a command or say `\end')
+*The Music Suite uses several advanced language constructs internally and
+
+*requires a relatively new Haskell compiler (see
+
+*\hyperref[installing-the-suite]{Installing the Suite}).
+
+LaTeX Warning: Hyper reference `installing-the-suite' on page 1 undefined on in
+put line 0.
+
+
+*
+(Please type a command or say `\end')
+*\subsubsection{An example}
+
+*
+(Please type a command or say `\end')
+*To generate music we write an \emph{expressions} such as this one:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{4ea6815a58473e70.pdf}
+<4ea6815a58473e70.pdf, id=5, 183.68625pt x 43.16125pt>
+File: 4ea6815a58473e70.pdf Graphic file (type pdf)
+
+<use 4ea6815a58473e70.pdf>
+Package pdftex.def Info: 4ea6815a58473e70.pdf used on input line 0.
+(pdftex.def)             Requested size: 183.68578pt x 43.16376pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 0.
+(/usr/local/texlive/2012/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+*\KeywordTok{let}
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 0.
+
+*    \NormalTok{m }\FunctionTok{=} \NormalTok{staccato (scat [c,d,e,c]}\Functio
+nTok{^/}\DecValTok{2}\NormalTok{) }\FunctionTok{|>} \NormalTok{ab }\FunctionTok
+{|>} \NormalTok{b_ }\FunctionTok{|>} \NormalTok{legato (d }\FunctionTok{|>} \No
+rmalTok{c)}\FunctionTok{^*}\DecValTok{2}
+
+*\KeywordTok{in} \NormalTok{stretch (}\DecValTok{1}\FunctionTok{/}\DecValTok{8}
+\NormalTok{) m}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*To transform music, we write a \emph{function}. For example the
+
+*following function halves all durations and transposes all pitches up a
+
+*minor sixth:
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{up (minor sixth) }\FunctionTok{.} \NormalTok{compress }\DecValTok{2
+}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*Applied to the above music we get:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{1dfd7766e2c33bbe.pdf}
+<1dfd7766e2c33bbe.pdf, id=6, 184.69pt x 46.1725pt>
+File: 1dfd7766e2c33bbe.pdf Graphic file (type pdf)
+ <use 1dfd7766e2c33bbe.pdf>
+Package pdftex.def Info: 1dfd7766e2c33bbe.pdf used on input line 0.
+(pdftex.def)             Requested size: 184.68953pt x 46.17236pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\subsubsection{Input and output}
+
+*
+(Please type a command or say `\end')
+*The Music Suite works well with the following input and output formats.
+
+*
+(Please type a command or say `\end')
+*\begin{itemize}
+
+*\itemsep1pt\parskip0pt\parsep0pt
+
+*\item
+
+*  MusicXML
+[1
+
+{/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./4ea68
+15a58473e70.pdf> <./1dfd7766e2c33bbe.pdf>]
+*\item
+
+*  Lilypond
+
+*\item
+
+*  ABC notation
+
+*\item
+
+*  MIDI
+
+*\end{itemize}
+
+*
+(Please type a command or say `\end')
+*Other formats are being added in the near future, see
+
+*\hyperref[import-and-export]{Import and export} for a more detailed
+
+LaTeX Warning: Hyper reference `import-and-export' on page 2 undefined on input
+ line 0.
+
+
+*overview.
+
+*
+(Please type a command or say `\end')
+*\subsubsection{A note on the versioning}
+
+*
+(Please type a command or say `\end')
+*The Music Suite consists of a group of packages released concurrently
+
+*under a common \href{http://optver.hanshoglund.org/}{optimistic version
+
+*number}. The library was deliberately released \emph{prematurely} in
+
+*order to encourage its developers to work on it more.
+
+*
+(Please type a command or say `\end')
+*\subsubsection{More information}
+
+*
+(Please type a command or say `\end')
+*For a complete reference, see the \href{/docs/api}{reference
+
+*documentation}.
+
+*
+(Please type a command or say `\end')
+*\section{Getting Started}
+
+*
+(Please type a command or say `\end')
+*\hyperdef{}{installing-the-suite}{\subsection{Installing the
+
+*Suite}\label{installing-the-suite}}
+
+*
+(Please type a command or say `\end')
+*The Music Suite depends on the
+
+*\href{http://www.haskell.org/platform/}{Haskell platform}.
+
+*
+(Please type a command or say `\end')
+*While not strictly required, \href{http://lilypond.org/}{Lilypond} is
+
+*highly recommended as it allow you to preview musical scores. See
+
+*\hyperref[import-and-export]{Import and Export} for other formats.
+
+LaTeX Warning: Hyper reference `import-and-export' on page 2 undefined on input
+ line 0.
+
+
+*
+(Please type a command or say `\end')
+*To install the suite, simply install the Haskell platform, and then run:
+
+*
+(Please type a command or say `\end')
+*\begin{verbatim}
+
+*cabal install music-preludes
+
+*\end{verbatim}
+
+*
+(Please type a command or say `\end')
+*\subsection{Writing music}
+
+*
+(Please type a command or say `\end')
+*This chapter will cover how to use the Music Suite to generate music.
+
+*Later on we will cover how to \emph{import} and \emph{transform} music.
+
+*
+(Please type a command or say `\end')
+*One of the main points of the Music Suite is to avoid committing to a
+
+*\emph{single}, closed music representation. Instead it provides a set of
+
+*types and type constructors that can be used to construct an arbitrary
+
+*representation of music.
+
+*
+(Please type a command or say `\end')
+*Usually you will not want to invent a new representation from scratch,
+
+*but rather start with a standard representation and customize it when
+
+*needed. The default representation is defined in the
+
+*\texttt{Music.Prelude.Basic} module, which is implicitly imported in all
+
+*the examples below. See
+
+*\hyperref[customizing-music-representation]{Customizing the Music
+
+*Representation} for other examples.
+
+LaTeX Warning: Hyper reference `customizing-music-representation' on page 2 und
+efined on input line 0.
+
+
+*
+[2]
+(Please type a command or say `\end')
+*\subsubsection{With music files}
+
+*
+(Please type a command or say `\end')
+*A piece of music is described by a \emph{expressions} such as this one:
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{c }\FunctionTok{|>} \NormalTok{d }\FunctionTok{|>} \NormalTok{e}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*The simplest way to render this expression is to save it in a file named
+
+*\texttt{foo.music} (or similar) and convert it using
+
+*\texttt{music2pdf foo.music}. This should render a file called
+
+*\texttt{foo.pdf} containing the following:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{e812b3370beb65f.pdf}
+<e812b3370beb65f.pdf, id=49, 156.585pt x 37.13875pt>
+File: e812b3370beb65f.pdf Graphic file (type pdf)
+ <use e812b3370beb65f.pdf>
+Package pdftex.def Info: e812b3370beb65f.pdf used on input line 0.
+(pdftex.def)             Requested size: 156.58461pt x 37.13979pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*There are several programs for converting music expressions:
+
+*
+(Please type a command or say `\end')
+*\begin{itemize}
+
+*\itemsep1pt\parskip0pt\parsep0pt
+
+*\item
+
+*  \texttt{music2mid}
+
+*\item
+
+*  \texttt{music2musicxml}
+
+*\item
+
+*  \texttt{music2ly}
+
+*\item
+
+*  \texttt{music2wav}
+
+*\item
+
+*  \texttt{music2pdf}
+
+*\end{itemize}
+
+*
+(Please type a command or say `\end')
+*\subsubsection{With Haskell files}
+
+*
+(Please type a command or say `\end')
+*Alternatively, you can create a file called \texttt{test.hs} (or
+
+*similar) with the following structure:
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\KeywordTok{import} \NormalTok{Music.Prelude.Basic}
+
+*
+(Please type a command or say `\end')
+*\NormalTok{main }\FunctionTok{=} \NormalTok{defaultMain music}
+
+*\NormalTok{music }\FunctionTok{=} \NormalTok{c }\FunctionTok{|>} \NormalTok{d 
+}\FunctionTok{|>} \NormalTok{e}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*Then either execute it using:
+
+*
+(Please type a command or say `\end')
+*\begin{verbatim}
+
+*$ runhaskell test.hs
+
+*\end{verbatim}
+
+*
+(Please type a command or say `\end')
+*or compile and run it with
+
+*
+(Please type a command or say `\end')
+*\begin{verbatim}
+
+*$ ghc --make test
+
+*$ ./test
+
+*\end{verbatim}
+
+*
+(Please type a command or say `\end')
+*In this case the resulting program will generate and open a file called
+
+*\texttt{test.pdf} containing the output seen above.
+
+*
+(Please type a command or say `\end')
+*Music files and Haskell files using \texttt{defaultMain} are equivalent
+[3 <./e812b3370beb65f.pdf>]
+*in every aspect. In fact, the \texttt{music2...} programs are simple
+
+*utilities that substitutes a single expression into a Haskell module
+
+*such as the one above and executes the resulting main function.
+
+*
+(Please type a command or say `\end')
+*\subsection{Time and duration}
+
+*
+(Please type a command or say `\end')
+*A single note can be entered by its name. This will render a note in the
+
+*middle octave with a duration of one. Note that note values and
+
+*durations correspond exactly, a duration of \texttt{1} is a whole note,
+
+*a duration of \texttt{1/2} is a half note, and so on.
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{344658b06e772a3e.pdf}
+<344658b06e772a3e.pdf, id=62, 75.28125pt x 37.13875pt>
+File: 344658b06e772a3e.pdf Graphic file (type pdf)
+
+<use 344658b06e772a3e.pdf>
+Package pdftex.def Info: 344658b06e772a3e.pdf used on input line 0.
+(pdftex.def)             Requested size: 75.28105pt x 37.14204pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{c}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*To change the duration of a note, use
+
+*\href{/docs/api/Music-Time-Stretchable.html\#v:stretch}{\texttt{stretch}}
+
+*or
+
+*\href{/docs/api/Music-Time-Stretchable.html\#v:compress}{\texttt{compress}}.
+
+*Note that:
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{compress x }\FunctionTok{=} \NormalTok{stretch (}\DecValTok{1}\Func
+tionTok{/}\NormalTok{x)}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*for all values of \emph{x}.
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{17acdbdbe31e8366.pdf}
+<17acdbdbe31e8366.pdf, id=65, 67.25125pt x 37.13875pt>
+File: 17acdbdbe31e8366.pdf Graphic file (type pdf)
+
+<use 17acdbdbe31e8366.pdf>
+Package pdftex.def Info: 17acdbdbe31e8366.pdf used on input line 0.
+(pdftex.def)             Requested size: 67.25107pt x 37.13922pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{stretch (}\DecValTok{1}\FunctionTok{/}\DecValTok{2}\NormalTok{) c}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{c206dd98257abc9.pdf}
+<c206dd98257abc9.pdf, id=66, 116.435pt x 42.1575pt>
+File: c206dd98257abc9.pdf Graphic file (type pdf)
+ <use c206dd98257abc9.pdf>
+Package pdftex.def Info: c206dd98257abc9.pdf used on input line 0.
+(pdftex.def)             Requested size: 116.43471pt x 42.15866pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{stretch }\DecValTok{2} \NormalTok{c         }
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{47c74d92daacf31f.pdf}
+<47c74d92daacf31f.pdf, id=67, 247.92625pt x 42.1575pt>
+File: 47c74d92daacf31f.pdf Graphic file (type pdf)
+
+<use 47c74d92daacf31f.pdf>
+Package pdftex.def Info: 47c74d92daacf31f.pdf used on input line 0.
+(pdftex.def)             Requested size: 247.92564pt x 42.15738pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{stretch (}\DecValTok{4}\FunctionTok{+}\DecValTok{1}\FunctionTok{/}\
+DecValTok{2}\NormalTok{) c}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*TODO delay
+
+*
+(Please type a command or say `\end')
+*Offset and duration is not limited to simple numbers. Here are some more
+
+*complex examples:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{7989d1133a0ecb36.pdf}
+<7989d1133a0ecb36.pdf, id=68, 128.48pt x 42.1575pt>
+File: 7989d1133a0ecb36.pdf Graphic file (type pdf)
+ <use 7989d1133a0ecb36.pdf>
+Package pdftex.def Info: 7989d1133a0ecb36.pdf used on input line 0.
+(pdftex.def)             Requested size: 128.47968pt x 42.16058pt.
+
+*\end{figure}
+[4 <./344658b06e772a3e.pdf> <./17acdbdbe31e8366.pdf> <./c206dd98257abc9.pdf>]
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{c}\FunctionTok{^*}\NormalTok{(}\DecValTok{9}\FunctionTok{/}\DecValT
+ok{8}\NormalTok{) }\FunctionTok{|>} \NormalTok{d}\FunctionTok{^*}\NormalTok{(}\
+DecValTok{7}\FunctionTok{/}\DecValTok{8}\NormalTok{)}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{4247fd44e823a93f.pdf}
+<4247fd44e823a93f.pdf, id=92, 222.8325pt x 38.1425pt>
+File: 4247fd44e823a93f.pdf Graphic file (type pdf)
+
+<use 4247fd44e823a93f.pdf>
+Package pdftex.def Info: 4247fd44e823a93f.pdf used on input line 0.
+(pdftex.def)             Requested size: 222.83195pt x 38.14297pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{stretch (}\DecValTok{2}\FunctionTok{/}\DecValTok{3}\NormalTok{) (sc
+at [c,d,e]) }\FunctionTok{|>} \NormalTok{f}\FunctionTok{^*}\DecValTok{2}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*As you can see, note values, tuplets and ties are added automatically
+
+*
+(Please type a command or say `\end')
+*The \texttt{\^{}*} and \texttt{\^{}/} operators can be used as
+
+*shorthands for \texttt{delay} and \texttt{compress}.
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{6e082ce15a9e3be5.pdf}
+<6e082ce15a9e3be5.pdf, id=93, 131.49126pt x 37.13875pt>
+File: 6e082ce15a9e3be5.pdf Graphic file (type pdf)
+
+<use 6e082ce15a9e3be5.pdf>
+Package pdftex.def Info: 6e082ce15a9e3be5.pdf used on input line 0.
+(pdftex.def)             Requested size: 131.49092pt x 37.14035pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{(c }\FunctionTok{|>} \NormalTok{d }\FunctionTok{|>} \NormalTok{e }\
+FunctionTok{|>} \NormalTok{c }\FunctionTok{|>} \NormalTok{d}\FunctionTok{^*}\De
+cValTok{2} \FunctionTok{|>} \NormalTok{d}\FunctionTok{^*}\DecValTok{2}\NormalTo
+k{)}\FunctionTok{^/}\DecValTok{16}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*Allthough the actual types are more general, you can think of \texttt{c}
+
+*as an expression of type \texttt{Score Note}, and the transformations as
+
+*functions \texttt{Score Note -\textgreater{} Score Note}.
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{72259aeb0502b2eb.pdf}
+<72259aeb0502b2eb.pdf, id=94, 66.2475pt x 37.13875pt>
+File: 72259aeb0502b2eb.pdf Graphic file (type pdf)
+
+<use 72259aeb0502b2eb.pdf>
+Package pdftex.def Info: 72259aeb0502b2eb.pdf used on input line 0.
+(pdftex.def)             Requested size: 66.24733pt x 37.14148pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{up (perfect octave) }\FunctionTok{.} \NormalTok{compress }\DecValTo
+k{2} \FunctionTok{.} \NormalTok{delay }\DecValTok{3} \FunctionTok{$} \NormalTok
+{c}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\subsection{Composition}
+
+*
+(Please type a command or say `\end')
+*Music expressions can be composed
+
+*\href{/docs/api/Music-Pitch.html\#v:-60-{}-62-}{\texttt{\textless{}\textgreate
+r{}}}:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{2417d7f318b299ee.pdf}
+<2417d7f318b299ee.pdf, id=96, 75.28125pt x 37.13875pt>
+File: 2417d7f318b299ee.pdf Graphic file (type pdf)
+
+<use 2417d7f318b299ee.pdf>
+Package pdftex.def Info: 2417d7f318b299ee.pdf used on input line 0.
+(pdftex.def)             Requested size: 75.28105pt x 37.14204pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{c }\FunctionTok{<>} \NormalTok{e }\FunctionTok{<>} \NormalTok{g}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*TODO fundamentally, \texttt{\textless{}\textgreater{}} is the only way
+
+*to compose music\ldots{}
+
+*
+(Please type a command or say `\end')
+*Or in sequence using
+
+*\href{/docs/api/Music-Time-Juxtapose.html\#v:-124-{}-62-}{\texttt{\textbar{}\t
+extgreater{}}}:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{e812b3370beb65f.pdf}
+File: e812b3370beb65f.pdf Graphic file (type pdf)
+<use e812b3370beb65f.pdf>
+Package pdftex.def Info: e812b3370beb65f.pdf used on input line 0.
+(pdftex.def)             Requested size: 156.58461pt x 37.13979pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{c }\FunctionTok{|>} \NormalTok{d }\FunctionTok{|>} \NormalTok{e}
+
+*\end{Highlighting}
+[5 <./47c74d92daacf31f.pdf> <./7989d1133a0ecb36.pdf> <./4247fd44e823a93f.pdf>]
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*Or partwise using
+
+*\href{/docs/api/Music-Score-Combinators.html\#v:-60-{}-47-{}-62-}{\texttt{\tex
+tless{}/\textgreater{}}}:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{59dcbb2937c2906c.pdf}
+<59dcbb2937c2906c.pdf, id=126, 76.285pt x 127.47626pt>
+File: 59dcbb2937c2906c.pdf Graphic file (type pdf)
+
+<use 59dcbb2937c2906c.pdf>
+Package pdftex.def Info: 59dcbb2937c2906c.pdf used on input line 0.
+(pdftex.def)             Requested size: 76.2848pt x 127.48177pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{c }\FunctionTok{</>} \NormalTok{e }\FunctionTok{</>} \NormalTok{g}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*Here is a more complex example:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{28c98e09d9084e17.pdf}
+<28c98e09d9084e17.pdf, id=127, 145.54375pt x 89.33376pt>
+File: 28c98e09d9084e17.pdf Graphic file (type pdf)
+
+<use 28c98e09d9084e17.pdf>
+Package pdftex.def Info: 28c98e09d9084e17.pdf used on input line 0.
+(pdftex.def)             Requested size: 145.54338pt x 89.34033pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\KeywordTok{let}
+
+*    \NormalTok{scale }\FunctionTok{=} \NormalTok{scat [c,d,e,f,g,a,g,f]}\Funct
+ionTok{^/}\DecValTok{8}
+
+*    \NormalTok{triad a }\FunctionTok{=} \NormalTok{a }\FunctionTok{<>} \Normal
+Tok{up _}\DataTypeTok{M3} \NormalTok{a }\FunctionTok{<>} \NormalTok{up _}\DataT
+ypeTok{P5} \NormalTok{a}
+
+*\KeywordTok{in} \NormalTok{up _}\DataTypeTok{P8} \NormalTok{scale }\FunctionTo
+k{</>} \NormalTok{(triad c)}\FunctionTok{^/}\DecValTok{2} \FunctionTok{|>} \Nor
+malTok{(triad g_)}\FunctionTok{^/}\DecValTok{2}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*As a shorthand for
+
+*\texttt{x \textbar{}\textgreater{} y \textbar{}\textgreater{} z ..}, we
+
+*can write
+
+*\href{/docs/api/Music-Time-Juxtapose.html\#v:scat}{\texttt{scat}}
+
+*\texttt{{[}x, y, z{]}} (short for \emph{sequential concatenation}).
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{8dcc23c8a43be98.pdf}
+<8dcc23c8a43be98.pdf, id=129, 93.34875pt x 37.13875pt>
+File: 8dcc23c8a43be98.pdf Graphic file (type pdf)
+
+<use 8dcc23c8a43be98.pdf>
+Package pdftex.def Info: 8dcc23c8a43be98.pdf used on input line 0.
+(pdftex.def)             Requested size: 93.34851pt x 37.14035pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{scat [c,e}\FunctionTok{..}\NormalTok{g]}\FunctionTok{^/}\DecValTok{
+4}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*For
+
+*\texttt{x \textless{}\textgreater{} y \textless{}\textgreater{} z ..},
+
+*we can write
+
+*\href{/docs/api/Music-Time-Juxtapose.html\#v:pcat}{\texttt{pcat}}
+
+*\texttt{{[}x, y, z{]}} (short for \emph{parallel concatenation}).
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{1a42f3fa65506151.pdf}
+<1a42f3fa65506151.pdf, id=131, 67.25125pt x 37.13875pt>
+File: 1a42f3fa65506151.pdf Graphic file (type pdf)
+
+<use 1a42f3fa65506151.pdf>
+Package pdftex.def Info: 1a42f3fa65506151.pdf used on input line 0.
+(pdftex.def)             Requested size: 67.25107pt x 37.13922pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{pcat [c,e}\FunctionTok{..}\NormalTok{g]}\FunctionTok{^/}\DecValTok{
+2}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*Actually,
+
+*\href{/docs/api/Music-Time-Juxtapose.html\#v:scat}{\texttt{scat}} and
+
+*\href{/docs/api/Music-Time-Juxtapose.html\#v:pcat}{\texttt{pcat}} used
+
+*to be called \texttt{melody} and \texttt{chord} back in the days, but I
+
+*figured out that these are names that you actually want to use in your
+
+*own code.
+
+*
+(Please type a command or say `\end')
+*\subsection{Pitch}
+
+*
+(Please type a command or say `\end')
+*\subsubsection{Pitch names}
+
+*
+(Please type a command or say `\end')
+*To facilitate the use of non-standard pitch, the standard pitch names
+
+*are provided as overloaded values, referred to as \emph{pitch literals}.
+
+*
+(Please type a command or say `\end')
+*To understand how this works, think about the type of numeric literal.
+[6 <./6e082ce15a9e3be5.pdf> <./72259aeb0502b2eb.pdf> <./2417d7f318b299ee.pdf>]
+[7 <./59dcbb2937c2906c.pdf> <./28c98e09d9084e17.pdf> <./8dcc23c8a43be98.pdf> <.
+/1a42f3fa65506151.pdf>]
+*The values $0, 1, 2$ etc. have type \texttt{Num a =\textgreater{} a},
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 0.
+(/usr/local/texlive/2012/texmf-dist/tex/latex/lm/ot1lmr.fd
+File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 0.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 0.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 0.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 0.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 0.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 0.
+LaTeX Font Info:    Try loading font information for U+msa on input line 0.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 0.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+*similarly, the pitch literals $c, d, e, f ...$ have type
+
+*\href{/docs/api/Music-Pitch-Literal-Pitch.html\#t:IsPitch}{\texttt{IsPitch}}
+
+*\texttt{a =\textgreater{} a}.
+
+*
+(Please type a command or say `\end')
+*For Western-style pitch types, the standard pitch names can be used:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{6cfe439b3533d41a.pdf}
+<6cfe439b3533d41a.pdf, id=187, 320.19624pt x 37.13875pt>
+File: 6cfe439b3533d41a.pdf Graphic file (type pdf)
+
+<use 6cfe439b3533d41a.pdf>
+Package pdftex.def Info: 6cfe439b3533d41a.pdf used on input line 0.
+(pdftex.def)             Requested size: 320.19545pt x 37.13922pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{scat [c, d, e, f, g, a, b]}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*Pitch names in other languages work as well, for example
+
+*\texttt{ut, do, re, mi, fa, so, la, ti, si}.
+
+*
+(Please type a command or say `\end')
+*You can change octave using \texttt{octavesUp} and \texttt{octavesDown}:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{5ee112ca5880e24a.pdf}
+<5ee112ca5880e24a.pdf, id=188, 76.285pt x 206.7725pt>
+File: 5ee112ca5880e24a.pdf Graphic file (type pdf)
+
+<use 5ee112ca5880e24a.pdf>
+Package pdftex.def Info: 5ee112ca5880e24a.pdf used on input line 0.
+(pdftex.def)             Requested size: 76.2848pt x 206.78145pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{octavesUp }\DecValTok{4} \NormalTok{c}
+
+*    \FunctionTok{</>}
+
+*\NormalTok{octavesUp (}\FunctionTok{-}\DecValTok{1}\NormalTok{) c}
+
+*    \FunctionTok{</>}
+
+*\NormalTok{octavesDown }\DecValTok{2} \NormalTok{c}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*There is also a shorthand for other octaves:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{762a2558558e6d28.pdf}
+<762a2558558e6d28.pdf, id=189, 238.8925pt x 76.285pt>
+File: 762a2558558e6d28.pdf Graphic file (type pdf)
+
+<use 762a2558558e6d28.pdf>
+Package pdftex.def Info: 762a2558558e6d28.pdf used on input line 0.
+(pdftex.def)             Requested size: 238.8919pt x 76.2848pt.
+
+*\end{figure}
+[8 <./6cfe439b3533d41a.pdf> <./5ee112ca5880e24a.pdf>]
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{c__ }\FunctionTok{|>} \NormalTok{c_ }\FunctionTok{|>} \NormalTok{c 
+}\FunctionTok{|>} \NormalTok{c' }\FunctionTok{|>} \NormalTok{c''}
+LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 0.
+(/usr/local/texlive/2012/texmf-dist/tex/latex/lm/ts1lmtt.fd
+File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+Package microtype Info: Character `texttrademark ' is missing
+(microtype)             in font `TS1/lmtt/m/n/10'.
+(microtype)             Ignoring protrusion settings for this character.
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*Sharps and flats can be added by the functions
+
+*\href{/docs/api/Music-Pitch-Common-Pitch.html\#v:sharp}{\texttt{sharp}}
+
+*and
+
+*\href{/docs/api/Music-Pitch-Common-Pitch.html\#v:flat}{\texttt{flat}},
+
+*which are written \emph{postfix} thanks to some overloading magic.
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{7d4cbd690475a6c8.pdf}
+<7d4cbd690475a6c8.pdf, id=212, 160.6pt x 42.1575pt>
+File: 7d4cbd690475a6c8.pdf Graphic file (type pdf)
+ <use 7d4cbd690475a6c8.pdf>
+Package pdftex.def Info: 7d4cbd690475a6c8.pdf used on input line 0.
+(pdftex.def)             Requested size: 160.5996pt x 42.15866pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{c sharp }\FunctionTok{|>} \NormalTok{d }\FunctionTok{|>} \NormalTok
+{e flat}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*You can also use the ordinary (prefix) versions \texttt{sharpen} and
+
+*\texttt{flatten}.
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{1101f1aee219368e.pdf}
+<1101f1aee219368e.pdf, id=213, 79.29625pt x 82.3075pt>
+File: 1101f1aee219368e.pdf Graphic file (type pdf)
+
+<use 1101f1aee219368e.pdf>
+Package pdftex.def Info: 1101f1aee219368e.pdf used on input line 0.
+(pdftex.def)             Requested size: 79.29604pt x 82.31355pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{sharpen c }
+
+*    \FunctionTok{</>}
+
+*\NormalTok{(sharpen }\FunctionTok{.} \NormalTok{sharpen) c}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*As you might expect, there is also a shorthand for sharp and flat notes:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{2fb5ed23f747e89c.pdf}
+<2fb5ed23f747e89c.pdf, id=214, 161.60374pt x 82.3075pt>
+File: 2fb5ed23f747e89c.pdf Graphic file (type pdf)
+
+<use 2fb5ed23f747e89c.pdf>
+Package pdftex.def Info: 2fb5ed23f747e89c.pdf used on input line 0.
+(pdftex.def)             Requested size: 161.60335pt x 82.31104pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{(cs }\FunctionTok{|>} \NormalTok{ds }\FunctionTok{|>} \NormalTok{es
+)    }\CommentTok{-- sharp}
+
+*    \FunctionTok{</>}
+
+*\NormalTok{(cb }\FunctionTok{|>} \NormalTok{db }\FunctionTok{|>} \NormalTok{eb
+)    }\CommentTok{-- flat}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*Here is an overview of all pitch notations:
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{sharpen c             }\FunctionTok{==} \NormalTok{c sharp       }\
+FunctionTok{==} \NormalTok{cs}
+
+*\NormalTok{flatten d             }\FunctionTok{==} \NormalTok{d flat        }\
+FunctionTok{==} \NormalTok{ds}
+
+*\NormalTok{(sharpen }\FunctionTok{.} \NormalTok{sharpen) c }\FunctionTok{==} \
+NormalTok{c doubleSharp }\FunctionTok{==} \NormalTok{css}
+
+*\NormalTok{(flatten }\FunctionTok{.} \NormalTok{flatten) d }\FunctionTok{==} \
+NormalTok{d doubleFlat  }\FunctionTok{==} \NormalTok{dss}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*Note that \texttt{cs == db} may or may not hold depending on which pitch
+
+*representation you use.
+
+*
+[9 <./762a2558558e6d28.pdf> <./7d4cbd690475a6c8.pdf> <./1101f1aee219368e.pdf>]
+(Please type a command or say `\end')
+*\subsubsection{Interval names}
+
+*
+(Please type a command or say `\end')
+*Interval names are overloaded in a manner similar to pitches, and are
+
+*consequently referred to as \emph{interval literals}. The corresponding
+
+*class is called
+
+*\href{/docs/api/Music-Pitch-Literal-Interval.html\#t:IsInterval}{\texttt{IsInt
+erval}}.
+
+*
+(Please type a command or say `\end')
+*Here and elsewhere in the Music Suite, the convention is to follow
+
+*standard theoretical notation, so \emph{minor} and \emph{diminished}
+
+*intervals are written in lower-case, while \emph{major} and
+
+*\emph{perfect} intervals are written in upper-case. Unfortunately,
+
+*Haskell does not support overloaded upper-case values, so we have to
+
+*adopt an underscore prefix:
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{minor third      }\FunctionTok{==} \NormalTok{m3}
+
+*\NormalTok{major third      }\FunctionTok{==} \NormalTok{_}\DataTypeTok{M3}
+
+*\NormalTok{perfect fifth    }\FunctionTok{==} \NormalTok{_}\DataTypeTok{P5}
+
+*\NormalTok{diminished fifth }\FunctionTok{==} \NormalTok{d5}
+
+*\NormalTok{minor ninth      }\FunctionTok{==} \NormalTok{m9}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*Similar to
+
+*\href{/docs/api/Music-Pitch-Alterable.html\#v:sharpen}{\texttt{sharpen}}
+
+*and
+
+*\href{/docs/api/Music-Pitch-Alterable.html\#v:flatten}{\texttt{flatten}},
+
+*the
+
+*\href{/docs/api/Music-Pitch-Augmentable.html\#v:augment}{\texttt{augment}}
+
+*and
+
+*\href{/docs/api/Music-Pitch-Augmentable.html\#v:diminish}{\texttt{diminish}}
+
+*functions can be used to alter the size of an interval. For example:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{72c9aad78038ac0c.pdf}
+<72c9aad78038ac0c.pdf, id=244, 121.45375pt x 37.13875pt>
+File: 72c9aad78038ac0c.pdf Graphic file (type pdf)
+
+<use 72c9aad78038ac0c.pdf>
+Package pdftex.def Info: 72c9aad78038ac0c.pdf used on input line 0.
+(pdftex.def)             Requested size: 121.45343pt x 37.13866pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\KeywordTok{let}
+
+*    \NormalTok{intervals }\FunctionTok{=} \NormalTok{[diminish (perfect fifth)
+, (diminish }\FunctionTok{.} \NormalTok{diminish) (perfect fifth)]}
+
+*\KeywordTok{in} \NormalTok{scat }\FunctionTok{$} \FunctionTok{fmap} \NormalTok
+{(}\OtherTok{`up`} \NormalTok{c) intervals}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*You can add pitches and intervals using the
+
+*\href{/docs/api/Music-Pitch.html\#v:-46-{}-45-{}-46-}{\texttt{.-.}} and
+
+*\href{/docs/api/Music-Pitch.html\#v:-46-{}-43-{}-94-}{\texttt{.+\^{}}}
+
+*operators. To memorize these operators, think of pitches and points
+
+*\texttt{.} and intervals as vectors \texttt{\^{}}.
+
+*
+(Please type a command or say `\end')
+*\texttt{music+haskellx setPitch (c .+\^{} m3) \$ return c\_}
+
+*
+(Please type a command or say `\end')
+*\subsubsection{Qualified pitch and interval names}
+[10 <./2fb5ed23f747e89c.pdf> <./72c9aad78038ac0c.pdf>]
+*
+(Please type a command or say `\end')
+*There is nothing special about the pitch and interval literals, they are
+
+*simply values exported by the \texttt{Music.Pitch.Literal} module. While
+
+*this module is reexported by the standard music preludes, you can also
+
+*import it qualified if you want to avoid bringing the single-letter
+
+*pitch names into scope.
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{Pitch.c }\FunctionTok{|>} \NormalTok{Pitch.d }\FunctionTok{.+^} \No
+rmalTok{Interval.m3}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*TODO overloading, explain why the following works:
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\FunctionTok{return} \NormalTok{(}\OtherTok{c::}\DataTypeTok{Note}\NormalTok{)
+ }\FunctionTok{==} \NormalTok{(}\OtherTok{c::}\DataTypeTok{Score} \DataTypeTok{
+Note}\NormalTok{)}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\subsection{Dynamics}
+
+*
+(Please type a command or say `\end')
+*Dynamic values are overloaded in the same way as pitches. The dynamic
+
+*literals are defined in \texttt{Music.Dynamics.Literal} and have type
+
+*\texttt{IsDynamics a =\textgreater{} a}.
+
+*
+(Please type a command or say `\end')
+*An overview of the dynamic values:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{73dd0a315ca1480.pdf}
+<73dd0a315ca1480.pdf, id=264, 361.35pt x 53.19875pt>
+File: 73dd0a315ca1480.pdf Graphic file (type pdf)
+ <use 73dd0a315ca1480.pdf>
+Package pdftex.def Info: 73dd0a315ca1480.pdf used on input line 0.
+(pdftex.def)             Requested size: 345.0pt x 50.79178pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{scat }\FunctionTok{$} \FunctionTok{zipWith} \NormalTok{dynamics [ff
+f,ff,_f,mf,mp,_p,pp,ppp] [c}\FunctionTok{..}\NormalTok{]}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*TODO other ways of applying dynamics
+
+*
+(Please type a command or say `\end')
+*\subsection{Articulation}
+
+*
+(Please type a command or say `\end')
+*Some basic articulation functions are
+
+*\href{/docs/api/Music-Score-Articulation.html\#v:legato}{\texttt{legato}},
+
+*\href{/docs/api/Music-Score-Articulation.html\#v:staccato}{\texttt{staccato}},
+
+
+*\href{/docs/api/Music-Score-Articulation.html\#v:portato}{\texttt{portato}},
+
+*\href{/docs/api/Music-Score-Articulation.html\#v:tenuto}{\texttt{tenuto}},
+
+*\href{/docs/api/Music-Score-Articulation.html\#v:separated}{\texttt{separated}
+},
+
+*\href{/docs/api/Music-Score-Articulation.html\#v:spiccato}{\texttt{spiccato}}:
+
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{4e0bf333c3a1253b.pdf}
+<4e0bf333c3a1253b.pdf, id=271, 108.405pt x 268.00125pt>
+File: 4e0bf333c3a1253b.pdf Graphic file (type pdf)
+
+<use 4e0bf333c3a1253b.pdf>
+Package pdftex.def Info: 4e0bf333c3a1253b.pdf used on input line 0.
+(pdftex.def)             Requested size: 108.40472pt x 268.01285pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{legato (scat [c}\FunctionTok{..}\NormalTok{g]}\FunctionTok{^/}\DecV
+alTok{8}\NormalTok{)}
+
+*    \FunctionTok{</>}
+
+*\NormalTok{staccato (scat [c}\FunctionTok{..}\NormalTok{g]}\FunctionTok{^/}\De
+cValTok{8}\NormalTok{)}
+
+*    \FunctionTok{</>}
+
+*\NormalTok{portato (scat [c}\FunctionTok{..}\NormalTok{g]}\FunctionTok{^/}\Dec
+ValTok{8}\NormalTok{)}
+
+*    \FunctionTok{</>}
+
+*\NormalTok{tenuto (scat [c}\FunctionTok{..}\NormalTok{g]}\FunctionTok{^/}\DecV
+alTok{8}\NormalTok{)}
+
+*    \FunctionTok{</>}
+
+*\NormalTok{separated (scat [c}\FunctionTok{..}\NormalTok{g]}\FunctionTok{^/}\D
+ecValTok{8}\NormalTok{)}
+[11 <./73dd0a315ca1480.pdf>]
+*    \FunctionTok{</>}
+
+*\NormalTok{spiccato (scat [c}\FunctionTok{..}\NormalTok{g]}\FunctionTok{^/}\De
+cValTok{8}\NormalTok{)}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Articulation.html\#v:accent}{\texttt{accent}}
+
+*\href{/docs/api/Music-Score-Articulation.html\#v:marcato}{\texttt{marcato}}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{7505c58579d6f2eb.pdf}
+<7505c58579d6f2eb.pdf, id=288, 108.405pt x 88.33pt>
+File: 7505c58579d6f2eb.pdf Graphic file (type pdf)
+ <use 7505c58579d6f2eb.pdf>
+Package pdftex.def Info: 7505c58579d6f2eb.pdf used on input line 0.
+(pdftex.def)             Requested size: 108.40472pt x 88.3338pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{accent (scat [c}\FunctionTok{..}\NormalTok{g]}\FunctionTok{^/}\DecV
+alTok{8}\NormalTok{)}
+
+*    \FunctionTok{</>}
+
+*\NormalTok{marcato (scat [c}\FunctionTok{..}\NormalTok{g]}\FunctionTok{^/}\Dec
+ValTok{8}\NormalTok{)}
+
+*\end{Highlighting}
+[12 <./4e0bf333c3a1253b.pdf> <./7505c58579d6f2eb.pdf>]
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Articulation.html\#v:accentLast}{\texttt{accentLas
+t}}
+
+*\href{/docs/api/Music-Score-Articulation.html\#v:accentAll}{\texttt{accentAll}
+}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{222067bf4985543d.pdf}
+<222067bf4985543d.pdf, id=307, 108.405pt x 88.33pt>
+File: 222067bf4985543d.pdf Graphic file (type pdf)
+ <use 222067bf4985543d.pdf>
+Package pdftex.def Info: 222067bf4985543d.pdf used on input line 0.
+(pdftex.def)             Requested size: 108.40472pt x 88.3338pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{accentLast (scat [c}\FunctionTok{..}\NormalTok{g]}\FunctionTok{^/}\
+DecValTok{8}\NormalTok{)}
+
+*    \FunctionTok{</>}
+
+*\NormalTok{accentAll (scat [c}\FunctionTok{..}\NormalTok{g]}\FunctionTok{^/}\D
+ecValTok{8}\NormalTok{)}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*Applying articulations over multiple parts:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{6d6121cf5a1057ff.pdf}
+<6d6121cf5a1057ff.pdf, id=308, 251.94125pt x 133.49875pt>
+File: 6d6121cf5a1057ff.pdf Graphic file (type pdf)
+
+<use 6d6121cf5a1057ff.pdf>
+Package pdftex.def Info: 6d6121cf5a1057ff.pdf used on input line 0.
+(pdftex.def)             Requested size: 251.94063pt x 133.4984pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\KeywordTok{let}
+
+*    \NormalTok{p1 }\FunctionTok{=} \NormalTok{scat [c}\FunctionTok{..}\NormalT
+ok{c']}\FunctionTok{^/}\DecValTok{4}
+
+*    \NormalTok{p2 }\FunctionTok{=} \NormalTok{delay (}\DecValTok{1}\FunctionTo
+k{/}\DecValTok{4}\NormalTok{) }\FunctionTok{$} \NormalTok{scat [c}\FunctionTok{
+..}\NormalTok{c']}\FunctionTok{^/}\DecValTok{4}
+
+*    \NormalTok{p3 }\FunctionTok{=} \NormalTok{delay (}\DecValTok{3}\FunctionTo
+k{/}\DecValTok{4}\NormalTok{) }\FunctionTok{$} \NormalTok{scat [c}\FunctionTok{
+..}\NormalTok{c']}\FunctionTok{^/}\DecValTok{4}
+
+*\KeywordTok{in} \NormalTok{(accent }\FunctionTok{.} \NormalTok{legato) (p1 }\F
+unctionTok{</>} \NormalTok{p2 }\FunctionTok{</>} \NormalTok{p3)}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\subsection{Parts}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Parts.html\#t:Division}{\texttt{Division}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Parts.html\#t:Subpart}{\texttt{Subpart}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Part.html\#t:Part}{\texttt{Part}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Parts.html\#t:Instrument}{\texttt{Instrument}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Parts.html\#t:Solo}{\texttt{Solo}}
+
+*
+(Please type a command or say `\end')
+*\subsection{Space}
+
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*\subsection{Tremolo}
+[13 <./222067bf4985543d.pdf> <./6d6121cf5a1057ff.pdf>]
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Ornaments.html\#v:tremolo}{\texttt{tremolo}}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{33035e5b50c27efa.pdf}
+<33035e5b50c27efa.pdf, id=333, 138.5175pt x 37.13875pt>
+File: 33035e5b50c27efa.pdf Graphic file (type pdf)
+
+<use 33035e5b50c27efa.pdf>
+Package pdftex.def Info: 33035e5b50c27efa.pdf used on input line 0.
+(pdftex.def)             Requested size: 138.51715pt x 37.13866pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{tremolo }\DecValTok{2} \FunctionTok{$} \NormalTok{times }\DecValTok
+{2} \FunctionTok{$} \NormalTok{(c }\FunctionTok{|>} \NormalTok{d)}\FunctionTok{
+^/}\DecValTok{2}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*TODO chord tremolo
+
+*
+(Please type a command or say `\end')
+*\subsection{Slides and glissando}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Ornaments.html\#v:slide}{\texttt{slide}}
+
+*\href{/docs/api/Music-Score-Ornaments.html\#v:glissando}{\texttt{glissando}}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{455023b9c80482a0.pdf}
+<455023b9c80482a0.pdf, id=336, 89.33376pt x 37.13875pt>
+File: 455023b9c80482a0.pdf Graphic file (type pdf)
+
+<use 455023b9c80482a0.pdf>
+Package pdftex.def Info: 455023b9c80482a0.pdf used on input line 0.
+(pdftex.def)             Requested size: 89.33353pt x 37.14035pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{glissando }\FunctionTok{$} \NormalTok{scat [c,d]}\FunctionTok{^/}\D
+ecValTok{2}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\subsection{Harmonics}
+
+*
+(Please type a command or say `\end')
+*Use the
+
+*\href{/docs/api/Music-Score-Ornaments.html\#v:harmonic}{\texttt{harmonic}}
+
+*function:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{3577bdcff02045dd.pdf}
+<3577bdcff02045dd.pdf, id=338, 68.255pt x 127.47626pt>
+File: 3577bdcff02045dd.pdf Graphic file (type pdf)
+
+<use 3577bdcff02045dd.pdf>
+Package pdftex.def Info: 3577bdcff02045dd.pdf used on input line 0.
+(pdftex.def)             Requested size: 68.25482pt x 127.4837pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{(harmonic }\DecValTok{1} \FunctionTok{$} \NormalTok{c}\FunctionTok{
+^/}\DecValTok{2}\NormalTok{)}
+
+*    \FunctionTok{</>}
+
+*\NormalTok{(harmonic }\DecValTok{2} \FunctionTok{$} \NormalTok{c}\FunctionTok{
+^/}\DecValTok{2}\NormalTok{)}
+
+*    \FunctionTok{</>}
+
+*\NormalTok{(harmonic }\DecValTok{3} \FunctionTok{$} \NormalTok{c}\FunctionTok{
+^/}\DecValTok{2}\NormalTok{)}
+[14 <./33035e5b50c27efa.pdf> <./455023b9c80482a0.pdf> <./3577bdcff02045dd.pdf>]
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*TODO artificial harmonics
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Ornaments.html\#v:artificial}{\texttt{artificial}}
+
+
+*
+(Please type a command or say `\end')
+*\subsection{Text}
+
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Ornaments.html\#v:text}{\texttt{text}}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{5351da121c9bf05d.pdf}
+<5351da121c9bf05d.pdf, id=367, 67.25125pt x 50.1875pt>
+File: 5351da121c9bf05d.pdf Graphic file (type pdf)
+
+<use 5351da121c9bf05d.pdf>
+Package pdftex.def Info: 5351da121c9bf05d.pdf used on input line 0.
+(pdftex.def)             Requested size: 67.25107pt x 50.18813pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{text }\StringTok{"pizz."} \FunctionTok{$} \NormalTok{c}\FunctionTok
+{^/}\DecValTok{2}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\subsection{Chords}
+
+*
+(Please type a command or say `\end')
+*Note with the same onset and offset are rendered as chords by default.
+
+*If you want to prevent this you must put them in separate parts.
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{2eb839e952b93cc5.pdf}
+<2eb839e952b93cc5.pdf, id=368, 197.73875pt x 37.13875pt>
+File: 2eb839e952b93cc5.pdf Graphic file (type pdf)
+
+<use 2eb839e952b93cc5.pdf>
+Package pdftex.def Info: 2eb839e952b93cc5.pdf used on input line 0.
+(pdftex.def)             Requested size: 197.73827pt x 37.13922pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{scat [c,d,e,c] }\FunctionTok{<>} \NormalTok{scat [e,f,g,e] }\Functi
+onTok{<>} \NormalTok{scat [g,a,b,g]}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*Or, equivalently:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{2d1c5c02c1378cf0.pdf}
+<2d1c5c02c1378cf0.pdf, id=369, 197.73875pt x 37.13875pt>
+File: 2d1c5c02c1378cf0.pdf Graphic file (type pdf)
+
+<use 2d1c5c02c1378cf0.pdf>
+Package pdftex.def Info: 2d1c5c02c1378cf0.pdf used on input line 0.
+(pdftex.def)             Requested size: 197.73827pt x 37.13922pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{pcat [c,e,g] }\FunctionTok{|>} \NormalTok{pcat [d,f,a] }\FunctionTo
+k{|>} \NormalTok{pcat [e,g,b] }\FunctionTok{|>} \NormalTok{pcat [c,e,g]}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*TODO how part separation works w.r.t. division etc
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Chord.html\#v:simultaneous}{\texttt{simultaneous}}
+
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Chord.html\#v:mapSimultaneous}{\texttt{mapSimultan
+eous}}
+
+*
+(Please type a command or say `\end')
+*\subsection{Rests}
+[15 <./5351da121c9bf05d.pdf> <./2eb839e952b93cc5.pdf> <./2d1c5c02c1378cf0.pdf>]
+
+*
+(Please type a command or say `\end')
+*Similar to chords, there is usually no need to handle rests explicitly.
+
+*
+(Please type a command or say `\end')
+*TODO add explicit rests etc
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Combinators.html\#v:removeRests}{\texttt{removeRes
+ts}}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{655bf6c96f41cdbf.pdf}
+<655bf6c96f41cdbf.pdf, id=401, 322.20375pt x 37.13875pt>
+File: 655bf6c96f41cdbf.pdf Graphic file (type pdf)
+
+<use 655bf6c96f41cdbf.pdf>
+Package pdftex.def Info: 655bf6c96f41cdbf.pdf used on input line 0.
+(pdftex.def)             Requested size: 322.20296pt x 37.14035pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{removeRests }\FunctionTok{$} \NormalTok{times }\DecValTok{4} \Norma
+lTok{(accent g}\FunctionTok{^*}\DecValTok{2} \FunctionTok{|>} \NormalTok{rest }
+\FunctionTok{|>} \NormalTok{scat [d,d]}\FunctionTok{^/}\DecValTok{2}\NormalTok{
+)}\FunctionTok{^/}\DecValTok{8}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\section{Transformations}
+
+*
+(Please type a command or say `\end')
+*\subsection{Time}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Time-Reverse.html\#v:rev}{\texttt{rev}}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{339ae0c0fd3b9259.pdf}
+<339ae0c0fd3b9259.pdf, id=403, 198.7425pt x 41.15375pt>
+File: 339ae0c0fd3b9259.pdf Graphic file (type pdf)
+
+<use 339ae0c0fd3b9259.pdf>
+Package pdftex.def Info: 339ae0c0fd3b9259.pdf used on input line 0.
+(pdftex.def)             Requested size: 198.742pt x 41.15489pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\KeywordTok{let}
+
+*    \NormalTok{melody }\FunctionTok{=} \NormalTok{accent }\FunctionTok{$} \Nor
+malTok{legato }\FunctionTok{$} \NormalTok{scat [d, scat [g,fs]}\FunctionTok{^/}
+\DecValTok{2}\NormalTok{,bb}\FunctionTok{^*}\DecValTok{2}\NormalTok{]}\Function
+Tok{^/}\DecValTok{4}
+
+*\KeywordTok{in} \NormalTok{melody }\FunctionTok{|>} \NormalTok{rev melody}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Time-Juxtapose.html\#v:times}{\texttt{times}}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{701c5015f33304a4.pdf}
+<701c5015f33304a4.pdf, id=405, 242.9075pt x 45.16875pt>
+File: 701c5015f33304a4.pdf Graphic file (type pdf)
+
+<use 701c5015f33304a4.pdf>
+Package pdftex.def Info: 701c5015f33304a4.pdf used on input line 0.
+(pdftex.def)             Requested size: 242.90689pt x 45.16862pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\KeywordTok{let}
+
+*    \NormalTok{melody }\FunctionTok{=} \NormalTok{legato }\FunctionTok{$} \Nor
+malTok{scat [c,d,e,c]}\FunctionTok{^/}\DecValTok{16}
+
+*\KeywordTok{in} \NormalTok{times }\DecValTok{4} \FunctionTok{$} \NormalTok{mel
+ody}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Time-Juxtapose.html\#v:sustain}{\texttt{sustain}}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{60dc3260048dae39.pdf}
+<60dc3260048dae39.pdf, id=407, 197.73875pt x 37.13875pt>
+File: 60dc3260048dae39.pdf Graphic file (type pdf)
+
+<use 60dc3260048dae39.pdf>
+Package pdftex.def Info: 60dc3260048dae39.pdf used on input line 0.
+(pdftex.def)             Requested size: 197.73827pt x 37.13922pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{scat [e,d,f,e] }\FunctionTok{<>} \NormalTok{c}
+
+*\end{Highlighting}
+[16 <./655bf6c96f41cdbf.pdf> <./339ae0c0fd3b9259.pdf> <./701c5015f33304a4.pdf>]
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Time-Juxtapose.html\#v:anticipate}{\texttt{anticipate}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Time-Juxtapose.html\#v:repeated}{\texttt{repeated}}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{209d91caa25c1aff.pdf}
+<209d91caa25c1aff.pdf, id=436, 397.485pt x 46.1725pt>
+File: 209d91caa25c1aff.pdf Graphic file (type pdf)
+
+<use 209d91caa25c1aff.pdf>
+Package pdftex.def Info: 209d91caa25c1aff.pdf used on input line 0.
+(pdftex.def)             Requested size: 345.0pt x 40.07672pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\KeywordTok{let}
+
+*    \NormalTok{m }\FunctionTok{=} \NormalTok{legato }\FunctionTok{$} \NormalTo
+k{scat [c,d,scat [e,d]}\FunctionTok{^/}\DecValTok{2}\NormalTok{, c]}\FunctionTo
+k{^/}\DecValTok{4}
+
+*\KeywordTok{in} \NormalTok{[c,eb,ab,g] }\OtherTok{`repeated`} \NormalTok{(\tex
+tbackslash{}p }\OtherTok{->} \NormalTok{up (asPitch p }\FunctionTok{.-.} \Norma
+lTok{c) m)}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\subsection{Onset and duration}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{6f4bfbf5a4d6c76a.pdf}
+<6f4bfbf5a4d6c76a.pdf, id=437, 163.61125pt x 103.38625pt>
+File: 6f4bfbf5a4d6c76a.pdf Graphic file (type pdf)
+
+<use 6f4bfbf5a4d6c76a.pdf>
+Package pdftex.def Info: 6f4bfbf5a4d6c76a.pdf used on input line 0.
+(pdftex.def)             Requested size: 163.61084pt x 103.38599pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\KeywordTok{let}
+
+*    \NormalTok{melody }\FunctionTok{=} \NormalTok{asScore }\FunctionTok{$} \No
+rmalTok{legato }\FunctionTok{$} \NormalTok{scat [scat [c,d,e,c], scat [e,f], g}
+\FunctionTok{^*}\DecValTok{2}\NormalTok{]}
+
+*    \NormalTok{pedal  }\FunctionTok{=} \NormalTok{asScore }\FunctionTok{$} \No
+rmalTok{delayTime (onset melody) }\FunctionTok{$} \NormalTok{stretch (duration 
+melody) }\FunctionTok{$} \NormalTok{c_}
+
+*\KeywordTok{in} \NormalTok{compress }\DecValTok{4} \FunctionTok{$} \NormalTok{
+melody }\FunctionTok{</>} \NormalTok{pedal}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\subsection{Pitch}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Pitch.html\#v:inv}{\texttt{inv}}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{410e93299536f330.pdf}
+<410e93299536f330.pdf, id=439, 168.63pt x 139.52126pt>
+File: 410e93299536f330.pdf Graphic file (type pdf)
+
+<use 410e93299536f330.pdf>
+Package pdftex.def Info: 410e93299536f330.pdf used on input line 0.
+(pdftex.def)             Requested size: 168.62958pt x 139.52303pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{(scat [c}\FunctionTok{..}\NormalTok{g]}\FunctionTok{^*}\NormalTok{(
+}\DecValTok{2}\FunctionTok{/}\DecValTok{5}\NormalTok{))}
+
+*    \FunctionTok{</>}
+
+*\NormalTok{(inv c }\FunctionTok{$} \NormalTok{scat [c}\FunctionTok{..}\NormalT
+ok{g]}\FunctionTok{^*}\NormalTok{(}\DecValTok{2}\FunctionTok{/}\DecValTok{5}\No
+rmalTok{))}
+
+*    \FunctionTok{</>}
+
+*\NormalTok{(inv e }\FunctionTok{$} \NormalTok{scat [c}\FunctionTok{..}\NormalT
+ok{g]}\FunctionTok{^*}\NormalTok{(}\DecValTok{2}\FunctionTok{/}\DecValTok{5}\No
+rmalTok{))}
+
+*\end{Highlighting}
+[17 <./60dc3260048dae39.pdf> <./209d91caa25c1aff.pdf> <./6f4bfbf5a4d6c76a.pdf>]
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\subsection{Pitches and intervals}
+
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*\subsection{Name and accidental}
+
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*\subsection{Spelling}
+
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*\subsection{Quality and number}
+
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*\subsection{Intonation}
+
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*\subsection{Inspecting dissonant intervals}
+
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*\subsection{Semitones and enharmonic equivalence}
+[18 <./410e93299536f330.pdf>]
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*\subsection{Spelling}
+
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*\subsection{Scales}
+
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*\subsection{Chords}
+
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*\subsection{Parts}
+
+*
+(Please type a command or say `\end')
+*\subsection{Instrument, part and sub-part}
+
+*
+(Please type a command or say `\end')
+*\subsection{Extracting and modifying parts}
+
+*
+(Please type a command or say `\end')
+*\subsection{Part composition}
+
+*
+(Please type a command or say `\end')
+*\section{Time-based structures}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Time-Delayable.html\#t:Delayable}{\texttt{Delayable}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Time-Stretchable.html\#t:Stretchable}{\texttt{Stretchabl
+e}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Time-Onset.html\#t:HasOnset}{\texttt{HasOnset}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Time-Onset.html\#t:HasOffset}{\texttt{HasOffset}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Time-Onset.html\#t:HasDuration}{\texttt{HasDuration}}
+
+*
+(Please type a command or say `\end')
+*\subsection{Time and duration}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Time.html\#v:time}{\texttt{Time}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Time-Time.html\#t:Duration}{\texttt{Duration}}
+
+*
+(Please type a command or say `\end')
+*\subsection{Spans}
+[19]
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Time-Span.html\#t:Span}{\texttt{Span}}
+
+*
+(Please type a command or say `\end')
+*\subsection{Notes}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Note.html\#t:Note}{\texttt{Note}}
+
+*
+(Please type a command or say `\end')
+*\subsection{Voice}
+
+*
+(Please type a command or say `\end')
+*A \href{/docs/api/Music-Score-Voice.html\#t:Voice}{\texttt{Voice}}
+
+*represents a single voice of music. It consists of a sequence of values
+
+*with duration, but no time.
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{786d2383245b9c9d.pdf}
+<786d2383245b9c9d.pdf, id=506, 182.6825pt x 37.13875pt>
+File: 786d2383245b9c9d.pdf Graphic file (type pdf)
+
+<use 786d2383245b9c9d.pdf>
+Package pdftex.def Info: 786d2383245b9c9d.pdf used on input line 0.
+(pdftex.def)             Requested size: 182.68204pt x 37.14035pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{stretch (}\DecValTok{1}\FunctionTok{/}\DecValTok{4}\NormalTok{) }\F
+unctionTok{$} \NormalTok{scat [c}\FunctionTok{..}\NormalTok{a]}\FunctionTok{^/}
+\DecValTok{2} \FunctionTok{|>} \NormalTok{b }\FunctionTok{|>} \NormalTok{c'}\Fu
+nctionTok{^*}\DecValTok{4}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{6391c8a4c4a26fdb.pdf}
+<6391c8a4c4a26fdb.pdf, id=507, 147.55125pt x 38.1425pt>
+File: 6391c8a4c4a26fdb.pdf Graphic file (type pdf)
+
+<use 6391c8a4c4a26fdb.pdf>
+Package pdftex.def Info: 6391c8a4c4a26fdb.pdf used on input line 0.
+(pdftex.def)             Requested size: 147.55087pt x 38.14297pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{stretch (}\DecValTok{1}\FunctionTok{/}\DecValTok{2}\NormalTok{) }\F
+unctionTok{$} \NormalTok{scat [c}\FunctionTok{..}\NormalTok{e]}\FunctionTok{^/}
+\DecValTok{3} \FunctionTok{|>} \NormalTok{f }\FunctionTok{|>} \NormalTok{g}\Fun
+ctionTok{^*}\DecValTok{2}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*It can be converted into a score by stretching each element and
+
+*composing in sequence.
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{28277393e1e71d7.pdf}
+<28277393e1e71d7.pdf, id=508, 256.96pt x 37.13875pt>
+File: 28277393e1e71d7.pdf Graphic file (type pdf)
+ <use 28277393e1e71d7.pdf>
+Package pdftex.def Info: 28277393e1e71d7.pdf used on input line 0.
+(pdftex.def)             Requested size: 256.95937pt x 37.14148pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\KeywordTok{let}
+
+*    \NormalTok{x,}\OtherTok{ y ::} \DataTypeTok{Voice} \DataTypeTok{Note}
+
+*
+(Please type a command or say `\end')
+*    \NormalTok{x }\FunctionTok{=} \NormalTok{voice [ (}\DecValTok{1}\NormalTok
+{, c),}
+
+*                \NormalTok{(}\DecValTok{1}\NormalTok{, d),}
+
+*                \NormalTok{(}\DecValTok{1}\NormalTok{, f),}
+
+*                \NormalTok{(}\DecValTok{1}\NormalTok{, e) ]}
+
+*
+[20 <./786d2383245b9c9d.pdf> <./6391c8a4c4a26fdb.pdf> <./28277393e1e71d7.pdf>]
+(Please type a command or say `\end')
+*    \NormalTok{y }\FunctionTok{=} \NormalTok{join }\FunctionTok{$} \NormalTok{
+voice [ (}\DecValTok{1}\NormalTok{, x), }
+
+*                       \NormalTok{(}\DecValTok{0}\FunctionTok{.}\DecValTok{5}\
+NormalTok{, up _}\DataTypeTok{P5} \NormalTok{x), }
+
+*                       \NormalTok{(}\DecValTok{4}\NormalTok{, up _}\DataTypeTo
+k{P8} \NormalTok{x) ]}
+
+*
+(Please type a command or say `\end')
+*\KeywordTok{in} \NormalTok{stretch (}\DecValTok{1}\FunctionTok{/}\DecValTok{8}
+\NormalTok{) }\FunctionTok{$} \NormalTok{voiceToScore }\FunctionTok{$} \NormalT
+ok{y}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\subsection{Tracks}
+
+*
+(Please type a command or say `\end')
+*A \href{/docs/api/Music-Score-Track.html\#t:Track}{\texttt{Track}} is
+
+*similar to a score, except that it events have no offset or duration. It
+
+*is useful for representing point-wise occurrences such as samples, cues
+
+*or percussion notes.
+
+*
+(Please type a command or say `\end')
+*It can be converted into a score by delaying each element and composing
+
+*in parallel. An explicit duration has to be provided.
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{202ddfede2859c40.pdf}
+<202ddfede2859c40.pdf, id=539, 434.62375pt x 37.13875pt>
+File: 202ddfede2859c40.pdf Graphic file (type pdf)
+
+<use 202ddfede2859c40.pdf>
+Package pdftex.def Info: 202ddfede2859c40.pdf used on input line 0.
+(pdftex.def)             Requested size: 345.0pt x 29.48209pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\KeywordTok{let}
+
+*    \NormalTok{x,}\OtherTok{ y ::} \DataTypeTok{Track} \DataTypeTok{Note}
+
+*    \NormalTok{x }\FunctionTok{=} \NormalTok{track [ (}\DecValTok{0}\NormalTok
+{, c), (}\DecValTok{1}\NormalTok{, d), (}\DecValTok{2}\NormalTok{, e) ]}
+
+*    \NormalTok{y }\FunctionTok{=} \NormalTok{join }\FunctionTok{$} \NormalTok{
+track [ (}\DecValTok{0}\NormalTok{, x), (}\DecValTok{1}\FunctionTok{.}\DecValTo
+k{5}\NormalTok{,  up _}\DataTypeTok{P5} \NormalTok{x), (}\DecValTok{3}\Function
+Tok{.}\DecValTok{25}\NormalTok{, up _}\DataTypeTok{P8} \NormalTok{x) ]}
+
+*\KeywordTok{in} \NormalTok{trackToScore (}\DecValTok{1}\FunctionTok{/}\DecValT
+ok{8}\NormalTok{) y}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\subsection{Scores}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Export-Lilypond.html\#t:Score}{\texttt{Score}}
+
+*
+(Please type a command or say `\end')
+*\section{Meta-information}
+
+*
+(Please type a command or say `\end')
+*It is often desirable to annotate music with extraneous information,
+
+*such as title, creator or time signature. Also, it is often useful to
+
+*mark scores with structural information such as movement numbers,
+
+*rehearsal marks or general annotations. In the Music Suite these are
+
+*grouped together under the common label \emph{meta-information}.
+
+*
+(Please type a command or say `\end')
+*Each type of meta-information is stored separately and can be extracted
+
+*and transformed depending on its type. Each type of meta-information has
+
+*a default value which is implicitly chosen if no meta-information of the
+
+*given type has been entered (for example the default title is empty, the
+
+*default key signature is C major and so on).
+
+*
+[21 <./202ddfede2859c40.pdf>]
+(Please type a command or say `\end')
+*The distinction between ordinary musical data and meta-data is not
+
+*always clear cut. As a rule of thumb, meta-events are any kind of event
+
+*that does not directly affect how the represented music sounds when
+
+*performed. However they might affect the appearance of the musical
+
+*notation. For example, a \emph{clef} is meta-information, while a
+
+*\emph{slur} is not. A notable exception to this rule is meta-events
+
+*affecting tempo such as metronome marks and fermatas, which usually
+
+*\emph{do} affect the performance of the music.
+
+*
+(Please type a command or say `\end')
+*\subsection{Title}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Title.html\#v:title}{\texttt{title}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Title.html\#v:subtitle}{\texttt{subtitle}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Title.html\#v:subsubtitle}{\texttt{subsubtitl
+e}}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{6fcc5379512ba159.pdf}
+<6fcc5379512ba159.pdf, id=557, 531.9875pt x 63.23625pt>
+File: 6fcc5379512ba159.pdf Graphic file (type pdf)
+
+<use 6fcc5379512ba159.pdf>
+Package pdftex.def Info: 6fcc5379512ba159.pdf used on input line 0.
+(pdftex.def)             Requested size: 345.0pt x 41.01044pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{title }\StringTok{"Frere Jaques"} \FunctionTok{$} \NormalTok{scat [
+c,d,e,c]}\FunctionTok{^/}\DecValTok{4}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\subsection{Attribution}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Attribution.html\#v:composer}{\texttt{compose
+r}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Attribution.html\#v:lyricist}{\texttt{lyricis
+t}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Attribution.html\#v:arranger}{\texttt{arrange
+r}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Attribution.html\#v:attribution}{\texttt{attr
+ibution}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Attribution.html\#v:attributions}{\texttt{att
+ributions}}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{7a6e97aaa81dd848.pdf}
+<7a6e97aaa81dd848.pdf, id=563, 531.9875pt x 57.21375pt>
+File: 7a6e97aaa81dd848.pdf Graphic file (type pdf)
+
+<use 7a6e97aaa81dd848.pdf>
+Package pdftex.def Info: 7a6e97aaa81dd848.pdf used on input line 0.
+(pdftex.def)             Requested size: 345.0pt x 37.10468pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{composer }\StringTok{"Anonymous"} \FunctionTok{$} \NormalTok{scat [
+c,d,e,c]}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{71070892445769d.pdf}
+<71070892445769d.pdf, id=564, 531.9875pt x 57.21375pt>
+File: 71070892445769d.pdf Graphic file (type pdf)
+
+<use 71070892445769d.pdf>
+Package pdftex.def Info: 71070892445769d.pdf used on input line 0.
+(pdftex.def)             Requested size: 345.0pt x 37.10468pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{composer }\StringTok{"Anonymous"} \FunctionTok{$} \NormalTok{lyrici
+st }\StringTok{"Anonymous"} \FunctionTok{$} \NormalTok{arranger }\StringTok{"Ha
+ns"} \FunctionTok{$} \NormalTok{scat [c,d,e,c]}\FunctionTok{^/}\DecValTok{4}
+
+*\end{Highlighting}
+[22 <./6fcc5379512ba159.pdf> <./7a6e97aaa81dd848.pdf>]
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\subsection{Key signatures}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Key.html\#v:key}{\texttt{key}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Key.html\#v:keySignature}{\texttt{keySignatur
+e}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Key.html\#v:keySignatureDuring}{\texttt{keySi
+gnatureDuring}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Key.html\#v:withKeySignature}{\texttt{withKey
+Signature}}
+
+*
+(Please type a command or say `\end')
+*\subsection{Time signatures}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Time.html\#v:time}{\texttt{time}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Time.html\#v:compoundTime}{\texttt{compoundTi
+me}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Time.html\#v:timeSignature}{\texttt{timeSigna
+ture}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Time.html\#v:timeSignatureDuring}{\texttt{tim
+eSignatureDuring}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Time.html\#v:withTimeSignature}{\texttt{withT
+imeSignature}}
+
+*
+(Please type a command or say `\end')
+*\subsection{Tempo}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Tempo.html\#v:metronome}{\texttt{metronome}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Tempo.html\#v:tempo}{\texttt{tempo}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Tempo.html\#v:tempoDuring}{\texttt{tempoDurin
+g}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Tempo.html\#v:withTempo}{\texttt{withTempo}}
+
+*
+(Please type a command or say `\end')
+*{[}\texttt{renderTempo}{]}{[}renderTempo{]}
+
+*
+(Please type a command or say `\end')
+*\subsection{Fermatas, caesuras and breathing marks}
+
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*\subsection{Ritardando and accellerando}
+
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*\subsection{Rehearsal marks}
+[23 <./71070892445769d.pdf>]
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-RehearsalMark.html\#v:rehearsalMark}{\texttt{
+rehearsalMark}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-RehearsalMark.html\#v:rehearsalMarkDuring}{\t
+exttt{rehearsalMarkDuring}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-RehearsalMark.html\#v:withRehearsalMark}{\tex
+ttt{withRehearsalMark}}
+
+*
+(Please type a command or say `\end')
+*\subsection{Barlines and repeats}
+
+*
+(Please type a command or say `\end')
+*There is generally no need to enter bars explicitly, as this information
+
+*can be inferred from other meta-information. Generally, the following
+
+*meta-events (in any part), will force a change of bar:
+
+*
+(Please type a command or say `\end')
+*\begin{itemize}
+
+*\itemsep1pt\parskip0pt\parsep0pt
+
+*\item
+
+*  Key signature changes
+
+*\item
+
+*  Time signature changes
+
+*\item
+
+*  Tempo changes
+
+*\item
+
+*  Rehearsal marks
+
+*\end{itemize}
+
+*
+(Please type a command or say `\end')
+*However, the user may also enter explicit bar lines using the following
+
+*functions:
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Barline.html\#v:barline}{\texttt{barline}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Barline.html\#v:doubleBarline}{\texttt{double
+Barline}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta-Barline.html\#v:finalBarline}{\texttt{finalBa
+rline}}
+
+*
+(Please type a command or say `\end')
+*Whenever a bar line is created as a result of a meta-event, an shorted
+
+*time signature may need to be inserted as in:
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{5f1d2f467655ff45.pdf}
+<5f1d2f467655ff45.pdf, id=624, 304.13625pt x 37.13875pt>
+File: 5f1d2f467655ff45.pdf Graphic file (type pdf)
+
+<use 5f1d2f467655ff45.pdf>
+Package pdftex.def Info: 5f1d2f467655ff45.pdf used on input line 0.
+(pdftex.def)             Requested size: 304.1355pt x 37.13979pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{compress }\DecValTok{4} \FunctionTok{$} \NormalTok{timeSignature (}
+\DecValTok{4}\FunctionTok{/}\DecValTok{4}\NormalTok{) (scat [c,d,e,c,d,e,f,d,g,
+d]) }\FunctionTok{|>} \NormalTok{timeSignature (}\DecValTok{3}\FunctionTok{/}\D
+ecValTok{4}\NormalTok{) (scat [a,g,f,g,f,e])}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*TODO adapt getBarDurations and getBarTimeSignatures to actually do this
+
+*
+(Please type a command or say `\end')
+*TODO repeats
+
+*
+(Please type a command or say `\end')
+*\subsection{Clefs}
+
+*
+(Please type a command or say `\end')
+*To set the clef for a whole passage, use
+
+*\href{/docs/api/Music-Score-Meta-Clef.html\#v:clef}{\texttt{clef}}. The
+
+*clef is used by most notation backends and ignored by audio backends.
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{1380bb5639887bcf.pdf}
+<1380bb5639887bcf.pdf, id=626, 253.94875pt x 45.16875pt>
+File: 1380bb5639887bcf.pdf Graphic file (type pdf)
+
+<use 1380bb5639887bcf.pdf>
+Package pdftex.def Info: 1380bb5639887bcf.pdf used on input line 0.
+(pdftex.def)             Requested size: 253.94812pt x 45.17pt.
+
+*\end{figure}
+[24 <./5f1d2f467655ff45.pdf>]
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\KeywordTok{let}
+
+*    \NormalTok{part1 }\FunctionTok{=} \NormalTok{clef }\DataTypeTok{FClef} \Fu
+nctionTok{$} \NormalTok{staccato }\FunctionTok{$} \NormalTok{scat [c_,g_,c,g_]}
+
+
+*    \NormalTok{part2 }\FunctionTok{=} \NormalTok{clef }\DataTypeTok{CClef} \Fu
+nctionTok{$} \NormalTok{staccato }\FunctionTok{$} \NormalTok{scat [ab_,eb,d,a]}
+
+
+*    \NormalTok{part3 }\FunctionTok{=} \NormalTok{clef }\DataTypeTok{GClef} \Fu
+nctionTok{$} \NormalTok{staccato }\FunctionTok{$} \NormalTok{accentLast }\Funct
+ionTok{$} \NormalTok{scat [g,fs,e,d]}
+
+*\KeywordTok{in} \NormalTok{compress }\DecValTok{8} \FunctionTok{$} \NormalTok{
+part1 }\FunctionTok{|>} \NormalTok{part2 }\FunctionTok{|>} \NormalTok{part3}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*To set the clef for a preexisting passage in an existing score, use
+
+*\href{/docs/api/Music-Score-Meta-Clef.html\#v:clefDuring}{\texttt{clefDuring}}
+.
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{653e320f9ed9980a.pdf}
+<653e320f9ed9980a.pdf, id=641, 341.275pt x 66.2475pt>
+File: 653e320f9ed9980a.pdf Graphic file (type pdf)
+
+<use 653e320f9ed9980a.pdf>
+Package pdftex.def Info: 653e320f9ed9980a.pdf used on input line 0.
+(pdftex.def)             Requested size: 341.27415pt x 66.25136pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{clefDuring (}\DecValTok{0}\FunctionTok{.}\DecValTok{25} \OtherTok{<
+-}\FunctionTok{>} \DecValTok{0}\FunctionTok{.}\DecValTok{5}\NormalTok{) }\DataT
+ypeTok{CClef} \FunctionTok{$} \NormalTok{clefDuring (}\DecValTok{0}\FunctionTok
+{.}\DecValTok{75} \OtherTok{<-}\FunctionTok{>} \DecValTok{1}\NormalTok{) }\Data
+TypeTok{FClef} \FunctionTok{$} \NormalTok{compress }\DecValTok{8} \FunctionTok{
+$} \NormalTok{scat [c_}\FunctionTok{..}\NormalTok{c']}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\subsection{Annotations}
+
+*
+(Please type a command or say `\end')
+*Annotations are simply textual values attached to a specific section of
+
+*the score. In contrast to other types of meta-information annotations
+
+*always apply to the whole score, not to a single part. To annotate a
+
+*score use
+
+*\href{/docs/api/Music-Score-Annotations.html\#v:annotate}{\texttt{annotate}},
+
+*to annotate a specific span, use
+
+*\href{/docs/api/Music-Score-Annotations.html\#v:annotateSpan}{\texttt{annotate
+Span}}.
+
+*
+(Please type a command or say `\end')
+*Annotations are invisible by default. To show annotations in the
+
+*generated output, use
+
+*\href{/docs/api/Music-Score-Annotations.html\#v:showAnnotations}{\texttt{showA
+nnotations}}.
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{5753dd6f3c2997e3.pdf}
+<5753dd6f3c2997e3.pdf, id=645, 176.66pt x 48.18pt>
+File: 5753dd6f3c2997e3.pdf Graphic file (type pdf)
+ <use 5753dd6f3c2997e3.pdf>
+Package pdftex.def Info: 5753dd6f3c2997e3.pdf used on input line 0.
+(pdftex.def)             Requested size: 176.65956pt x 48.18059pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{showAnnotations }\FunctionTok{$} \NormalTok{annotate }\StringTok{"F
+irst note"} \NormalTok{c }\FunctionTok{|>} \NormalTok{d }\FunctionTok{|>} \Norm
+alTok{annotate }\StringTok{"Last note"} \NormalTok{d}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\subsection{Custom meta-information}
+
+*
+(Please type a command or say `\end')
+*Meta-information is not restricted to the types described above. In
+
+*fact, the user can add meta-information of any type that satisfies the
+
+*\texttt{IsAttribute} constraint, including user-defined types. Each type
+
+*of meta-information is stored separately from other types, and is
+
+*invisible to the user by default. You might think of each score as
+
+*having one an infinite set of associated meta-scores, each containing
+
+*both part-specific and global meta information.
+
+*
+[25 <./1380bb5639887bcf.pdf> <./653e320f9ed9980a.pdf> <./5753dd6f3c2997e3.pdf>]
+(Please type a command or say `\end')
+*Meta-information is required to implement \texttt{Monoid}. The
+
+*\texttt{mempty} value is used as a default value for the type, while the
+
+*\texttt{mappend} function is used to combine the default value and all
+
+*values added by the user.
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta.html\#v:addMetaNote}{\texttt{addMetaNote}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Meta.html\#v:addGlobalMetaNote}{\texttt{addGlobalM
+etaNote}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Combinators.html\#v:withMeta}{\texttt{withMeta}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Combinators.html\#v:withGlobalMeta}{\texttt{withGl
+obalMeta}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Combinators.html\#v:withMetaAtStart}{\texttt{withM
+etaAtStart}}
+
+*
+(Please type a command or say `\end')
+*\href{/docs/api/Music-Score-Combinators.html\#v:withGlobalMetaAtStart}{\texttt
+{withGlobalMetaAtStart}}
+
+*
+(Please type a command or say `\end')
+*Typically, you want to use a monoid similar to \texttt{Maybe},
+
+*\texttt{First} or \texttt{Last}, but not one derived from the list type.
+
+*The reason for this is that meta-scores compose, so that
+
+*\texttt{getMeta (x \textless{}\textgreater{} y) = getMeta x \textless{}\textgr
+eater{} getMeta y}.
+
+*
+(Please type a command or say `\end')
+*TODO unexpected results with filter and recompose, solve by using a good
+
+*Monoid Acceptable Monoids are Maybe and Set/Map, but not lists (ordered
+
+*sets/unique lists OK) See issue 103
+
+*
+(Please type a command or say `\end')
+*\hyperdef{}{import-and-export}{\section{Import and
+
+*export}\label{import-and-export}}
+
+*
+(Please type a command or say `\end')
+*The standard distribution (installed as part of \texttt{music-preludes})
+
+*of the Music Suite includes a variety of input and output formats. There
+
+*are also some experimental formats, which are distributed in separate
+
+*packages, these are marked as experimental below.
+
+*
+(Please type a command or say `\end')
+*The conventions for input or output formats is similar to the convention
+
+*for properties (TODO ref above): for any type \texttt{a} and format
+
+*\texttt{T a}, input formats are defined by an \emph{is} constraint, and
+
+*output format by a \emph{has} constraint. For example, types that can be
+
+*exported to Lilypond are defined by the constraint
+
+*\texttt{HasLilypond a}, while types that can be imported from MIDI are
+
+*defined by the constraint \texttt{IsMidi a}.
+
+*
+(Please type a command or say `\end')
+*\subsection{MIDI}
+
+*
+(Please type a command or say `\end')
+*All standard representations support MIDI input and output. The MIDI
+
+*representation uses
+
+*\href{http://hackage.haskell.org/package/HCodecs}{HCodecs} and the
+
+*real-time support uses
+
+*\href{http://hackage.haskell.org/package/hamid}{hamid}.
+
+*
+(Please type a command or say `\end')
+*Beware that MIDI input may contain time and pitch values that yield a
+[26]
+*non-readable notation, you need an sophisticated piece of analysis
+
+*software to convert raw MIDI input to quantized input.
+
+*
+(Please type a command or say `\end')
+*\subsection{Lilypond}
+
+*
+(Please type a command or say `\end')
+*All standard representations support Lilypond output. The
+
+*\href{http://hackage.haskell.org/package/lilypond}{lilypond} package is
+
+*used for parsing and pretty printing of Lilypond syntax. Lilypond is the
+
+*recommended way of rendering music.
+
+*
+(Please type a command or say `\end')
+*Lilypond input is not available yet but will hopefully be added soon.
+
+*
+(Please type a command or say `\end')
+*An example:
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{toLyString }\FunctionTok{$} \NormalTok{asScore }\FunctionTok{$} \No
+rmalTok{scat [c,d,e]}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\begin{verbatim}
+
+*<<
+
+*    \new Staff { <c'>1 <d'>1 <e'>1 }
+
+*>>
+
+*\end{verbatim}
+
+*
+(Please type a command or say `\end')
+*\hyperdef{}{musicxml}{\subsection{MusicXML}\label{musicxml}}
+
+*
+(Please type a command or say `\end')
+*All standard representations support MusicXML output. The
+
+*\href{http://hackage.haskell.org/package/musicxml2}{musicxml2} package
+
+*is used for parsing and pretty printing.
+
+*
+(Please type a command or say `\end')
+*The output is fairly complete, with some limitations
+
+*(\href{https://github.com/hanshoglund/music-score/issues}{reports}
+
+*welcome). There are no plans to support input in the near future.
+
+*
+(Please type a command or say `\end')
+*Beware of the extreme verboseness of XML, for example:
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\NormalTok{toXmlString }\FunctionTok{$} \NormalTok{asScore }\FunctionTok{$} \N
+ormalTok{scat [c,d,e]}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\begin{verbatim}
+
+*<?xml version='1.0' ?>
+
+*<score-partwise>
+
+*  <movement-title>Title</movement-title>
+
+*  <identification>
+
+*    <creator type="composer">Composer</creator>
+
+*  </identification>
+
+*  <part-list>
+
+*    <score-part id="P1">
+
+*      <part-name></part-name>
+
+*    </score-part>
+
+*  </part-list>
+
+*  <part id="P1">
+
+*    <measure number="1">
+
+*      <attributes>
+
+*        <key>
+
+*          <fifths>0</fifths>
+
+*          <mode>major</mode>
+
+*        </key>
+
+*      </attributes>
+
+*      <attributes>
+
+*        <divisions>768</divisions>
+
+*      </attributes>
+
+*      <direction>
+
+*        <direction-type>
+
+*          <metronome>
+
+*            <beat-unit>quarter</beat-unit>
+
+*            <per-minute>60</per-minute>
+
+*          </metronome>
+
+*        </direction-type>
+
+*      </direction>
+
+*      <attributes>
+
+*        <time symbol="common">
+
+*          <beats>4</beats>
+
+*          <beat-type>4</beat-type>
+
+*        </time>
+
+*      </attributes>
+
+*      <note>
+
+*        <pitch>
+
+*          <step>C</step>
+
+*          <alter>0.0</alter>
+
+*          <octave>4</octave>
+
+*        </pitch>
+
+*        <duration>3072</duration>
+
+*        <voice>1</voice>
+
+*        <type>whole</type>
+
+*      </note>
+
+*    </measure>
+
+*    <measure number="2">
+
+*      <note>
+
+*        <pitch>
+
+*          <step>D</step>
+
+*          <alter>0.0</alter>
+
+*          <octave>4</octave>
+
+*        </pitch>
+
+*        <duration>3072</duration>
+
+*        <voice>1</voice>
+
+*        <type>whole</type>
+
+*      </note>
+
+*    </measure>
+
+*    <measure number="3">
+
+*      <note>
+
+*        <pitch>
+
+*          <step>E</step>
+
+*          <alter>0.0</alter>
+
+*          <octave>4</octave>
+
+*        </pitch>
+
+*        <duration>3072</duration>
+
+*        <voice>1</voice>
+
+*        <type>whole</type>
+
+*      </note>
+
+*    </measure>
+
+*  </part>
+
+*</score-partwise>
+
+*\end{verbatim}
+[27] [28]
+*
+(Please type a command or say `\end')
+*\subsection{ABC Notation}
+
+*
+(Please type a command or say `\end')
+*ABC notation (for use with \href{http://code.google.com/p/abcjs/}{abcjs}
+
+*or similar engines) is still experimental.
+
+*
+(Please type a command or say `\end')
+*\subsection{Guido}
+
+*
+(Please type a command or say `\end')
+*Guido output (for use with the
+
+*\href{http://guidolib.sourceforge.net/}{GUIDO engine}) is not supported
+
+*yet. This would be useful, as it allow real-time rendering of scores.
+
+*
+(Please type a command or say `\end')
+*\subsection{Vextab}
+
+*
+(Please type a command or say `\end')
+*Vextab output (for use with \href{http://www.vexflow.com/}{Vexflow}) is
+
+*not supported yet.
+
+*
+(Please type a command or say `\end')
+*\subsection{Sibelius}
+
+*
+(Please type a command or say `\end')
+*The
+
+*\href{http://hackage.haskell.org/package/music-sibelius}{music-sibelius}
+
+*package provides experimental import of Sibelius scores (as MusicXML
+
+*import is \hyperref[musicxml]{not supported}).
+
+LaTeX Warning: Hyper reference `musicxml' on page 29 undefined on input line 0.
+
+
+
+*
+(Please type a command or say `\end')
+*\hyperdef{}{customizing-music-representation}{\section{Customizing music
+
+*representation}\label{customizing-music-representation}}
+
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*\section{Examples}
+
+*
+(Please type a command or say `\end')
+*Some more involved examples:
+
+*
+(Please type a command or say `\end')
+*\subsection{Counterpoint}
+[29]
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{3147fc3d10ebefd6.pdf}
+<3147fc3d10ebefd6.pdf, id=718, 308.15125pt x 82.3075pt>
+File: 3147fc3d10ebefd6.pdf Graphic file (type pdf)
+
+<use 3147fc3d10ebefd6.pdf>
+Package pdftex.def Info: 3147fc3d10ebefd6.pdf used on input line 0.
+(pdftex.def)             Requested size: 308.15048pt x 82.31355pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\KeywordTok{let}
+
+*    \NormalTok{subj }\FunctionTok{=} \NormalTok{asScore }\FunctionTok{$} \Norm
+alTok{scat [ c,       d,        f,          e           ]}
+
+*    \NormalTok{cs1  }\FunctionTok{=} \NormalTok{asScore }\FunctionTok{$} \Norm
+alTok{scat [ g,f,e,g, f,a,g,d', c',b,c',d', e',g',f',e' ]}
+
+*\KeywordTok{in} \NormalTok{compress }\DecValTok{4} \NormalTok{cs1 }\FunctionTo
+k{</>} \NormalTok{subj}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*TODO about
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{509e242376de176e.pdf}
+<509e242376de176e.pdf, id=719, 495.8525pt x 131.49126pt>
+File: 509e242376de176e.pdf Graphic file (type pdf)
+
+<use 509e242376de176e.pdf>
+Package pdftex.def Info: 509e242376de176e.pdf used on input line 0.
+(pdftex.def)             Requested size: 345.0pt x 91.48747pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\KeywordTok{let} \NormalTok{subj }\FunctionTok{=} \NormalTok{removeRests }\Fun
+ctionTok{$} \NormalTok{scat [ }
+
+*            \NormalTok{scat [rest,c,d,e], }
+
+*            \NormalTok{f}\FunctionTok{^*}\DecValTok{1}\FunctionTok{.}\DecValTo
+k{5}\NormalTok{, scat[g,f]}\FunctionTok{^/}\DecValTok{4}\NormalTok{, scat [e,a,
+d], g}\FunctionTok{^*}\DecValTok{1}\FunctionTok{.}\DecValTok{5}\NormalTok{,}
+
+*            \NormalTok{scat [a,g,f,e,f,e,d]}\FunctionTok{^/}\DecValTok{2}\Norm
+alTok{, c}\FunctionTok{^*}\DecValTok{2}
+
+*        \NormalTok{]}\FunctionTok{^/}\DecValTok{8}
+
+*
+(Please type a command or say `\end')
+*\KeywordTok{in} \NormalTok{(delay }\DecValTok{1}\FunctionTok{.}\DecValTok{5} \
+FunctionTok{.} \NormalTok{up _}\DataTypeTok{P5}\NormalTok{) subj }\FunctionTok{
+</>} \NormalTok{subj}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\subsection{Generative music}
+
+*
+(Please type a command or say `\end')
+*\begin{figure}[htbp]
+
+*\centering
+
+*\includegraphics{6e89c3525b872b20.pdf}
+<6e89c3525b872b20.pdf, id=720, 522.95375pt x 238.8925pt>
+File: 6e89c3525b872b20.pdf Graphic file (type pdf)
+
+<use 6e89c3525b872b20.pdf>
+Package pdftex.def Info: 6e89c3525b872b20.pdf used on input line 0.
+(pdftex.def)             Requested size: 345.0pt x 157.60391pt.
+
+*\end{figure}
+
+*
+(Please type a command or say `\end')
+*\begin{Shaded}
+
+*\begin{Highlighting}[]
+
+*\KeywordTok{let}
+
+*    \NormalTok{row }\FunctionTok{=} \FunctionTok{cycle} \NormalTok{[c,eb,ab,as
+Pitch g]}
+
+*    \NormalTok{mel }\FunctionTok{=} \NormalTok{asScore }\FunctionTok{$} \Norma
+lTok{scat [d, scat [g,fs]}\FunctionTok{^/}\DecValTok{2}\NormalTok{,bb}\Function
+Tok{^*}\DecValTok{2}\NormalTok{]}\FunctionTok{^/}\DecValTok{4}
+
+*\KeywordTok{in} \NormalTok{(}\FunctionTok{take} \DecValTok{25} \FunctionTok{$}
+ \NormalTok{row) }\OtherTok{`repeated`} \NormalTok{(\textbackslash{}p }\OtherTo
+k{->} \NormalTok{up (asPitch p }\FunctionTok{.-.} \NormalTok{c) mel)}
+
+*\end{Highlighting}
+
+*\end{Shaded}
+
+*
+(Please type a command or say `\end')
+*\subsection{Viola duo}
+
+*
+(Please type a command or say `\end')
+*\section{Design overview}
+
+*
+(Please type a command or say `\end')
+*TODO
+
+*
+(Please type a command or say `\end')
+*The Music Suite consists of a number of packages. These can be divided
+[30 <./3147fc3d10ebefd6.pdf> <./509e242376de176e.pdf>]
+*into two categories:
+
+*
+(Please type a command or say `\end')
+*\begin{itemize}
+
+*\item
+
+*  \emph{Music} packages that provide classes, types and functions
+
+*  related to a particular aspect of musical representation such as time,
+
+*  pitch, dynamics and so on. The name of these packages always begin
+
+*  with \texttt{music}.
+
+*\item
+
+*  \emph{Supporting} packages that implement a musical representation
+
+*  (\texttt{musicxml2}, \texttt{lilypond}, \texttt{abcnotation}), or
+
+*  miscellaneous functionality such as cross-platform MIDI support
+
+*  (\texttt{hamid}). These packages can be used as stand-alone packages
+
+*  but are included in the Suite for completeness.
+
+*\end{itemize}
+
+*
+(Please type a command or say `\end')
+*There is no central package, instead the aim has been to separate the
+
+*various issues that arise in music representations as clearly as
+
+*possible. In particular, the \texttt{music-score} package, which provide
+
+*scores and other temporal containers, does \emph{not} depend on packages
+
+*that provide models of musical aspects such as \texttt{music-pitch},
+
+*neither do these libraries depend on \texttt{music-score}.
+
+*
+(Please type a command or say `\end')
+*The reason for this is that we want to keep musical structure and
+
+*content separate. This is a form of the
+
+*\href{http://en.wikipedia.org/wiki/Expression_problem}{expression
+
+*problem}: if one depended on the other we would either always force the
+
+*user into a particular form of musical structure, or a particular form
+
+*of musical material.
+
+*
+(Please type a command or say `\end')
+*However, some packages have special roles:
+
+*
+(Please type a command or say `\end')
+*\begin{itemize}
+
+*\item
+
+*  The \texttt{music-pitch-literal} and \texttt{music-dynamics-literal}
+
+*  are minimal packages that provide musical \emph{literals}, i.e.~common
+
+*  vocabulary overloaded on result type. This means other packages can
+
+*  import and provide instances for the literals without having to depend
+
+*  on a specific representation.
+
+*\item
+
+*  The \texttt{music-preludes} provides modules that import modules from
+[31 <./6e89c3525b872b20.pdf>]
+*  both \texttt{music-score} and \texttt{music-pitch} and its sister
+
+*  packages.
+
+*\end{itemize}
+
+*
+(Please type a command or say `\end')
+*\subsubsection{Compability with other libraries}
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 0.
+
+
+*
+(Please type a command or say `\end')
+*The Music Suite libraries does not profess to be compatible with any
+
+*other music \emph{representation} library\footnote{Including Haskore,
+
+*  Euterpea, hts and temporal-media}, and deliberately claims the whole
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 0.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 0.
+
+*\texttt{Music} top-level package. The aim is that functionality from
+
+*these packages should eventually be included into the Music Suite
+
+*packages. However it can be used with packages that implement audio
+
+*processing, synthesis, interaction with musical instruments, FRP
+
+*libraries and so on.
+
+*
+(Please type a command or say `\end')
+*The concepts and abstractions used in the suite overlap with some
+
+*fundamental concepts form FRP, but the focus is fundamentally different.
+
+*While FRP libraries focus on reacting to the external world, the Music
+
+*Suite focus on modeling temporal values and musical concepts.
+
+*
+(Please type a command or say `\end')
+*\subsubsection{Acknowledgements}
+
+*
+(Please type a command or say `\end')
+*The Music Suite is indebted to many other previous libraries and
+
+*computer music environments, particularly
+
+*\href{http://commonmusic.sourceforge.net/}{Common Music},
+
+*\href{http://cycling74.com/products/max/}{Max/MSP},
+
+*\href{http://supercollider.sourceforge.net/}{SuperCollider},
+
+*\href{http://music21-mit.blogspot.se/}{music21},
+
+*\href{http://guidolib.sourceforge.net/}{Guido},
+
+*\href{http://lilypond.org/}{Lilypond} and
+
+*\href{https://pypi.python.org/pypi/Abjad/2.3}{Abjad}. Some of the ideas
+
+*for the quantization algorithms came from
+
+*\href{http://fomus.sourceforge.net/}{Fomus}.
+
+*
+(Please type a command or say `\end')
+*It obviously ows a lot to the Haskell libraries that it follows
+
+*including \href{http://www.haskell.org/haskellwiki/Haskore}{Haskore},
+
+*\href{http://haskell.cs.yale.edu/euterpea/}{Euterpea} and
+
+*\href{http://hackage.haskell.org/package/temporal-media}{temporal-media}.
+
+*The idea of defining a custom internal representation, but relying on
+
+*standardized formats for input and output comes from
+
+*\href{http://johnmacfarlane.net/pandoc/}{Pandoc}. The idea of splitting
+
+*the library into a set of packages (and the name) comes from the
+
+*\href{https://github.com/haskell-suite}{Haskell Suite}. The temporal
+
+*structures, their instances and the concept of denotational design comes
+
+*from \href{http://www.haskell.org/haskellwiki/Reactive}{Reactive} (and
+
+*its predecessors).
+
+*\href{http://projects.haskell.org/diagrams/}{Diagrams} provided the
+
+*daring example and some general influences on the design.
+
+*
+(Please type a command or say `\end')
+*\end{document}
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 0.
+[32]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 0.
+ (./texput.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 0.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 0.
+
+
+Package rerunfilecheck Warning: File `texput.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `texput.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  E6BFF050278BD67B40612A86F91E9B96;10135.
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 0.
+ 
+Here is how much of TeX's memory you used:
+ 10350 strings out of 493488
+ 153127 string characters out of 3141326
+ 250045 words of memory out of 3000000
+ 13239 multiletter control sequences out of 15000+200000
+ 61382 words of font info for 99 fonts, out of 3000000 for 9000
+ 957 hyphenation exceptions out of 8191
+ 34i,8n,35p,475b,495s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/te
+xlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2012/te
+xmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2012/texmf-dist/f
+onts/enc/dvips/lm/lm-rm.enc}</usr/local/texlive/2012/texmf-dist/fonts/type1/pub
+lic/lm/lmbx10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmb
+x12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></
+usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/t
+exlive/2012/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2012/
+texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2012/texmf-dist/f
+onts/type1/public/lm/lmr8.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/p
+ublic/lm/lmri10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/l
+mtk10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
+</usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></usr/loc
+al/texlive/2012/texmf-dist/fonts/type1/urw/ncntrsbk/uncb8a.pfb></usr/local/texl
+ive/2012/texmf-dist/fonts/type1/urw/ncntrsbk/uncr8a.pfb></usr/local/texlive/201
+2/texmf-dist/fonts/type1/urw/ncntrsbk/uncri8a.pfb>
+Output written on texput.pdf (32 pages, 714270 bytes).
+PDF statistics:
+ 857 PDF objects out of 1000 (max. 8388607)
+ 692 compressed objects within 7 object streams
+ 119 named destinations out of 1000 (max. 500000)
+ 19732 words of extra memory for PDF output out of 20736 (max. 10000000)
+

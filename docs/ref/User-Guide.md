@@ -478,18 +478,9 @@ in scat $ fmap (`up` c) intervals
 You can add pitches and intervals using the [`.-.`][.-.] and [`.+^`][.+^] operators. To memorize these
 operators, think of pitches and points `.` and intervals as vectors `^`.
 
-<div class='haskell-music'>
-
-
-
-![](43d6c0b4d2b8d1b0x.png)
-
-```haskell
+```music+haskellx
 setPitch (c .+^ m3) $ return c_
-
 ```
-
-</div>
 
 
 ### Qualified pitch and interval names
@@ -712,27 +703,49 @@ text "pizz." $ c^/2
 
 ## Chords
 
-TODO
+Note with the same onset and offset are rendered as chords by default. If you want to prevent this you must put them in separate parts.
 
 <div class='haskell-music'>
 
 
 
-![](758a40f40aac0f5bx.png)
+![](2eb839e952b93cc5x.png)
 
 ```haskell
-compress 4 $ scat [c,d,e,c] <> scat [e,f,g,e]
+scat [c,d,e,c] <> scat [e,f,g,e] <> scat [g,a,b,g]
 
 ```
 
 </div>
 
+Or, equivalently:
+
+<div class='haskell-music'>
+
+
+
+![](2d1c5c02c1378cf0x.png)
+
+```haskell
+pcat [c,e,g] |> pcat [d,f,a] |> pcat [e,g,b] |> pcat [c,e,g]
+
+```
+
+</div>
+
+TODO how part separation works w.r.t. division etc
+
+[`simultaneous`][simultaneous]
+
+[`mapSimultaneous`][mapSimultaneous]
+
 ## Rests
 
-Sometimes it is useful to work with scores that have a duration but no events.
-This kind of score is represented by `rest` and has the type `Score (Maybe
-Note)`. We use [`removeRests`][removeRests] to convert a `Score (Maybe a)`
-into a `Score a`.
+Similar to chords, there is usually no need to handle rests explicitly.
+
+TODO add explicit rests etc
+
+[`removeRests`][removeRests] 
 
 <div class='haskell-music'>
 
@@ -760,10 +773,11 @@ removeRests $ times 4 (accent g^*2 |> rest |> scat [d,d]^/2)^/8
 
 
 
-![](339ae0c0fd3b9259x.png)
+![](789b7d6d37b6f45cx.png)
 
 ```haskell
 let
+    rev = id -- TODO
     melody = accent $ legato $ scat [d, scat [g,fs]^/2,bb^*2]^/4
 in melody |> rev melody
 
@@ -843,20 +857,20 @@ in compress 4 $ melody </> pedal
 
 ## Pitch
 
-[`invertAround`][invertAround]
+[`inv`][inv]
 
 <div class='haskell-music'>
 
 
 
-![](bd806eefa75df64x.png)
+![](410e93299536f330x.png)
 
 ```haskell
 (scat [c..g]^*(2/5))
     </>
-(invertAround c $ scat [c..g]^*(2/5))
+(inv c $ scat [c..g]^*(2/5))
     </>
-(invertAround e $ scat [c..g]^*(2/5))
+(inv e $ scat [c..g]^*(2/5))
 
 ```
 
@@ -979,20 +993,18 @@ It can be converted into a score by stretching each element and composing in seq
 
 
 
-![](28277393e1e71d7x.png)
+![](6bebc8106dcb32e8x.png)
 
 ```haskell
 let
-    x, y :: Voice Note
+    x = [ (1, c),
+          (1, d),
+          (1, f),
+          (1, e) ]^.voice
 
-    x = voice [ (1, c),
-                (1, d),
-                (1, f),
-                (1, e) ]
-
-    y = join $ voice [ (1, x), 
-                       (0.5, up _P5 x), 
-                       (4, up _P8 x) ]
+    y = join $ [ (1, x), 
+                 (0.5, up _P5 x), 
+                 (4, up _P8 x) ]^.voice
 
 in stretch (1/8) $ voiceToScore $ y
 
@@ -1010,13 +1022,12 @@ It can be converted into a score by delaying each element and composing in paral
 
 
 
-![](202ddfede2859c40x.png)
+![](7e2913e2885a8832x.png)
 
 ```haskell
 let
-    x, y :: Track Note
-    x = track [ (0, c), (1, d), (2, e) ]
-    y = join $ track [ (0, x), (1.5,  up _P5 x), (3.25, up _P8 x) ]
+    x = [(0, c), (1, d), (2, e)]^.track
+    y = join $ [(0, x), (1.5,  up _P5 x), (3.25, up _P8 x)]^.track
 in trackToScore (1/8) y
 
 ```
@@ -1029,42 +1040,47 @@ in trackToScore (1/8) y
 
 
 
+
 # Meta-information
 
-It is often desirable to annotate music with extraneous information, such as title, creator, time signature and so on. In the Music Suite these are grouped together under the common label *meta-information*.
+It is often desirable to annotate music with extraneous information, such as title, creator or time signature. Also, it is often useful to mark scores with structural information such as movement numbers, rehearsal marks or general annotations. In the Music Suite these are grouped together under the common label *meta-information*. 
 
-The distinction between ordinary musical data and meta-data is not always clear cut. For example, while a clef is clearly a presentation detail, a key signature might be considered both a presentation aspect and a fundamental aspect of the musical syntax.
+Each type of meta-information is stored separately and can be extracted and transformed depending on its type. Each type of meta-information has a default value which is implicitly chosen if no meta-information of the given type has been entered (for example the default title is empty, the default key signature is C major and so on).
 
-TODO while we only consider notes as non-meta etc
-
-TODO attributes (same as in Diagrams)
-
-Each attribute value may apply either to a *whole* score (i.e. from beginning to end), or to a *section* of the score.
+The distinction between ordinary musical data and meta-data is not always clear cut. As a rule of thumb, meta-events are any kind of event that does not directly affect how the represented music sounds when performed. However they might affect the appearance of the musical notation. For example, a *clef* is meta-information, while a *slur* is not. A notable exception to this rule is meta-events affecting tempo such as metronome marks and fermatas, which usually *do* affect the performance of the music.
 
 ## Title
 
-TODO
+[`title`][title]
+
+[`subtitle`][subtitle]
+
+[`subsubtitle`][subsubtitle]
 
 <div class='haskell-music'>
 
 
 
-![](3b7a5d1936343a84x.png)
+![](6fcc5379512ba159x.png)
 
 ```haskell
-title "Frere Jaques" $ scat [c,d,e,c]
+title "Frere Jaques" $ scat [c,d,e,c]^/4
 
 ```
 
 </div>
 
-## Movement title and number
-
-TODO
-
 ## Attribution
 
-TODO
+[`composer`][composer]
+
+[`lyricist`][lyricist]
+
+[`arranger`][arranger]
+
+[`attribution`][attribution]
+
+[`attributions`][attributions]
 
 <div class='haskell-music'>
 
@@ -1083,17 +1099,102 @@ composer "Anonymous" $ scat [c,d,e,c]
 
 
 
-![](f327339c1ea4233x.png)
+![](71070892445769dx.png)
 
 ```haskell
-composer "Rodgers" $ lyricist "Hammerstein" $ arranger "Bennet" $ scat [c,d,e,c]
+composer "Anonymous" $ lyricist "Anonymous" $ arranger "Hans" $ scat [c,d,e,c]^/4
 
 ```
 
 </div>
 
+## Key signatures
+
+[`key`][key]
+
+[`keySignature`][keySignature]
+
+[`keySignatureDuring`][keySignatureDuring]
+
+[`withKeySignature`][withKeySignature]
+
+## Time signatures          
+
+[`time`][time]
+
+[`compoundTime`][compoundTime]
+
+[`timeSignature`][timeSignature]
+
+[`timeSignatureDuring`][timeSignatureDuring]
+
+[`withTimeSignature`][withTimeSignature]
+
+## Tempo
+
+[`metronome`][metronome]
+
+[`tempo`][tempo]
+
+[`tempoDuring`][tempoDuring]
+
+[`withTempo`][withTempo]
+
+[`renderTempo`][renderTempo]
+
+## Fermatas, caesuras and breathing marks
+
+TODO
+
+## Ritardando and accellerando
+
+TODO
+
+## Rehearsal marks
+
+TODO
+
+[`rehearsalMark`][rehearsalMark]
+
+[`rehearsalMarkDuring`][rehearsalMarkDuring]
+
+[`withRehearsalMark`][withRehearsalMark]
+
+## Barlines and repeats
+
+There is generally no need to enter bars explicitly, as this information can be inferred from other meta-information. Generally, the following meta-events (in any part), will force a change of bar:
+
+* Key signature changes
+* Time signature changes
+* Tempo changes
+* Rehearsal marks
+
+However, the user may also enter explicit bar lines using the following functions:
+
+[`barline`][barline]
+
+[`doubleBarline`][doubleBarline]
+
+[`finalBarline`][finalBarline]
+
+Whenever a bar line is created as a result of a meta-event, an shorted time signature may need to be inserted as in:
+
+<div class='haskell-music'>
 
 
+
+![](5f1d2f467655ff45x.png)
+
+```haskell
+compress 4 $ timeSignature (4/4) (scat [c,d,e,c,d,e,f,d,g,d]) |> timeSignature (3/4) (scat [a,g,f,g,f,e])
+
+```
+
+</div>
+
+TODO adapt getBarDurations and getBarTimeSignatures to actually do this
+
+TODO repeats
 
 ## Clefs
 
@@ -1122,65 +1223,14 @@ To set the clef for a preexisting passage in an existing score, use [`clefDuring
 
 
 
-![](25cfb506e740628ax.png)
+![](653e320f9ed9980ax.png)
 
 ```haskell
-clefDuring (0.25 <-> 0.5) CClef $ clefDuring (0.75 <-> 1) FClef $ compress 8 $ scat [c_..c']
+clefDuring (0.25 <-> 0.5) CClef $ clefDuring (0.75 <-> 1) FClef $ compress 8 $ scat [c_..c']
 
 ```
 
 </div>
-
-## Time signatures          
-
-[`time`][time]
-
-[`compoundTime`][compoundTime]
-
-[`timeSignature`][timeSignature]
-
-[`timeSignatureDuring`][timeSignatureDuring]
-
-[`withTimeSignature`][withTimeSignature]
-
-## Key signatures
-
-[`key`][key]
-
-[`keySignature`][keySignature]
-
-[`keySignatureDuring`][keySignatureDuring]
-
-[`withKeySignature`][withKeySignature]
-
-## Tempo
-
-[`metronome`][metronome]
-
-[`tempo`][tempo]
-
-[`tempoDuring`][tempoDuring]
-
-[`withTempo`][withTempo]
-
-[`renderTempo`][renderTempo]
-
-TODO Fermatas, acc, rit and tempo operators
-
-## Rehearsal marks
-
-TODO
-
-[`rehearsalMark`][rehearsalMark]
-
-[`rehearsalMarkAt`][rehearsalMarkAt]
-
-[`withRehearsalMarks`][withRehearsalMarks]
-
-## Barlines and separators
-
-TODO
-
 
 ## Annotations
 
@@ -1222,7 +1272,9 @@ Meta-information is required to implement `Monoid`. The `mempty` value is used a
 
 Typically, you want to use a monoid similar to `Maybe`, `First` or `Last`, but not one derived from the list type. The reason for this is that meta-scores compose, so that `getMeta (x <> y) = getMeta x <> getMeta y`.
 
-TODO unexpected results with filter and recompose, solve by using a good Monoid, see issue 103
+TODO unexpected results with filter and recompose, solve by using a good Monoid
+Acceptable Monoids are Maybe and Set/Map, but not lists (ordered sets/unique lists OK)
+See issue 103
 
 
 # Import and export
@@ -1438,15 +1490,10 @@ in (take 25 $ row) `repeated` (\p -> up (asPitch p .-. c) mel)
 
 ## Viola duo
 
-<div class='haskell-music'>
-
-
-
-![](6d03cd27809e5097x.png)
-
-```haskell
+<!--
+```music+haskellx
 let
-    toLydian = modifyPitch (\p -> if p == c then cs else p)
+    toLydian = mapPitch' (\p -> if p == c then cs else p)
 
     subj1 = (^/2) $
         (legato.accent) (b_ |> c) |> (legato.accent) (c |> b_^*2)
@@ -1462,10 +1509,8 @@ let
     part2 = pres1 |> pres2
 
 in clef CClef $ dynamics pp $ compress 2 $ part1 |> toLydian part2
-
 ```
-
-</div>
+-->
 
 <!--
 ### Schubert
@@ -1489,46 +1534,7 @@ in  stretch (1/4) $ song </> left </> down _P8 right
 -->
 
 
-# Design overview
 
-<!--
-To develop the Music Suite you need the following tools:
-
-* Pandoc
-* Transf
-* Hslinks
-* Lilypond
-
-Most of these can be installed using `cabal install`.
-
-There is a utility program called `music-util`, which simplifies the kind of cross-package development used throughout the Music Suite. This can be installed in the same manner as the packages, i.e. `cabal install music-util`. See [its documentation][music-util-docs] for an overview of the things it can do.
-
--->
-
-TODO
-
-The Music Suite consists of a number of packages. These can be divided into two categories: 
-
-- *Music* packages that provide classes, types and functions related to a particular aspect of musical representation such as time, pitch, dynamics and so on. The name of these packages always begin with `music`.
-
-- *Supporting* packages that implement a musical representation (`musicxml2`, `lilypond`, `abcnotation`), or miscellaneous functionality such as cross-platform MIDI support (`hamid`). These packages can be used as stand-alone packages but are included in the Suite for completeness.
-
-There is no central package, instead the aim has been to separate the various issues that arise in music representations as clearly as possible. In particular, the `music-score` package, which provide scores and other temporal containers, does *not* depend on packages that provide models of musical aspects such as `music-pitch`, neither do these libraries depend on `music-score`. 
-
-The reason for this is that we want to keep musical structure and content separate. This is a form of the [expression problem](http://en.wikipedia.org/wiki/Expression_problem): if one depended on the other we would either always force the user into a particular form of musical structure, or a particular form of musical material.
-
-However, some packages have special roles:
-
-- The `music-pitch-literal` and `music-dynamics-literal` are minimal packages that provide musical *literals*, i.e. common vocabulary overloaded on result type. This means other packages can import and provide instances for the literals without having to depend on a specific representation.
-
-- The `music-preludes` provides modules that import modules from both `music-score` and `music-pitch` and its sister packages.
-
-
-### Compability with other libraries
-
-The Music Suite libraries does not profess to be compatible with any other music *representation* library^[Including Haskore, Euterpea, hts and temporal-media], and deliberately claims the whole `Music` top-level package. The aim is that functionality from these packages should eventually be included into the Music Suite packages. However it can be used with packages that implement audio processing, synthesis, interaction with musical instruments, FRP libraries and so on. 
-
-The concepts and abstractions used in the suite overlap with some fundamental concepts form FRP, but the focus is fundamentally different. While FRP libraries focus on reacting to the external world, the Music Suite focus on modeling temporal values and musical concepts.
 
 
 ### Acknowledgements
@@ -1582,13 +1588,15 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 [harmonic]: /docs/api/Music-Score-Ornaments.html#v:harmonic
 [artificial]: /docs/api/Music-Score-Ornaments.html#v:artificial
 [text]: /docs/api/Music-Score-Ornaments.html#v:text
+[simultaneous]: /docs/api/Music-Score-Chord.html#v:simultaneous
+[mapSimultaneous]: /docs/api/Music-Score-Chord.html#v:mapSimultaneous
 [removeRests]: /docs/api/Music-Score-Combinators.html#v:removeRests
 [rev]: /docs/api/Music-Time-Reverse.html#v:rev
 [times]: /docs/api/Music-Time-Juxtapose.html#v:times
 [sustain]: /docs/api/Music-Time-Juxtapose.html#v:sustain
 [anticipate]: /docs/api/Music-Time-Juxtapose.html#v:anticipate
 [repeated]: /docs/api/Music-Time-Juxtapose.html#v:repeated
-[invertAround]: /docs/api/Music-Score-Pitch.html#v:invertAround
+[inv]: /docs/api/Music-Score-Pitch.html#v:inv
 [Delayable]: /docs/api/Music-Time-Delayable.html#t:Delayable
 [Stretchable]: /docs/api/Music-Time-Stretchable.html#t:Stretchable
 [HasOnset]: /docs/api/Music-Time-Onset.html#t:HasOnset
@@ -1601,45 +1609,52 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 [Voice]: /docs/api/Music-Score-Voice.html#t:Voice
 [Track]: /docs/api/Music-Score-Track.html#t:Track
 [Score]: /docs/api/Music-Score-Export-Lilypond.html#t:Score
-[clef]: /docs/api/Music-Score-Meta-Clef.html#v:clef
-[clefDuring]: /docs/api/Music-Score-Meta-Clef.html#v:clefDuring
+[title]: /docs/api/Music-Score-Meta-Title.html#v:title
+[subtitle]: /docs/api/Music-Score-Meta-Title.html#v:subtitle
+[subsubtitle]: /docs/api/Music-Score-Meta-Title.html#v:subsubtitle
+[composer]: /docs/api/Music-Score-Meta-Attribution.html#v:composer
+[lyricist]: /docs/api/Music-Score-Meta-Attribution.html#v:lyricist
+[arranger]: /docs/api/Music-Score-Meta-Attribution.html#v:arranger
+[attribution]: /docs/api/Music-Score-Meta-Attribution.html#v:attribution
+[attributions]: /docs/api/Music-Score-Meta-Attribution.html#v:attributions
+[key]: /docs/api/Music-Score-Meta-Key.html#v:key
+[keySignature]: /docs/api/Music-Score-Meta-Key.html#v:keySignature
+[keySignatureDuring]: /docs/api/Music-Score-Meta-Key.html#v:keySignatureDuring
+[withKeySignature]: /docs/api/Music-Score-Meta-Key.html#v:withKeySignature
 [time]: /docs/api/Music-Score-Meta-Time.html#v:time
 [compoundTime]: /docs/api/Music-Score-Meta-Time.html#v:compoundTime
 [timeSignature]: /docs/api/Music-Score-Meta-Time.html#v:timeSignature
 [timeSignatureDuring]: /docs/api/Music-Score-Meta-Time.html#v:timeSignatureDuring
 [withTimeSignature]: /docs/api/Music-Score-Meta-Time.html#v:withTimeSignature
-[key]: /docs/api/Music-Score-Meta-Key.html#v:key
-[keySignature]: /docs/api/Music-Score-Meta-Key.html#v:keySignature
-[keySignatureDuring]: /docs/api/Music-Score-Meta-Key.html#v:keySignatureDuring
-[withKeySignature]: /docs/api/Music-Score-Meta-Key.html#v:withKeySignature
 [metronome]: /docs/api/Music-Score-Meta-Tempo.html#v:metronome
 [tempo]: /docs/api/Music-Score-Meta-Tempo.html#v:tempo
 [tempoDuring]: /docs/api/Music-Score-Meta-Tempo.html#v:tempoDuring
-[withTempo]: /docs/api/Music-Score-Meta-Tempo.html#v:withTempo
+
+<!-- Unknown: withTempo No such identifier: withTempo-->
+
 [renderTempo]: /docs/api/Music-Score-Meta-Tempo.html#v:renderTempo
-
-<!-- Unknown: rehearsalMark No such identifier: rehearsalMark-->
-
-
-<!-- Unknown: rehearsalMarkAt No such identifier: rehearsalMarkAt-->
-
-
-<!-- Unknown: withRehearsalMarks No such identifier: withRehearsalMarks-->
-
-[annotate]: /docs/api/Music-Score-Annotations.html#v:annotate
-[annotateSpan]: /docs/api/Music-Score-Annotations.html#v:annotateSpan
-[showAnnotations]: /docs/api/Music-Score-Annotations.html#v:showAnnotations
+[rehearsalMark]: /docs/api/Music-Score-Meta-RehearsalMark.html#v:rehearsalMark
+[rehearsalMarkDuring]: /docs/api/Music-Score-Meta-RehearsalMark.html#v:rehearsalMarkDuring
+[withRehearsalMark]: /docs/api/Music-Score-Meta-RehearsalMark.html#v:withRehearsalMark
+[barline]: /docs/api/Music-Score-Meta-Barline.html#v:barline
+[doubleBarline]: /docs/api/Music-Score-Meta-Barline.html#v:doubleBarline
+[finalBarline]: /docs/api/Music-Score-Meta-Barline.html#v:finalBarline
+[clef]: /docs/api/Music-Score-Meta-Clef.html#v:clef
+[clefDuring]: /docs/api/Music-Score-Meta-Clef.html#v:clefDuring
+[annotate]: /docs/api/Music-Score-Meta-Annotations.html#v:annotate
+[annotateSpan]: /docs/api/Music-Score-Meta-Annotations.html#v:annotateSpan
+[showAnnotations]: /docs/api/Music-Score-Meta-Annotations.html#v:showAnnotations
 [addMetaNote]: /docs/api/Music-Score-Meta.html#v:addMetaNote
 [addGlobalMetaNote]: /docs/api/Music-Score-Meta.html#v:addGlobalMetaNote
 [withMeta]: /docs/api/Music-Score-Combinators.html#v:withMeta
 [withGlobalMeta]: /docs/api/Music-Score-Combinators.html#v:withGlobalMeta
 [withMetaAtStart]: /docs/api/Music-Score-Combinators.html#v:withMetaAtStart
 [withGlobalMetaAtStart]: /docs/api/Music-Score-Combinators.html#v:withGlobalMetaAtStart
-
-<!-- Unknown: readMidi No such identifier: readMidi-->
-
+[readMidi]: /docs/api/Music-Score-Import-Midi.html#v:readMidi
 [writeMidi]: /docs/api/Music-Score-Export-Midi.html#v:writeMidi
-[playMidi]: /docs/api/Music-Score-Export-Midi.html#v:playMidi
+
+<!-- Unknown: playMidi No such identifier: playMidi-->
+
 [playMidiIO]: /docs/api/Music-Score-Export-Midi.html#v:playMidiIO
 
 [Lilypond]:         http://lilypond.org

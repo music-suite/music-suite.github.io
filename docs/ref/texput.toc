@@ -1,0 +1,80 @@
+\contentsline {subsection}{The Music Suite}{1}{section*.2}
+\contentsline {subsubsection}{An example}{1}{section*.3}
+\contentsline {subsubsection}{Input and output}{2}{section*.4}
+\contentsline {subsubsection}{A note on the versioning}{2}{section*.5}
+\contentsline {subsubsection}{More information}{2}{section*.6}
+\contentsline {section}{Getting Started}{2}{section*.7}
+\contentsline {subsection}{Installing the Suite}{2}{section*.8}
+\contentsline {subsection}{Writing music}{2}{section*.9}
+\contentsline {subsubsection}{With music files}{3}{section*.10}
+\contentsline {subsubsection}{With Haskell files}{3}{section*.11}
+\contentsline {subsection}{Time and duration}{4}{section*.12}
+\contentsline {subsection}{Composition}{5}{section*.13}
+\contentsline {subsection}{Pitch}{8}{section*.14}
+\contentsline {subsubsection}{Pitch names}{8}{section*.15}
+\contentsline {subsubsection}{Interval names}{10}{section*.16}
+\contentsline {subsubsection}{Qualified pitch and interval names}{11}{section*.17}
+\contentsline {subsection}{Dynamics}{11}{section*.18}
+\contentsline {subsection}{Articulation}{11}{section*.19}
+\contentsline {subsection}{Parts}{13}{section*.20}
+\contentsline {subsection}{Space}{14}{section*.21}
+\contentsline {subsection}{Tremolo}{14}{section*.22}
+\contentsline {subsection}{Slides and glissando}{14}{section*.23}
+\contentsline {subsection}{Harmonics}{14}{section*.24}
+\contentsline {subsection}{Text}{15}{section*.25}
+\contentsline {subsection}{Chords}{15}{section*.26}
+\contentsline {subsection}{Rests}{16}{section*.27}
+\contentsline {section}{Transformations}{16}{section*.28}
+\contentsline {subsection}{Time}{16}{section*.29}
+\contentsline {subsection}{Onset and duration}{17}{section*.30}
+\contentsline {subsection}{Pitch}{17}{section*.31}
+\contentsline {subsection}{Pitches and intervals}{18}{section*.32}
+\contentsline {subsection}{Name and accidental}{18}{section*.33}
+\contentsline {subsection}{Spelling}{18}{section*.34}
+\contentsline {subsection}{Quality and number}{18}{section*.35}
+\contentsline {subsection}{Intonation}{18}{section*.36}
+\contentsline {subsection}{Inspecting dissonant intervals}{19}{section*.37}
+\contentsline {subsection}{Semitones and enharmonic equivalence}{19}{section*.38}
+\contentsline {subsection}{Spelling}{19}{section*.39}
+\contentsline {subsection}{Scales}{19}{section*.40}
+\contentsline {subsection}{Chords}{19}{section*.41}
+\contentsline {subsection}{Parts}{19}{section*.42}
+\contentsline {subsection}{Instrument, part and sub-part}{19}{section*.43}
+\contentsline {subsection}{Extracting and modifying parts}{19}{section*.44}
+\contentsline {subsection}{Part composition}{19}{section*.45}
+\contentsline {section}{Time-based structures}{19}{section*.46}
+\contentsline {subsection}{Time and duration}{20}{section*.47}
+\contentsline {subsection}{Spans}{20}{section*.48}
+\contentsline {subsection}{Notes}{20}{section*.49}
+\contentsline {subsection}{Voice}{20}{section*.50}
+\contentsline {subsection}{Tracks}{21}{section*.51}
+\contentsline {subsection}{Scores}{21}{section*.52}
+\contentsline {section}{Meta-information}{21}{section*.53}
+\contentsline {subsection}{Title}{22}{section*.54}
+\contentsline {subsection}{Attribution}{22}{section*.55}
+\contentsline {subsection}{Key signatures}{23}{section*.56}
+\contentsline {subsection}{Time signatures}{23}{section*.57}
+\contentsline {subsection}{Tempo}{23}{section*.58}
+\contentsline {subsection}{Fermatas, caesuras and breathing marks}{23}{section*.59}
+\contentsline {subsection}{Ritardando and accellerando}{24}{section*.60}
+\contentsline {subsection}{Rehearsal marks}{24}{section*.61}
+\contentsline {subsection}{Barlines and repeats}{24}{section*.62}
+\contentsline {subsection}{Clefs}{25}{section*.63}
+\contentsline {subsection}{Annotations}{25}{section*.64}
+\contentsline {subsection}{Custom meta-information}{26}{section*.65}
+\contentsline {section}{Import and export}{26}{section*.66}
+\contentsline {subsection}{MIDI}{27}{section*.67}
+\contentsline {subsection}{Lilypond}{27}{section*.68}
+\contentsline {subsection}{MusicXML}{27}{section*.69}
+\contentsline {subsection}{ABC Notation}{29}{section*.70}
+\contentsline {subsection}{Guido}{29}{section*.71}
+\contentsline {subsection}{Vextab}{29}{section*.72}
+\contentsline {subsection}{Sibelius}{29}{section*.73}
+\contentsline {section}{Customizing music representation}{29}{section*.74}
+\contentsline {section}{Examples}{30}{section*.75}
+\contentsline {subsection}{Counterpoint}{30}{section*.76}
+\contentsline {subsection}{Generative music}{30}{section*.77}
+\contentsline {subsection}{Viola duo}{31}{section*.78}
+\contentsline {section}{Design overview}{31}{section*.79}
+\contentsline {subsubsection}{Compability with other libraries}{32}{section*.80}
+\contentsline {subsubsection}{Acknowledgements}{32}{section*.81}

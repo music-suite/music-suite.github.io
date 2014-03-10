@@ -1,0 +1,21 @@
+\include "lilypond-book-preamble.ly"
+\paper {
+  #(define dump-extents #t)
+
+  indent = 0\mm
+  line-width = 210\mm - 2.0 * 0.4\in
+  ragged-right = ##t
+  force-assignment = #""
+  line-width = #(- line-width (* mm  3.000000))
+}
+\header {
+  title = ""
+  composer = ""
+}
+\layout {
+}
+
+<<
+    \new Staff {   \set Staff.instrumentName = "" \set Staff.shortInstrumentName = "" \clef treble <c'>1 <d'>1 <e'>1 <f'>1 <g'>1 <a'>1 <b'>1 <c''>1
+               }
+>>

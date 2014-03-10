@@ -90,15 +90,14 @@ window.onload = function () {pageLoad();setSynopsis("mini_Music-Pitch-Common-Int
 </p></div></div><h3 id="g:5">Inspecting intervals
 </h3><div class="top"><p class="src"><a name="v:isNegative" class="def">isNegative</a> :: <a href="Music-Pitch-Common-Interval.html#t:Interval">Interval</a> -&gt; Bool</p><div class="doc"><p>Returns whether the given interval is negative.
 </p></div></div><div class="top"><p class="src"><a name="v:isPositive" class="def">isPositive</a> :: <a href="Music-Pitch-Common-Interval.html#t:Interval">Interval</a> -&gt; Bool</p><div class="doc"><p>Returns whether the given interval is positive.
-</p></div></div><div class="top"><p class="src"><a name="v:isNonNegative" class="def">isNonNegative</a> :: <a href="Music-Pitch-Common-Interval.html#t:Interval">Interval</a> -&gt; Bool</p><div class="doc"><p>Returns whether the given interval is non-negative.
-</p><p>That is, whether it is either positive or a perfect unison.
+</p></div></div><div class="top"><p class="src"><a name="v:isNonNegative" class="def">isNonNegative</a> :: <a href="Music-Pitch-Common-Interval.html#t:Interval">Interval</a> -&gt; Bool</p><div class="doc"><p>Returns whether the given interval is non-negative. This implies that it is either positive or a perfect unison.
 </p></div></div><div class="top"><p class="src"><a name="v:isPerfectUnison" class="def">isPerfectUnison</a> :: <a href="Music-Pitch-Common-Interval.html#t:Interval">Interval</a> -&gt; Bool</p><div class="doc"><p>Returns whether the given interval a perfect unison.
 </p></div></div><div class="top"><p class="src"><a name="v:isStep" class="def">isStep</a> :: <a href="Music-Pitch-Common-Interval.html#t:Interval">Interval</a> -&gt; Bool</p><div class="doc"><p>Returns whether the given interval is a step (a second or smaller).
-</p><p>Only the number portion is taken into account, so <code>_A2</code> is considered
+</p><p>Only diatonic <code><a href="Music-Pitch-Common-Interval.html#v:number">number</a></code> is taken into account, so <code>_A2</code> is considered
  a step and <code>m3</code> a leap, even though they have the same number of
  semitones.
-</p></div></div><div class="top"><p class="src"><a name="v:isLeap" class="def">isLeap</a> :: <a href="Music-Pitch-Common-Interval.html#t:Interval">Interval</a> -&gt; Bool</p><div class="doc"><p>Returns whether the given interval is a leap (larger than a secon).
-</p><p>Only the number portion is taken into account, so <code>_A2</code> is considered
+</p></div></div><div class="top"><p class="src"><a name="v:isLeap" class="def">isLeap</a> :: <a href="Music-Pitch-Common-Interval.html#t:Interval">Interval</a> -&gt; Bool</p><div class="doc"><p>Returns whether the given interval is a leap (larger than a second).
+</p><p>Only the diatonic <code><a href="Music-Pitch-Common-Interval.html#v:number">number</a></code> is taken into account, so <code>_A2</code> is considered
  a step and <code>m3</code> a leap, even though they have the same number of
  semitones.
 </p></div></div><h3 id="g:6">Simple and compound intervals

@@ -10,7 +10,4 @@ window.onload = function () {pageLoad();setSynopsis("mini_Music-Score-Meta-Clef.
 </p></div></div><div class="top"><p class="src"><a name="v:clefDuring" class="def">clefDuring</a> :: (<a href="Music-Score-Meta.html#t:HasMeta">HasMeta</a> a, <a href="Music-Score-Part.html#t:HasPart-39-">HasPart'</a> a) =&gt; <a href="Music-Time-Span.html#t:Span">Span</a> -&gt; <a href="Music-Score-Meta-Clef.html#t:Clef">Clef</a> -&gt; a -&gt; a</p><div class="doc"><p>Set clef of the given part of a score.
 </p></div></div><h2 id="g:3">Extracting clefs
 </h2><div class="top"><p class="src"><a name="v:withClef" class="def">withClef</a> :: <a href="Music-Score-Part.html#t:HasPart-39-">HasPart'</a> a =&gt; <a href="Music-Score-Meta-Clef.html#t:Clef">Clef</a> -&gt; (<a href="Music-Score-Meta-Clef.html#t:Clef">Clef</a> -&gt; <a href="Music-Score-Score.html#t:Score">Score</a> a -&gt; <a href="Music-Score-Score.html#t:Score">Score</a> a) -&gt; <a href="Music-Score-Score.html#t:Score">Score</a> a -&gt; <a href="Music-Score-Score.html#t:Score">Score</a> a</p><div class="doc"><p>Extract the clef in from the given score, using the given default clef.
-</p><p>The given function is called once for each clef change, containing the fragment
- of the score to which the given clef change is to be applied. This is mostly
- used by notation backends to emit a clef mark at the beginning of each fragment. 
 </p></div></div></div></div><div id="footer"><p>Produced by <a href="http://www.haskell.org/haddock/">Haddock</a> version 2.13.2</p></div></body></html>
