@@ -4594,7 +4594,7 @@ ormalTok{scat [c,d,e]}
 
 *
 (Please type a command or say `\end')
-*ABC notation (for use with \href{http://code.google.com/p/abcjs/}{abcjs}
+*ABC notation (for use with \href{https://github.com/paulrosen/abcjs}{abcjs}
 
 *or similar engines) is still experimental.
 
