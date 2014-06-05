@@ -19,7 +19,7 @@ To generate music we write an *expressions* such as this one:
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='4ea6815a58473e70.mid'>[listen]</a></div>
 
 ![](4ea6815a58473e70x.png)
 
@@ -35,15 +35,15 @@ in stretch (1/8) m
 To transform music, we write a *function*. For example the following function halves all durations and transposes all pitches up a minor sixth:
 
 ```haskell
-up (minor sixth) . compress 2
+up m6 . compress 2
 
 ```
 
 Applied to the above music we get:
 
+<div class='haskell-music-listen'><a href='702bad1be0859e8d.mid'>[listen]</a></div>
 
-
-![](1dfd7766e2c33bbex.png)
+![](702bad1be0859e8dx.png)
 
 ### Input and output
 

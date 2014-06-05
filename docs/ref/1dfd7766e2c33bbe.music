@@ -1,0 +1,4 @@
+let
+    transform = up (minor sixth) . compress 2
+    m = staccato (scat [c,d,e,c]^/2) |> ab |> b_ |> legato (d |> c)^*2
+in transform $ stretch (1/8) m

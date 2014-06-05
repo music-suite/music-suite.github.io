@@ -1,0 +1,5 @@
+let
+    p1 = scat [c..c']^/4
+    p2 = delay (1/4) $ scat [c..c']^/4
+    p3 = delay (3/4) $ scat [c..c']^/4
+in (accent . legato) (p1 </> p2 </> p3)

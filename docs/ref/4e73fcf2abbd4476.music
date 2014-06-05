@@ -1,0 +1,3 @@
+let
+    intervals = [diminish _P5, (diminish . diminish) _P5]
+in scat $ fmap (`up` c) intervals

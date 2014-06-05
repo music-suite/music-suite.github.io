@@ -1,0 +1,7 @@
+let subj = mcatMaybes $ scat [ 
+            scat [rest,c,d,e], 
+            f^*1.5, scat[g,f]^/4, scat [e,a,d], g^*1.5,
+            scat [a,g,f,e,f,e,d]^/2, c^*2 
+        ]^/8
+
+in (delay 1.5 . up _P5) subj </> subj

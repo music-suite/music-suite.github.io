@@ -1,0 +1,1 @@
+mcatMaybes $ times 4 (accentAll g^*2 |> rest |> scat [d,d]^/2)^/8

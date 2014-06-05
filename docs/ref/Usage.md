@@ -29,9 +29,9 @@ The suite also includes a special program called `music-transf`, which interpret
 
 Among other things, `music-transf` is useful for generating nice inline musical examples such as this one:
 
+<div class='haskell-music-listen'><a href='361e4aee2793308d.mid'>[listen]</a></div>
 
-
-![](4a066366f32c9a51x.png)
+![](361e4aee2793308dx.png)
 
 
 

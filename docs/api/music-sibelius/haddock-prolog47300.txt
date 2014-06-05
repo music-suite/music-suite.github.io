@@ -1,0 +1,3 @@
+Import music from Sibelius (experimental).
+
+This library is part of the Music Suite, see <http://music-suite.github.io>.

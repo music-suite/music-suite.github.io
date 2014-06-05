@@ -11,7 +11,7 @@ preview musical scores. See [Import and Export](#import-and-export) for other fo
 
 To install the suite, simply install the Haskell platform, and then run:
 
-    cabal install music-preludes
+    cabal install music-suite
 
 
 ## Writing music
@@ -36,17 +36,18 @@ The simplest way to render this expression is to save it in a file named
 `foo.music` (or similar) and convert it using `music2pdf foo.music`. This
 should render a file called `foo.pdf` containing the following:
 
-
+<div class='haskell-music-listen'><a href='e812b3370beb65f.mid'>[listen]</a></div>
 
 ![](e812b3370beb65fx.png)
 
 There are several programs for converting music expressions:
 
-* `music2mid` 
-* `music2musicxml` 
-* `music2ly` 
-* `music2wav` 
+* `music2midi`
+* `music2musicxml`
+* `music2ly`
 * `music2pdf`
+* `music2svg`
+* `music2png`
 
 ### With Haskell files
 
@@ -80,7 +81,7 @@ A single note can be entered by its name. This will render a note in the middle 
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='344658b06e772a3e.mid'>[listen]</a></div>
 
 ![](344658b06e772a3ex.png)
 
@@ -102,7 +103,7 @@ for all values of *x*.
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='17acdbdbe31e8366.mid'>[listen]</a></div>
 
 ![](17acdbdbe31e8366x.png)
 
@@ -115,7 +116,7 @@ stretch (1/2) c
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='c206dd98257abc9.mid'>[listen]</a></div>
 
 ![](c206dd98257abc9x.png)
 
@@ -128,7 +129,7 @@ stretch 2 c
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='47c74d92daacf31f.mid'>[listen]</a></div>
 
 ![](47c74d92daacf31fx.png)
 
@@ -145,7 +146,7 @@ Offset and duration is not limited to simple numbers. Here are some more complex
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='7989d1133a0ecb36.mid'>[listen]</a></div>
 
 ![](7989d1133a0ecb36x.png)
 
@@ -158,7 +159,7 @@ c^*(9/8) |> d^*(7/8)
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='4247fd44e823a93f.mid'>[listen]</a></div>
 
 ![](4247fd44e823a93fx.png)
 
@@ -175,7 +176,7 @@ The `^*` and `^/` operators can be used as shorthands for `delay` and `compress`
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='6e082ce15a9e3be5.mid'>[listen]</a></div>
 
 ![](6e082ce15a9e3be5x.png)
 
@@ -192,12 +193,12 @@ of type `Score Note`, and the transformations as functions `Score Note -> Score 
 
 <div class='haskell-music'>
 
+<div class='haskell-music-listen'><a href='2f3b5be629552536.mid'>[listen]</a></div>
 
-
-![](72259aeb0502b2ebx.png)
+![](2f3b5be629552536x.png)
 
 ```haskell
-up (perfect octave) . compress 2 . delay 3 $ c
+up _P8 . compress 2 . delay 3 $ c
 
 ```
 
@@ -210,7 +211,7 @@ Music expressions can be composed [`<>`][<>]:
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='2417d7f318b299ee.mid'>[listen]</a></div>
 
 ![](2417d7f318b299eex.png)
 
@@ -227,7 +228,7 @@ Or in sequence using [`|>`][|>]:
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='e812b3370beb65f.mid'>[listen]</a></div>
 
 ![](e812b3370beb65fx.png)
 
@@ -242,7 +243,7 @@ Or partwise using [`</>`][</>]:
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='59dcbb2937c2906c.mid'>[listen]</a></div>
 
 ![](59dcbb2937c2906cx.png)
 
@@ -257,7 +258,7 @@ Here is a more complex example:
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='28c98e09d9084e17.mid'>[listen]</a></div>
 
 ![](28c98e09d9084e17x.png)
 
@@ -275,7 +276,7 @@ As a shorthand for `x |> y |> z ..`, we can write [`scat`][scat] `[x, y, z]` (sh
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='8dcc23c8a43be98.mid'>[listen]</a></div>
 
 ![](8dcc23c8a43be98x.png)
 
@@ -290,7 +291,7 @@ For `x <> y <> z ..`, we can write [`pcat`][pcat] `[x, y, z]` (short for *parall
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='1a42f3fa65506151.mid'>[listen]</a></div>
 
 ![](1a42f3fa65506151x.png)
 
@@ -316,7 +317,7 @@ For Western-style pitch types, the standard pitch names can be used:
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='6cfe439b3533d41a.mid'>[listen]</a></div>
 
 ![](6cfe439b3533d41ax.png)
 
@@ -347,7 +348,7 @@ You can change octave using `octavesUp` and `octavesDown`:
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='5ee112ca5880e24a.mid'>[listen]</a></div>
 
 ![](5ee112ca5880e24ax.png)
 
@@ -366,7 +367,7 @@ There is also a shorthand for other octaves:
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='762a2558558e6d28.mid'>[listen]</a></div>
 
 ![](762a2558558e6d28x.png)
 
@@ -382,7 +383,7 @@ Sharps and flats can be added by the functions [`sharp`][sharp] and [`flat`][fla
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='7d4cbd690475a6c8.mid'>[listen]</a></div>
 
 ![](7d4cbd690475a6c8x.png)
 
@@ -397,7 +398,7 @@ You can also use the ordinary (prefix) versions `sharpen` and `flatten`.
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='1101f1aee219368e.mid'>[listen]</a></div>
 
 ![](1101f1aee219368ex.png)
 
@@ -414,7 +415,7 @@ As you might expect, there is also a shorthand for sharp and flat notes:
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='2fb5ed23f747e89c.mid'>[listen]</a></div>
 
 ![](2fb5ed23f747e89cx.png)
 
@@ -462,13 +463,13 @@ to alter the size of an interval. For example:
 
 <div class='haskell-music'>
 
+<div class='haskell-music-listen'><a href='4e73fcf2abbd4476.mid'>[listen]</a></div>
 
-
-![](72c9aad78038ac0cx.png)
+![](4e73fcf2abbd4476x.png)
 
 ```haskell
 let
-    intervals = [diminish (perfect fifth), (diminish . diminish) (perfect fifth)]
+    intervals = [diminish _P5, (diminish . diminish) _P5]
 in scat $ fmap (`up` c) intervals
 
 ```
@@ -478,9 +479,6 @@ in scat $ fmap (`up` c) intervals
 You can add pitches and intervals using the [`.-.`][.-.] and [`.+^`][.+^] operators. To memorize these
 operators, think of pitches and points `.` and intervals as vectors `^`.
 
-```music+haskellx
-setPitch (c .+^ m3) $ return c_
-```
 
 
 ### Qualified pitch and interval names
@@ -507,28 +505,28 @@ An overview of the dynamic values:
 
 <div class='haskell-music'>
 
+<div class='haskell-music-listen'><a href='30d94bf3a5798872.mid'>[listen]</a></div>
 
-
-![](73dd0a315ca1480x.png)
+![](30d94bf3a5798872x.png)
 
 ```haskell
-scat $ zipWith dynamics [fff,ff,_f,mf,mp,_p,pp,ppp] [c..]
+scat $ zipWith level [fff,ff,_f,mf,mp,_p,pp,ppp] [c..]
 
 ```
 
 </div>
 
-TODO other ways of applying dynamics
+TODO other ways of applying level
 
 ## Articulation
 
-Some basic articulation functions are [`legato`][legato], [`staccato`][staccato], [`portato`][portato], [`tenuto`][tenuto], [`separated`][separated], [`spiccato`][spiccato]:
+Some basic articulation functions are [`legato`][legato], [`staccato`][staccato], [`portato`][portato], [`tenuto`][tenuto], [`separated`][separated], [`staccatissimo`][staccatissimo]:
 
 <div class='haskell-music'>
 
+<div class='haskell-music-listen'><a href='562059c2a485ae04.mid'>[listen]</a></div>
 
-
-![](4e0bf333c3a1253bx.png)
+![](562059c2a485ae04x.png)
 
 ```haskell
 legato (scat [c..g]^/8)
@@ -541,7 +539,7 @@ tenuto (scat [c..g]^/8)
     </>
 separated (scat [c..g]^/8)
     </>
-spiccato (scat [c..g]^/8)
+staccatissimo (scat [c..g]^/8)
 
 ```
 
@@ -552,7 +550,7 @@ spiccato (scat [c..g]^/8)
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='7505c58579d6f2eb.mid'>[listen]</a></div>
 
 ![](7505c58579d6f2ebx.png)
 
@@ -570,7 +568,7 @@ marcato (scat [c..g]^/8)
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='222067bf4985543d.mid'>[listen]</a></div>
 
 ![](222067bf4985543dx.png)
 
@@ -587,7 +585,7 @@ Applying articulations over multiple parts:
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='6d6121cf5a1057ff.mid'>[listen]</a></div>
 
 ![](6d6121cf5a1057ffx.png)
 
@@ -625,7 +623,7 @@ TODO
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='33035e5b50c27efa.mid'>[listen]</a></div>
 
 ![](33035e5b50c27efax.png)
 
@@ -645,7 +643,7 @@ TODO chord tremolo
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='455023b9c80482a0.mid'>[listen]</a></div>
 
 ![](455023b9c80482a0x.png)
 
@@ -662,7 +660,7 @@ Use the [`harmonic`][harmonic] function:
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='3577bdcff02045dd.mid'>[listen]</a></div>
 
 ![](3577bdcff02045ddx.png)
 
@@ -690,7 +688,7 @@ TODO
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='5351da121c9bf05d.mid'>[listen]</a></div>
 
 ![](5351da121c9bf05dx.png)
 
@@ -707,7 +705,7 @@ Note with the same onset and offset are rendered as chords by default. If you wa
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='2eb839e952b93cc5.mid'>[listen]</a></div>
 
 ![](2eb839e952b93cc5x.png)
 
@@ -722,7 +720,7 @@ Or, equivalently:
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='2d1c5c02c1378cf0.mid'>[listen]</a></div>
 
 ![](2d1c5c02c1378cf0x.png)
 
@@ -737,7 +735,7 @@ TODO how part separation works w.r.t. division etc
 
 [`simultaneous`][simultaneous]
 
-[`mapSimultaneous`][mapSimultaneous]
+[`simult`][simult]
 
 ## Rests
 
@@ -745,16 +743,16 @@ Similar to chords, there is usually no need to handle rests explicitly.
 
 TODO add explicit rests etc
 
-[`removeRests`][removeRests] 
+[`mcatMaybes`][mcatMaybes] 
 
 <div class='haskell-music'>
 
+<div class='haskell-music-listen'><a href='1f74a9ab0e749367.mid'>[listen]</a></div>
 
-
-![](655bf6c96f41cdbfx.png)
+![](1f74a9ab0e749367x.png)
 
 ```haskell
-removeRests $ times 4 (accent g^*2 |> rest |> scat [d,d]^/2)^/8
+mcatMaybes $ times 4 (accentAll g^*2 |> rest |> scat [d,d]^/2)^/8
 
 ```
 
@@ -771,13 +769,12 @@ removeRests $ times 4 (accent g^*2 |> rest |> scat [d,d]^/2)^/8
 
 <div class='haskell-music'>
 
+<div class='haskell-music-listen'><a href='339ae0c0fd3b9259.mid'>[listen]</a></div>
 
-
-![](789b7d6d37b6f45cx.png)
+![](339ae0c0fd3b9259x.png)
 
 ```haskell
 let
-    rev = id -- TODO
     melody = accent $ legato $ scat [d, scat [g,fs]^/2,bb^*2]^/4
 in melody |> rev melody
 
@@ -789,7 +786,7 @@ in melody |> rev melody
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='701c5015f33304a4.mid'>[listen]</a></div>
 
 ![](701c5015f33304a4x.png)
 
@@ -806,7 +803,7 @@ in times 4 $ melody
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='60dc3260048dae39.mid'>[listen]</a></div>
 
 ![](60dc3260048dae39x.png)
 
@@ -820,35 +817,28 @@ scat [e,d,f,e] <> c
 
 [`anticipate`][anticipate]
 
+<!--
 [`repeated`][repeated]
 
-<div class='haskell-music'>
-
-
-
-![](209d91caa25c1affx.png)
-
-```haskell
+```music+haskellx
 let 
     m = legato $ scat [c,d,scat [e,d]^/2, c]^/4 
 in [c,eb,ab,g] `repeated` (\p -> up (asPitch p .-. c) m)
-
 ```
-
-</div>
+-->
 
 ## Onset and duration
 
 <div class='haskell-music'>
 
+<div class='haskell-music-listen'><a href='55fd573b2001a8a.mid'>[listen]</a></div>
 
-
-![](6f4bfbf5a4d6c76ax.png)
+![](55fd573b2001a8ax.png)
 
 ```haskell
 let                
     melody = asScore $ legato $ scat [scat [c,d,e,c], scat [e,f], g^*2]
-    pedal  = asScore $ delayTime (onset melody) $ stretch (duration melody) $ c_
+    pedal  = asScore $ delayTime (melody^.onset) $ stretch (melody^.duration) $ c_
 in compress 4 $ melody </> pedal
 
 ```
@@ -857,20 +847,20 @@ in compress 4 $ melody </> pedal
 
 ## Pitch
 
-[`inv`][inv]
+[`invertPitches`][invertPitches]
 
 <div class='haskell-music'>
 
+<div class='haskell-music-listen'><a href='572fb63c22f84242.mid'>[listen]</a></div>
 
-
-![](410e93299536f330x.png)
+![](572fb63c22f84242x.png)
 
 ```haskell
 (scat [c..g]^*(2/5))
     </>
-(inv c $ scat [c..g]^*(2/5))
+(invertPitches c $ scat [c..g]^*(2/5))
     </>
-(inv e $ scat [c..g]^*(2/5))
+(invertPitches e $ scat [c..g]^*(2/5))
 
 ```
 
@@ -931,13 +921,13 @@ TODO
 
 # Time-based structures
 
-[`Delayable`][Delayable]
+[`Transformable`][Transformable]
 
-[`Stretchable`][Stretchable]
+[`Splittable`][Splittable]
 
-[`HasOnset`][HasOnset]
+[`Reversible`][Reversible]
 
-[`HasOffset`][HasOffset]
+[`HasPosition`][HasPosition]
 
 [`HasDuration`][HasDuration]
 
@@ -962,7 +952,7 @@ A [`Voice`][Voice] represents a single voice of music. It consists of a sequence
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='786d2383245b9c9d.mid'>[listen]</a></div>
 
 ![](786d2383245b9c9dx.png)
 
@@ -975,7 +965,7 @@ stretch (1/4) $ scat [c..a]^/2 |> b |> c'^*4
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='6391c8a4c4a26fdb.mid'>[listen]</a></div>
 
 ![](6391c8a4c4a26fdbx.png)
 
@@ -989,13 +979,8 @@ stretch (1/2) $ scat [c..e]^/3 |> f |> g^*2
 
 It can be converted into a score by stretching each element and composing in sequence.
 
-<div class='haskell-music'>
-
-
-
-![](6bebc8106dcb32e8x.png)
-
-```haskell
+<!--
+```music+haskellx
 let
     x = [ (1, c),
           (1, d),
@@ -1007,10 +992,8 @@ let
                  (4, up _P8 x) ]^.voice
 
 in stretch (1/8) $ voiceToScore $ y
-
 ```
-
-</div>
+-->
 
 ## Tracks
 
@@ -1018,21 +1001,17 @@ A [`Track`][Track] is similar to a score, except that it events have no offset o
 
 It can be converted into a score by delaying each element and composing in parallel. An explicit duration has to be provided.
 
-<div class='haskell-music'>
-
-
-
-![](7e2913e2885a8832x.png)
-
-```haskell
+<!--
+```music+haskellx
 let
-    x = [(0, c), (1, d), (2, e)]^.track
-    y = join $ [(0, x), (1.5,  up _P5 x), (3.25, up _P8 x)]^.track
+    x = [ (0, c), (1, d), (2, e) ]^.track
+    y = join $ [ (0, x), 
+                (1.5,  up _P5 x), 
+                (3.25, up _P8 x) ]^.track
+
 in trackToScore (1/8) y
-
 ```
-
-</div>
+-->
 
 ## Scores
 
@@ -1059,7 +1038,7 @@ The distinction between ordinary musical data and meta-data is not always clear 
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='6fcc5379512ba159.mid'>[listen]</a></div>
 
 ![](6fcc5379512ba159x.png)
 
@@ -1084,7 +1063,7 @@ title "Frere Jaques" $ scat [c,d,e,c]^/4
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='7a6e97aaa81dd848.mid'>[listen]</a></div>
 
 ![](7a6e97aaa81dd848x.png)
 
@@ -1097,7 +1076,7 @@ composer "Anonymous" $ scat [c,d,e,c]
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='71070892445769d.mid'>[listen]</a></div>
 
 ![](71070892445769dx.png)
 
@@ -1181,7 +1160,7 @@ Whenever a bar line is created as a result of a meta-event, an shorted time sign
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='5f1d2f467655ff45.mid'>[listen]</a></div>
 
 ![](5f1d2f467655ff45x.png)
 
@@ -1200,37 +1179,9 @@ TODO repeats
 
 To set the clef for a whole passage, use [`clef`][clef]. The clef is used by most notation backends and ignored by audio backends.
 
-<div class='haskell-music'>
-
-
-
-![](1380bb5639887bcfx.png)
-
-```haskell
-let
-    part1 = clef FClef $ staccato $ scat [c_,g_,c,g_]
-    part2 = clef CClef $ staccato $ scat [ab_,eb,d,a]
-    part3 = clef GClef $ staccato $ accentLast $ scat [g,fs,e,d]
-in compress 8 $ part1 |> part2 |> part3
-
-```
-
-</div>
-
 To set the clef for a preexisting passage in an existing score, use [`clefDuring`][clefDuring].
 
-<div class='haskell-music'>
-
-
-
-![](653e320f9ed9980ax.png)
-
-```haskell
-clefDuring (0.25 <-> 0.5) CClef $ clefDuring (0.75 <-> 1) FClef $ compress 8 $ scat [c_..c']
-
-```
-
-</div>
+TODO example
 
 ## Annotations
 
@@ -1241,7 +1192,7 @@ Annotations are invisible by default. To show annotations in the generated outpu
 
 <div class='haskell-music'>
 
-
+<div class='haskell-music-listen'><a href='5753dd6f3c2997e3.mid'>[listen]</a></div>
 
 ![](5753dd6f3c2997e3x.png)
 
@@ -1321,7 +1272,7 @@ The output is fairly complete, with some limitations ([reports][issue-tracker] w
 Beware of the extreme verboseness of XML, for example:
 
 ```haskell
-toXmlString $ asScore $ scat [c,d,e]
+toMusicXmlString $ asScore $ scat [c,d,e]
 
 ```
 
@@ -1426,236 +1377,138 @@ This feature could of course also be used to convert Sibelius scores to other fo
 
 TODO
 
+
 # Examples
 
-Some more involved examples:
-
-## Counterpoint
-
-
-<div class='haskell-music'>
-
-
-
-![](3147fc3d10ebefd6x.png)
-
-```haskell
-let                      
-    subj = asScore $ scat [ c,       d,        f,          e           ]
-    cs1  = asScore $ scat [ g,f,e,g, f,a,g,d', c',b,c',d', e',g',f',e' ]
-in compress 4 cs1 </> subj
-
-```
-
-</div>
-
-TODO about
-
-<div class='haskell-music'>
-
-
-
-![](509e242376de176ex.png)
-
-```haskell
-let subj = removeRests $ scat [ 
-            scat [rest,c,d,e], 
-            f^*1.5, scat[g,f]^/4, scat [e,a,d], g^*1.5,
-            scat [a,g,f,e,f,e,d]^/2, c^*2 
-        ]^/8
-
-in (delay 1.5 . up _P5) subj </> subj
-
-```
-
-</div>
-
-## Generative music
-
-<div class='haskell-music'>
-
-
-
-![](6e89c3525b872b20x.png)
-
-```haskell
-let
-    row = cycle [c,eb,ab,asPitch g]
-    mel = asScore $ scat [d, scat [g,fs]^/2,bb^*2]^/4
-in (take 25 $ row) `repeated` (\p -> up (asPitch p .-. c) mel)
-
-```
-
-</div>
-
-## Viola duo
-
-<!--
-```music+haskellx
-let
-    toLydian = mapPitch' (\p -> if p == c then cs else p)
-
-    subj1 = (^/2) $
-        (legato.accent) (b_ |> c) |> (legato.accent) (c |> b_^*2)
-            |> legato (scat [b_, c, d])
-            |> b_ |> c |> b_^*2
-        |> legato (scat [e, d, b_, c]) |> b_^*2
-        |> scat [d, e, b_] |> c^*2 |> b_
-
-    pres1 = subj1^*(2/2)
-    pres2 = subj1^*(2/2) </> delay 2 (subj1^*(3/2))
-
-    part1 = pres1 |> pres2
-    part2 = pres1 |> pres2
-
-in clef CClef $ dynamics pp $ compress 2 $ part1 |> toLydian part2
-```
--->
-
-<!--
-### Schubert
-
-```music+haskellx
-let
-    motive = (legato $ stretchTo 2 $ scat [g,a,bb,c',d',eb']) |> staccato (scat [d', bb, g])
-    bar    = rest^*4
-
-    song    = mempty
-    left    = times 4 (times 4 $ removeRests $ triplet g)
-    right   = removeRests $ times 2 (delay 4 motive |> rest^*3)
-
-    triplet = group 3
-
-    a `x` b = a^*(3/4) |> b^*(1/4)
-    a `l` b = (a |> b)^/2
-
-in  stretch (1/4) $ song </> left </> down _P8 right      
-```
--->
-
-
-
+See the [examples](https://github.com/music-suite/music-preludes/tree/master/examples) directory in `music-preludes`.
 
 
 ### Acknowledgements
 
-The Music Suite is indebted to many other previous libraries and computer music environments, particularly [Common Music][common-music], [Max/MSP][max-msp], [SuperCollider][supercollider], [music21][music21], [Guido][guido], [Lilypond][lilypond] and [Abjad][abjad]. Some of the ideas for the quantization algorithms came from [Fomus][fomus].
+The Music Suite is indebted to many other previous libraries and computer music environments, particularly [Common Music][common-music], [Max/MSP][max-msp], [SuperCollider][supercollider], [nyquist][nyquist], [music21][music21], [Guido][guido], [Lilypond][lilypond] and [Abjad][abjad]. Some of the ideas for the quantization algorithms came from [Fomus][fomus].
 
 It obviously ows a lot to the Haskell libraries that it follows including [Haskore][haskore], [Euterpea][euterpea] and [temporal-media][temporal-media]. The idea of defining a custom internal representation, but relying on standardized formats for input and output comes from [Pandoc][pandoc]. The idea of splitting the library into a set of packages (and the name) comes from the [Haskell Suite][haskell-suite]. The temporal structures, their instances and the concept of denotational design comes from [Reactive][reactive] (and its predecessors). [Diagrams][diagrams] provided the daring example and some general influences on the design.
 
 
-<!--
-![Modules](module-graph.png)
--->
+<script src="js/jasmid/stream.js"></script>
+<script src="js/jasmid/midifile.js"></script>
+<script src="js/jasmid/replayer.js"></script>
+<script src="js/midi.js"></script>
+<script src="js/Base64.js" type="text/javascript"></script>
+<script src="js/base64binary.js" type="text/javascript"></script>
+<script src="js/main.js" type="text/javascript"></script>
 
 
 
-[stretch]: /docs/api/Music-Time-Stretchable.html#v:stretch
-[compress]: /docs/api/Music-Time-Stretchable.html#v:compress
-[<>]: /docs/api/Music-Pitch.html#v:-60--62-
-[|>]: /docs/api/Music-Time-Juxtapose.html#v:-124--62-
-[</>]: /docs/api/Music-Score-Combinators.html#v:-60--47--62-
-[scat]: /docs/api/Music-Time-Juxtapose.html#v:scat
-[pcat]: /docs/api/Music-Time-Juxtapose.html#v:pcat
-[IsPitch]: /docs/api/Music-Pitch-Literal-Pitch.html#t:IsPitch
-[sharp]: /docs/api/Music-Pitch-Common-Pitch.html#v:sharp
-[flat]: /docs/api/Music-Pitch-Common-Pitch.html#v:flat
-[IsInterval]: /docs/api/Music-Pitch-Literal-Interval.html#t:IsInterval
-[sharpen]: /docs/api/Music-Pitch-Alterable.html#v:sharpen
-[flatten]: /docs/api/Music-Pitch-Alterable.html#v:flatten
-[augment]: /docs/api/Music-Pitch-Augmentable.html#v:augment
-[diminish]: /docs/api/Music-Pitch-Augmentable.html#v:diminish
-[.-.]: /docs/api/Music-Pitch.html#v:-46--45--46-
-[.+^]: /docs/api/Music-Pitch.html#v:-46--43--94-
-[legato]: /docs/api/Music-Score-Articulation.html#v:legato
-[staccato]: /docs/api/Music-Score-Articulation.html#v:staccato
-[portato]: /docs/api/Music-Score-Articulation.html#v:portato
-[tenuto]: /docs/api/Music-Score-Articulation.html#v:tenuto
-[separated]: /docs/api/Music-Score-Articulation.html#v:separated
-[spiccato]: /docs/api/Music-Score-Articulation.html#v:spiccato
-[accent]: /docs/api/Music-Score-Articulation.html#v:accent
-[marcato]: /docs/api/Music-Score-Articulation.html#v:marcato
-[accentLast]: /docs/api/Music-Score-Articulation.html#v:accentLast
-[accentAll]: /docs/api/Music-Score-Articulation.html#v:accentAll
-[Division]: /docs/api/Music-Parts.html#t:Division
-[Subpart]: /docs/api/Music-Parts.html#t:Subpart
-[Part]: /docs/api/Music-Score-Part.html#t:Part
-[Instrument]: /docs/api/Music-Parts.html#t:Instrument
-[Solo]: /docs/api/Music-Parts.html#t:Solo
-[tremolo]: /docs/api/Music-Score-Ornaments.html#v:tremolo
-[slide]: /docs/api/Music-Score-Ornaments.html#v:slide
-[glissando]: /docs/api/Music-Score-Ornaments.html#v:glissando
-[harmonic]: /docs/api/Music-Score-Ornaments.html#v:harmonic
-[artificial]: /docs/api/Music-Score-Ornaments.html#v:artificial
-[text]: /docs/api/Music-Score-Ornaments.html#v:text
-[simultaneous]: /docs/api/Music-Score-Chord.html#v:simultaneous
-[mapSimultaneous]: /docs/api/Music-Score-Chord.html#v:mapSimultaneous
-[removeRests]: /docs/api/Music-Score-Combinators.html#v:removeRests
-[rev]: /docs/api/Music-Time-Reverse.html#v:rev
-[times]: /docs/api/Music-Time-Juxtapose.html#v:times
-[sustain]: /docs/api/Music-Time-Juxtapose.html#v:sustain
-[anticipate]: /docs/api/Music-Time-Juxtapose.html#v:anticipate
-[repeated]: /docs/api/Music-Time-Juxtapose.html#v:repeated
-[inv]: /docs/api/Music-Score-Pitch.html#v:inv
-[Delayable]: /docs/api/Music-Time-Delayable.html#t:Delayable
-[Stretchable]: /docs/api/Music-Time-Stretchable.html#t:Stretchable
-[HasOnset]: /docs/api/Music-Time-Onset.html#t:HasOnset
-[HasOffset]: /docs/api/Music-Time-Onset.html#t:HasOffset
-[HasDuration]: /docs/api/Music-Time-Onset.html#t:HasDuration
-[Time]: /docs/api/Music-Time-Time.html#t:Time
-[Duration]: /docs/api/Music-Time-Time.html#t:Duration
-[Span]: /docs/api/Music-Time-Span.html#t:Span
-[Note]: /docs/api/Music-Score-Note.html#t:Note
-[Voice]: /docs/api/Music-Score-Voice.html#t:Voice
-[Track]: /docs/api/Music-Score-Track.html#t:Track
-[Score]: /docs/api/Music-Score-Export-Lilypond.html#t:Score
-[title]: /docs/api/Music-Score-Meta-Title.html#v:title
-[subtitle]: /docs/api/Music-Score-Meta-Title.html#v:subtitle
-[subsubtitle]: /docs/api/Music-Score-Meta-Title.html#v:subsubtitle
-[composer]: /docs/api/Music-Score-Meta-Attribution.html#v:composer
-[lyricist]: /docs/api/Music-Score-Meta-Attribution.html#v:lyricist
-[arranger]: /docs/api/Music-Score-Meta-Attribution.html#v:arranger
-[attribution]: /docs/api/Music-Score-Meta-Attribution.html#v:attribution
-[attributions]: /docs/api/Music-Score-Meta-Attribution.html#v:attributions
-[key]: /docs/api/Music-Score-Meta-Key.html#v:key
-[keySignature]: /docs/api/Music-Score-Meta-Key.html#v:keySignature
-[keySignatureDuring]: /docs/api/Music-Score-Meta-Key.html#v:keySignatureDuring
-[withKeySignature]: /docs/api/Music-Score-Meta-Key.html#v:withKeySignature
-[time]: /docs/api/Music-Score-Meta-Time.html#v:time
-[compoundTime]: /docs/api/Music-Score-Meta-Time.html#v:compoundTime
-[timeSignature]: /docs/api/Music-Score-Meta-Time.html#v:timeSignature
-[timeSignatureDuring]: /docs/api/Music-Score-Meta-Time.html#v:timeSignatureDuring
-[withTimeSignature]: /docs/api/Music-Score-Meta-Time.html#v:withTimeSignature
-[metronome]: /docs/api/Music-Score-Meta-Tempo.html#v:metronome
-[tempo]: /docs/api/Music-Score-Meta-Tempo.html#v:tempo
-[tempoDuring]: /docs/api/Music-Score-Meta-Tempo.html#v:tempoDuring
+<!-- Unknown: anticipate No such identifier: anticipate-->
 
-<!-- Unknown: withTempo No such identifier: withTempo-->
-
-[renderTempo]: /docs/api/Music-Score-Meta-Tempo.html#v:renderTempo
-[rehearsalMark]: /docs/api/Music-Score-Meta-RehearsalMark.html#v:rehearsalMark
-[rehearsalMarkDuring]: /docs/api/Music-Score-Meta-RehearsalMark.html#v:rehearsalMarkDuring
-[withRehearsalMark]: /docs/api/Music-Score-Meta-RehearsalMark.html#v:withRehearsalMark
-[barline]: /docs/api/Music-Score-Meta-Barline.html#v:barline
-[doubleBarline]: /docs/api/Music-Score-Meta-Barline.html#v:doubleBarline
-[finalBarline]: /docs/api/Music-Score-Meta-Barline.html#v:finalBarline
-[clef]: /docs/api/Music-Score-Meta-Clef.html#v:clef
-[clefDuring]: /docs/api/Music-Score-Meta-Clef.html#v:clefDuring
-[annotate]: /docs/api/Music-Score-Meta-Annotations.html#v:annotate
-[annotateSpan]: /docs/api/Music-Score-Meta-Annotations.html#v:annotateSpan
-[showAnnotations]: /docs/api/Music-Score-Meta-Annotations.html#v:showAnnotations
-[addMetaNote]: /docs/api/Music-Score-Meta.html#v:addMetaNote
-[addGlobalMetaNote]: /docs/api/Music-Score-Meta.html#v:addGlobalMetaNote
-[withMeta]: /docs/api/Music-Score-Combinators.html#v:withMeta
-[withGlobalMeta]: /docs/api/Music-Score-Combinators.html#v:withGlobalMeta
-[withMetaAtStart]: /docs/api/Music-Score-Combinators.html#v:withMetaAtStart
-[withGlobalMetaAtStart]: /docs/api/Music-Score-Combinators.html#v:withGlobalMetaAtStart
-[readMidi]: /docs/api/Music-Score-Import-Midi.html#v:readMidi
-[writeMidi]: /docs/api/Music-Score-Export-Midi.html#v:writeMidi
 
 <!-- Unknown: playMidi No such identifier: playMidi-->
 
-[playMidiIO]: /docs/api/Music-Score-Export-Midi.html#v:playMidiIO
+
+<!-- Unknown: playMidiIO No such identifier: playMidiIO-->
+
+
+<!-- Unknown: withTempo No such identifier: withTempo-->
+
+[.+^]: /docs/api/music-pitch/Music-Pitch.html#v:-46--43--94-
+[.-.]: /docs/api/music-pitch/Music-Pitch.html#v:-46--45--46-
+[</>]: /docs/api/music-score/Music-Score-Meta.html#v:-60--47--62-
+[<>]: /docs/api/music-pitch/Music-Pitch.html#v:-60--62-
+[Division]: /docs/api/music-parts/Music-Parts.html#t:Division
+[Duration]: /docs/api/music-score/Music-Time-Duration.html#t:Duration
+[HasDuration]: /docs/api/music-score/Music-Time-Duration.html#t:HasDuration
+[HasPosition]: /docs/api/music-score/Music-Time-Position.html#t:HasPosition
+[Instrument]: /docs/api/music-parts/Music-Parts.html#t:Instrument
+[IsInterval]: /docs/api/music-pitch-literal/Music-Pitch-Literal-Interval.html#t:IsInterval
+[IsPitch]: /docs/api/music-pitch-literal/Music-Pitch-Literal-Pitch.html#t:IsPitch
+[Note]: /docs/api/music-score/Music-Time-Note.html#t:Note
+[Part]: /docs/api/music-score/Music-Score-Part.html#t:Part
+[Reversible]: /docs/api/music-score/Music-Time-Reverse.html#t:Reversible
+[Score]: /docs/api/music-score/Music-Time-Score.html#t:Score
+[Solo]: /docs/api/music-parts/Music-Parts.html#t:Solo
+[Span]: /docs/api/music-score/Music-Time-Duration.html#t:Span
+[Splittable]: /docs/api/music-score/Music-Time-Split.html#t:Splittable
+[Subpart]: /docs/api/music-parts/Music-Parts.html#t:Subpart
+[Time]: /docs/api/music-score/Music-Time-Duration.html#t:Time
+[Track]: /docs/api/music-score/Music-Time-Track.html#t:Track
+[Transformable]: /docs/api/music-score/Music-Time-Internal-Transform.html#t:Transformable
+[Voice]: /docs/api/music-score/Music-Time-Voice.html#t:Voice
+[accentAll]: /docs/api/music-score/Music-Score-Articulation.html#v:accentAll
+[accentLast]: /docs/api/music-score/Music-Score-Articulation.html#v:accentLast
+[accent]: /docs/api/music-score/Music-Score-Articulation.html#v:accent
+[addGlobalMetaNote]: /docs/api/music-score/Music-Score-Meta.html#v:addGlobalMetaNote
+[addMetaNote]: /docs/api/music-score/Music-Score-Meta.html#v:addMetaNote
+[annotateSpan]: /docs/api/music-score/Music-Score-Meta-Annotations.html#v:annotateSpan
+[annotate]: /docs/api/music-score/Music-Score-Meta-Annotations.html#v:annotate
+[arranger]: /docs/api/music-score/Music-Score-Meta-Attribution.html#v:arranger
+[artificial]: /docs/api/music-score/Music-Score-Harmonics.html#v:artificial
+[attribution]: /docs/api/music-score/Music-Score-Meta-Attribution.html#v:attribution
+[attributions]: /docs/api/music-score/Music-Score-Meta-Attribution.html#v:attributions
+[augment]: /docs/api/music-pitch-literal/Music-Pitch-Augmentable.html#v:augment
+[barline]: /docs/api/music-score/Music-Score-Meta-Barline.html#v:barline
+[clefDuring]: /docs/api/music-score/Music-Score-Meta-Clef.html#v:clefDuring
+[clef]: /docs/api/music-score/Music-Score-Meta-Clef.html#v:clef
+[composer]: /docs/api/music-score/Music-Score-Meta-Attribution.html#v:composer
+[compoundTime]: /docs/api/music-score/Music-Score-Meta-Time.html#v:compoundTime
+[compress]: /docs/api/music-score/Music-Time-Internal-Transform.html#v:compress
+[diminish]: /docs/api/music-pitch-literal/Music-Pitch-Augmentable.html#v:diminish
+[doubleBarline]: /docs/api/music-score/Music-Score-Meta-Barline.html#v:doubleBarline
+[finalBarline]: /docs/api/music-score/Music-Score-Meta-Barline.html#v:finalBarline
+[flat]: /docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:flat
+[flatten]: /docs/api/music-pitch-literal/Music-Pitch-Alterable.html#v:flatten
+[glissando]: /docs/api/music-score/Music-Score-Slide.html#v:glissando
+[harmonic]: /docs/api/music-score/Music-Score-Harmonics.html#v:harmonic
+[invertPitches]: /docs/api/music-score/Music-Score-Pitch.html#v:invertPitches
+[keySignatureDuring]: /docs/api/music-score/Music-Score-Meta-Key.html#v:keySignatureDuring
+[keySignature]: /docs/api/music-score/Music-Score-Meta-Key.html#v:keySignature
+[key]: /docs/api/music-score/Music-Score-Meta-Key.html#v:key
+[legato]: /docs/api/music-score/Music-Score-Articulation.html#v:legato
+[lyricist]: /docs/api/music-score/Music-Score-Meta-Attribution.html#v:lyricist
+[marcato]: /docs/api/music-score/Music-Score-Articulation.html#v:marcato
+[mcatMaybes]: /docs/api/music-score/Music-Score.html#v:mcatMaybes
+[metronome]: /docs/api/music-score/Music-Score-Meta-Tempo.html#v:metronome
+[pcat]: /docs/api/music-score/Music-Time-Juxtapose.html#v:pcat
+[portato]: /docs/api/music-score/Music-Score-Articulation.html#v:portato
+[readMidi]: /docs/api/music-score/Music-Score-Import-Midi.html#v:readMidi
+[rehearsalMarkDuring]: /docs/api/music-score/Music-Score-Meta-RehearsalMark.html#v:rehearsalMarkDuring
+[rehearsalMark]: /docs/api/music-score/Music-Score-Meta-RehearsalMark.html#v:rehearsalMark
+[renderTempo]: /docs/api/music-score/Music-Score-Meta-Tempo.html#v:renderTempo
+[repeated]: /docs/api/music-score/Music-Score.html#v:repeated
+[rev]: /docs/api/music-score/Music-Time-Reverse.html#v:rev
+[scat]: /docs/api/music-score/Music-Time-Juxtapose.html#v:scat
+[separated]: /docs/api/music-score/Music-Score-Articulation.html#v:separated
+[sharp]: /docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:sharp
+[sharpen]: /docs/api/music-pitch-literal/Music-Pitch-Alterable.html#v:sharpen
+[showAnnotations]: /docs/api/music-score/Music-Score-Meta-Annotations.html#v:showAnnotations
+[simult]: /docs/api/music-score/Music-Time-Score.html#v:simult
+[simultaneous]: /docs/api/music-score/Music-Time-Score.html#v:simultaneous
+[slide]: /docs/api/music-score/Music-Score-Slide.html#v:slide
+[staccatissimo]: /docs/api/music-score/Music-Score-Articulation.html#v:staccatissimo
+[staccato]: /docs/api/music-score/Music-Score-Articulation.html#v:staccato
+[stretch]: /docs/api/music-score/Music-Time-Internal-Transform.html#v:stretch
+[subsubtitle]: /docs/api/music-score/Music-Score-Meta-Title.html#v:subsubtitle
+[subtitle]: /docs/api/music-score/Music-Score-Meta-Title.html#v:subtitle
+[sustain]: /docs/api/music-score/Music-Time-Juxtapose.html#v:sustain
+[tempoDuring]: /docs/api/music-score/Music-Score-Meta-Tempo.html#v:tempoDuring
+[tempo]: /docs/api/music-score/Music-Score-Meta-Tempo.html#v:tempo
+[tenuto]: /docs/api/music-score/Music-Score-Articulation.html#v:tenuto
+[text]: /docs/api/music-score/Music-Score-Text.html#v:text
+[timeSignatureDuring]: /docs/api/music-score/Music-Score-Meta-Time.html#v:timeSignatureDuring
+[timeSignature]: /docs/api/music-score/Music-Score-Meta-Time.html#v:timeSignature
+[time]: /docs/api/music-score/Music-Score-Meta-Time.html#v:time
+[times]: /docs/api/music-score/Music-Time-Juxtapose.html#v:times
+[title]: /docs/api/music-score/Music-Score-Meta-Title.html#v:title
+[tremolo]: /docs/api/music-score/Music-Score-Tremolo.html#v:tremolo
+[withGlobalMetaAtStart]: /docs/api/music-score/Music-Score-Meta.html#v:withGlobalMetaAtStart
+[withGlobalMeta]: /docs/api/music-score/Music-Score-Meta.html#v:withGlobalMeta
+[withKeySignature]: /docs/api/music-score/Music-Score-Meta-Key.html#v:withKeySignature
+[withMetaAtStart]: /docs/api/music-score/Music-Score-Meta.html#v:withMetaAtStart
+[withMeta]: /docs/api/music-score/Music-Score-Meta.html#v:withMeta
+[withRehearsalMark]: /docs/api/music-score/Music-Score-Meta-RehearsalMark.html#v:withRehearsalMark
+[withTimeSignature]: /docs/api/music-score/Music-Score-Meta-Time.html#v:withTimeSignature
+[writeMidi]: /docs/api/music-score/Music-Score-Export-Midi.html#v:writeMidi
+[|>]: /docs/api/music-score/Music-Time-Juxtapose.html#v:-124--62-
 
 [Lilypond]:         http://lilypond.org
 [Timidity]:         http://timidity.sourceforge.net/
@@ -1671,6 +1524,7 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 [temporal-media]:   http://hackage.haskell.org/package/temporal-media
 [abjad]:            https://pypi.python.org/pypi/Abjad/2.3
 [max-msp]:          http://cycling74.com/products/max/
+[nyquist]:          http://audacity.sourceforge.net/help/nyquist
 [reactive]:         http://www.haskell.org/haskellwiki/Reactive
 [diagrams]:         http://projects.haskell.org/diagrams/
 [supercollider]:    http://supercollider.sourceforge.net/

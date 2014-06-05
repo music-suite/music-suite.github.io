@@ -1,0 +1,3 @@
+let 
+    m = legato $ scat [c,d,scat [e,d]^/2, c]^/4 
+in [c,eb,ab,g] `repeated` (\p -> up (asPitch p .-. c) m)

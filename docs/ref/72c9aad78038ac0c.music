@@ -1,0 +1,3 @@
+let
+    intervals = [diminish (perfect fifth), (diminish . diminish) (perfect fifth)]
+in scat $ fmap (`up` c) intervals
