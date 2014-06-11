@@ -33,7 +33,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#the-music-suite">The Music Suite</a><ul>
 <li><a href="#an-example">An example</a></li>
 <li><a href="#input-and-output">Input and output</a></li>
-<li><a href="#a-note-on-the-versioning">A note on the versioning</a></li>
+<li><a href="#version-numbers-and-stability">Version numbers and stability</a></li>
+<li><a href="#contributing-to-the-suite">Contributing to the Suite</a></li>
 <li><a href="#more-information">More information</a></li>
 </ul></li>
 <li><a href="#getting-started">Getting Started</a><ul>
@@ -110,8 +111,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#vextab">Vextab</a></li>
 <li><a href="#sibelius">Sibelius</a></li>
 </ul></li>
-<li><a href="#customizing-music-representation">Customizing music representation</a></li>
-<li><a href="#examples">Examples</a><ul>
+<li><a href="#customizing-music-representation">Customizing music representation</a><ul>
 <li><a href="#acknowledgements">Acknowledgements</a></li>
 </ul></li>
 </ul>
@@ -156,10 +156,20 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>MIDI</li>
 </ul>
 <p>Other formats are being added in the near future, see <a href="#import-and-export">Import and export</a> for a more detailed overview.</p>
-<h3 id="a-note-on-the-versioning">A note on the versioning</h3>
-<p>The Music Suite consists of a group of packages released concurrently under a common <a href="http://optver.hanshoglund.org/">optimistic version number</a>. The library was deliberately released <em>prematurely</em> in order to encourage its developers to work on it more.</p>
+<h3 id="version-numbers-and-stability">Version numbers and stability</h3>
+<p>The Music Suite consists of a group of packages released concurrently under a common version number. The <a href="http://hackage.haskell.org/package/music-suite">music-suite</a> acts as a meta-package that includes all stable packages of the Suite.</p>
+<p>Please note that the Suite is quite usable, parts of it are still experimental, and we expect the API to change slightly with every release up to v2.0.0 (think of it as <a href="http://semver.org">optimistic versioning</a>). If you have any problems with upgrading from a previous version, please post to the discussion group.</p>
+<h3 id="contributing-to-the-suite">Contributing to the Suite</h3>
+<p>If you are interested in contributing to the Suite, please join the Github organization (see the link below). In addition to code, we appreciate contributions in the form of tutorials, examples or musical compositions. Hopefully we may soon have a showcase of works created with Music Suite, like <a href="http://projects.haskell.org/diagrams/gallery.html">Diagrams gallery</a>.</p>
 <h3 id="more-information">More information</h3>
-<p>For a complete reference, see the <a href="/docs/api">reference documentation</a>.</p>
+<ul>
+<li><p>All releases on <a href="http://hackage.haskell.org/package/music-suite">Hackage</a></p></li>
+<li><p>The <a href="/docs/api">full API documentation</a></p></li>
+<li><p>The <a href="https://github.com/music-suite">source code on Github</a></p></li>
+<li><p>For more examples, see <a href="https://github.com/music-suite/music-preludes/tree/master/examples">music-preludes/examples</a> directory. You can download this directory from Hackage using <code>cabal unpack music-preludes</code>.</p></li>
+<li><p>For bug reports, please use the relevant Github tracker, i.e. for <code>music-score</code> use <a href="https://github.com/music-suite/music-score/issues">https://github.com/music-suite/music-score/issues</a></p></li>
+<li><p>For questions, feedback and general discussion, see <a href="http://groups.google.com/d/forum/music-suite-discuss">the Google discussion group</a></p></li>
+</ul>
 <!--
 For an introduction, see [User Guide](User-Guide).
 -->
@@ -443,7 +453,7 @@ octavesDown <span class="dv">2</span> c</code></pre>
 </div>
 <p>Here is an overview of all pitch notations:</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">sharpen c             <span class="fu">==</span> c sharp       <span class="fu">==</span> cs
-flatten d             <span class="fu">==</span> d flat        <span class="fu">==</span> ds
+flatten d             <span class="fu">==</span> d flat        <span class="fu">==</span> db
 (sharpen <span class="fu">.</span> sharpen) c <span class="fu">==</span> c doubleSharp <span class="fu">==</span> css
 (flatten <span class="fu">.</span> flatten) d <span class="fu">==</span> d doubleFlat  <span class="fu">==</span> dss</code></pre>
 <p>Note that <code>cs == db</code> may or may not hold depending on which pitch representation you use.</p>
@@ -1038,8 +1048,6 @@ This feature could of course also be used to convert Sibelius scores to other fo
 
 <h1 id="customizing-music-representation">Customizing music representation</h1>
 <p>TODO</p>
-<h1 id="examples">Examples</h1>
-<p>See the <a href="https://github.com/music-suite/music-preludes/tree/master/examples">examples</a> directory in <code>music-preludes</code>.</p>
 <h3 id="acknowledgements">Acknowledgements</h3>
 <p>The Music Suite is indebted to many other previous libraries and computer music environments, particularly <a href="http://commonmusic.sourceforge.net/">Common Music</a>, <a href="http://cycling74.com/products/max/">Max/MSP</a>, <a href="http://supercollider.sourceforge.net/">SuperCollider</a>, <a href="http://audacity.sourceforge.net/help/nyquist">nyquist</a>, <a href="http://music21-mit.blogspot.se/">music21</a>, <a href="http://guidolib.sourceforge.net/">Guido</a>, <a href="http://lilypond.org/">Lilypond</a> and <a href="https://pypi.python.org/pypi/Abjad/2.3">Abjad</a>. Some of the ideas for the quantization algorithms came from <a href="http://fomus.sourceforge.net/">Fomus</a>.</p>
 <p>It obviously ows a lot to the Haskell libraries that it follows including <a href="http://www.haskell.org/haskellwiki/Haskore">Haskore</a>, <a href="http://haskell.cs.yale.edu/euterpea/">Euterpea</a> and <a href="http://hackage.haskell.org/package/temporal-media">temporal-media</a>. The idea of defining a custom internal representation, but relying on standardized formats for input and output comes from <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a>. The idea of splitting the library into a set of packages (and the name) comes from the <a href="https://github.com/haskell-suite">Haskell Suite</a>. The temporal structures, their instances and the concept of denotational design comes from <a href="http://www.haskell.org/haskellwiki/Reactive">Reactive</a> (and its predecessors). <a href="http://projects.haskell.org/diagrams/">Diagrams</a> provided the daring example and some general influences on the design.</p>
@@ -1065,3 +1073,4 @@ This feature could of course also be used to convert Sibelius scores to other fo
 <!-- Unknown: withTempo No such identifier: withTempo-->
 </body>
 </html>
+

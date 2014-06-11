@@ -432,7 +432,7 @@ Here is an overview of all pitch notations:
 
 ```haskell
 sharpen c             == c sharp       == cs
-flatten d             == d flat        == ds
+flatten d             == d flat        == db
 (sharpen . sharpen) c == c doubleSharp == css
 (flatten . flatten) d == d doubleFlat  == dss
 
@@ -1376,11 +1376,6 @@ This feature could of course also be used to convert Sibelius scores to other fo
 # Customizing music representation
 
 TODO
-
-
-# Examples
-
-See the [examples](https://github.com/music-suite/music-preludes/tree/master/examples) directory in `music-preludes`.
 
 
 ### Acknowledgements
