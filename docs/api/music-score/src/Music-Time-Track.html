@@ -132,35 +132,44 @@
 <a name="line-123"></a><a name="instance%20Transformable%20(Track%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Transformable</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
 <a name="line-124"></a>  <span class='hs-varid'>transform</span> <span class='hs-varid'>s</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-sel'>_Wrapped'</span> <span class='hs-layout'>(</span><span class='hs-varid'>transform</span> <span class='hs-varid'>s</span><span class='hs-layout'>)</span>
 <a name="line-125"></a>
-<a name="line-126"></a><a name="instance%20HasDuration%20(Track%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-127"></a>  <span class='hs-sel'>_duration</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Foldable</span><span class='hs-varop'>.</span><span class='hs-varid'>sum</span> <span class='hs-varop'>.</span> <span class='hs-varid'>fmap</span> <span class='hs-sel'>_duration</span> <span class='hs-varop'>.</span> <span class='hs-varid'>view</span> <span class='hs-sel'>_Wrapped'</span>
-<a name="line-128"></a>
-<a name="line-129"></a><a name="instance%20Splittable%20(Track%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Splittable</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Splittable</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-130"></a>  <span class='hs-comment'>-- TODO</span>
-<a name="line-131"></a>
-<a name="line-132"></a><a name="instance%20Reversible%20(Track%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Reversible</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Reversible</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-133"></a>  <span class='hs-varid'>rev</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-sel'>_Wrapped'</span> <span class='hs-layout'>(</span><span class='hs-varid'>fmap</span> <span class='hs-varid'>rev</span><span class='hs-layout'>)</span> <span class='hs-comment'>-- TODO OK?</span>
-<a name="line-134"></a>
-<a name="line-135"></a>
-<a name="line-136"></a><a name="track"></a><span class='hs-comment'>-- |</span>
-<a name="line-137"></a><span class='hs-comment'>-- Create a track from a list of notes.</span>
-<a name="line-138"></a><span class='hs-comment'>--</span>
-<a name="line-139"></a><span class='hs-comment'>-- Se also 'delayeds'.</span>
-<a name="line-140"></a><span class='hs-comment'>--</span>
-<a name="line-141"></a><span class='hs-definition'>track</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Getter</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-142"></a><span class='hs-definition'>track</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>from</span> <span class='hs-varid'>unsafeTrack</span>
-<a name="line-143"></a><span class='hs-comment'>{-# INLINE track #-}</span>
-<a name="line-144"></a>
-<a name="line-145"></a><a name="delayeds"></a><span class='hs-definition'>delayeds</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>b</span><span class='hs-keyglyph'>]</span>
-<a name="line-146"></a><span class='hs-definition'>delayeds</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>unsafeTrack</span>
-<a name="line-147"></a>
-<a name="line-148"></a><a name="singleDelayed"></a><span class='hs-definition'>singleDelayed</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Prism'</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-149"></a><span class='hs-definition'>singleDelayed</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>unsafeTrack</span> <span class='hs-varop'>.</span> <span class='hs-varid'>single</span>
-<a name="line-150"></a><span class='hs-comment'>{-# INLINE singleDelayed #-}</span>
-<a name="line-151"></a>
-<a name="line-152"></a><a name="unsafeTrack"></a><span class='hs-definition'>unsafeTrack</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Iso</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>b</span><span class='hs-keyglyph'>]</span>
-<a name="line-153"></a><span class='hs-definition'>unsafeTrack</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_Wrapped</span>
-<a name="line-154"></a><span class='hs-comment'>{-# INLINE unsafeTrack #-}</span>
-<a name="line-155"></a>
+<a name="line-126"></a><a name="instance%20HasPosition%20(Track%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasPosition</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-127"></a>  <span class='hs-sel'>_onset</span>  <span class='hs-keyglyph'>=</span> <span class='hs-varid'>safeMinimum</span> <span class='hs-varop'>.</span> <span class='hs-varid'>fmap</span> <span class='hs-sel'>_onset</span> <span class='hs-varop'>.</span> <span class='hs-varid'>view</span> <span class='hs-sel'>_Wrapped'</span>
+<a name="line-128"></a>  <span class='hs-sel'>_offset</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>safeMaximum</span> <span class='hs-varop'>.</span> <span class='hs-varid'>fmap</span> <span class='hs-sel'>_offset</span> <span class='hs-varop'>.</span> <span class='hs-varid'>view</span> <span class='hs-sel'>_Wrapped'</span>
+<a name="line-129"></a>
+<a name="line-130"></a><a name="safeMinimum"></a><span class='hs-comment'>-- TODO move</span>
+<a name="line-131"></a><span class='hs-definition'>safeMinimum</span> <span class='hs-varid'>xs</span> <span class='hs-keyglyph'>=</span> <span class='hs-keyword'>if</span> <span class='hs-varid'>null</span> <span class='hs-varid'>xs</span> <span class='hs-keyword'>then</span> <span class='hs-num'>0</span> <span class='hs-keyword'>else</span> <span class='hs-varid'>minimum</span> <span class='hs-varid'>xs</span>
+<a name="line-132"></a><a name="safeMaximum"></a><span class='hs-definition'>safeMaximum</span> <span class='hs-varid'>xs</span> <span class='hs-keyglyph'>=</span> <span class='hs-keyword'>if</span> <span class='hs-varid'>null</span> <span class='hs-varid'>xs</span> <span class='hs-keyword'>then</span> <span class='hs-num'>0</span> <span class='hs-keyword'>else</span> <span class='hs-varid'>maximum</span> <span class='hs-varid'>xs</span>
+<a name="line-133"></a>
+<a name="line-134"></a><a name="instance%20HasDuration%20(Track%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-135"></a>  <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_offset</span> <span class='hs-varid'>x</span> <span class='hs-varop'>.-.</span> <span class='hs-sel'>_onset</span> <span class='hs-varid'>x</span>
+<a name="line-136"></a>
+<a name="line-137"></a><a name="instance%20Splittable%20(Track%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Splittable</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Splittable</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-138"></a>  <span class='hs-comment'>-- TODO</span>
+<a name="line-139"></a>
+<a name="line-140"></a><a name="instance%20Reversible%20(Track%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Reversible</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Reversible</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-141"></a>  <span class='hs-comment'>-- TODO</span>
+<a name="line-142"></a>
+<a name="line-143"></a>
+<a name="line-144"></a><a name="track"></a><span class='hs-comment'>-- |</span>
+<a name="line-145"></a><span class='hs-comment'>-- Create a track from a list of notes.</span>
+<a name="line-146"></a><span class='hs-comment'>--</span>
+<a name="line-147"></a><span class='hs-comment'>-- Se also 'delayeds'.</span>
+<a name="line-148"></a><span class='hs-comment'>--</span>
+<a name="line-149"></a><span class='hs-definition'>track</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Getter</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-150"></a><span class='hs-definition'>track</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>from</span> <span class='hs-varid'>unsafeTrack</span>
+<a name="line-151"></a><span class='hs-comment'>{-# INLINE track #-}</span>
+<a name="line-152"></a>
+<a name="line-153"></a><a name="delayeds"></a><span class='hs-definition'>delayeds</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>b</span><span class='hs-keyglyph'>]</span>
+<a name="line-154"></a><span class='hs-definition'>delayeds</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>unsafeTrack</span>
+<a name="line-155"></a><span class='hs-comment'>{-# INLINE delayeds #-}</span>
+<a name="line-156"></a>
+<a name="line-157"></a><a name="singleDelayed"></a><span class='hs-definition'>singleDelayed</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Prism'</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-158"></a><span class='hs-definition'>singleDelayed</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>unsafeTrack</span> <span class='hs-varop'>.</span> <span class='hs-varid'>single</span>
+<a name="line-159"></a><span class='hs-comment'>{-# INLINE singleDelayed #-}</span>
+<a name="line-160"></a>
+<a name="line-161"></a><a name="unsafeTrack"></a><span class='hs-definition'>unsafeTrack</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Iso</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>b</span><span class='hs-keyglyph'>]</span>
+<a name="line-162"></a><span class='hs-definition'>unsafeTrack</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_Wrapped</span>
+<a name="line-163"></a><span class='hs-comment'>{-# INLINE unsafeTrack #-}</span>
+<a name="line-164"></a>
 </pre></body>
 </html>

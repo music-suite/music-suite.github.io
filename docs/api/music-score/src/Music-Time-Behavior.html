@@ -193,12 +193,12 @@
 <a name="line-184"></a>  <span class='hs-varid'>fromDynamics</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>pure</span> <span class='hs-varop'>.</span> <span class='hs-varid'>fromDynamics</span>
 <a name="line-185"></a>
 <a name="line-186"></a><a name="instance%20Alterable%20(Behavior%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Alterable</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Alterable</span> <span class='hs-layout'>(</span><span class='hs-conid'>Behavior</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-187"></a>    <span class='hs-varid'>sharpen</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-varid'>sharpen</span>
-<a name="line-188"></a>    <span class='hs-varid'>flatten</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-varid'>flatten</span>
+<a name="line-187"></a>  <span class='hs-varid'>sharpen</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-varid'>sharpen</span>
+<a name="line-188"></a>  <span class='hs-varid'>flatten</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-varid'>flatten</span>
 <a name="line-189"></a>
 <a name="line-190"></a><a name="instance%20Augmentable%20(Behavior%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Augmentable</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Augmentable</span> <span class='hs-layout'>(</span><span class='hs-conid'>Behavior</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-191"></a>    <span class='hs-varid'>augment</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-varid'>augment</span>
-<a name="line-192"></a>    <span class='hs-varid'>diminish</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-varid'>diminish</span>
+<a name="line-191"></a>  <span class='hs-varid'>augment</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-varid'>augment</span>
+<a name="line-192"></a>  <span class='hs-varid'>diminish</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-varid'>diminish</span>
 <a name="line-193"></a>
 <a name="line-194"></a><a name="instance%20Eq%20(Behavior%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Eq</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Eq</span> <span class='hs-layout'>(</span><span class='hs-conid'>Behavior</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
 <a name="line-195"></a>  <span class='hs-layout'>(</span><span class='hs-varop'>==</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No fun"</span>
@@ -386,5 +386,6 @@
 <a name="line-377"></a><a name="floor'"></a><span class='hs-definition'>floor'</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>RealFrac</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
 <a name="line-378"></a><span class='hs-definition'>floor'</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromIntegral</span> <span class='hs-varop'>.</span> <span class='hs-varid'>floor</span>
 <a name="line-379"></a>
+<a name="line-380"></a><span class='hs-comment'>-- JUNK</span>
 </pre></body>
 </html>
