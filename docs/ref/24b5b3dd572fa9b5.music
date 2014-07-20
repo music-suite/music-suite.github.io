@@ -1,0 +1,8 @@
+data Foo = Foo
+
+instance Eq Foo where
+  Foo == Foo = True
+
+example = chord |> up d5 chord
+  where
+    chord = c <> e <> g

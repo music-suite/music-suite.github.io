@@ -1,29 +1,18 @@
 
-
-# Getting Started
+# First steps
 
 ## Installing the Suite
 
-The Music Suite depends on the [Haskell platform][HaskellPlatform].
+The Music Suite depends on the [Haskell platform][haskell-platform].
 
-While not strictly required, [Lilypond][Lilypond] is highly recommended as it allow you to
+While not strictly required, [Lilypond][lilypond] is highly recommended as it allow you to
 preview musical scores. See [Import and Export](#import-and-export) for other formats.
 
 To install the suite, simply install the Haskell platform, and then run:
 
     cabal install music-suite
 
-
-## Writing music
-
-This chapter will cover how to use the Music Suite to generate music. Later on we will cover how to *import* and *transform* music.
-
-One of the main points of the Music Suite is to avoid committing to a *single*, closed music representation. Instead it provides a set of types and type constructors that can be used to construct an arbitrary representation of music. 
-
-Usually you will not want to invent a new representation from scratch, but rather start with a standard representation and customize it when needed. The default representation is defined in the `Music.Prelude.Basic` module, which is implicitly imported in all the examples below. See [Customizing the Music Representation](#customizing-music-representation) for other examples.
-
-
-### With music files
+## Using Music files
 
 A piece of music is described by a *expressions* such as this one:
 
@@ -40,24 +29,45 @@ should render a file called `foo.pdf` containing the following:
 
 ![](e812b3370beb65fx.png)
 
-There are several programs for converting music expressions:
+While most simple music files contains only a single expression, it is also possible to write music files in [declaration style][declaration-style]. In this style you can provide an arbitrary number of top-level declarations, including type, class and instance declarations. You must provide a single top-level declaration called `example` which takes the place of the top-level music expression.
 
-* `music2midi`
-* `music2musicxml`
-* `music2ly`
-* `music2pdf`
-* `music2svg`
-* `music2png`
+<div class='haskell-music'>
 
-### With Haskell files
+<div class='haskell-music-listen'><a href='24b5b3dd572fa9b5.mid'>[listen]</a></div>
+
+![](24b5b3dd572fa9b5x.png)
+
+```haskell
+data Foo = Foo
+
+instance Eq Foo where
+  Foo == Foo = True
+
+example = chord |> up d5 chord
+  where
+    chord = c <> e <> g
+
+```
+
+</div>
+
+There are several programs for converting music files:
+
+* `music2midi` – converts to MIDI
+* `music2musicxml` – converts to MusicXML
+* `music2ly` – converts to Lilypond input files
+* `music2pdf` – converts to PDF (using Lilypond)
+* `music2png` – converts to PNG (using Lilypond)
+
+## Using Haskell files
 
 Alternatively, you can create a file called `test.hs` (or similar) with the following structure:
 
 ```haskell
-import Music.Prelude.Basic
+import Music.Prelude
 
-main = defaultMain music
-music = c |> d |> e
+example = c |> d |> e
+main = open example
 
 ```
 
@@ -70,10 +80,40 @@ or compile and run it with
     $ ghc --make test
     $ ./test
 
-In this case the resulting program will generate and open a file called
-`test.pdf` containing the output seen above.
+In this case the resulting program will generate and open a file called `test.pdf` containing the output seen above.
 
-Music files and Haskell files using `defaultMain` are equivalent in every aspect. In fact, the `music2...` programs are simple utilities that substitutes a single expression into a Haskell module such as the one above and executes the resulting main function.
+Music files and Haskell files using `open` are equivalent in every aspect. In fact, the `music2...` programs are simple utilities that substitutes a single expression into a Haskell module such as the one above and executes the resulting main function.
+
+## Interactive use
+
+An advantage of Haskell files is that you can load them into a Haskell interpreter.
+
+TODO configuration
+
+Here is an example `.ghci` file.
+
+```
+:m + Music.Prelude
+:def! open  (\x -> return $ "open  $ asScore $ "++ x)
+:def! play  (\x -> return $ "play  $ asScore $ "++ x)
+:def! write (\x -> return $ "write $ asScore $ "++ x)
+putStrLn "Welcome to the Music Suite!"
+putStrLn "Try :open <music> or :play <music>"
+```
+
+
+# Writing music
+
+This chapter will cover how to use the Music Suite to *write* music. Later on we will cover how to *import* and *transform* music.
+
+One of the main points of the Music Suite is to avoid committing to a *single*, closed music representation. Instead it provides a set of types and type constructors that can be used to construct an arbitrary representation of music. 
+
+Usually you will not want to invent a new representation from scratch, but rather start with a standard representation and customize it when needed. The default representation is defined in the `Music.Prelude` module, which imported in all music files by default. 
+
+<!--
+See [Customizing the Music Representation](#customizing-music-representation) for other examples.
+-->
+
 
 ## Time and duration
 
@@ -334,7 +374,7 @@ Pitch names in other languages work as well, for example `ut, do, re, mi, fa, so
 German names (using `h` and `b` instead of `b` and `bb`) can be approximated as follows:
 
 ```haskell
-import Music.Preludes.Basic hiding (b)
+import Music.Preludes hiding (b)
 import qualified Music.Pitch.Literal as P
 
 h = P.b
@@ -500,6 +540,8 @@ return (c::Note) == (c::Score Note)
 ## Dynamics
 
 Dynamic values are overloaded in the same way as pitches. The dynamic literals are defined in `Music.Dynamics.Literal` and have type `IsDynamics a => a`.
+
+[`level`][level]
 
 An overview of the dynamic values:
 
@@ -747,12 +789,12 @@ TODO add explicit rests etc
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='1f74a9ab0e749367.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='2fb58cdb0e83e23d.mid'>[listen]</a></div>
 
-![](1f74a9ab0e749367x.png)
+![](2fb58cdb0e83e23dx.png)
 
 ```haskell
-mcatMaybes $ times 4 (accentAll g^*2 |> rest |> scat [d,d]^/2)^/8
+mcatMaybes $ times 4 (accentAll g^*2 |> rest |> scat [d,d]^/2)^/8 
 
 ```
 
@@ -761,9 +803,10 @@ mcatMaybes $ times 4 (accentAll g^*2 |> rest |> scat [d,d]^/2)^/8
 
 
 
-# Transformations
+<!--
+# Transforming music
 
-## Time
+## Time transformations
 
 [`rev`][rev]
 
@@ -813,19 +856,6 @@ scat [e,d,f,e] <> c
 ```
 
 </div>
-
-
-[`anticipate`][anticipate]
-
-<!--
-[`repeated`][repeated]
-
-```music+haskellx
-let 
-    m = legato $ scat [c,d,scat [e,d]^/2, c]^/4 
-in [c,eb,ab,g] `repeated` (\p -> up (asPitch p .-. c) m)
-```
--->
 
 ## Onset and duration
 
@@ -918,8 +948,18 @@ TODO
 
 ## Part composition
 
+-->
 
-# Time-based structures
+# Musical aspects
+
+## Pitch
+## Articulation
+## Dynamics
+## Parts
+## Space
+
+
+# Time and structure
 
 [`Transformable`][Transformable]
 
@@ -942,11 +982,11 @@ TODO
 
 [`Span`][Span]
 
-## Notes
+## Rests, Notes and Chords
 
 [`Note`][Note]
 
-## Voice
+## Voices
 
 A [`Voice`][Voice] represents a single voice of music. It consists of a sequence of values with duration, but no time. 
 
@@ -995,6 +1035,10 @@ in stretch (1/8) $ voiceToScore $ y
 ```
 -->
 
+## Segment and Linear
+
+## Behavior and Reactive
+
 ## Tracks
 
 A [`Track`][Track] is similar to a score, except that it events have no offset or duration. It is useful for representing point-wise occurrences such as samples, cues or percussion notes.
@@ -1022,19 +1066,17 @@ in trackToScore (1/8) y
 
 # Meta-information
 
-It is often desirable to annotate music with extraneous information, such as title, creator or time signature. Also, it is often useful to mark scores with structural information such as movement numbers, rehearsal marks or general annotations. In the Music Suite these are grouped together under the common label *meta-information*. 
+It is often desirable to annotate music with extraneous information, such as title, creator or, key or time signature. Also, it is often useful to mark scores with structural information such as movement numbers, rehearsal marks or general annotations. In the Music Suite these are grouped together under the common label *meta-information*.
 
-Each type of meta-information is stored separately and can be extracted and transformed depending on its type. Each type of meta-information has a default value which is implicitly chosen if no meta-information of the given type has been entered (for example the default title is empty, the default key signature is C major and so on).
+The notion of meta-data used in the Music Suite is more extensive than just static values: any [`Transformable`][Transformable] container can be wrapped, and the meta-data will be transformed when the annotated value is transformed. This is why meta-data is often variable values, such as [`Reactive`][Reactive] or [`Behavior`][Behavior].
+
+All time structures in the Suite support an arbitrary number of meta-data fields, indexed by type. All meta-information is required to satisfy the `Typeable`, so that meta-data can be packed and unpacked dynamically), and `Monoid`, so that values can be created and composed without having to worry about meta-data. The `mempty` value is implicitly chosen if no meta-information of the given type has been entered: for example the default title is empty, the default time signature is `4/4`. If two values annotated with meta-data are composed, their associated meta-data maps are composed as well, using the `<>` operator on each of the types.
 
 The distinction between ordinary musical data and meta-data is not always clear cut. As a rule of thumb, meta-events are any kind of event that does not directly affect how the represented music sounds when performed. However they might affect the appearance of the musical notation. For example, a *clef* is meta-information, while a *slur* is not. A notable exception to this rule is meta-events affecting tempo such as metronome marks and fermatas, which usually *do* affect the performance of the music.
 
 ## Title
 
-[`title`][title]
-
-[`subtitle`][subtitle]
-
-[`subsubtitle`][subsubtitle]
+Title, subtitle etc is grouped together as a single type `Title`, thus an arbitrary number of nested titles is supported. The simplest way to add a title is to use the functions [`title`][title], [`subtitle`][subtitle], [`subsubtitle`][subsubtitle] and so son.
 
 <div class='haskell-music'>
 
@@ -1051,15 +1093,7 @@ title "Frere Jaques" $ scat [c,d,e,c]^/4
 
 ## Attribution
 
-[`composer`][composer]
-
-[`lyricist`][lyricist]
-
-[`arranger`][arranger]
-
-[`attribution`][attribution]
-
-[`attributions`][attributions]
+Similar to titles, the attribution of the creators of music can be annotated according to description such as [`composer`][composer], [`lyricist`][lyricist], [`arranger`][arranger] etc. More generally, [`attribution`][attribution] or [`attributions`][attributions] can be used to embed arbitrary `(profession, name)` mappings.
 
 <div class='haskell-music'>
 
@@ -1116,8 +1150,6 @@ composer "Anonymous" $ lyricist "Anonymous" $ arranger "Hans" $ scat [c,d,e,c]^/
 [`tempo`][tempo]
 
 [`tempoDuring`][tempoDuring]
-
-[`withTempo`][withTempo]
 
 [`renderTempo`][renderTempo]
 
@@ -1205,32 +1237,27 @@ showAnnotations $ annotate "First note" c |> d |> annotate "Last note" d
 
 ## Custom meta-information
 
-Meta-information is not restricted to the types described above. In fact, the user can add meta-information of any type that satisfies the `IsAttribute` constraint, including user-defined types. Each type of meta-information is stored separately from other types, and is invisible to the user by default. You might think of each score as having one an infinite set of associated meta-scores, each containing both part-specific and global meta information.
-
-Meta-information is required to implement `Monoid`. The `mempty` value is used as a default value for the type, while the `mappend` function is used to combine the default value and all values added by the user.
-
-[`addMetaNote`][addMetaNote]
-
-[`addGlobalMetaNote`][addGlobalMetaNote]
-
-[`withMeta`][withMeta]
-
-[`withGlobalMeta`][withGlobalMeta]
-
-[`withMetaAtStart`][withMetaAtStart]
-
-[`withGlobalMetaAtStart`][withGlobalMetaAtStart]
+Meta-information is not restricted to the types described above. In fact, the user can add meta-information of any type that satisfies the [`AttributeClass`][AttributeClass] constraint, including user-defined types. Meta-information is required to implement `Monoid`. The `mempty` value is used as a default value for the type, while the `mappend` function is used to combine the default value and all values added by the user.
 
 Typically, you want to use a monoid similar to `Maybe`, `First` or `Last`, but not one derived from the list type. The reason for this is that meta-scores compose, so that `getMeta (x <> y) = getMeta x <> getMeta y`.
 
+<!--
 TODO unexpected results with filter and recompose, solve by using a good Monoid
 Acceptable Monoids are Maybe and Set/Map, but not lists (ordered sets/unique lists OK)
 See issue 103
+-->
+
+[`HasMeta`][HasMeta]
+
+[`setMetaAttr`][setMetaAttr]
+
+[`setMetaTAttr`][setMetaTAttr]
+
 
 
 # Import and export
 
-The standard distribution (installed as part of `music-preludes`) of the Music Suite includes a variety of input and output formats. There are also some experimental formats, which are distributed in separate packages, these are marked as experimental below.
+The standard distribution (installed as part of `music-suite`) of the Music Suite includes a variety of input and output formats. There are also some experimental formats, which are distributed in separate packages, these are marked as experimental below.
 
 The conventions for input or output formats is similar to the convention for properties (TODO ref above): for any type `a` and format `T a`, input formats are defined by an *is* constraint, and output format by a *has* constraint. For example, types that can be exported to Lilypond are defined by the constraint `HasLilypond a`, while types that can be imported from MIDI are defined by the constraint `IsMidi a`.
 
@@ -1246,14 +1273,14 @@ Beware that MIDI input may contain time and pitch values that yield a non-readab
 
 ## Lilypond
 
-All standard representations support Lilypond output. The [lilypond](http://hackage.haskell.org/package/lilypond) package is used for parsing and pretty printing of Lilypond syntax. Lilypond is the recommended way of rendering music.
+All standard representations support Lilypond output. The [lilypond](http://hackage.haskell.org/package/lilypond) package is used for parsing and pretty printing of Lilypond syntax. Lilypond is the recommended way of rendering music notation.
 
-Lilypond input is not available yet but will hopefully be added soon.
+Lilypond input is not available yet but a subset of the Lilypond language will hopefully be added soon.
 
 An example:
 
 ```haskell
-toLyString $ asScore $ scat [c,d,e]
+toLilypondString $ asScore $ scat [c,d,e]
 
 ```
 
@@ -1375,14 +1402,35 @@ This feature could of course also be used to convert Sibelius scores to other fo
 
 # Customizing music representation
 
+## Adding an new representation
+
+You can use your own representation for all standard musical aspects.
+
 TODO
 
+## Adding a new aspect
 
-### Acknowledgements
+It is also possible to make the Suite work with completely *new* aspects.
 
-The Music Suite is indebted to many other previous libraries and computer music environments, particularly [Common Music][common-music], [Max/MSP][max-msp], [SuperCollider][supercollider], [nyquist][nyquist], [music21][music21], [Guido][guido], [Lilypond][lilypond] and [Abjad][abjad]. Some of the ideas for the quantization algorithms came from [Fomus][fomus].
+TODO
 
-It obviously ows a lot to the Haskell libraries that it follows including [Haskore][haskore], [Euterpea][euterpea] and [temporal-media][temporal-media]. The idea of defining a custom internal representation, but relying on standardized formats for input and output comes from [Pandoc][pandoc]. The idea of splitting the library into a set of packages (and the name) comes from the [Haskell Suite][haskell-suite]. The temporal structures, their instances and the concept of denotational design comes from [Reactive][reactive] (and its predecessors). [Diagrams][diagrams] provided the daring example and some general influences on the design.
+## Adding a time structure
+
+TODO
+
+- Create a type of kind `* -> *`.
+- Add instances for the standard classes [`Functor`][Functor], [`Applicative`][Applicative] and (if possible) [`Monad`][Monad] or [`Comonad`][Comonad].
+- If your representation supports *parallel* composition it should be a trivial (non-lifted) [`Monoid`][Monoid]. It it also supports sequential composition, it should support [`Transformable`][Transformable] and [`HasPosition`][HasPosition].
+- Optionally, add instances for [`Splittable`][Splittable] and [`Reversible`][Reversible].
+
+
+# Acknowledgements
+
+The Music Suite is indebted to many other previous libraries and computer music environments, particularly [Common Music][common-music], [PWGL][pwgl], [Max/MSP][max-msp], [SuperCollider][supercollider], [nyquist][nyquist], [music21][music21], [Guido][guido], [Lilypond][lilypond] and [Abjad][abjad]. Some of the ideas for the quantization algorithms came from [Fomus][fomus].
+
+The Music Suite obviously ows much to the previous Haskell libraries for music representation, including [Haskore][haskore], [Euterpea][euterpea] and [temporal-media][temporal-media]. The idea of defining a custom internal representation, but relying on standardized formats for input and output comes from [Pandoc][pandoc]. The idea of splitting the library into a set of packages (and the name) comes from the [Haskell Suite][haskell-suite].
+
+The temporal structures, their instances and the concept of denotational design comes from [Reactive][reactive] (and its predecessors). [Diagrams][diagrams] provided the daring example and some general influences on the design.
 
 
 <script src="js/jasmid/stream.js"></script>
@@ -1395,7 +1443,7 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 
 
 
-<!-- Unknown: anticipate No such identifier: anticipate-->
+<!-- Unknown: Comonad No such identifier: Comonad-->
 
 
 <!-- Unknown: playMidi No such identifier: playMidi-->
@@ -1403,22 +1451,27 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 
 <!-- Unknown: playMidiIO No such identifier: playMidiIO-->
 
-
-<!-- Unknown: withTempo No such identifier: withTempo-->
-
 [.+^]: /docs/api/music-pitch/Music-Pitch.html#v:-46--43--94-
 [.-.]: /docs/api/music-pitch/Music-Pitch.html#v:-46--45--46-
 [</>]: /docs/api/music-score/Music-Score-Meta.html#v:-60--47--62-
 [<>]: /docs/api/music-pitch/Music-Pitch.html#v:-60--62-
+[Applicative]: /docs/api/music-score/Music-Score.html#t:Applicative
+[AttributeClass]: /docs/api/music-score/Music-Score-Meta.html#t:AttributeClass
+[Behavior]: /docs/api/music-score/Music-Time-Behavior.html#t:Behavior
 [Division]: /docs/api/music-parts/Music-Parts.html#t:Division
 [Duration]: /docs/api/music-score/Music-Time-Duration.html#t:Duration
+[Functor]: /docs/api/music-score/Music-Score.html#t:Functor
 [HasDuration]: /docs/api/music-score/Music-Time-Duration.html#t:HasDuration
+[HasMeta]: /docs/api/music-score/Music-Score-Meta.html#t:HasMeta
 [HasPosition]: /docs/api/music-score/Music-Time-Position.html#t:HasPosition
 [Instrument]: /docs/api/music-parts/Music-Parts.html#t:Instrument
 [IsInterval]: /docs/api/music-pitch-literal/Music-Pitch-Literal-Interval.html#t:IsInterval
 [IsPitch]: /docs/api/music-pitch-literal/Music-Pitch-Literal-Pitch.html#t:IsPitch
+[Monad]: /docs/api/music-score/Music-Score.html#t:Monad
+[Monoid]: /docs/api/music-pitch/Music-Pitch.html#t:Monoid
 [Note]: /docs/api/music-score/Music-Time-Note.html#t:Note
 [Part]: /docs/api/music-score/Music-Score-Part.html#t:Part
+[Reactive]: /docs/api/music-score/Music-Time-Reactive.html#t:Reactive
 [Reversible]: /docs/api/music-score/Music-Time-Reverse.html#t:Reversible
 [Score]: /docs/api/music-score/Music-Time-Score.html#t:Score
 [Solo]: /docs/api/music-parts/Music-Parts.html#t:Solo
@@ -1432,8 +1485,6 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 [accentAll]: /docs/api/music-score/Music-Score-Articulation.html#v:accentAll
 [accentLast]: /docs/api/music-score/Music-Score-Articulation.html#v:accentLast
 [accent]: /docs/api/music-score/Music-Score-Articulation.html#v:accent
-[addGlobalMetaNote]: /docs/api/music-score/Music-Score-Meta.html#v:addGlobalMetaNote
-[addMetaNote]: /docs/api/music-score/Music-Score-Meta.html#v:addMetaNote
 [annotateSpan]: /docs/api/music-score/Music-Score-Meta-Annotations.html#v:annotateSpan
 [annotate]: /docs/api/music-score/Music-Score-Meta-Annotations.html#v:annotate
 [arranger]: /docs/api/music-score/Music-Score-Meta-Attribution.html#v:arranger
@@ -1459,6 +1510,7 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 [keySignature]: /docs/api/music-score/Music-Score-Meta-Key.html#v:keySignature
 [key]: /docs/api/music-score/Music-Score-Meta-Key.html#v:key
 [legato]: /docs/api/music-score/Music-Score-Articulation.html#v:legato
+[level]: /docs/api/music-score/Music-Score-Dynamics.html#v:level
 [lyricist]: /docs/api/music-score/Music-Score-Meta-Attribution.html#v:lyricist
 [marcato]: /docs/api/music-score/Music-Score-Articulation.html#v:marcato
 [mcatMaybes]: /docs/api/music-score/Music-Score.html#v:mcatMaybes
@@ -1469,10 +1521,11 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 [rehearsalMarkDuring]: /docs/api/music-score/Music-Score-Meta-RehearsalMark.html#v:rehearsalMarkDuring
 [rehearsalMark]: /docs/api/music-score/Music-Score-Meta-RehearsalMark.html#v:rehearsalMark
 [renderTempo]: /docs/api/music-score/Music-Score-Meta-Tempo.html#v:renderTempo
-[repeated]: /docs/api/music-score/Music-Score.html#v:repeated
 [rev]: /docs/api/music-score/Music-Time-Reverse.html#v:rev
 [scat]: /docs/api/music-score/Music-Time-Juxtapose.html#v:scat
 [separated]: /docs/api/music-score/Music-Score-Articulation.html#v:separated
+[setMetaAttr]: /docs/api/music-score/Music-Score-Meta.html#v:setMetaAttr
+[setMetaTAttr]: /docs/api/music-score/Music-Score-Meta.html#v:setMetaTAttr
 [sharp]: /docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:sharp
 [sharpen]: /docs/api/music-pitch-literal/Music-Pitch-Alterable.html#v:sharpen
 [showAnnotations]: /docs/api/music-score/Music-Score-Meta-Annotations.html#v:showAnnotations
@@ -1495,22 +1548,19 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 [times]: /docs/api/music-score/Music-Time-Juxtapose.html#v:times
 [title]: /docs/api/music-score/Music-Score-Meta-Title.html#v:title
 [tremolo]: /docs/api/music-score/Music-Score-Tremolo.html#v:tremolo
-[withGlobalMetaAtStart]: /docs/api/music-score/Music-Score-Meta.html#v:withGlobalMetaAtStart
-[withGlobalMeta]: /docs/api/music-score/Music-Score-Meta.html#v:withGlobalMeta
 [withKeySignature]: /docs/api/music-score/Music-Score-Meta-Key.html#v:withKeySignature
-[withMetaAtStart]: /docs/api/music-score/Music-Score-Meta.html#v:withMetaAtStart
-[withMeta]: /docs/api/music-score/Music-Score-Meta.html#v:withMeta
 [withRehearsalMark]: /docs/api/music-score/Music-Score-Meta-RehearsalMark.html#v:withRehearsalMark
 [withTimeSignature]: /docs/api/music-score/Music-Score-Meta-Time.html#v:withTimeSignature
 [writeMidi]: /docs/api/music-score/Music-Score-Export-Midi.html#v:writeMidi
 [|>]: /docs/api/music-score/Music-Time-Juxtapose.html#v:-124--62-
 
-[Lilypond]:         http://lilypond.org
-[Timidity]:         http://timidity.sourceforge.net/
-[HaskellPlatform]:  http://www.haskell.org/platform/
+[lilypond]:         http://lilypond.org
+[timidity]:         http://timidity.sourceforge.net/
+[haskell-platform]: http://www.haskell.org/platform/
 
 [issue-tracker]:    https://github.com/hanshoglund/music-score/issues
 
+[pwgl]:             http://www2.siba.fi/PWGL/
 [pandoc]:           http://johnmacfarlane.net/pandoc/
 [haskell-suite]:    https://github.com/haskell-suite
 [music-util-docs]:  https://github.com/hanshoglund/music-util/blob/master/README.md#music-util
@@ -1532,6 +1582,13 @@ It obviously ows a lot to the Haskell libraries that it follows including [Hasko
 [haskell]:          http://haskell.org
 [pandoc]:           http://johnmacfarlane.net/pandoc/
 
+[declaration-style]: http://www.haskell.org/haskellwiki/Declaration_vs._expression_style
+
+----
+
+*Copyright Hans Jacob Höglund 2012–2013*
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This documentation is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
 
 

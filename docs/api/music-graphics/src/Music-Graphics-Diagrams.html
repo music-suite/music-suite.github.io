@@ -16,17 +16,17 @@
 <a name="line-7"></a>        <span class='hs-comment'>-- openGraphic</span>
 <a name="line-8"></a><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
 <a name="line-9"></a>
-<a name="line-10"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span>
-<a name="line-11"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span>
-<a name="line-12"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Diagrams</span><span class='hs-varop'>.</span><span class='hs-conid'>Prelude</span> <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Time</span><span class='hs-layout'>,</span> <span class='hs-conid'>Duration</span><span class='hs-layout'>)</span>
-<a name="line-13"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Diagrams</span><span class='hs-varop'>.</span><span class='hs-conid'>Backend</span><span class='hs-varop'>.</span><span class='hs-conid'>SVG</span> <span class='hs-keyword'>as</span> <span class='hs-conid'>SVG</span>
-<a name="line-14"></a>
-<a name="line-15"></a><span class='hs-comment'>-- test       </span>
-<a name="line-16"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Prelude</span><span class='hs-varop'>.</span><span class='hs-conid'>Basic</span>
-<a name="line-17"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span>
-<a name="line-18"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>System</span><span class='hs-varop'>.</span><span class='hs-conid'>Process</span>
-<a name="line-19"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Text</span><span class='hs-varop'>.</span><span class='hs-conid'>Blaze</span><span class='hs-varop'>.</span><span class='hs-conid'>Svg</span><span class='hs-varop'>.</span><span class='hs-conid'>Renderer</span><span class='hs-varop'>.</span><span class='hs-conid'>Utf8</span> <span class='hs-layout'>(</span><span class='hs-varid'>renderSvg</span><span class='hs-layout'>)</span>
-<a name="line-20"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>ByteString</span><span class='hs-varop'>.</span><span class='hs-conid'>Lazy</span> <span class='hs-keyword'>as</span> <span class='hs-conid'>ByteString</span>
+<a name="line-10"></a><span class='hs-comment'>-- import Music.Score</span>
+<a name="line-11"></a><span class='hs-comment'>-- import Music.Pitch</span>
+<a name="line-12"></a><span class='hs-comment'>-- import Diagrams.Prelude hiding (Time, Duration)</span>
+<a name="line-13"></a><span class='hs-comment'>-- import qualified Diagrams.Backend.SVG as SVG</span>
+<a name="line-14"></a><span class='hs-comment'>-- </span>
+<a name="line-15"></a><span class='hs-comment'>-- -- test       </span>
+<a name="line-16"></a><span class='hs-comment'>-- import Music.Prelude.Basic</span>
+<a name="line-17"></a><span class='hs-comment'>-- import Control.Lens</span>
+<a name="line-18"></a><span class='hs-comment'>-- import System.Process</span>
+<a name="line-19"></a><span class='hs-comment'>-- import Text.Blaze.Svg.Renderer.Utf8 (renderSvg)</span>
+<a name="line-20"></a><span class='hs-comment'>-- import qualified Data.ByteString.Lazy as ByteString</span>
 <a name="line-21"></a><span class='hs-comment'>-- </span>
 <a name="line-22"></a><span class='hs-comment'>-- </span>
 <a name="line-23"></a><span class='hs-comment'>-- timeToDouble :: Time -&gt; Double</span>

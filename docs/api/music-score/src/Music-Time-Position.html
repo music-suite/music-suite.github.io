@@ -52,178 +52,185 @@
 <a name="line-43"></a>
 <a name="line-44"></a>      <span class='hs-comment'>-- * Specific positions</span>
 <a name="line-45"></a>      <span class='hs-varid'>onset</span><span class='hs-layout'>,</span>
-<a name="line-46"></a>      <span class='hs-varid'>offset</span><span class='hs-layout'>,</span>
-<a name="line-47"></a>      <span class='hs-varid'>preOnset</span><span class='hs-layout'>,</span>
-<a name="line-48"></a>      <span class='hs-varid'>postOnset</span><span class='hs-layout'>,</span>
+<a name="line-46"></a>      <span class='hs-varid'>midpoint</span><span class='hs-layout'>,</span>
+<a name="line-47"></a>      <span class='hs-varid'>offset</span><span class='hs-layout'>,</span>
+<a name="line-48"></a>      <span class='hs-varid'>preOnset</span><span class='hs-layout'>,</span>
 <a name="line-49"></a>      <span class='hs-varid'>postOffset</span><span class='hs-layout'>,</span>
 <a name="line-50"></a>
-<a name="line-51"></a>      <span class='hs-comment'>-- * Moving to absolute positions</span>
-<a name="line-52"></a>      <span class='hs-varid'>startAt</span><span class='hs-layout'>,</span>
-<a name="line-53"></a>      <span class='hs-varid'>stopAt</span><span class='hs-layout'>,</span>
-<a name="line-54"></a>      <span class='hs-varid'>placeAt</span><span class='hs-layout'>,</span>
-<a name="line-55"></a>
-<a name="line-56"></a>      <span class='hs-comment'>-- * Internal</span>
-<a name="line-57"></a>      <span class='hs-comment'>-- TODO hide...</span>
-<a name="line-58"></a>      <span class='hs-sel'>_setEra</span><span class='hs-layout'>,</span>
-<a name="line-59"></a>      <span class='hs-sel'>_getEra</span><span class='hs-layout'>,</span>
-<a name="line-60"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-61"></a>
-<a name="line-62"></a>
-<a name="line-63"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span>
-<a name="line-64"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span><span class='hs-varop'>.</span><span class='hs-conid'>Point</span>
-<a name="line-65"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>               <span class='hs-layout'>(</span><span class='hs-conid'>Map</span><span class='hs-layout'>)</span>
-<a name="line-66"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>               <span class='hs-keyword'>as</span> <span class='hs-conid'>Map</span>
-<a name="line-67"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
-<a name="line-68"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Set</span>               <span class='hs-layout'>(</span><span class='hs-conid'>Set</span><span class='hs-layout'>)</span>
-<a name="line-69"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Set</span>               <span class='hs-keyword'>as</span> <span class='hs-conid'>Set</span>
-<a name="line-70"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>VectorSpace</span>       <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Sum</span><span class='hs-layout'>)</span>
-<a name="line-71"></a>
-<a name="line-72"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Duration</span>
-<a name="line-73"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Internal</span><span class='hs-varop'>.</span><span class='hs-conid'>Util</span>
+<a name="line-51"></a>      <span class='hs-comment'>-- ** Deprecated</span>
+<a name="line-52"></a>      <span class='hs-varid'>postOnset</span><span class='hs-layout'>,</span>
+<a name="line-53"></a>
+<a name="line-54"></a>      <span class='hs-comment'>-- * Moving to absolute positions</span>
+<a name="line-55"></a>      <span class='hs-varid'>startAt</span><span class='hs-layout'>,</span>
+<a name="line-56"></a>      <span class='hs-varid'>stopAt</span><span class='hs-layout'>,</span>
+<a name="line-57"></a>      <span class='hs-varid'>placeAt</span><span class='hs-layout'>,</span>
+<a name="line-58"></a>
+<a name="line-59"></a>      <span class='hs-comment'>-- * Internal</span>
+<a name="line-60"></a>      <span class='hs-comment'>-- TODO hide...</span>
+<a name="line-61"></a>      <span class='hs-sel'>_setEra</span><span class='hs-layout'>,</span>
+<a name="line-62"></a>      <span class='hs-sel'>_getEra</span><span class='hs-layout'>,</span>
+<a name="line-63"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-64"></a>
+<a name="line-65"></a>
+<a name="line-66"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span>
+<a name="line-67"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span><span class='hs-varop'>.</span><span class='hs-conid'>Point</span>
+<a name="line-68"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>               <span class='hs-layout'>(</span><span class='hs-conid'>Map</span><span class='hs-layout'>)</span>
+<a name="line-69"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>               <span class='hs-keyword'>as</span> <span class='hs-conid'>Map</span>
+<a name="line-70"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
+<a name="line-71"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Set</span>               <span class='hs-layout'>(</span><span class='hs-conid'>Set</span><span class='hs-layout'>)</span>
+<a name="line-72"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Set</span>               <span class='hs-keyword'>as</span> <span class='hs-conid'>Set</span>
+<a name="line-73"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>VectorSpace</span>       <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Sum</span><span class='hs-layout'>)</span>
 <a name="line-74"></a>
-<a name="line-75"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span>           <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Indexable</span><span class='hs-layout'>,</span> <span class='hs-conid'>Level</span><span class='hs-layout'>,</span> <span class='hs-varid'>above</span><span class='hs-layout'>,</span> <span class='hs-varid'>below</span><span class='hs-layout'>,</span>
-<a name="line-76"></a>                                         <span class='hs-varid'>index</span><span class='hs-layout'>,</span> <span class='hs-varid'>inside</span><span class='hs-layout'>,</span> <span class='hs-varid'>parts</span><span class='hs-layout'>,</span> <span class='hs-varid'>reversed</span><span class='hs-layout'>,</span>
-<a name="line-77"></a>                                         <span class='hs-varid'>transform</span><span class='hs-layout'>,</span> <span class='hs-layout'>(</span><span class='hs-varop'>&lt;|</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span> <span class='hs-layout'>(</span><span class='hs-varop'>|&gt;</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
-<a name="line-78"></a>
-<a name="line-79"></a><a name="HasPosition"></a><span class='hs-comment'>-- |</span>
-<a name="line-80"></a><a name="HasPosition"></a><span class='hs-comment'>-- Class of values that have a position in time.</span>
-<a name="line-81"></a><a name="HasPosition"></a><span class='hs-comment'>--</span>
-<a name="line-82"></a><a name="HasPosition"></a><span class='hs-comment'>-- Many values such as notes, envelopes etc can in fact have many positions such as onset,</span>
-<a name="line-83"></a><a name="HasPosition"></a><span class='hs-comment'>-- attack point, offset, decay point time etc. Rather than having separate methods for a</span>
-<a name="line-84"></a><a name="HasPosition"></a><span class='hs-comment'>-- discrete set of cases, this class provides an interpolation from a /local/ position to</span>
-<a name="line-85"></a><a name="HasPosition"></a><span class='hs-comment'>-- a /global/ position. While the local position goes from 0 to 1, the global position</span>
-<a name="line-86"></a><a name="HasPosition"></a><span class='hs-comment'>-- goes from the 'onset' to the 'offset' of the value.</span>
-<a name="line-87"></a><a name="HasPosition"></a><span class='hs-comment'>--</span>
-<a name="line-88"></a><a name="HasPosition"></a><span class='hs-comment'>-- For instantaneous values, a suitable instance is:</span>
-<a name="line-89"></a><a name="HasPosition"></a><span class='hs-comment'>--</span>
-<a name="line-90"></a><a name="HasPosition"></a><span class='hs-comment'>-- @</span>
-<a name="line-91"></a><a name="HasPosition"></a><span class='hs-comment'>-- '_position' x = 'const' t</span>
-<a name="line-92"></a><a name="HasPosition"></a><span class='hs-comment'>-- @</span>
-<a name="line-93"></a><a name="HasPosition"></a><span class='hs-comment'>--</span>
-<a name="line-94"></a><a name="HasPosition"></a><span class='hs-comment'>-- For values with an onset and offset we can use 'alerp':</span>
-<a name="line-95"></a><a name="HasPosition"></a><span class='hs-comment'>--</span>
-<a name="line-96"></a><a name="HasPosition"></a><span class='hs-comment'>-- @</span>
-<a name="line-97"></a><a name="HasPosition"></a><span class='hs-comment'>-- '_position' x = 'alerp' ('_onset' x) ('_offset' x)</span>
-<a name="line-98"></a><a name="HasPosition"></a><span class='hs-comment'>-- @</span>
-<a name="line-99"></a><a name="HasPosition"></a><span class='hs-comment'>--</span>
-<a name="line-100"></a><a name="HasPosition"></a><span class='hs-keyword'>class</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span> <span class='hs-keyword'>where</span>
-<a name="line-101"></a>  <span class='hs-comment'>-- |</span>
-<a name="line-102"></a>  <span class='hs-comment'>-- Return the onset of the given value, or the value between the attack and decay phases.</span>
-<a name="line-103"></a>  <span class='hs-comment'>--</span>
-<a name="line-104"></a>  <span class='hs-sel'>_position</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Duration</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Time</span>
-<a name="line-105"></a>  <span class='hs-sel'>_position</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>alerp</span> <span class='hs-layout'>(</span><span class='hs-sel'>_onset</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-sel'>_offset</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span>
-<a name="line-106"></a>
-<a name="line-107"></a>  <span class='hs-comment'>-- |</span>
-<a name="line-108"></a>  <span class='hs-comment'>-- Return the onset of the given value, or the value between the attack and decay phases.</span>
-<a name="line-109"></a>  <span class='hs-comment'>--</span>
-<a name="line-110"></a>  <span class='hs-sel'>_onset</span><span class='hs-layout'>,</span> <span class='hs-sel'>_offset</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Time</span>
-<a name="line-111"></a>  <span class='hs-sel'>_onset</span>     <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varop'>`_position`</span> <span class='hs-num'>0</span><span class='hs-layout'>)</span>
-<a name="line-112"></a>  <span class='hs-sel'>_offset</span>    <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varop'>`_position`</span> <span class='hs-num'>1.0</span><span class='hs-layout'>)</span>
-<a name="line-113"></a>
-<a name="line-114"></a><a name="instance%20HasPosition%20Time"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasPosition</span> <span class='hs-conid'>Time</span> <span class='hs-keyword'>where</span>
-<a name="line-115"></a>  <span class='hs-sel'>_position</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>const</span>
+<a name="line-75"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Duration</span>
+<a name="line-76"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Internal</span><span class='hs-varop'>.</span><span class='hs-conid'>Util</span>
+<a name="line-77"></a>
+<a name="line-78"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span>           <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Indexable</span><span class='hs-layout'>,</span> <span class='hs-conid'>Level</span><span class='hs-layout'>,</span> <span class='hs-varid'>above</span><span class='hs-layout'>,</span> <span class='hs-varid'>below</span><span class='hs-layout'>,</span>
+<a name="line-79"></a>                                         <span class='hs-varid'>index</span><span class='hs-layout'>,</span> <span class='hs-varid'>inside</span><span class='hs-layout'>,</span> <span class='hs-varid'>parts</span><span class='hs-layout'>,</span> <span class='hs-varid'>reversed</span><span class='hs-layout'>,</span>
+<a name="line-80"></a>                                         <span class='hs-varid'>transform</span><span class='hs-layout'>,</span> <span class='hs-layout'>(</span><span class='hs-varop'>&lt;|</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span> <span class='hs-layout'>(</span><span class='hs-varop'>|&gt;</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
+<a name="line-81"></a>
+<a name="line-82"></a><a name="HasPosition"></a><span class='hs-comment'>-- |</span>
+<a name="line-83"></a><a name="HasPosition"></a><span class='hs-comment'>-- Class of values that have a position in time.</span>
+<a name="line-84"></a><a name="HasPosition"></a><span class='hs-comment'>--</span>
+<a name="line-85"></a><a name="HasPosition"></a><span class='hs-comment'>-- Many values such as notes, envelopes etc can in fact have many positions such as onset,</span>
+<a name="line-86"></a><a name="HasPosition"></a><span class='hs-comment'>-- attack point, offset, decay point time etc. Rather than having separate methods for a</span>
+<a name="line-87"></a><a name="HasPosition"></a><span class='hs-comment'>-- discrete set of cases, this class provides an interpolation from a /local/ position to</span>
+<a name="line-88"></a><a name="HasPosition"></a><span class='hs-comment'>-- a /global/ position. While the local position goes from 0 to 1, the global position</span>
+<a name="line-89"></a><a name="HasPosition"></a><span class='hs-comment'>-- goes from the 'onset' to the 'offset' of the value.</span>
+<a name="line-90"></a><a name="HasPosition"></a><span class='hs-comment'>--</span>
+<a name="line-91"></a><a name="HasPosition"></a><span class='hs-comment'>-- For instantaneous values, a suitable instance is:</span>
+<a name="line-92"></a><a name="HasPosition"></a><span class='hs-comment'>--</span>
+<a name="line-93"></a><a name="HasPosition"></a><span class='hs-comment'>-- @</span>
+<a name="line-94"></a><a name="HasPosition"></a><span class='hs-comment'>-- '_position' x = 'const' t</span>
+<a name="line-95"></a><a name="HasPosition"></a><span class='hs-comment'>-- @</span>
+<a name="line-96"></a><a name="HasPosition"></a><span class='hs-comment'>--</span>
+<a name="line-97"></a><a name="HasPosition"></a><span class='hs-comment'>-- For values with an onset and offset we can use 'alerp':</span>
+<a name="line-98"></a><a name="HasPosition"></a><span class='hs-comment'>--</span>
+<a name="line-99"></a><a name="HasPosition"></a><span class='hs-comment'>-- @</span>
+<a name="line-100"></a><a name="HasPosition"></a><span class='hs-comment'>-- '_position' x = 'alerp' ('_onset' x) ('_offset' x)</span>
+<a name="line-101"></a><a name="HasPosition"></a><span class='hs-comment'>-- @</span>
+<a name="line-102"></a><a name="HasPosition"></a><span class='hs-comment'>--</span>
+<a name="line-103"></a><a name="HasPosition"></a><span class='hs-keyword'>class</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span> <span class='hs-keyword'>where</span>
+<a name="line-104"></a>  <span class='hs-comment'>-- |</span>
+<a name="line-105"></a>  <span class='hs-comment'>-- Return the onset of the given value, or the value between the attack and decay phases.</span>
+<a name="line-106"></a>  <span class='hs-comment'>--</span>
+<a name="line-107"></a>  <span class='hs-sel'>_position</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Duration</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Time</span>
+<a name="line-108"></a>  <span class='hs-sel'>_position</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>alerp</span> <span class='hs-layout'>(</span><span class='hs-sel'>_onset</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-sel'>_offset</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span>
+<a name="line-109"></a>
+<a name="line-110"></a>  <span class='hs-comment'>-- |</span>
+<a name="line-111"></a>  <span class='hs-comment'>-- Return the onset of the given value, or the value between the attack and decay phases.</span>
+<a name="line-112"></a>  <span class='hs-comment'>--</span>
+<a name="line-113"></a>  <span class='hs-sel'>_onset</span><span class='hs-layout'>,</span> <span class='hs-sel'>_offset</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Time</span>
+<a name="line-114"></a>  <span class='hs-sel'>_onset</span>     <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varop'>`_position`</span> <span class='hs-num'>0</span><span class='hs-layout'>)</span>
+<a name="line-115"></a>  <span class='hs-sel'>_offset</span>    <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varop'>`_position`</span> <span class='hs-num'>1.0</span><span class='hs-layout'>)</span>
 <a name="line-116"></a>
-<a name="line-117"></a><a name="instance%20HasPosition%20Span"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasPosition</span> <span class='hs-conid'>Span</span> <span class='hs-keyword'>where</span>
-<a name="line-118"></a>  <span class='hs-comment'>-- Override as an optimization:</span>
-<a name="line-119"></a>  <span class='hs-sel'>_onset</span>    <span class='hs-layout'>(</span><span class='hs-varid'>view</span> <span class='hs-varid'>range</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-layout'>(</span><span class='hs-varid'>t1</span><span class='hs-layout'>,</span> <span class='hs-varid'>t2</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>t1</span>
-<a name="line-120"></a>  <span class='hs-sel'>_offset</span>   <span class='hs-layout'>(</span><span class='hs-varid'>view</span> <span class='hs-varid'>range</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-layout'>(</span><span class='hs-varid'>t1</span><span class='hs-layout'>,</span> <span class='hs-varid'>t2</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>t2</span>
-<a name="line-121"></a>  <span class='hs-sel'>_position</span> <span class='hs-layout'>(</span><span class='hs-varid'>view</span> <span class='hs-varid'>range</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-layout'>(</span><span class='hs-varid'>t1</span><span class='hs-layout'>,</span> <span class='hs-varid'>t2</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>alerp</span> <span class='hs-varid'>t1</span> <span class='hs-varid'>t2</span>
-<a name="line-122"></a>
-<a name="line-123"></a><a name="instance%20HasDuration%20%5ba%5d"></a><span class='hs-keyword'>instance</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-keyword'>where</span>
-<a name="line-124"></a>  <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_offset</span> <span class='hs-varid'>x</span> <span class='hs-varop'>.-.</span> <span class='hs-sel'>_onset</span> <span class='hs-varid'>x</span>
+<a name="line-117"></a><a name="instance%20HasPosition%20Time"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasPosition</span> <span class='hs-conid'>Time</span> <span class='hs-keyword'>where</span>
+<a name="line-118"></a>  <span class='hs-sel'>_position</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>const</span>
+<a name="line-119"></a>
+<a name="line-120"></a><a name="instance%20HasPosition%20Span"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasPosition</span> <span class='hs-conid'>Span</span> <span class='hs-keyword'>where</span>
+<a name="line-121"></a>  <span class='hs-comment'>-- Override as an optimization:</span>
+<a name="line-122"></a>  <span class='hs-sel'>_onset</span>    <span class='hs-layout'>(</span><span class='hs-varid'>view</span> <span class='hs-varid'>range</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-layout'>(</span><span class='hs-varid'>t1</span><span class='hs-layout'>,</span> <span class='hs-varid'>t2</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>t1</span>
+<a name="line-123"></a>  <span class='hs-sel'>_offset</span>   <span class='hs-layout'>(</span><span class='hs-varid'>view</span> <span class='hs-varid'>range</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-layout'>(</span><span class='hs-varid'>t1</span><span class='hs-layout'>,</span> <span class='hs-varid'>t2</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>t2</span>
+<a name="line-124"></a>  <span class='hs-sel'>_position</span> <span class='hs-layout'>(</span><span class='hs-varid'>view</span> <span class='hs-varid'>range</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-layout'>(</span><span class='hs-varid'>t1</span><span class='hs-layout'>,</span> <span class='hs-varid'>t2</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>alerp</span> <span class='hs-varid'>t1</span> <span class='hs-varid'>t2</span>
 <a name="line-125"></a>
-<a name="line-126"></a><a name="instance%20HasPosition%20%5ba%5d"></a><span class='hs-keyword'>instance</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasPosition</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-keyword'>where</span>
-<a name="line-127"></a>  <span class='hs-sel'>_onset</span>  <span class='hs-keyglyph'>=</span> <span class='hs-varid'>foldr</span> <span class='hs-varid'>min</span> <span class='hs-num'>0</span> <span class='hs-varop'>.</span> <span class='hs-varid'>fmap</span> <span class='hs-sel'>_onset</span>
-<a name="line-128"></a>  <span class='hs-sel'>_offset</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>foldr</span> <span class='hs-varid'>max</span> <span class='hs-num'>0</span> <span class='hs-varop'>.</span> <span class='hs-varid'>fmap</span> <span class='hs-sel'>_offset</span>
-<a name="line-129"></a>
-<a name="line-130"></a><span class='hs-sel'>_getEra</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Span</span>
-<a name="line-131"></a><span class='hs-sel'>_getEra</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_onset</span> <span class='hs-varid'>x</span> <span class='hs-varop'>&lt;-&gt;</span> <span class='hs-sel'>_offset</span> <span class='hs-varid'>x</span>
-<a name="line-132"></a><span class='hs-comment'>{-# INLINE _getEra #-}</span>
-<a name="line-133"></a>
-<a name="line-134"></a><a name="position"></a><span class='hs-comment'>-- |</span>
-<a name="line-135"></a><span class='hs-comment'>-- Position of the given value.</span>
-<a name="line-136"></a><span class='hs-comment'>--</span>
-<a name="line-137"></a><span class='hs-definition'>position</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Duration</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Time</span>
-<a name="line-138"></a><span class='hs-definition'>position</span> <span class='hs-varid'>d</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>lens</span> <span class='hs-layout'>(</span><span class='hs-varop'>`_position`</span> <span class='hs-varid'>d</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-varid'>flip</span> <span class='hs-varop'>$</span> <span class='hs-varid'>placeAt</span> <span class='hs-varid'>d</span><span class='hs-layout'>)</span>
-<a name="line-139"></a><span class='hs-comment'>{-# INLINE position #-}</span>
-<a name="line-140"></a>
-<a name="line-141"></a><a name="onset"></a><span class='hs-comment'>-- |</span>
-<a name="line-142"></a><span class='hs-comment'>-- Onset of the given value.</span>
-<a name="line-143"></a><span class='hs-comment'>--</span>
-<a name="line-144"></a><span class='hs-definition'>onset</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Time</span>
-<a name="line-145"></a><span class='hs-definition'>onset</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>position</span> <span class='hs-num'>0</span>
-<a name="line-146"></a><span class='hs-comment'>{-# INLINE onset #-}</span>
-<a name="line-147"></a>
-<a name="line-148"></a><a name="offset"></a><span class='hs-comment'>-- |</span>
-<a name="line-149"></a><span class='hs-comment'>-- Onset of the given value.</span>
-<a name="line-150"></a><span class='hs-comment'>--</span>
-<a name="line-151"></a><span class='hs-definition'>offset</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Time</span>
-<a name="line-152"></a><span class='hs-definition'>offset</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>position</span> <span class='hs-num'>1</span>
-<a name="line-153"></a><span class='hs-comment'>{-# INLINE offset #-}</span>
-<a name="line-154"></a>
-<a name="line-155"></a><a name="preOnset"></a><span class='hs-comment'>-- |</span>
-<a name="line-156"></a><span class='hs-comment'>-- Pre-onset of the given value, or the value right before the attack phase.</span>
-<a name="line-157"></a><span class='hs-comment'>--</span>
-<a name="line-158"></a><span class='hs-definition'>preOnset</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Time</span>
-<a name="line-159"></a><span class='hs-definition'>preOnset</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>position</span> <span class='hs-layout'>(</span><span class='hs-comment'>-</span><span class='hs-num'>0.5</span><span class='hs-layout'>)</span>
-<a name="line-160"></a><span class='hs-comment'>{-# INLINE preOnset #-}</span>
-<a name="line-161"></a>
-<a name="line-162"></a><a name="postOnset"></a><span class='hs-comment'>-- |</span>
-<a name="line-163"></a><span class='hs-comment'>-- Post-onset of the given value, or the value between the decay and sustain phases.</span>
-<a name="line-164"></a><span class='hs-comment'>--</span>
-<a name="line-165"></a><span class='hs-definition'>postOnset</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Time</span>
-<a name="line-166"></a><span class='hs-definition'>postOnset</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>position</span> <span class='hs-num'>0.5</span>
-<a name="line-167"></a><span class='hs-comment'>{-# INLINE postOnset #-}</span>
-<a name="line-168"></a>
-<a name="line-169"></a><a name="postOffset"></a><span class='hs-comment'>-- |</span>
-<a name="line-170"></a><span class='hs-comment'>-- Post-offset of the given value, or the value right after the release phase.</span>
-<a name="line-171"></a><span class='hs-comment'>--</span>
-<a name="line-172"></a><span class='hs-definition'>postOffset</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Time</span>
-<a name="line-173"></a><span class='hs-definition'>postOffset</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>position</span> <span class='hs-num'>1.5</span>
-<a name="line-174"></a><span class='hs-comment'>{-# INLINE postOffset #-}</span>
+<a name="line-126"></a><a name="instance%20HasDuration%20%5ba%5d"></a><span class='hs-keyword'>instance</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-keyword'>where</span>
+<a name="line-127"></a>  <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_offset</span> <span class='hs-varid'>x</span> <span class='hs-varop'>.-.</span> <span class='hs-sel'>_onset</span> <span class='hs-varid'>x</span>
+<a name="line-128"></a>
+<a name="line-129"></a><a name="instance%20HasPosition%20%5ba%5d"></a><span class='hs-keyword'>instance</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasPosition</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-keyword'>where</span>
+<a name="line-130"></a>  <span class='hs-sel'>_onset</span>  <span class='hs-keyglyph'>=</span> <span class='hs-varid'>foldr</span> <span class='hs-varid'>min</span> <span class='hs-num'>0</span> <span class='hs-varop'>.</span> <span class='hs-varid'>fmap</span> <span class='hs-sel'>_onset</span>
+<a name="line-131"></a>  <span class='hs-sel'>_offset</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>foldr</span> <span class='hs-varid'>max</span> <span class='hs-num'>0</span> <span class='hs-varop'>.</span> <span class='hs-varid'>fmap</span> <span class='hs-sel'>_offset</span>
+<a name="line-132"></a>
+<a name="line-133"></a><span class='hs-sel'>_getEra</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Span</span>
+<a name="line-134"></a><span class='hs-sel'>_getEra</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_onset</span> <span class='hs-varid'>x</span> <span class='hs-varop'>&lt;-&gt;</span> <span class='hs-sel'>_offset</span> <span class='hs-varid'>x</span>
+<a name="line-135"></a><span class='hs-comment'>{-# INLINE _getEra #-}</span>
+<a name="line-136"></a>
+<a name="line-137"></a><a name="position"></a><span class='hs-comment'>-- |</span>
+<a name="line-138"></a><span class='hs-comment'>-- Position of the given value.</span>
+<a name="line-139"></a><span class='hs-comment'>--</span>
+<a name="line-140"></a><span class='hs-definition'>position</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Duration</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Time</span>
+<a name="line-141"></a><span class='hs-definition'>position</span> <span class='hs-varid'>d</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>lens</span> <span class='hs-layout'>(</span><span class='hs-varop'>`_position`</span> <span class='hs-varid'>d</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-varid'>flip</span> <span class='hs-varop'>$</span> <span class='hs-varid'>placeAt</span> <span class='hs-varid'>d</span><span class='hs-layout'>)</span>
+<a name="line-142"></a><span class='hs-comment'>{-# INLINE position #-}</span>
+<a name="line-143"></a>
+<a name="line-144"></a><a name="onset"></a><span class='hs-comment'>-- |</span>
+<a name="line-145"></a><span class='hs-comment'>-- Onset of the given value.</span>
+<a name="line-146"></a><span class='hs-comment'>--</span>
+<a name="line-147"></a><span class='hs-definition'>onset</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Time</span>
+<a name="line-148"></a><span class='hs-definition'>onset</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>position</span> <span class='hs-num'>0</span>
+<a name="line-149"></a><span class='hs-comment'>{-# INLINE onset #-}</span>
+<a name="line-150"></a>
+<a name="line-151"></a><a name="offset"></a><span class='hs-comment'>-- |</span>
+<a name="line-152"></a><span class='hs-comment'>-- Onset of the given value.</span>
+<a name="line-153"></a><span class='hs-comment'>--</span>
+<a name="line-154"></a><span class='hs-definition'>offset</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Time</span>
+<a name="line-155"></a><span class='hs-definition'>offset</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>position</span> <span class='hs-num'>1</span>
+<a name="line-156"></a><span class='hs-comment'>{-# INLINE offset #-}</span>
+<a name="line-157"></a>
+<a name="line-158"></a><a name="preOnset"></a><span class='hs-comment'>-- |</span>
+<a name="line-159"></a><span class='hs-comment'>-- Pre-onset of the given value, or the value right before the attack phase.</span>
+<a name="line-160"></a><span class='hs-comment'>--</span>
+<a name="line-161"></a><span class='hs-definition'>preOnset</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Time</span>
+<a name="line-162"></a><span class='hs-definition'>preOnset</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>position</span> <span class='hs-layout'>(</span><span class='hs-comment'>-</span><span class='hs-num'>0.5</span><span class='hs-layout'>)</span>
+<a name="line-163"></a><span class='hs-comment'>{-# INLINE preOnset #-}</span>
+<a name="line-164"></a>
+<a name="line-165"></a><a name="midpoint"></a><span class='hs-comment'>-- |</span>
+<a name="line-166"></a><span class='hs-comment'>-- Midpoint of the given value, or the value between the decay and sustain phases.</span>
+<a name="line-167"></a><span class='hs-comment'>--</span>
+<a name="line-168"></a><span class='hs-definition'>midpoint</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Time</span>
+<a name="line-169"></a><span class='hs-definition'>midpoint</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>position</span> <span class='hs-num'>0.5</span>
+<a name="line-170"></a><span class='hs-comment'>{-# INLINE midpoint #-}</span>
+<a name="line-171"></a>
+<a name="line-172"></a><a name="postOnset"></a><span class='hs-definition'>postOnset</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Time</span>
+<a name="line-173"></a><span class='hs-definition'>postOnset</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>position</span> <span class='hs-num'>0.5</span>
+<a name="line-174"></a><span class='hs-comment'>{-# DEPRECATED postOnset "Use midpoint" #-}</span>
 <a name="line-175"></a>
-<a name="line-176"></a>
-<a name="line-177"></a>
-<a name="line-178"></a><a name="startAt"></a><span class='hs-comment'>-- |</span>
-<a name="line-179"></a><span class='hs-comment'>-- Move a value forward in time.</span>
-<a name="line-180"></a><span class='hs-comment'>--</span>
-<a name="line-181"></a><span class='hs-definition'>startAt</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Time</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
-<a name="line-182"></a><span class='hs-definition'>startAt</span> <span class='hs-varid'>t</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>t</span> <span class='hs-varop'>.-.</span> <span class='hs-sel'>_onset</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-varop'>`delay`</span> <span class='hs-varid'>x</span>
+<a name="line-176"></a><a name="postOffset"></a><span class='hs-comment'>-- |</span>
+<a name="line-177"></a><span class='hs-comment'>-- Post-offset of the given value, or the value right after the release phase.</span>
+<a name="line-178"></a><span class='hs-comment'>--</span>
+<a name="line-179"></a><span class='hs-definition'>postOffset</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Time</span>
+<a name="line-180"></a><span class='hs-definition'>postOffset</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>position</span> <span class='hs-num'>1.5</span>
+<a name="line-181"></a><span class='hs-comment'>{-# INLINE postOffset #-}</span>
+<a name="line-182"></a>
 <a name="line-183"></a>
-<a name="line-184"></a><a name="stopAt"></a><span class='hs-comment'>-- |</span>
-<a name="line-185"></a><span class='hs-comment'>-- Move a value forward in time.</span>
-<a name="line-186"></a><span class='hs-comment'>--</span>
-<a name="line-187"></a><span class='hs-definition'>stopAt</span>  <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Time</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
-<a name="line-188"></a><span class='hs-definition'>stopAt</span> <span class='hs-varid'>t</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>t</span> <span class='hs-varop'>.-.</span> <span class='hs-sel'>_offset</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-varop'>`delay`</span> <span class='hs-varid'>x</span>
-<a name="line-189"></a>
-<a name="line-190"></a><a name="placeAt"></a><span class='hs-comment'>-- |</span>
-<a name="line-191"></a><span class='hs-comment'>-- Align a value to a given position.</span>
-<a name="line-192"></a><span class='hs-comment'>--</span>
-<a name="line-193"></a><span class='hs-comment'>-- @placeAt p t@ places the given thing so that its position p is at time t</span>
-<a name="line-194"></a><span class='hs-comment'>--</span>
-<a name="line-195"></a><span class='hs-comment'>-- @</span>
-<a name="line-196"></a><span class='hs-comment'>-- 'placeAt' 0 = 'startAt'</span>
-<a name="line-197"></a><span class='hs-comment'>-- 'placeAt' 1 = 'stopAt'</span>
-<a name="line-198"></a><span class='hs-comment'>-- @</span>
+<a name="line-184"></a>
+<a name="line-185"></a><a name="startAt"></a><span class='hs-comment'>-- |</span>
+<a name="line-186"></a><span class='hs-comment'>-- Move a value forward in time.</span>
+<a name="line-187"></a><span class='hs-comment'>--</span>
+<a name="line-188"></a><span class='hs-definition'>startAt</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Time</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
+<a name="line-189"></a><span class='hs-definition'>startAt</span> <span class='hs-varid'>t</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>t</span> <span class='hs-varop'>.-.</span> <span class='hs-sel'>_onset</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-varop'>`delay`</span> <span class='hs-varid'>x</span>
+<a name="line-190"></a>
+<a name="line-191"></a><a name="stopAt"></a><span class='hs-comment'>-- |</span>
+<a name="line-192"></a><span class='hs-comment'>-- Move a value forward in time.</span>
+<a name="line-193"></a><span class='hs-comment'>--</span>
+<a name="line-194"></a><span class='hs-definition'>stopAt</span>  <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Time</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
+<a name="line-195"></a><span class='hs-definition'>stopAt</span> <span class='hs-varid'>t</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>t</span> <span class='hs-varop'>.-.</span> <span class='hs-sel'>_offset</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-varop'>`delay`</span> <span class='hs-varid'>x</span>
+<a name="line-196"></a>
+<a name="line-197"></a><a name="placeAt"></a><span class='hs-comment'>-- |</span>
+<a name="line-198"></a><span class='hs-comment'>-- Align a value to a given position.</span>
 <a name="line-199"></a><span class='hs-comment'>--</span>
-<a name="line-200"></a><span class='hs-definition'>placeAt</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Duration</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Time</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
-<a name="line-201"></a><span class='hs-definition'>placeAt</span> <span class='hs-varid'>p</span> <span class='hs-varid'>t</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>t</span> <span class='hs-varop'>.-.</span> <span class='hs-varid'>x</span> <span class='hs-varop'>`_position`</span> <span class='hs-varid'>p</span><span class='hs-layout'>)</span> <span class='hs-varop'>`delay`</span> <span class='hs-varid'>x</span>
-<a name="line-202"></a>
-<a name="line-203"></a><span class='hs-comment'>-- |</span>
-<a name="line-204"></a><span class='hs-comment'>-- Place a value over the given span.</span>
-<a name="line-205"></a><span class='hs-comment'>--</span>
-<a name="line-206"></a><span class='hs-comment'>-- @placeAt s t@ places the given thing so that @x^.place = s@</span>
-<a name="line-207"></a><span class='hs-comment'>--</span>
-<a name="line-208"></a><span class='hs-sel'>_setEra</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Span</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
-<a name="line-209"></a><span class='hs-sel'>_setEra</span> <span class='hs-varid'>s</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>transform</span> <span class='hs-layout'>(</span><span class='hs-varid'>s</span> <span class='hs-varop'>^-^</span> <span class='hs-varid'>view</span> <span class='hs-varid'>era</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-varid'>x</span>
-<a name="line-210"></a>
-<a name="line-211"></a><a name="era"></a><span class='hs-comment'>-- |</span>
-<a name="line-212"></a><span class='hs-comment'>-- A lens to the position</span>
-<a name="line-213"></a><span class='hs-comment'>--</span>
-<a name="line-214"></a><span class='hs-definition'>era</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Span</span>
-<a name="line-215"></a><span class='hs-definition'>era</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>lens</span> <span class='hs-sel'>_getEra</span> <span class='hs-layout'>(</span><span class='hs-varid'>flip</span> <span class='hs-sel'>_setEra</span><span class='hs-layout'>)</span>
-<a name="line-216"></a><span class='hs-comment'>{-# INLINE era #-}</span>
+<a name="line-200"></a><span class='hs-comment'>-- @placeAt p t@ places the given thing so that its position p is at time t</span>
+<a name="line-201"></a><span class='hs-comment'>--</span>
+<a name="line-202"></a><span class='hs-comment'>-- @</span>
+<a name="line-203"></a><span class='hs-comment'>-- 'placeAt' 0 = 'startAt'</span>
+<a name="line-204"></a><span class='hs-comment'>-- 'placeAt' 1 = 'stopAt'</span>
+<a name="line-205"></a><span class='hs-comment'>-- @</span>
+<a name="line-206"></a><span class='hs-comment'>--</span>
+<a name="line-207"></a><span class='hs-definition'>placeAt</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Duration</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Time</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
+<a name="line-208"></a><span class='hs-definition'>placeAt</span> <span class='hs-varid'>p</span> <span class='hs-varid'>t</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>t</span> <span class='hs-varop'>.-.</span> <span class='hs-varid'>x</span> <span class='hs-varop'>`_position`</span> <span class='hs-varid'>p</span><span class='hs-layout'>)</span> <span class='hs-varop'>`delay`</span> <span class='hs-varid'>x</span>
+<a name="line-209"></a>
+<a name="line-210"></a><span class='hs-comment'>-- |</span>
+<a name="line-211"></a><span class='hs-comment'>-- Place a value over the given span.</span>
+<a name="line-212"></a><span class='hs-comment'>--</span>
+<a name="line-213"></a><span class='hs-comment'>-- @placeAt s t@ places the given thing so that @x^.place = s@</span>
+<a name="line-214"></a><span class='hs-comment'>--</span>
+<a name="line-215"></a><span class='hs-sel'>_setEra</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Span</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
+<a name="line-216"></a><span class='hs-sel'>_setEra</span> <span class='hs-varid'>s</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>transform</span> <span class='hs-layout'>(</span><span class='hs-varid'>s</span> <span class='hs-varop'>^-^</span> <span class='hs-varid'>view</span> <span class='hs-varid'>era</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-varid'>x</span>
 <a name="line-217"></a>
-<a name="line-218"></a>
+<a name="line-218"></a><a name="era"></a><span class='hs-comment'>-- |</span>
+<a name="line-219"></a><span class='hs-comment'>-- A lens to the position</span>
+<a name="line-220"></a><span class='hs-comment'>--</span>
+<a name="line-221"></a><span class='hs-definition'>era</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Span</span>
+<a name="line-222"></a><span class='hs-definition'>era</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>lens</span> <span class='hs-sel'>_getEra</span> <span class='hs-layout'>(</span><span class='hs-varid'>flip</span> <span class='hs-sel'>_setEra</span><span class='hs-layout'>)</span>
+<a name="line-223"></a><span class='hs-comment'>{-# INLINE era #-}</span>
+<a name="line-224"></a>
+<a name="line-225"></a>
 </pre></body>
 </html>

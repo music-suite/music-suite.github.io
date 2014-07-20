@@ -73,15 +73,15 @@
 <a name="line-64"></a>
 <a name="line-65"></a><a name="StandardNote"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>StandardNote</span> <span class='hs-keyglyph'>=</span> 
 <a name="line-66"></a>  <span class='hs-layout'>(</span><span class='hs-conid'>PartT</span> <span class='hs-conid'>Part</span>
-<a name="line-67"></a>    <span class='hs-layout'>(</span><span class='hs-conid'>TieT</span>
-<a name="line-68"></a>      <span class='hs-layout'>(</span><span class='hs-conid'>ColorT</span> 
-<a name="line-69"></a>        <span class='hs-layout'>(</span><span class='hs-conid'>TextT</span>
-<a name="line-70"></a>          <span class='hs-layout'>(</span><span class='hs-conid'>TremoloT</span>
-<a name="line-71"></a>            <span class='hs-layout'>(</span><span class='hs-conid'>HarmonicT</span>
-<a name="line-72"></a>              <span class='hs-layout'>(</span><span class='hs-conid'>SlideT</span>
-<a name="line-73"></a>                <span class='hs-layout'>(</span><span class='hs-conid'>ArticulationT</span> <span class='hs-layout'>(</span><span class='hs-conid'>Sum</span> <span class='hs-conid'>Double</span><span class='hs-layout'>,</span> <span class='hs-conid'>Sum</span> <span class='hs-conid'>Double</span><span class='hs-layout'>)</span>
-<a name="line-74"></a>                  <span class='hs-layout'>(</span><span class='hs-conid'>DynamicT</span> <span class='hs-layout'>(</span><span class='hs-conid'>Sum</span> <span class='hs-conid'>Double</span><span class='hs-layout'>)</span>
-<a name="line-75"></a>                    <span class='hs-keyglyph'>[</span><span class='hs-conid'>Behavior</span> <span class='hs-conid'>StandardPitch</span><span class='hs-keyglyph'>]</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
+<a name="line-67"></a>    <span class='hs-layout'>(</span><span class='hs-conid'>ColorT</span> 
+<a name="line-68"></a>      <span class='hs-layout'>(</span><span class='hs-conid'>TextT</span>
+<a name="line-69"></a>        <span class='hs-layout'>(</span><span class='hs-conid'>TremoloT</span>
+<a name="line-70"></a>          <span class='hs-layout'>(</span><span class='hs-conid'>HarmonicT</span>
+<a name="line-71"></a>            <span class='hs-layout'>(</span><span class='hs-conid'>SlideT</span>
+<a name="line-72"></a>              <span class='hs-layout'>(</span><span class='hs-conid'>ArticulationT</span> <span class='hs-layout'>(</span><span class='hs-conid'>Sum</span> <span class='hs-conid'>Double</span><span class='hs-layout'>,</span> <span class='hs-conid'>Sum</span> <span class='hs-conid'>Double</span><span class='hs-layout'>)</span>
+<a name="line-73"></a>                <span class='hs-layout'>(</span><span class='hs-conid'>DynamicT</span> <span class='hs-layout'>(</span><span class='hs-conid'>Average</span> <span class='hs-conid'>Double</span><span class='hs-layout'>)</span>
+<a name="line-74"></a>                  <span class='hs-keyglyph'>[</span><span class='hs-conid'>TieT</span>
+<a name="line-75"></a>                    <span class='hs-layout'>(</span><span class='hs-conid'>Behavior</span> <span class='hs-conid'>StandardPitch</span><span class='hs-layout'>)</span><span class='hs-keyglyph'>]</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
 <a name="line-76"></a>
 <a name="line-77"></a><a name="StandardPitch"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>StandardPitch</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span>
 <a name="line-78"></a><span class='hs-comment'>-- data StandardPitch = StandardPitch Music.Pitch.Pitch</span>

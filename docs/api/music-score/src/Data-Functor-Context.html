@@ -8,21 +8,48 @@
 </head>
 <body>
 <pre><a name="line-1"></a>
-<a name="line-2"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Functor</span><span class='hs-varop'>.</span><span class='hs-conid'>Context</span> <span class='hs-layout'>(</span>
-<a name="line-3"></a>        <span class='hs-conid'>Ctxt</span><span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
-<a name="line-4"></a>        <span class='hs-varid'>mapCtxt</span><span class='hs-layout'>,</span>
-<a name="line-5"></a>        <span class='hs-varid'>extractCtxt</span><span class='hs-layout'>,</span>
-<a name="line-6"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-7"></a>
-<a name="line-8"></a><a name="Ctxt"></a><span class='hs-comment'>-- TODO use newtype and derivice Functor, Comonad etc</span>
-<a name="line-9"></a><a name="Ctxt"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>Ctxt</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>Maybe</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Maybe</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-10"></a>
+<a name="line-2"></a><span class='hs-comment'>{-# LANGUAGE TypeFamilies #-}</span>
+<a name="line-3"></a><span class='hs-comment'>{-# LANGUAGE MultiParamTypeClasses #-}</span>
+<a name="line-4"></a><span class='hs-comment'>{-# LANGUAGE DeriveFunctor #-}</span>
+<a name="line-5"></a>
+<a name="line-6"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Functor</span><span class='hs-varop'>.</span><span class='hs-conid'>Context</span> <span class='hs-layout'>(</span>
+<a name="line-7"></a>        <span class='hs-conid'>Ctxt</span><span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
+<a name="line-8"></a>        <span class='hs-varid'>mapCtxt</span><span class='hs-layout'>,</span>
+<a name="line-9"></a>        <span class='hs-varid'>extractCtxt</span><span class='hs-layout'>,</span>
+<a name="line-10"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
 <a name="line-11"></a>
-<a name="line-12"></a><a name="mapCtxt"></a><span class='hs-definition'>mapCtxt</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Ctxt</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Ctxt</span> <span class='hs-varid'>b</span>
-<a name="line-13"></a><span class='hs-definition'>mapCtxt</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span><span class='hs-layout'>,</span><span class='hs-varid'>b</span><span class='hs-layout'>,</span><span class='hs-varid'>c</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>fmap</span> <span class='hs-varid'>f</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-varid'>f</span> <span class='hs-varid'>b</span><span class='hs-layout'>,</span> <span class='hs-varid'>fmap</span> <span class='hs-varid'>f</span> <span class='hs-varid'>c</span><span class='hs-layout'>)</span>
-<a name="line-14"></a>
-<a name="line-15"></a><a name="extractCtxt"></a><span class='hs-definition'>extractCtxt</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Ctxt</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
-<a name="line-16"></a><span class='hs-definition'>extractCtxt</span> <span class='hs-layout'>(</span><span class='hs-keyword'>_</span><span class='hs-layout'>,</span><span class='hs-varid'>x</span><span class='hs-layout'>,</span><span class='hs-keyword'>_</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>x</span>
-<a name="line-17"></a>
+<a name="line-12"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Comonad</span>
+<a name="line-13"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Applicative</span>
+<a name="line-14"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span><span class='hs-varop'>.</span><span class='hs-conid'>Wrapped</span>
+<a name="line-15"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span><span class='hs-varop'>.</span><span class='hs-conid'>Iso</span>
+<a name="line-16"></a>
+<a name="line-17"></a><a name="Ctxt"></a><span class='hs-comment'>-- TODO use newtype and derivice Functor, Comonad etc</span>
+<a name="line-18"></a><a name="Ctxt"></a><span class='hs-keyword'>newtype</span> <span class='hs-conid'>Ctxt</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Ctxt</span> <span class='hs-layout'>{</span> <span class='hs-varid'>getCtxt</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Maybe</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Maybe</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>}</span>
+<a name="line-19"></a>  <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Functor</span><span class='hs-layout'>)</span>
+<a name="line-20"></a>
+<a name="line-21"></a><a name="instance%20Wrapped%20(Ctxt%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Wrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>Ctxt</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-22"></a>  <span class='hs-keyword'>type</span> <span class='hs-conid'>Unwrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>Ctxt</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>Maybe</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Maybe</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-23"></a>  <span class='hs-sel'>_Wrapped'</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>iso</span> <span class='hs-varid'>getCtxt</span> <span class='hs-conid'>Ctxt</span>
+<a name="line-24"></a>
+<a name="line-25"></a><a name="instance%20Rewrapped%20(Ctxt%20a)%20(Ctxt%20b)%20instance%20Applicative%20Ctxt"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Rewrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>Ctxt</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Ctxt</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span>
+<a name="line-26"></a>
+<a name="line-27"></a><a name="instance%20Applicative%20Ctxt"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Applicative</span> <span class='hs-conid'>Ctxt</span> <span class='hs-keyword'>where</span>
+<a name="line-28"></a>  <span class='hs-varid'>pure</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Ctxt</span> <span class='hs-layout'>(</span><span class='hs-conid'>Nothing</span><span class='hs-layout'>,</span> <span class='hs-varid'>x</span><span class='hs-layout'>,</span> <span class='hs-conid'>Nothing</span><span class='hs-layout'>)</span>
+<a name="line-29"></a>  <span class='hs-conid'>Ctxt</span> <span class='hs-layout'>(</span><span class='hs-varid'>b</span><span class='hs-layout'>,</span><span class='hs-varid'>x</span><span class='hs-layout'>,</span><span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-varop'>&lt;*&gt;</span> <span class='hs-conid'>Ctxt</span> <span class='hs-layout'>(</span><span class='hs-varid'>b'</span><span class='hs-layout'>,</span><span class='hs-varid'>x'</span><span class='hs-layout'>,</span><span class='hs-varid'>a'</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Ctxt</span> <span class='hs-layout'>(</span><span class='hs-varid'>b</span> <span class='hs-varop'>&lt;*&gt;</span> <span class='hs-varid'>b'</span><span class='hs-layout'>,</span> <span class='hs-varid'>x</span> <span class='hs-varid'>x'</span><span class='hs-layout'>,</span> <span class='hs-varid'>a</span> <span class='hs-varop'>&lt;*&gt;</span> <span class='hs-varid'>a'</span><span class='hs-layout'>)</span>
+<a name="line-30"></a>  
+<a name="line-31"></a><span class='hs-comment'>-- instance Comonad Ctxt where</span>
+<a name="line-32"></a>  <span class='hs-comment'>-- extract (Ctxt (b,x,a)) = x</span>
+<a name="line-33"></a>
+<a name="line-34"></a>  <span class='hs-comment'>-- duplicate (Ctxt (Nothing,x,Nothing)) = Ctxt (Nothing, Ctxt (Nothing, x, Nothing), Nothing)</span>
+<a name="line-35"></a>  <span class='hs-comment'>-- duplicate (Ctxt (Just b,x,Nothing)) = Ctxt (Ctxt Just b, Ctxt (Just b, x, Nothing), Nothing)</span>
+<a name="line-36"></a>  <span class='hs-comment'>-- duplicate (Ctxt (Nothing,x,Just a)) = Ctxt (Nothing, Ctxt (Nothing, x, Just a), Just a)</span>
+<a name="line-37"></a>  <span class='hs-comment'>-- duplicate (Ctxt (Just b,x,Just a)) = Ctxt (b, Ctxt (b, x, Just a), Just a)</span>
+<a name="line-38"></a>
+<a name="line-39"></a><a name="mapCtxt"></a><span class='hs-definition'>mapCtxt</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Ctxt</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Ctxt</span> <span class='hs-varid'>b</span>
+<a name="line-40"></a><span class='hs-definition'>mapCtxt</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span>
+<a name="line-41"></a>
+<a name="line-42"></a><a name="extractCtxt"></a><span class='hs-definition'>extractCtxt</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Ctxt</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
+<a name="line-43"></a><span class='hs-definition'>extractCtxt</span> <span class='hs-layout'>(</span><span class='hs-conid'>Ctxt</span> <span class='hs-layout'>(</span><span class='hs-keyword'>_</span><span class='hs-layout'>,</span><span class='hs-varid'>x</span><span class='hs-layout'>,</span><span class='hs-keyword'>_</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>x</span>
+<a name="line-44"></a>
 </pre></body>
 </html>
