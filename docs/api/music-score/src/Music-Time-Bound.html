@@ -33,132 +33,129 @@
 <a name="line-24"></a><span class='hs-comment'>-- Stability   : experimental</span>
 <a name="line-25"></a><span class='hs-comment'>-- Portability : non-portable (TF,GNTD)</span>
 <a name="line-26"></a><span class='hs-comment'>--</span>
-<a name="line-27"></a><span class='hs-comment'>-- /Warning/ This module is experimental.</span>
-<a name="line-28"></a><span class='hs-comment'>--</span>
-<a name="line-29"></a><span class='hs-comment'>-------------------------------------------------------------------------------------</span>
-<a name="line-30"></a>
-<a name="line-31"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Bound</span> <span class='hs-layout'>(</span>
-<a name="line-32"></a>    <span class='hs-comment'>-- * Bound type</span>
-<a name="line-33"></a>    <span class='hs-conid'>Bound</span><span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
-<a name="line-34"></a>    
-<a name="line-35"></a>    <span class='hs-comment'>-- * Construction</span>
-<a name="line-36"></a>    <span class='hs-varid'>bounds</span><span class='hs-layout'>,</span>
-<a name="line-37"></a>    <span class='hs-varid'>bounding</span><span class='hs-layout'>,</span>
-<a name="line-38"></a>    <span class='hs-comment'>-- trim,</span>
-<a name="line-39"></a>    <span class='hs-comment'>-- splice,</span>
-<a name="line-40"></a>    <span class='hs-comment'>-- bounded',</span>
-<a name="line-41"></a>    <span class='hs-comment'>-- bounded,</span>
-<a name="line-42"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-43"></a>
-<a name="line-44"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span>
-<a name="line-45"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span><span class='hs-varop'>.</span><span class='hs-conid'>Point</span>
-<a name="line-46"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Bifunctor</span>
-<a name="line-47"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>               <span class='hs-layout'>(</span><span class='hs-conid'>Map</span><span class='hs-layout'>)</span>
-<a name="line-48"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>               <span class='hs-keyword'>as</span> <span class='hs-conid'>Map</span>
-<a name="line-49"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Ratio</span>
-<a name="line-50"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
-<a name="line-51"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Set</span>               <span class='hs-layout'>(</span><span class='hs-conid'>Set</span><span class='hs-layout'>)</span>
-<a name="line-52"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Set</span>               <span class='hs-keyword'>as</span> <span class='hs-conid'>Set</span>
-<a name="line-53"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>VectorSpace</span>
-<a name="line-54"></a>
-<a name="line-55"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Reverse</span>
-<a name="line-56"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Split</span>
-<a name="line-57"></a>
-<a name="line-58"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Applicative</span>
-<a name="line-59"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span>           <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Indexable</span><span class='hs-layout'>,</span> <span class='hs-conid'>Level</span><span class='hs-layout'>,</span> <span class='hs-varid'>above</span><span class='hs-layout'>,</span> <span class='hs-varid'>below</span><span class='hs-layout'>,</span>
-<a name="line-60"></a>                                         <span class='hs-varid'>index</span><span class='hs-layout'>,</span> <span class='hs-varid'>inside</span><span class='hs-layout'>,</span> <span class='hs-varid'>parts</span><span class='hs-layout'>,</span> <span class='hs-varid'>reversed</span><span class='hs-layout'>,</span>
-<a name="line-61"></a>                                         <span class='hs-varid'>transform</span><span class='hs-layout'>,</span> <span class='hs-layout'>(</span><span class='hs-varop'>&lt;|</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span> <span class='hs-layout'>(</span><span class='hs-varop'>|&gt;</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
-<a name="line-62"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Typeable</span>
-<a name="line-63"></a>
-<a name="line-64"></a><a name="Bound"></a><span class='hs-comment'>-- |</span>
-<a name="line-65"></a><a name="Bound"></a><span class='hs-comment'>-- 'Bound' restricts the start and stop time of a value, and prevents access to values</span>
-<a name="line-66"></a><a name="Bound"></a><span class='hs-comment'>-- outside the bounds.</span>
-<a name="line-67"></a><a name="Bound"></a><span class='hs-comment'>--</span>
-<a name="line-68"></a><a name="Bound"></a><span class='hs-comment'>-- 'Bound' is especially useful to restrict the range of a 'Behavior'. If we have a</span>
-<a name="line-69"></a><a name="Bound"></a><span class='hs-comment'>-- value with can only be reasonably defined for a particular time range, we can</span>
-<a name="line-70"></a><a name="Bound"></a><span class='hs-comment'>-- represent it as 'Bound' 'Behavior'. This is isomorphic to a 'Note' 'Segment', and</span>
-<a name="line-71"></a><a name="Bound"></a><span class='hs-comment'>-- 'bounded' whitnesses the isomorphism.</span>
-<a name="line-72"></a><a name="Bound"></a><span class='hs-comment'>--</span>
-<a name="line-73"></a><a name="Bound"></a><span class='hs-comment'>-- 'Bound' is not 'Foldable' or 'Traversable', as that would allow us to access values</span>
-<a name="line-74"></a><a name="Bound"></a><span class='hs-comment'>-- outside the bounds. However, we can still access values of a 'Bound' 'Behavior' in a</span>
-<a name="line-75"></a><a name="Bound"></a><span class='hs-comment'>-- safe manner using 'trim' or 'splice'.</span>
-<a name="line-76"></a><a name="Bound"></a><span class='hs-comment'>--</span>
-<a name="line-77"></a><a name="Bound"></a><span class='hs-keyword'>newtype</span> <span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Bound</span> <span class='hs-layout'>{</span> <span class='hs-varid'>getBound</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Span</span><span class='hs-layout'>,</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>}</span>
-<a name="line-78"></a>  <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Functor</span><span class='hs-layout'>,</span> <span class='hs-conid'>Semigroup</span><span class='hs-layout'>,</span> <span class='hs-conid'>Typeable</span><span class='hs-layout'>,</span> <span class='hs-conid'>Eq</span><span class='hs-layout'>,</span> <span class='hs-conid'>Show</span><span class='hs-layout'>)</span>
-<a name="line-79"></a>
-<a name="line-80"></a><span class='hs-comment'>-- $semantics Bound</span>
-<a name="line-81"></a><span class='hs-comment'>--</span>
+<a name="line-27"></a><span class='hs-comment'>-------------------------------------------------------------------------------------</span>
+<a name="line-28"></a>
+<a name="line-29"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Bound</span> <span class='hs-layout'>(</span>
+<a name="line-30"></a>    <span class='hs-comment'>-- * Bound type</span>
+<a name="line-31"></a>    <span class='hs-conid'>Bound</span><span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
+<a name="line-32"></a>    
+<a name="line-33"></a>    <span class='hs-comment'>-- * Construction</span>
+<a name="line-34"></a>    <span class='hs-varid'>bounds</span><span class='hs-layout'>,</span>
+<a name="line-35"></a>    <span class='hs-varid'>bounding</span><span class='hs-layout'>,</span>
+<a name="line-36"></a>    <span class='hs-comment'>-- trim,</span>
+<a name="line-37"></a>    <span class='hs-comment'>-- splice,</span>
+<a name="line-38"></a>    <span class='hs-comment'>-- bounded',</span>
+<a name="line-39"></a>    <span class='hs-comment'>-- bounded,</span>
+<a name="line-40"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-41"></a>
+<a name="line-42"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span>
+<a name="line-43"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span><span class='hs-varop'>.</span><span class='hs-conid'>Point</span>
+<a name="line-44"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Bifunctor</span>
+<a name="line-45"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>               <span class='hs-layout'>(</span><span class='hs-conid'>Map</span><span class='hs-layout'>)</span>
+<a name="line-46"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>               <span class='hs-keyword'>as</span> <span class='hs-conid'>Map</span>
+<a name="line-47"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Ratio</span>
+<a name="line-48"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
+<a name="line-49"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Set</span>               <span class='hs-layout'>(</span><span class='hs-conid'>Set</span><span class='hs-layout'>)</span>
+<a name="line-50"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Set</span>               <span class='hs-keyword'>as</span> <span class='hs-conid'>Set</span>
+<a name="line-51"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>VectorSpace</span>
+<a name="line-52"></a>
+<a name="line-53"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Reverse</span>
+<a name="line-54"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Split</span>
+<a name="line-55"></a>
+<a name="line-56"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Applicative</span>
+<a name="line-57"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span>           <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Indexable</span><span class='hs-layout'>,</span> <span class='hs-conid'>Level</span><span class='hs-layout'>,</span> <span class='hs-varid'>above</span><span class='hs-layout'>,</span> <span class='hs-varid'>below</span><span class='hs-layout'>,</span>
+<a name="line-58"></a>                                         <span class='hs-varid'>index</span><span class='hs-layout'>,</span> <span class='hs-varid'>inside</span><span class='hs-layout'>,</span> <span class='hs-varid'>parts</span><span class='hs-layout'>,</span> <span class='hs-varid'>reversed</span><span class='hs-layout'>,</span>
+<a name="line-59"></a>                                         <span class='hs-varid'>transform</span><span class='hs-layout'>,</span> <span class='hs-layout'>(</span><span class='hs-varop'>&lt;|</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span> <span class='hs-layout'>(</span><span class='hs-varop'>|&gt;</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
+<a name="line-60"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Typeable</span>
+<a name="line-61"></a>
+<a name="line-62"></a><a name="Bound"></a><span class='hs-comment'>-- |</span>
+<a name="line-63"></a><a name="Bound"></a><span class='hs-comment'>-- 'Bound' restricts the start and stop time of a value, and prevents access to values</span>
+<a name="line-64"></a><a name="Bound"></a><span class='hs-comment'>-- outside the bounds.</span>
+<a name="line-65"></a><a name="Bound"></a><span class='hs-comment'>--</span>
+<a name="line-66"></a><a name="Bound"></a><span class='hs-comment'>-- 'Bound' is especially useful to restrict the range of a 'Behavior'. If we have a</span>
+<a name="line-67"></a><a name="Bound"></a><span class='hs-comment'>-- value with can only be reasonably defined for a particular time range, we can</span>
+<a name="line-68"></a><a name="Bound"></a><span class='hs-comment'>-- represent it as 'Bound' 'Behavior'. This is isomorphic to a 'Note' 'Segment', and</span>
+<a name="line-69"></a><a name="Bound"></a><span class='hs-comment'>-- 'bounded' whitnesses the isomorphism.</span>
+<a name="line-70"></a><a name="Bound"></a><span class='hs-comment'>--</span>
+<a name="line-71"></a><a name="Bound"></a><span class='hs-comment'>-- 'Bound' is not 'Foldable' or 'Traversable', as that would allow us to access values</span>
+<a name="line-72"></a><a name="Bound"></a><span class='hs-comment'>-- outside the bounds. However, we can still access values of a 'Bound' 'Behavior' in a</span>
+<a name="line-73"></a><a name="Bound"></a><span class='hs-comment'>-- safe manner using 'trim' or 'splice'.</span>
+<a name="line-74"></a><a name="Bound"></a><span class='hs-comment'>--</span>
+<a name="line-75"></a><a name="Bound"></a><span class='hs-keyword'>newtype</span> <span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Bound</span> <span class='hs-layout'>{</span> <span class='hs-varid'>getBound</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Span</span><span class='hs-layout'>,</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>}</span>
+<a name="line-76"></a>  <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Functor</span><span class='hs-layout'>,</span> <span class='hs-conid'>Semigroup</span><span class='hs-layout'>,</span> <span class='hs-conid'>Typeable</span><span class='hs-layout'>,</span> <span class='hs-conid'>Eq</span><span class='hs-layout'>,</span> <span class='hs-conid'>Show</span><span class='hs-layout'>)</span>
+<a name="line-77"></a>
+<a name="line-78"></a><span class='hs-comment'>-- $semantics Bound</span>
+<a name="line-79"></a><span class='hs-comment'>--</span>
+<a name="line-80"></a><span class='hs-comment'>-- @</span>
+<a name="line-81"></a><span class='hs-comment'>-- type Bound a = (Time, Time, a)</span>
 <a name="line-82"></a><span class='hs-comment'>-- @</span>
-<a name="line-83"></a><span class='hs-comment'>-- type Bound a = (Time, Time, a)</span>
-<a name="line-84"></a><span class='hs-comment'>-- @</span>
+<a name="line-83"></a><span class='hs-comment'>--</span>
+<a name="line-84"></a>
 <a name="line-85"></a><span class='hs-comment'>--</span>
-<a name="line-86"></a>
+<a name="line-86"></a><span class='hs-comment'>-- These are both unsafe, as they allow us to define 'unBound'</span>
 <a name="line-87"></a><span class='hs-comment'>--</span>
-<a name="line-88"></a><span class='hs-comment'>-- These are both unsafe, as they allow us to define 'unBound'</span>
-<a name="line-89"></a><span class='hs-comment'>--</span>
-<a name="line-90"></a><span class='hs-comment'>-- instance Foldable Bound where</span>
-<a name="line-91"></a><span class='hs-comment'>--   foldr f z (Bound (_,x)) = f x z</span>
-<a name="line-92"></a><span class='hs-comment'>--</span>
-<a name="line-93"></a><span class='hs-comment'>-- instance Traversable Bound where</span>
-<a name="line-94"></a><span class='hs-comment'>--   traverse f (Bound (s,x)) = (Bound . (s,)) &lt;$&gt; f x</span>
+<a name="line-88"></a><span class='hs-comment'>-- instance Foldable Bound where</span>
+<a name="line-89"></a><span class='hs-comment'>--   foldr f z (Bound (_,x)) = f x z</span>
+<a name="line-90"></a><span class='hs-comment'>--</span>
+<a name="line-91"></a><span class='hs-comment'>-- instance Traversable Bound where</span>
+<a name="line-92"></a><span class='hs-comment'>--   traverse f (Bound (s,x)) = (Bound . (s,)) &lt;$&gt; f x</span>
+<a name="line-93"></a><span class='hs-comment'>--</span>
+<a name="line-94"></a>
 <a name="line-95"></a><span class='hs-comment'>--</span>
-<a name="line-96"></a>
+<a name="line-96"></a><span class='hs-comment'>-- TODO define Applicative/Monad</span>
 <a name="line-97"></a><span class='hs-comment'>--</span>
-<a name="line-98"></a><span class='hs-comment'>-- TODO define Applicative/Monad</span>
-<a name="line-99"></a><span class='hs-comment'>--</span>
-<a name="line-100"></a><span class='hs-comment'>--</span>
-<a name="line-101"></a><span class='hs-comment'>-- This is a Writer-style instance with interval arithmetic style union/empty as the Monoid</span>
-<a name="line-102"></a><span class='hs-comment'>-- A possible problem with this is that there are multiple representations of the empty</span>
-<a name="line-103"></a><span class='hs-comment'>-- set (namely [(t, t)^.from range | t &lt;- {Time} ]).</span>
-<a name="line-104"></a><span class='hs-comment'>--</span>
-<a name="line-105"></a>
-<a name="line-106"></a><a name="instance%20Wrapped%20(Bound%20a)"></a><span class='hs-comment'>-- | Unsafe: Do not use 'Wrapped' instances</span>
-<a name="line-107"></a><a name="instance%20Wrapped%20(Bound%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Wrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-108"></a>  <span class='hs-keyword'>type</span> <span class='hs-conid'>Unwrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>Span</span><span class='hs-layout'>,</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-109"></a>  <span class='hs-sel'>_Wrapped'</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>iso</span> <span class='hs-varid'>getBound</span> <span class='hs-conid'>Bound</span>
-<a name="line-110"></a>
-<a name="line-111"></a><a name="instance%20Reversible%20(Bound%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Rewrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span>
-<a name="line-112"></a>
-<a name="line-113"></a><a name="instance%20Reversible%20(Bound%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Reversible</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Reversible</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-114"></a>  <span class='hs-comment'>-- rev = over (_Wrapped . each) rev</span>
-<a name="line-115"></a>  <span class='hs-varid'>rev</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-sel'>_Wrapped</span> <span class='hs-varop'>$</span> <span class='hs-layout'>(</span><span class='hs-varid'>bimap</span> <span class='hs-varid'>rev</span> <span class='hs-varid'>rev</span><span class='hs-layout'>)</span>
+<a name="line-98"></a><span class='hs-comment'>--</span>
+<a name="line-99"></a><span class='hs-comment'>-- This is a Writer-style instance with interval arithmetic style union/empty as the Monoid</span>
+<a name="line-100"></a><span class='hs-comment'>-- A possible problem with this is that there are multiple representations of the empty</span>
+<a name="line-101"></a><span class='hs-comment'>-- set (namely [(t, t)^.from range | t &lt;- {Time} ]).</span>
+<a name="line-102"></a><span class='hs-comment'>--</span>
+<a name="line-103"></a>
+<a name="line-104"></a><a name="instance%20Wrapped%20(Bound%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Wrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-105"></a>  <span class='hs-keyword'>type</span> <span class='hs-conid'>Unwrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>Span</span><span class='hs-layout'>,</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-106"></a>  <span class='hs-sel'>_Wrapped'</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>iso</span> <span class='hs-varid'>getBound</span> <span class='hs-conid'>Bound</span>
+<a name="line-107"></a>
+<a name="line-108"></a><a name="instance%20Reversible%20(Bound%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Rewrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span>
+<a name="line-109"></a>
+<a name="line-110"></a><a name="instance%20Reversible%20(Bound%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Reversible</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Reversible</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-111"></a>  <span class='hs-comment'>-- rev = over (_Wrapped . each) rev</span>
+<a name="line-112"></a>  <span class='hs-varid'>rev</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-sel'>_Wrapped</span> <span class='hs-varop'>$</span> <span class='hs-layout'>(</span><span class='hs-varid'>bimap</span> <span class='hs-varid'>rev</span> <span class='hs-varid'>rev</span><span class='hs-layout'>)</span>
+<a name="line-113"></a>
+<a name="line-114"></a><a name="instance%20Splittable%20(Bound%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Splittable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Splittable</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-115"></a>  <span class='hs-comment'>-- TODO</span>
 <a name="line-116"></a>
-<a name="line-117"></a><a name="instance%20Splittable%20(Bound%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Splittable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Splittable</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-118"></a>  <span class='hs-comment'>-- TODO</span>
-<a name="line-119"></a>
-<a name="line-120"></a><a name="instance%20Transformable%20(Bound%20a)"></a><span class='hs-comment'>-- |</span>
-<a name="line-121"></a><a name="instance%20Transformable%20(Bound%20a)"></a><span class='hs-comment'>-- 'Bound' transform by transforming the bounded value as well as</span>
-<a name="line-122"></a><a name="instance%20Transformable%20(Bound%20a)"></a><span class='hs-comment'>-- the bounds.</span>
-<a name="line-123"></a><a name="instance%20Transformable%20(Bound%20a)"></a><span class='hs-comment'>--</span>
-<a name="line-124"></a><a name="instance%20Transformable%20(Bound%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Transformable</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-125"></a>  <span class='hs-varid'>transform</span> <span class='hs-varid'>t</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-sel'>_Wrapped</span> <span class='hs-layout'>(</span><span class='hs-varid'>transform</span> <span class='hs-varid'>t</span> <span class='hs-varop'>`bimap`</span> <span class='hs-varid'>transform</span> <span class='hs-varid'>t</span><span class='hs-layout'>)</span>
+<a name="line-117"></a><a name="instance%20Transformable%20(Bound%20a)"></a><span class='hs-comment'>-- |</span>
+<a name="line-118"></a><a name="instance%20Transformable%20(Bound%20a)"></a><span class='hs-comment'>-- 'Bound' transform by transforming the bounded value as well as</span>
+<a name="line-119"></a><a name="instance%20Transformable%20(Bound%20a)"></a><span class='hs-comment'>-- the bounds.</span>
+<a name="line-120"></a><a name="instance%20Transformable%20(Bound%20a)"></a><span class='hs-comment'>--</span>
+<a name="line-121"></a><a name="instance%20Transformable%20(Bound%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Transformable</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-122"></a>  <span class='hs-varid'>transform</span> <span class='hs-varid'>t</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-sel'>_Wrapped</span> <span class='hs-layout'>(</span><span class='hs-varid'>transform</span> <span class='hs-varid'>t</span> <span class='hs-varop'>`bimap`</span> <span class='hs-varid'>transform</span> <span class='hs-varid'>t</span><span class='hs-layout'>)</span>
+<a name="line-123"></a>
+<a name="line-124"></a><a name="instance%20HasDuration%20(Bound%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-125"></a>  <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_offset</span> <span class='hs-varid'>x</span> <span class='hs-varop'>.-.</span> <span class='hs-sel'>_onset</span> <span class='hs-varid'>x</span>
 <a name="line-126"></a>
-<a name="line-127"></a><a name="instance%20HasDuration%20(Bound%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-128"></a>  <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_offset</span> <span class='hs-varid'>x</span> <span class='hs-varop'>.-.</span> <span class='hs-sel'>_onset</span> <span class='hs-varid'>x</span>
-<a name="line-129"></a>
-<a name="line-130"></a><a name="instance%20HasPosition%20(Bound%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasPosition</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-131"></a>  <span class='hs-comment'>-- TODO lawless</span>
-<a name="line-132"></a>  <span class='hs-comment'>-- _position (Bound (view range -&gt; (t, u), x)) d = truncating t u (_position x d)</span>
-<a name="line-133"></a>  <span class='hs-sel'>_position</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-layout'>(</span><span class='hs-varid'>view</span> <span class='hs-varid'>range</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-layout'>(</span><span class='hs-varid'>t</span><span class='hs-layout'>,</span> <span class='hs-varid'>u</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>alerp</span> <span class='hs-varid'>t</span> <span class='hs-varid'>u</span>
+<a name="line-127"></a><a name="instance%20HasPosition%20(Bound%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasPosition</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-128"></a>  <span class='hs-comment'>-- TODO lawless</span>
+<a name="line-129"></a>  <span class='hs-comment'>-- _position (Bound (view range -&gt; (t, u), x)) d = truncating t u (_position x d)</span>
+<a name="line-130"></a>  <span class='hs-sel'>_position</span> <span class='hs-layout'>(</span><span class='hs-conid'>Bound</span> <span class='hs-layout'>(</span><span class='hs-varid'>view</span> <span class='hs-varid'>range</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-layout'>(</span><span class='hs-varid'>t</span><span class='hs-layout'>,</span> <span class='hs-varid'>u</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>alerp</span> <span class='hs-varid'>t</span> <span class='hs-varid'>u</span>
+<a name="line-131"></a>
+<a name="line-132"></a><a name="truncating"></a><span class='hs-definition'>truncating</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Ord</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
+<a name="line-133"></a><span class='hs-definition'>truncating</span> <span class='hs-varid'>t</span> <span class='hs-varid'>u</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>x</span> <span class='hs-varop'>`max`</span> <span class='hs-varid'>t</span><span class='hs-layout'>)</span> <span class='hs-varop'>`min`</span> <span class='hs-varid'>u</span>
 <a name="line-134"></a>
-<a name="line-135"></a><a name="truncating"></a><span class='hs-definition'>truncating</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Ord</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
-<a name="line-136"></a><span class='hs-definition'>truncating</span> <span class='hs-varid'>t</span> <span class='hs-varid'>u</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>x</span> <span class='hs-varop'>`max`</span> <span class='hs-varid'>t</span><span class='hs-layout'>)</span> <span class='hs-varop'>`min`</span> <span class='hs-varid'>u</span>
-<a name="line-137"></a>
-<a name="line-138"></a><a name="bounds"></a><span class='hs-comment'>-- |</span>
-<a name="line-139"></a><span class='hs-comment'>-- Add bounds.</span>
-<a name="line-140"></a><span class='hs-comment'>--</span>
-<a name="line-141"></a><span class='hs-definition'>bounds</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Time</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Time</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span>
-<a name="line-142"></a><span class='hs-definition'>bounds</span> <span class='hs-varid'>t</span> <span class='hs-varid'>u</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Bound</span> <span class='hs-layout'>(</span><span class='hs-varid'>t</span> <span class='hs-varop'>&lt;-&gt;</span> <span class='hs-varid'>u</span><span class='hs-layout'>,</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span>
-<a name="line-143"></a>
-<a name="line-144"></a><a name="bounding"></a><span class='hs-comment'>-- |</span>
-<a name="line-145"></a><span class='hs-comment'>-- Add bounds.</span>
-<a name="line-146"></a><span class='hs-comment'>--</span>
-<a name="line-147"></a><span class='hs-comment'>-- @</span>
-<a name="line-148"></a><span class='hs-comment'>-- (s,x)^.note = (bounding s . transform s) x</span>
-<a name="line-149"></a><span class='hs-comment'>-- @</span>
-<a name="line-150"></a><span class='hs-comment'>--</span>
-<a name="line-151"></a><span class='hs-definition'>bounding</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Span</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span>
-<a name="line-152"></a><span class='hs-definition'>bounding</span> <span class='hs-layout'>(</span><span class='hs-varid'>view</span> <span class='hs-varid'>range</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-layout'>(</span><span class='hs-varid'>t</span><span class='hs-layout'>,</span> <span class='hs-varid'>u</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>bounds</span> <span class='hs-varid'>t</span> <span class='hs-varid'>u</span>
-<a name="line-153"></a>
+<a name="line-135"></a><a name="bounds"></a><span class='hs-comment'>-- |</span>
+<a name="line-136"></a><span class='hs-comment'>-- Add bounds.</span>
+<a name="line-137"></a><span class='hs-comment'>--</span>
+<a name="line-138"></a><span class='hs-definition'>bounds</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Time</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Time</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span>
+<a name="line-139"></a><span class='hs-definition'>bounds</span> <span class='hs-varid'>t</span> <span class='hs-varid'>u</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Bound</span> <span class='hs-layout'>(</span><span class='hs-varid'>t</span> <span class='hs-varop'>&lt;-&gt;</span> <span class='hs-varid'>u</span><span class='hs-layout'>,</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span>
+<a name="line-140"></a>
+<a name="line-141"></a><a name="bounding"></a><span class='hs-comment'>-- |</span>
+<a name="line-142"></a><span class='hs-comment'>-- Add bounds.</span>
+<a name="line-143"></a><span class='hs-comment'>--</span>
+<a name="line-144"></a><span class='hs-comment'>-- @</span>
+<a name="line-145"></a><span class='hs-comment'>-- (s,x)^.note = (bounding s . transform s) x</span>
+<a name="line-146"></a><span class='hs-comment'>-- @</span>
+<a name="line-147"></a><span class='hs-comment'>--</span>
+<a name="line-148"></a><span class='hs-definition'>bounding</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Span</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bound</span> <span class='hs-varid'>a</span>
+<a name="line-149"></a><span class='hs-definition'>bounding</span> <span class='hs-layout'>(</span><span class='hs-varid'>view</span> <span class='hs-varid'>range</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-layout'>(</span><span class='hs-varid'>t</span><span class='hs-layout'>,</span> <span class='hs-varid'>u</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>bounds</span> <span class='hs-varid'>t</span> <span class='hs-varid'>u</span>
+<a name="line-150"></a>
 </pre></body>
 </html>

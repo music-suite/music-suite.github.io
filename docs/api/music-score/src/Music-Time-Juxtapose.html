@@ -75,7 +75,7 @@
 <a name="line-66"></a><span class='hs-comment'>-- Move a value so that</span>
 <a name="line-67"></a><span class='hs-comment'>--</span>
 <a name="line-68"></a><span class='hs-comment'>-- @</span>
-<a name="line-69"></a><span class='hs-comment'>-- '_offset' (a ``lead`` b) = '_onset' b</span>
+<a name="line-69"></a><span class='hs-comment'>-- '_offset' (a `lead` b) = '_onset' b</span>
 <a name="line-70"></a><span class='hs-comment'>-- @</span>
 <a name="line-71"></a><span class='hs-comment'>--</span>
 <a name="line-72"></a><span class='hs-comment'>--</span>
@@ -86,7 +86,7 @@
 <a name="line-77"></a><span class='hs-comment'>-- Move a value so that</span>
 <a name="line-78"></a><span class='hs-comment'>--</span>
 <a name="line-79"></a><span class='hs-comment'>-- @</span>
-<a name="line-80"></a><span class='hs-comment'>-- '_offset' a = '_onset' (a ``follow`` b)</span>
+<a name="line-80"></a><span class='hs-comment'>-- '_offset' a = '_onset' (a `follow` b)</span>
 <a name="line-81"></a><span class='hs-comment'>-- @</span>
 <a name="line-82"></a><span class='hs-comment'>--</span>
 <a name="line-83"></a><span class='hs-definition'>follow</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasPosition</span> <span class='hs-varid'>b</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>b</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>b</span>
@@ -176,57 +176,5 @@
 <a name="line-167"></a><span class='hs-definition'>times</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Semigroup</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Monoid</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
 <a name="line-168"></a><span class='hs-definition'>times</span> <span class='hs-varid'>n</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>scat</span> <span class='hs-varop'>.</span> <span class='hs-varid'>replicate</span> <span class='hs-varid'>n</span>
 <a name="line-169"></a>
-<a name="line-170"></a><span class='hs-comment'>{-
-<a name="line-171"></a>
-<a name="line-172"></a>-- |
-<a name="line-173"></a>-- Like '&lt;&gt;', but scaling the second agument to the duration of the first.
-<a name="line-174"></a>--
-<a name="line-175"></a>-- &gt; Score a -&gt; Score a -&gt; Score a
-<a name="line-176"></a>--
-<a name="line-177"></a>sustain         :: (Semigroup a, Stretchable a, HasDuration a, Fractional d, d ~ Duration) =&gt;
-<a name="line-178"></a>                a -&gt; a -&gt; a
-<a name="line-179"></a>
-<a name="line-180"></a>-- |
-<a name="line-181"></a>-- Like '|&gt;' but with a negative delay on the second element.
-<a name="line-182"></a>--
-<a name="line-183"></a>-- &gt; Duration -&gt; Score a -&gt; Score a -&gt; Score a
-<a name="line-184"></a>--
-<a name="line-185"></a>anticipate      :: (Semigroup a, Transformable a, HasOnset a, HasOffset a, Ord d, d ~ Duration) =&gt;
-<a name="line-186"></a>                d -&gt; a -&gt; a -&gt; a
-<a name="line-187"></a>
-<a name="line-188"></a>x `sustain` y     = x &lt;&gt; duration x `stretchTo` y
-<a name="line-189"></a>anticipate t a b  =  a &lt;&gt; startAt (offset a .-^ t) b
-<a name="line-190"></a>
-<a name="line-191"></a>-- Like '&lt;&gt;', but truncating the second agument to the duration of the first.
-<a name="line-192"></a>-- prolong x y = x &lt;&gt; before (duration x) y
-<a name="line-193"></a>
-<a name="line-194"></a>-- |
-<a name="line-195"></a>-- Repeat once for each element in the list.
-<a name="line-196"></a>--
-<a name="line-197"></a>-- Example:
-<a name="line-198"></a>--
-<a name="line-199"></a>-- &gt; repeated [1,2,1] (c^*)
-<a name="line-200"></a>--
-<a name="line-201"></a>-- Simple type:
-<a name="line-202"></a>--
-<a name="line-203"></a>-- &gt; [a] -&gt; (a -&gt; Score Note) -&gt; Score Note
-<a name="line-204"></a>--
-<a name="line-205"></a>repeated        :: (Monoid' b, Transformable b, HasOnset b, HasOffset b) =&gt;
-<a name="line-206"></a>                [a] -&gt; (a -&gt; b) -&gt; b
-<a name="line-207"></a>
-<a name="line-208"></a>-- |
-<a name="line-209"></a>-- Repeat a number of times and scale down by the same amount.
-<a name="line-210"></a>--
-<a name="line-211"></a>-- &gt; Duration -&gt; Score a -&gt; Score a
-<a name="line-212"></a>--
-<a name="line-213"></a>group           :: (Monoid' a, Transformable a, Fractional d, d ~ Duration, HasOnset a, HasOffset a) =&gt;
-<a name="line-214"></a>                Int -&gt; a -&gt; a
-<a name="line-215"></a>
-<a name="line-216"></a>times n     = scat . replicate n
-<a name="line-217"></a>repeated    = flip (\f -&gt; scat . fmap f)
-<a name="line-218"></a>group n     = times n . (fromIntegral n `compress`)
-<a name="line-219"></a>-}</span>
-<a name="line-220"></a>
-<a name="line-221"></a><span class='hs-comment'>-- JUNK</span>
 </pre></body>
 </html>

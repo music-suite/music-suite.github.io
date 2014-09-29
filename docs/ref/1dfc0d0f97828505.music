@@ -1,0 +1,1 @@
+legato $ level mp $ stretch (1/16) $ (scat [cs,d,e,f]) |> g^*12

@@ -45,7 +45,7 @@
 <a name="line-36"></a>        <span class='hs-comment'>-- * The Reversible class</span>
 <a name="line-37"></a>        <span class='hs-conid'>Reversible</span><span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
 <a name="line-38"></a>
-<a name="line-39"></a>        <span class='hs-comment'>-- * Reversed values</span>
+<a name="line-39"></a>        <span class='hs-comment'>-- * Reversing</span>
 <a name="line-40"></a>        <span class='hs-varid'>reversed</span><span class='hs-layout'>,</span>
 <a name="line-41"></a>        <span class='hs-varid'>revDefault</span><span class='hs-layout'>,</span>
 <a name="line-42"></a>
@@ -99,7 +99,7 @@
 <a name="line-90"></a><a name="Reversible"></a><span class='hs-comment'>-- @</span>
 <a name="line-91"></a><a name="Reversible"></a><span class='hs-comment'>--</span>
 <a name="line-92"></a><a name="Reversible"></a><span class='hs-comment'>-- @</span>
-<a name="line-93"></a><a name="Reversible"></a><span class='hs-comment'>-- 'rev' s ``transform`` a = 'rev' (s ``transform`` a)</span>
+<a name="line-93"></a><a name="Reversible"></a><span class='hs-comment'>-- 'rev' s `transform` a = 'rev' (s `transform` a)</span>
 <a name="line-94"></a><a name="Reversible"></a><span class='hs-comment'>-- @</span>
 <a name="line-95"></a><a name="Reversible"></a><span class='hs-comment'>--</span>
 <a name="line-96"></a><a name="Reversible"></a><span class='hs-comment'>-- or equivalently,</span>
@@ -177,106 +177,107 @@
 <a name="line-168"></a><span class='hs-comment'>-- revDefault x = (stretch (-1) `whilst` undelaying (_position x 0.5 .-. 0)) x</span>
 <a name="line-169"></a><span class='hs-definition'>revDefault</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>stretch</span> <span class='hs-layout'>(</span><span class='hs-comment'>-</span><span class='hs-num'>1</span><span class='hs-layout'>)</span> <span class='hs-varid'>x</span>
 <a name="line-170"></a>
-<a name="line-171"></a><a name="NoReverse"></a><span class='hs-keyword'>newtype</span> <span class='hs-conid'>NoReverse</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>NoReverse</span> <span class='hs-layout'>{</span> <span class='hs-varid'>getNoReverse</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>a</span> <span class='hs-layout'>}</span>
-<a name="line-172"></a>  <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Typeable</span><span class='hs-layout'>,</span> <span class='hs-conid'>Eq</span><span class='hs-layout'>,</span> <span class='hs-conid'>Ord</span><span class='hs-layout'>,</span> <span class='hs-conid'>Show</span><span class='hs-layout'>)</span>
-<a name="line-173"></a>
-<a name="line-174"></a><a name="instance%20Transformable%20(NoReverse%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Transformable</span> <span class='hs-layout'>(</span><span class='hs-conid'>NoReverse</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-175"></a>  <span class='hs-varid'>transform</span> <span class='hs-keyword'>_</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>id</span>
-<a name="line-176"></a>
-<a name="line-177"></a><a name="instance%20Reversible%20(NoReverse%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Reversible</span> <span class='hs-layout'>(</span><span class='hs-conid'>NoReverse</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-178"></a>  <span class='hs-varid'>rev</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>id</span>
-<a name="line-179"></a>
-<a name="line-180"></a><a name="reversed"></a><span class='hs-comment'>-- |</span>
-<a name="line-181"></a><span class='hs-comment'>-- View the reverse of a value.</span>
-<a name="line-182"></a><span class='hs-comment'>--</span>
-<a name="line-183"></a><span class='hs-comment'>-- &gt;&gt;&gt; [1,2,3] &amp; reversed %~ sort</span>
-<a name="line-184"></a><span class='hs-comment'>-- &gt; [3,2,1]</span>
-<a name="line-185"></a><span class='hs-comment'>--</span>
-<a name="line-186"></a><span class='hs-definition'>reversed</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Reversible</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Iso'</span> <span class='hs-varid'>a</span> <span class='hs-varid'>a</span>
-<a name="line-187"></a><span class='hs-definition'>reversed</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>iso</span> <span class='hs-varid'>rev</span> <span class='hs-varid'>rev</span>
-<a name="line-188"></a>
+<a name="line-171"></a>
+<a name="line-172"></a><a name="NoReverse"></a><span class='hs-keyword'>newtype</span> <span class='hs-conid'>NoReverse</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>NoReverse</span> <span class='hs-layout'>{</span> <span class='hs-varid'>getNoReverse</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>a</span> <span class='hs-layout'>}</span>
+<a name="line-173"></a>  <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Typeable</span><span class='hs-layout'>,</span> <span class='hs-conid'>Eq</span><span class='hs-layout'>,</span> <span class='hs-conid'>Ord</span><span class='hs-layout'>,</span> <span class='hs-conid'>Show</span><span class='hs-layout'>)</span>
+<a name="line-174"></a>
+<a name="line-175"></a><a name="instance%20Transformable%20(NoReverse%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Transformable</span> <span class='hs-layout'>(</span><span class='hs-conid'>NoReverse</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-176"></a>  <span class='hs-varid'>transform</span> <span class='hs-keyword'>_</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>id</span>
+<a name="line-177"></a>
+<a name="line-178"></a><a name="instance%20Reversible%20(NoReverse%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Reversible</span> <span class='hs-layout'>(</span><span class='hs-conid'>NoReverse</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-179"></a>  <span class='hs-varid'>rev</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>id</span>
+<a name="line-180"></a>
+<a name="line-181"></a><a name="reversed"></a><span class='hs-comment'>-- |</span>
+<a name="line-182"></a><span class='hs-comment'>-- View the reverse of a value.</span>
+<a name="line-183"></a><span class='hs-comment'>--</span>
+<a name="line-184"></a><span class='hs-comment'>-- &gt;&gt;&gt; [1,2,3] &amp; reversed %~ Data.List.sort</span>
+<a name="line-185"></a><span class='hs-comment'>-- [3,2,1]</span>
+<a name="line-186"></a><span class='hs-comment'>--</span>
+<a name="line-187"></a><span class='hs-definition'>reversed</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Reversible</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Iso'</span> <span class='hs-varid'>a</span> <span class='hs-varid'>a</span>
+<a name="line-188"></a><span class='hs-definition'>reversed</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>iso</span> <span class='hs-varid'>rev</span> <span class='hs-varid'>rev</span>
 <a name="line-189"></a>
 <a name="line-190"></a>
 <a name="line-191"></a>
 <a name="line-192"></a>
-<a name="line-193"></a><span class='hs-comment'>{-
-<a name="line-194"></a>-- |
-<a name="line-195"></a>-- Reversible values.
-<a name="line-196"></a>--
-<a name="line-197"></a>-- For instances of 'Reversible' and 'HasOnset', the following laws should hold:
-<a name="line-198"></a>--
-<a name="line-199"></a>-- &gt; onset a    = onset (rev a)
-<a name="line-200"></a>-- &gt; duration a = duration (rev a)
-<a name="line-201"></a>--
-<a name="line-202"></a>-- For structural types, 'rev' is applied recursively, hence the constraint on
-<a name="line-203"></a>-- the 'Score' instance. 'rev' is id by default, so for a trivial type @T@ it
-<a name="line-204"></a>-- suffices to write
-<a name="line-205"></a>--
-<a name="line-206"></a>-- &gt; instance Reversible T
-<a name="line-207"></a>--
-<a name="line-208"></a>-- For instances 'U' of 'HasOnset' and 'Transformable', a suitable instance
-<a name="line-209"></a>-- is
-<a name="line-210"></a>--
-<a name="line-211"></a>-- &gt; instance Reversible T where
-<a name="line-212"></a>-- &gt;     rev = withSameOnset (stretch (-1))
-<a name="line-213"></a>--
+<a name="line-193"></a>
+<a name="line-194"></a><span class='hs-comment'>{-
+<a name="line-195"></a>-- |
+<a name="line-196"></a>-- Reversible values.
+<a name="line-197"></a>--
+<a name="line-198"></a>-- For instances of 'Reversible' and 'HasOnset', the following laws should hold:
+<a name="line-199"></a>--
+<a name="line-200"></a>-- &gt; onset a    = onset (rev a)
+<a name="line-201"></a>-- &gt; duration a = duration (rev a)
+<a name="line-202"></a>--
+<a name="line-203"></a>-- For structural types, 'rev' is applied recursively, hence the constraint on
+<a name="line-204"></a>-- the 'Score' instance. 'rev' is id by default, so for a trivial type @T@ it
+<a name="line-205"></a>-- suffices to write
+<a name="line-206"></a>--
+<a name="line-207"></a>-- &gt; instance Reversible T
+<a name="line-208"></a>--
+<a name="line-209"></a>-- For instances 'U' of 'HasOnset' and 'Transformable', a suitable instance
+<a name="line-210"></a>-- is
+<a name="line-211"></a>--
+<a name="line-212"></a>-- &gt; instance Reversible T where
+<a name="line-213"></a>-- &gt;     rev = withSameOnset (stretch (-1))
 <a name="line-214"></a>--
-<a name="line-215"></a>
-<a name="line-216"></a>class Reversible a where
-<a name="line-217"></a>
-<a name="line-218"></a>    -- |
-<a name="line-219"></a>    -- Reverse a value.
-<a name="line-220"></a>    --
-<a name="line-221"></a>    -- Reverse is an involution, meaning that:
-<a name="line-222"></a>    --
-<a name="line-223"></a>    -- &gt; rev (rev a) = a
-<a name="line-224"></a>    --
-<a name="line-225"></a>    rev :: a -&gt; a
-<a name="line-226"></a>    rev = id
-<a name="line-227"></a>
-<a name="line-228"></a>-- instance Reversible Time where
-<a name="line-229"></a>    -- rev t = mirror t
-<a name="line-230"></a>
-<a name="line-231"></a>instance Reversible Double
-<a name="line-232"></a>instance Reversible Float
-<a name="line-233"></a>instance Reversible Int
-<a name="line-234"></a>instance Reversible Integer
-<a name="line-235"></a>instance Reversible ()
-<a name="line-236"></a>instance Reversible (Ratio a)
-<a name="line-237"></a>
-<a name="line-238"></a>instance Reversible a =&gt; Reversible [a] where
-<a name="line-239"></a>    rev = fmap rev
-<a name="line-240"></a>
-<a name="line-241"></a>instance (Ord a, Reversible a) =&gt; Reversible (Set a) where
-<a name="line-242"></a>    rev = Set.map rev
-<a name="line-243"></a>
-<a name="line-244"></a>instance Reversible a =&gt; Reversible (Map k a) where
-<a name="line-245"></a>    rev = fmap rev
-<a name="line-246"></a>
-<a name="line-247"></a>newtype NoRev a = NoRev { getNoRev :: a }
-<a name="line-248"></a>    deriving (Eq, Ord, Enum, Show, Semigroup, Monoid,
-<a name="line-249"></a>        Delayable, Stretchable, HasOnset, HasOffset, HasDuration)
-<a name="line-250"></a>
-<a name="line-251"></a>instance Reversible (NoRev a) where
-<a name="line-252"></a>    rev = id
-<a name="line-253"></a>
+<a name="line-215"></a>--
+<a name="line-216"></a>
+<a name="line-217"></a>class Reversible a where
+<a name="line-218"></a>
+<a name="line-219"></a>    -- |
+<a name="line-220"></a>    -- Reverse a value.
+<a name="line-221"></a>    --
+<a name="line-222"></a>    -- Reverse is an involution, meaning that:
+<a name="line-223"></a>    --
+<a name="line-224"></a>    -- &gt; rev (rev a) = a
+<a name="line-225"></a>    --
+<a name="line-226"></a>    rev :: a -&gt; a
+<a name="line-227"></a>    rev = id
+<a name="line-228"></a>
+<a name="line-229"></a>-- instance Reversible Time where
+<a name="line-230"></a>    -- rev t = mirror t
+<a name="line-231"></a>
+<a name="line-232"></a>instance Reversible Double
+<a name="line-233"></a>instance Reversible Float
+<a name="line-234"></a>instance Reversible Int
+<a name="line-235"></a>instance Reversible Integer
+<a name="line-236"></a>instance Reversible ()
+<a name="line-237"></a>instance Reversible (Ratio a)
+<a name="line-238"></a>
+<a name="line-239"></a>instance Reversible a =&gt; Reversible [a] where
+<a name="line-240"></a>    rev = fmap rev
+<a name="line-241"></a>
+<a name="line-242"></a>instance (Ord a, Reversible a) =&gt; Reversible (Set a) where
+<a name="line-243"></a>    rev = Set.map rev
+<a name="line-244"></a>
+<a name="line-245"></a>instance Reversible a =&gt; Reversible (Map k a) where
+<a name="line-246"></a>    rev = fmap rev
+<a name="line-247"></a>
+<a name="line-248"></a>newtype NoRev a = NoRev { getNoRev :: a }
+<a name="line-249"></a>    deriving (Eq, Ord, Enum, Show, Semigroup, Monoid,
+<a name="line-250"></a>        Delayable, Stretchable, HasOnset, HasOffset, HasDuration)
+<a name="line-251"></a>
+<a name="line-252"></a>instance Reversible (NoRev a) where
+<a name="line-253"></a>    rev = id
 <a name="line-254"></a>
 <a name="line-255"></a>
-<a name="line-256"></a>newtype WithRev a = WithRev (a,a)
-<a name="line-257"></a>    deriving (Eq, Ord, Semigroup, Monoid)
-<a name="line-258"></a>
-<a name="line-259"></a>withRev :: Reversible a =&gt; a -&gt; WithRev a
-<a name="line-260"></a>withRev x = WithRev (rev x, x)
-<a name="line-261"></a>
-<a name="line-262"></a>fromWithRev :: Reversible a =&gt; WithRev a -&gt; a
-<a name="line-263"></a>fromWithRev (WithRev (_,x)) = x
-<a name="line-264"></a>
-<a name="line-265"></a>instance Reversible a =&gt; Reversible (WithRev a) where
-<a name="line-266"></a>    rev (WithRev (r,x)) = WithRev (x,r)
-<a name="line-267"></a>
-<a name="line-268"></a>-- JUNK
-<a name="line-269"></a>                                         -}</span>
-<a name="line-270"></a>
+<a name="line-256"></a>
+<a name="line-257"></a>newtype WithRev a = WithRev (a,a)
+<a name="line-258"></a>    deriving (Eq, Ord, Semigroup, Monoid)
+<a name="line-259"></a>
+<a name="line-260"></a>withRev :: Reversible a =&gt; a -&gt; WithRev a
+<a name="line-261"></a>withRev x = WithRev (rev x, x)
+<a name="line-262"></a>
+<a name="line-263"></a>fromWithRev :: Reversible a =&gt; WithRev a -&gt; a
+<a name="line-264"></a>fromWithRev (WithRev (_,x)) = x
+<a name="line-265"></a>
+<a name="line-266"></a>instance Reversible a =&gt; Reversible (WithRev a) where
+<a name="line-267"></a>    rev (WithRev (r,x)) = WithRev (x,r)
+<a name="line-268"></a>
+<a name="line-269"></a>-- JUNK
+<a name="line-270"></a>                                         -}</span>
 <a name="line-271"></a>
+<a name="line-272"></a>
 </pre></body>
 </html>

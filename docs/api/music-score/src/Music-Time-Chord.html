@@ -35,44 +35,44 @@
 <a name="line-26"></a><span class='hs-comment'>-- Stability   : experimental</span>
 <a name="line-27"></a><span class='hs-comment'>-- Portability : non-portable (TF,GNTD)</span>
 <a name="line-28"></a><span class='hs-comment'>--</span>
-<a name="line-29"></a><span class='hs-comment'>-- /Warning/ This module is experimental.</span>
-<a name="line-30"></a><span class='hs-comment'>--</span>
-<a name="line-31"></a><span class='hs-comment'>-------------------------------------------------------------------------------------</span>
+<a name="line-29"></a><span class='hs-comment'>-------------------------------------------------------------------------------------</span>
+<a name="line-30"></a>
+<a name="line-31"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Chord</span> <span class='hs-layout'>(</span>
 <a name="line-32"></a>
-<a name="line-33"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Chord</span> <span class='hs-layout'>(</span>
-<a name="line-34"></a>
-<a name="line-35"></a>      <span class='hs-comment'>-- * Chord type</span>
-<a name="line-36"></a>      <span class='hs-conid'>Chord</span><span class='hs-layout'>,</span>
-<a name="line-37"></a>
-<a name="line-38"></a>      <span class='hs-comment'>-- * Construction</span>
-<a name="line-39"></a>      <span class='hs-varid'>chord</span><span class='hs-layout'>,</span>
-<a name="line-40"></a>      <span class='hs-varid'>unsafeChord</span><span class='hs-layout'>,</span>
-<a name="line-41"></a>
-<a name="line-42"></a>      <span class='hs-comment'>-- invertC,</span>
-<a name="line-43"></a>      <span class='hs-comment'>-- inversions,</span>
-<a name="line-44"></a>      <span class='hs-comment'>-- chordToScore,</span>
-<a name="line-45"></a>      <span class='hs-comment'>-- arpUp3,</span>
-<a name="line-46"></a>      <span class='hs-comment'>-- arpDown3,</span>
-<a name="line-47"></a>      <span class='hs-comment'>-- arpUpDown3,</span>
-<a name="line-48"></a>      <span class='hs-comment'>-- arpDownUp3,</span>
-<a name="line-49"></a>      <span class='hs-comment'>-- alberti3,</span>
-<a name="line-50"></a>      <span class='hs-comment'>-- triad,</span>
-<a name="line-51"></a>      <span class='hs-comment'>-- mtriad,</span>
-<a name="line-52"></a>      <span class='hs-comment'>-- sixthChord,</span>
-<a name="line-53"></a>      <span class='hs-comment'>-- sixthFourthChord,</span>
-<a name="line-54"></a>      <span class='hs-comment'>-- fromBass,     </span>
-<a name="line-55"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-33"></a>      <span class='hs-comment'>-- * Chord type</span>
+<a name="line-34"></a>      <span class='hs-conid'>Chord</span><span class='hs-layout'>,</span>
+<a name="line-35"></a>
+<a name="line-36"></a>      <span class='hs-comment'>-- * Construction</span>
+<a name="line-37"></a>      <span class='hs-varid'>chord</span><span class='hs-layout'>,</span>
+<a name="line-38"></a>      <span class='hs-varid'>unchord</span><span class='hs-layout'>,</span>
+<a name="line-39"></a>      <span class='hs-varid'>unsafeChord</span><span class='hs-layout'>,</span>
+<a name="line-40"></a>
+<a name="line-41"></a>      <span class='hs-comment'>-- invertChord,</span>
+<a name="line-42"></a>      <span class='hs-comment'>-- inversions,</span>
+<a name="line-43"></a>      <span class='hs-comment'>-- chordToScore,</span>
+<a name="line-44"></a>      <span class='hs-comment'>-- arpUp3,</span>
+<a name="line-45"></a>      <span class='hs-comment'>-- arpDown3,</span>
+<a name="line-46"></a>      <span class='hs-comment'>-- arpUpDown3,</span>
+<a name="line-47"></a>      <span class='hs-comment'>-- arpDownUp3,</span>
+<a name="line-48"></a>      <span class='hs-comment'>-- alberti3,</span>
+<a name="line-49"></a>      <span class='hs-comment'>-- triad,</span>
+<a name="line-50"></a>      <span class='hs-comment'>-- mtriad,</span>
+<a name="line-51"></a>      <span class='hs-comment'>-- sixthChord,</span>
+<a name="line-52"></a>      <span class='hs-comment'>-- sixthFourthChord,</span>
+<a name="line-53"></a>      <span class='hs-comment'>-- fromBass,     </span>
+<a name="line-54"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-55"></a>
 <a name="line-56"></a>
-<a name="line-57"></a>
-<a name="line-58"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span>
-<a name="line-59"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span><span class='hs-varop'>.</span><span class='hs-conid'>Point</span>
-<a name="line-60"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>               <span class='hs-layout'>(</span><span class='hs-conid'>Map</span><span class='hs-layout'>)</span>
-<a name="line-61"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>               <span class='hs-keyword'>as</span> <span class='hs-conid'>Map</span>
-<a name="line-62"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Ratio</span>
-<a name="line-63"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
-<a name="line-64"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Set</span>               <span class='hs-layout'>(</span><span class='hs-conid'>Set</span><span class='hs-layout'>)</span>
-<a name="line-65"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Set</span>               <span class='hs-keyword'>as</span> <span class='hs-conid'>Set</span>
-<a name="line-66"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>VectorSpace</span>
+<a name="line-57"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span>
+<a name="line-58"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span><span class='hs-varop'>.</span><span class='hs-conid'>Point</span>
+<a name="line-59"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>               <span class='hs-layout'>(</span><span class='hs-conid'>Map</span><span class='hs-layout'>)</span>
+<a name="line-60"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>               <span class='hs-keyword'>as</span> <span class='hs-conid'>Map</span>
+<a name="line-61"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Ratio</span>
+<a name="line-62"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
+<a name="line-63"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Set</span>               <span class='hs-layout'>(</span><span class='hs-conid'>Set</span><span class='hs-layout'>)</span>
+<a name="line-64"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Set</span>               <span class='hs-keyword'>as</span> <span class='hs-conid'>Set</span>
+<a name="line-65"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>VectorSpace</span>
+<a name="line-66"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>String</span>
 <a name="line-67"></a>
 <a name="line-68"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Delayed</span>
 <a name="line-69"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Reverse</span>
@@ -122,98 +122,103 @@
 <a name="line-113"></a>  <span class='hs-varid'>return</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>view</span> <span class='hs-sel'>_Unwrapped</span> <span class='hs-varop'>.</span> <span class='hs-varid'>return</span> <span class='hs-varop'>.</span> <span class='hs-varid'>return</span>
 <a name="line-114"></a>  <span class='hs-varid'>xs</span> <span class='hs-varop'>&gt;&gt;=</span> <span class='hs-varid'>f</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>view</span> <span class='hs-sel'>_Unwrapped</span> <span class='hs-varop'>$</span> <span class='hs-layout'>(</span><span class='hs-varid'>view</span> <span class='hs-sel'>_Wrapped</span> <span class='hs-varop'>.</span> <span class='hs-varid'>f</span><span class='hs-layout'>)</span> <span class='hs-varop'>`mbind`</span> <span class='hs-varid'>view</span> <span class='hs-sel'>_Wrapped</span> <span class='hs-varid'>xs</span>
 <a name="line-115"></a>
-<a name="line-116"></a><a name="instance%20Wrapped%20(Chord%20a)"></a><span class='hs-comment'>-- | Unsafe: Do not use 'Wrapped' instances</span>
-<a name="line-117"></a><a name="instance%20Wrapped%20(Chord%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Wrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-118"></a>  <span class='hs-keyword'>type</span> <span class='hs-conid'>Unwrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>ChordList</span> <span class='hs-layout'>(</span><span class='hs-conid'>ChordEv</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
-<a name="line-119"></a>  <span class='hs-sel'>_Wrapped'</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>iso</span> <span class='hs-varid'>getChord</span> <span class='hs-conid'>Chord</span>
-<a name="line-120"></a>
-<a name="line-121"></a><a name="instance%20Rewrapped%20(Chord%20a)%20(Chord%20b)%20instance%20Transformable%20(Chord%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Rewrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span>
-<a name="line-122"></a>
-<a name="line-123"></a><a name="instance%20Transformable%20(Chord%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Transformable</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-124"></a>  <span class='hs-varid'>transform</span> <span class='hs-varid'>s</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-sel'>_Wrapped'</span> <span class='hs-layout'>(</span><span class='hs-varid'>transform</span> <span class='hs-varid'>s</span><span class='hs-layout'>)</span>
-<a name="line-125"></a>
-<a name="line-126"></a><a name="instance%20HasDuration%20(Chord%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-127"></a>  <span class='hs-sel'>_duration</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Foldable</span><span class='hs-varop'>.</span><span class='hs-varid'>sum</span> <span class='hs-varop'>.</span> <span class='hs-varid'>fmap</span> <span class='hs-sel'>_duration</span> <span class='hs-varop'>.</span> <span class='hs-varid'>view</span> <span class='hs-sel'>_Wrapped'</span>
-<a name="line-128"></a>
-<a name="line-129"></a><a name="instance%20Splittable%20(Chord%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Splittable</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Splittable</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-130"></a>  <span class='hs-comment'>-- TODO</span>
-<a name="line-131"></a>
-<a name="line-132"></a><a name="instance%20Reversible%20(Chord%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Reversible</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Reversible</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-133"></a>  <span class='hs-varid'>rev</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-sel'>_Wrapped'</span> <span class='hs-layout'>(</span><span class='hs-varid'>fmap</span> <span class='hs-varid'>rev</span><span class='hs-layout'>)</span> <span class='hs-comment'>-- TODO OK?</span>
-<a name="line-134"></a>
-<a name="line-135"></a><span class='hs-comment'>-- TODO</span>
-<a name="line-136"></a><span class='hs-comment'>-- instance HasMeta (Chord a) where</span>
-<a name="line-137"></a>  <span class='hs-comment'>-- meta = error "Not implemented: meta"</span>
-<a name="line-138"></a>
-<a name="line-139"></a><a name="chord"></a><span class='hs-definition'>chord</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>b</span><span class='hs-keyglyph'>]</span>
-<a name="line-140"></a><span class='hs-definition'>chord</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_Wrapped</span>
-<a name="line-141"></a>
-<a name="line-142"></a><a name="unsafeChord"></a><span class='hs-comment'>-- TODO names are not consistent with other types</span>
-<a name="line-143"></a><span class='hs-definition'>unsafeChord</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Iso</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>b</span><span class='hs-keyglyph'>]</span>
-<a name="line-144"></a><span class='hs-definition'>unsafeChord</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_Wrapped</span>
-<a name="line-145"></a>
-<a name="line-146"></a><span class='hs-keyword'>deriving</span> <span class='hs-keyword'>instance</span> <span class='hs-conid'>IsPitch</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>IsPitch</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>	 
-<a name="line-147"></a><span class='hs-keyword'>deriving</span> <span class='hs-keyword'>instance</span> <span class='hs-conid'>IsInterval</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>IsInterval</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>	 
-<a name="line-148"></a><span class='hs-keyword'>deriving</span> <span class='hs-keyword'>instance</span> <span class='hs-conid'>IsDynamics</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>IsDynamics</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-149"></a>
+<a name="line-116"></a><a name="instance%20Wrapped%20(Chord%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Wrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-117"></a>  <span class='hs-keyword'>type</span> <span class='hs-conid'>Unwrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>ChordList</span> <span class='hs-layout'>(</span><span class='hs-conid'>ChordEv</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
+<a name="line-118"></a>  <span class='hs-sel'>_Wrapped'</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>iso</span> <span class='hs-varid'>getChord</span> <span class='hs-conid'>Chord</span>
+<a name="line-119"></a>
+<a name="line-120"></a><a name="instance%20Rewrapped%20(Chord%20a)%20(Chord%20b)%20instance%20Transformable%20(Chord%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Rewrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span>
+<a name="line-121"></a>
+<a name="line-122"></a><a name="instance%20Transformable%20(Chord%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Transformable</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-123"></a>  <span class='hs-varid'>transform</span> <span class='hs-varid'>s</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-sel'>_Wrapped'</span> <span class='hs-layout'>(</span><span class='hs-varid'>transform</span> <span class='hs-varid'>s</span><span class='hs-layout'>)</span>
+<a name="line-124"></a>
+<a name="line-125"></a><a name="instance%20HasDuration%20(Chord%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-126"></a>  <span class='hs-sel'>_duration</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Foldable</span><span class='hs-varop'>.</span><span class='hs-varid'>sum</span> <span class='hs-varop'>.</span> <span class='hs-varid'>fmap</span> <span class='hs-sel'>_duration</span> <span class='hs-varop'>.</span> <span class='hs-varid'>view</span> <span class='hs-sel'>_Wrapped'</span>
+<a name="line-127"></a>
+<a name="line-128"></a><a name="instance%20Splittable%20(Chord%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Splittable</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Splittable</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-129"></a>  <span class='hs-comment'>-- TODO</span>
+<a name="line-130"></a>
+<a name="line-131"></a><a name="instance%20Reversible%20(Chord%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Reversible</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Reversible</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-132"></a>  <span class='hs-varid'>rev</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-sel'>_Wrapped'</span> <span class='hs-layout'>(</span><span class='hs-varid'>fmap</span> <span class='hs-varid'>rev</span><span class='hs-layout'>)</span> <span class='hs-comment'>-- TODO OK?</span>
+<a name="line-133"></a>
+<a name="line-134"></a><span class='hs-comment'>-- TODO</span>
+<a name="line-135"></a><span class='hs-comment'>-- instance HasMeta (Chord a) where</span>
+<a name="line-136"></a>  <span class='hs-comment'>-- meta = error "Not implemented: meta"</span>
+<a name="line-137"></a>
+<a name="line-138"></a><a name="chord"></a><span class='hs-definition'>chord</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Getter</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-139"></a><span class='hs-definition'>chord</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>from</span> <span class='hs-varid'>unsafeChord</span>
+<a name="line-140"></a>
+<a name="line-141"></a><a name="unchord"></a><span class='hs-definition'>unchord</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>b</span><span class='hs-keyglyph'>]</span>
+<a name="line-142"></a><span class='hs-definition'>unchord</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_Wrapped</span>
+<a name="line-143"></a>
+<a name="line-144"></a><a name="unsafeChord"></a><span class='hs-comment'>-- TODO names are not consistent with other types</span>
+<a name="line-145"></a><span class='hs-definition'>unsafeChord</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Iso</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Delayed</span> <span class='hs-varid'>b</span><span class='hs-keyglyph'>]</span>
+<a name="line-146"></a><span class='hs-definition'>unsafeChord</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_Wrapped</span>
+<a name="line-147"></a>
+<a name="line-148"></a><a name="instance%20IsString%20(Chord%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>IsString</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>IsString</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-149"></a>  <span class='hs-varid'>fromString</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>pure</span> <span class='hs-varop'>.</span> <span class='hs-varid'>fromString</span>
 <a name="line-150"></a>
-<a name="line-151"></a><span class='hs-comment'>{-
-<a name="line-152"></a>-- |
-<a name="line-153"></a>-- Invert a chord, i.e. transpose its lowest pitch up one octave.
-<a name="line-154"></a>--
-<a name="line-155"></a>-- To access higher-numbered inversions, iterate this function, i.e.
-<a name="line-156"></a>--
-<a name="line-157"></a>-- @
-<a name="line-158"></a>-- 'iterate' 'invertC' ('triad' c) !! 2
-<a name="line-159"></a>-- @
-<a name="line-160"></a>--
-<a name="line-161"></a>invertC :: Transposable a =&gt; Chord a -&gt; Chord a
-<a name="line-162"></a>invertC = over chord (rotlAnd $ up _P8)
-<a name="line-163"></a>
-<a name="line-164"></a>-- TODO include transp
-<a name="line-165"></a>inversions :: Transposable a =&gt; Chord a -&gt; [Chord a]
-<a name="line-166"></a>inversions = iterate invertC
-<a name="line-167"></a>
-<a name="line-168"></a>chordToScore :: Chord a -&gt; Score a
-<a name="line-169"></a>chordToScore = pcat . map pure . toListOf traverse
-<a name="line-170"></a>
-<a name="line-171"></a>-- TODO
-<a name="line-172"></a>unchord =  toListOf traverse
-<a name="line-173"></a>
-<a name="line-174"></a>
-<a name="line-175"></a>arpUp3 :: Chord a -&gt; Score a
-<a name="line-176"></a>arpUp3 x = scat $ map ((^/16) . pure) [a,b,c]
-<a name="line-177"></a>  where
-<a name="line-178"></a>    [a,b,c] = unchord x
+<a name="line-151"></a><span class='hs-keyword'>deriving</span> <span class='hs-keyword'>instance</span> <span class='hs-conid'>IsPitch</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>IsPitch</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>	 
+<a name="line-152"></a><span class='hs-keyword'>deriving</span> <span class='hs-keyword'>instance</span> <span class='hs-conid'>IsInterval</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>IsInterval</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>	 
+<a name="line-153"></a><span class='hs-keyword'>deriving</span> <span class='hs-keyword'>instance</span> <span class='hs-conid'>IsDynamics</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>IsDynamics</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-154"></a>
+<a name="line-155"></a>
+<a name="line-156"></a><span class='hs-comment'>{-
+<a name="line-157"></a>-- |
+<a name="line-158"></a>-- Invert a chord, i.e. transpose its lowest pitch up one octave.
+<a name="line-159"></a>--
+<a name="line-160"></a>-- To access higher-numbered inversions, iterate this function, i.e.
+<a name="line-161"></a>--
+<a name="line-162"></a>-- @
+<a name="line-163"></a>-- 'iterate' 'invertC' ('triad' c) !! 2
+<a name="line-164"></a>-- @
+<a name="line-165"></a>--
+<a name="line-166"></a>invertC :: Transposable a =&gt; Chord a -&gt; Chord a
+<a name="line-167"></a>invertC = over chord (rotlAnd $ up _P8)
+<a name="line-168"></a>
+<a name="line-169"></a>-- TODO include transp
+<a name="line-170"></a>inversions :: Transposable a =&gt; Chord a -&gt; [Chord a]
+<a name="line-171"></a>inversions = iterate invertC
+<a name="line-172"></a>
+<a name="line-173"></a>chordToScore :: Chord a -&gt; Score a
+<a name="line-174"></a>chordToScore = pcat . map pure . toListOf traverse
+<a name="line-175"></a>
+<a name="line-176"></a>-- TODO
+<a name="line-177"></a>unchord =  toListOf traverse
+<a name="line-178"></a>
 <a name="line-179"></a>
-<a name="line-180"></a>arpDown3 :: Chord a -&gt; Score a
-<a name="line-181"></a>arpDown3 x = scat $ map ((^/16) . pure) [c,b,a]
+<a name="line-180"></a>arpUp3 :: Chord a -&gt; Score a
+<a name="line-181"></a>arpUp3 x = scat $ map ((^/16) . pure) [a,b,c]
 <a name="line-182"></a>  where
 <a name="line-183"></a>    [a,b,c] = unchord x
 <a name="line-184"></a>
-<a name="line-185"></a>arpUpDown3 x = arpUp3 x |&gt; arpDown3 x
-<a name="line-186"></a>arpDownUp3 x = arpDown3 x |&gt; arpUp3 x
-<a name="line-187"></a>
-<a name="line-188"></a>alberti3 :: Chord a -&gt; Score a
-<a name="line-189"></a>alberti3 x = scat $ map ((^/16) . pure) [a,c,b,c]
-<a name="line-190"></a>  where
-<a name="line-191"></a>    [a,b,c] = unchord x
+<a name="line-185"></a>arpDown3 :: Chord a -&gt; Score a
+<a name="line-186"></a>arpDown3 x = scat $ map ((^/16) . pure) [c,b,a]
+<a name="line-187"></a>  where
+<a name="line-188"></a>    [a,b,c] = unchord x
+<a name="line-189"></a>
+<a name="line-190"></a>arpUpDown3 x = arpUp3 x |&gt; arpDown3 x
+<a name="line-191"></a>arpDownUp3 x = arpDown3 x |&gt; arpUp3 x
 <a name="line-192"></a>
-<a name="line-193"></a>
-<a name="line-194"></a>
-<a name="line-195"></a>triad :: Transposable a =&gt; a -&gt; Chord a
-<a name="line-196"></a>triad x = mconcat $ map pure [x, up _M3 x, up _P5 x]
+<a name="line-193"></a>alberti3 :: Chord a -&gt; Score a
+<a name="line-194"></a>alberti3 x = scat $ map ((^/16) . pure) [a,c,b,c]
+<a name="line-195"></a>  where
+<a name="line-196"></a>    [a,b,c] = unchord x
 <a name="line-197"></a>
-<a name="line-198"></a>mtriad :: Transposable a =&gt; a -&gt; Chord a
-<a name="line-199"></a>mtriad x = mconcat $ map pure [x, up m3 x, up _P5 x]
-<a name="line-200"></a>
-<a name="line-201"></a>sixthChord       = down m3 . invertC . mtriad
-<a name="line-202"></a>sixthFourthChord = down _P5 . invertC . invertC . triad
-<a name="line-203"></a>
-<a name="line-204"></a>
-<a name="line-205"></a>-- TODO better parsing
-<a name="line-206"></a>fromBass :: Transposable a =&gt; String -&gt; a -&gt; Chord a
-<a name="line-207"></a>fromBass "" x = triad x
-<a name="line-208"></a>-}</span>
+<a name="line-198"></a>
+<a name="line-199"></a>
+<a name="line-200"></a>triad :: Transposable a =&gt; a -&gt; Chord a
+<a name="line-201"></a>triad x = mconcat $ map pure [x, up _M3 x, up _P5 x]
+<a name="line-202"></a>
+<a name="line-203"></a>mtriad :: Transposable a =&gt; a -&gt; Chord a
+<a name="line-204"></a>mtriad x = mconcat $ map pure [x, up m3 x, up _P5 x]
+<a name="line-205"></a>
+<a name="line-206"></a>sixthChord       = down m3 . invertC . mtriad
+<a name="line-207"></a>sixthFourthChord = down _P5 . invertC . invertC . triad
+<a name="line-208"></a>
+<a name="line-209"></a>
+<a name="line-210"></a>-- TODO better parsing
+<a name="line-211"></a>fromBass :: Transposable a =&gt; String -&gt; a -&gt; Chord a
+<a name="line-212"></a>fromBass "" x = triad x
+<a name="line-213"></a>-}</span>
 </pre></body>
 </html>

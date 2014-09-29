@@ -32,300 +32,306 @@
 <a name="line-23"></a><span class='hs-comment'>-- Stability   : experimental</span>
 <a name="line-24"></a><span class='hs-comment'>-- Portability : non-portable (TF,GNTD)</span>
 <a name="line-25"></a><span class='hs-comment'>--</span>
-<a name="line-26"></a><span class='hs-comment'>-- Provides a way to annotate data-types with 'Transformable' meta-data. See</span>
-<a name="line-27"></a><span class='hs-comment'>-- "Music.Score.Meta" for more specific applications.</span>
+<a name="line-26"></a><span class='hs-comment'>-- Provides a way to annotate data-types with 'Transformable' meta-data.</span>
+<a name="line-27"></a><span class='hs-comment'>-- Inspired by Clojure meta-data and Diagrams styles.</span>
 <a name="line-28"></a><span class='hs-comment'>--</span>
-<a name="line-29"></a><span class='hs-comment'>-- Inspired by Clojure and Diagram's styles, in turn based on xmonad's @Message@ type,</span>
-<a name="line-30"></a><span class='hs-comment'>-- in turn based on ideas in:</span>
-<a name="line-31"></a><span class='hs-comment'>--</span>
-<a name="line-32"></a><span class='hs-comment'>-- Simon Marlow.</span>
-<a name="line-33"></a><span class='hs-comment'>-- /An Extensible Dynamically-Typed Hierarchy of Exceptions/.</span>
-<a name="line-34"></a><span class='hs-comment'>-- Proceedings of the 2006 ACM SIGPLAN workshop on</span>
-<a name="line-35"></a><span class='hs-comment'>-- Haskell. &lt;<a href="http://research.microsoft.com/apps/pubs/default.aspx?id=67968">http://research.microsoft.com/apps/pubs/default.aspx?id=67968</a>&gt;.</span>
-<a name="line-36"></a><span class='hs-comment'>--</span>
-<a name="line-37"></a><span class='hs-comment'>-------------------------------------------------------------------------------------</span>
-<a name="line-38"></a>
-<a name="line-39"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Meta</span> <span class='hs-layout'>(</span>
-<a name="line-40"></a>        <span class='hs-comment'>-- * Attributes</span>
-<a name="line-41"></a>        <span class='hs-conid'>AttributeClass</span><span class='hs-layout'>,</span>
-<a name="line-42"></a>        <span class='hs-conid'>TAttributeClass</span><span class='hs-layout'>,</span>
-<a name="line-43"></a>        
-<a name="line-44"></a>        <span class='hs-conid'>Attribute</span><span class='hs-layout'>,</span>
-<a name="line-45"></a>        
-<a name="line-46"></a>        <span class='hs-comment'>-- ** Creating attributes</span>
-<a name="line-47"></a>        <span class='hs-varid'>wrapAttr</span><span class='hs-layout'>,</span>
-<a name="line-48"></a>        <span class='hs-varid'>wrapTAttr</span><span class='hs-layout'>,</span>
-<a name="line-49"></a>        <span class='hs-varid'>unwrapAttr</span><span class='hs-layout'>,</span>
-<a name="line-50"></a>        <span class='hs-comment'>-- unwrapTAttr,</span>
+<a name="line-29"></a><span class='hs-comment'>-------------------------------------------------------------------------------------</span>
+<a name="line-30"></a>
+<a name="line-31"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Meta</span> <span class='hs-layout'>(</span>
+<a name="line-32"></a>        <span class='hs-comment'>-- * Attributes</span>
+<a name="line-33"></a>        <span class='hs-conid'>AttributeClass</span><span class='hs-layout'>,</span>
+<a name="line-34"></a>        <span class='hs-conid'>TAttributeClass</span><span class='hs-layout'>,</span>
+<a name="line-35"></a>        
+<a name="line-36"></a>        <span class='hs-conid'>Attribute</span><span class='hs-layout'>,</span>
+<a name="line-37"></a>        
+<a name="line-38"></a>        <span class='hs-comment'>-- ** Creating attributes</span>
+<a name="line-39"></a>        <span class='hs-varid'>wrapAttr</span><span class='hs-layout'>,</span>
+<a name="line-40"></a>        <span class='hs-varid'>wrapTAttr</span><span class='hs-layout'>,</span>
+<a name="line-41"></a>        <span class='hs-varid'>unwrapAttr</span><span class='hs-layout'>,</span>
+<a name="line-42"></a>        <span class='hs-comment'>-- unwrapTAttr,</span>
+<a name="line-43"></a>
+<a name="line-44"></a>        <span class='hs-comment'>-- * Meta-data</span>
+<a name="line-45"></a>        <span class='hs-conid'>Meta</span><span class='hs-layout'>,</span>
+<a name="line-46"></a>
+<a name="line-47"></a>        <span class='hs-comment'>-- ** Creating meta-data</span>
+<a name="line-48"></a>        <span class='hs-varid'>wrapMeta</span><span class='hs-layout'>,</span>
+<a name="line-49"></a>        <span class='hs-varid'>wrapTMeta</span><span class='hs-layout'>,</span>
+<a name="line-50"></a>        <span class='hs-varid'>unwrapMeta</span><span class='hs-layout'>,</span>
 <a name="line-51"></a>
-<a name="line-52"></a>        <span class='hs-comment'>-- * Meta-data</span>
-<a name="line-53"></a>        <span class='hs-conid'>Meta</span><span class='hs-layout'>,</span>
-<a name="line-54"></a>
-<a name="line-55"></a>        <span class='hs-comment'>-- ** Creating meta-data</span>
-<a name="line-56"></a>        <span class='hs-varid'>wrapMeta</span><span class='hs-layout'>,</span>
-<a name="line-57"></a>        <span class='hs-varid'>wrapTMeta</span><span class='hs-layout'>,</span>
-<a name="line-58"></a>        <span class='hs-varid'>unwrapMeta</span><span class='hs-layout'>,</span>
-<a name="line-59"></a>
-<a name="line-60"></a>        <span class='hs-comment'>-- ** The HasMeta class</span>
-<a name="line-61"></a>        <span class='hs-conid'>HasMeta</span><span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
-<a name="line-62"></a>        <span class='hs-varid'>setMeta</span><span class='hs-layout'>,</span>
-<a name="line-63"></a>        <span class='hs-varid'>setMetaAttr</span><span class='hs-layout'>,</span>
-<a name="line-64"></a>        <span class='hs-varid'>setMetaTAttr</span><span class='hs-layout'>,</span>
-<a name="line-65"></a>        <span class='hs-varid'>applyMeta</span><span class='hs-layout'>,</span>
-<a name="line-66"></a>
-<a name="line-67"></a>        <span class='hs-comment'>-- ** Add meta-data to arbitrary types</span>
-<a name="line-68"></a>        <span class='hs-conid'>AddMeta</span><span class='hs-layout'>,</span>
-<a name="line-69"></a>        <span class='hs-varid'>annotated</span><span class='hs-layout'>,</span>
-<a name="line-70"></a>        <span class='hs-varid'>unannotated</span><span class='hs-layout'>,</span>
-<a name="line-71"></a>        <span class='hs-varid'>unsafeAnnotated</span>
-<a name="line-72"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-73"></a>
-<a name="line-74"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Applicative</span>
-<a name="line-75"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Comonad</span>
-<a name="line-76"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span>              <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-varid'>transform</span><span class='hs-layout'>)</span>
-<a name="line-77"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Monad</span><span class='hs-varop'>.</span><span class='hs-conid'>Plus</span>
-<a name="line-78"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Functor</span><span class='hs-varop'>.</span><span class='hs-conid'>Rep</span> <span class='hs-comment'>-- TODO experimental</span>
-<a name="line-79"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Foldable</span>             <span class='hs-layout'>(</span><span class='hs-conid'>Foldable</span><span class='hs-layout'>)</span>
-<a name="line-80"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Foldable</span>             <span class='hs-keyword'>as</span> <span class='hs-conid'>F</span>
-<a name="line-81"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>List</span>                 <span class='hs-keyword'>as</span> <span class='hs-conid'>List</span>
-<a name="line-82"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Functor</span><span class='hs-varop'>.</span><span class='hs-conid'>Adjunction</span>  <span class='hs-layout'>(</span><span class='hs-varid'>unzipR</span><span class='hs-layout'>)</span>
-<a name="line-83"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>                  <span class='hs-layout'>(</span><span class='hs-conid'>Map</span><span class='hs-layout'>)</span>
-<a name="line-84"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>                  <span class='hs-keyword'>as</span> <span class='hs-conid'>Map</span>
-<a name="line-85"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Maybe</span>
-<a name="line-86"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
-<a name="line-87"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Set</span>                  <span class='hs-layout'>(</span><span class='hs-conid'>Set</span><span class='hs-layout'>)</span>
-<a name="line-88"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Set</span>                  <span class='hs-keyword'>as</span> <span class='hs-conid'>Set</span>
-<a name="line-89"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>String</span>
-<a name="line-90"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Typeable</span>
-<a name="line-91"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Void</span>
-<a name="line-92"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Functor</span><span class='hs-varop'>.</span><span class='hs-conid'>Couple</span>
+<a name="line-52"></a>        <span class='hs-comment'>-- ** The HasMeta class</span>
+<a name="line-53"></a>        <span class='hs-conid'>HasMeta</span><span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
+<a name="line-54"></a>        <span class='hs-varid'>getMeta</span><span class='hs-layout'>,</span>
+<a name="line-55"></a>        <span class='hs-varid'>mapMeta</span><span class='hs-layout'>,</span>
+<a name="line-56"></a>        <span class='hs-varid'>setMeta</span><span class='hs-layout'>,</span>
+<a name="line-57"></a>        <span class='hs-varid'>applyMeta</span><span class='hs-layout'>,</span>
+<a name="line-58"></a>        <span class='hs-varid'>setMetaAttr</span><span class='hs-layout'>,</span>
+<a name="line-59"></a>        <span class='hs-varid'>setMetaTAttr</span><span class='hs-layout'>,</span>
+<a name="line-60"></a>        <span class='hs-varid'>preserveMeta</span><span class='hs-layout'>,</span>
+<a name="line-61"></a>
+<a name="line-62"></a>        <span class='hs-comment'>-- ** Add meta-data to arbitrary types</span>
+<a name="line-63"></a>        <span class='hs-conid'>AddMeta</span><span class='hs-layout'>,</span>
+<a name="line-64"></a>        <span class='hs-varid'>annotated</span><span class='hs-layout'>,</span>
+<a name="line-65"></a>        <span class='hs-varid'>unannotated</span><span class='hs-layout'>,</span>
+<a name="line-66"></a>        <span class='hs-varid'>unsafeAnnotated</span>
+<a name="line-67"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-68"></a>
+<a name="line-69"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Applicative</span>
+<a name="line-70"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Comonad</span>
+<a name="line-71"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span>              <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-varid'>transform</span><span class='hs-layout'>)</span>
+<a name="line-72"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Monad</span><span class='hs-varop'>.</span><span class='hs-conid'>Plus</span>
+<a name="line-73"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Functor</span><span class='hs-varop'>.</span><span class='hs-conid'>Rep</span> <span class='hs-comment'>-- TODO experimental</span>
+<a name="line-74"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Foldable</span>             <span class='hs-layout'>(</span><span class='hs-conid'>Foldable</span><span class='hs-layout'>)</span>
+<a name="line-75"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Foldable</span>             <span class='hs-keyword'>as</span> <span class='hs-conid'>F</span>
+<a name="line-76"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>List</span>                 <span class='hs-keyword'>as</span> <span class='hs-conid'>List</span>
+<a name="line-77"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Functor</span><span class='hs-varop'>.</span><span class='hs-conid'>Adjunction</span>  <span class='hs-layout'>(</span><span class='hs-varid'>unzipR</span><span class='hs-layout'>)</span>
+<a name="line-78"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>                  <span class='hs-layout'>(</span><span class='hs-conid'>Map</span><span class='hs-layout'>)</span>
+<a name="line-79"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>                  <span class='hs-keyword'>as</span> <span class='hs-conid'>Map</span>
+<a name="line-80"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Maybe</span>
+<a name="line-81"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
+<a name="line-82"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Set</span>                  <span class='hs-layout'>(</span><span class='hs-conid'>Set</span><span class='hs-layout'>)</span>
+<a name="line-83"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Set</span>                  <span class='hs-keyword'>as</span> <span class='hs-conid'>Set</span>
+<a name="line-84"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>String</span>
+<a name="line-85"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Typeable</span>
+<a name="line-86"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Void</span>
+<a name="line-87"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Functor</span><span class='hs-varop'>.</span><span class='hs-conid'>Couple</span>
+<a name="line-88"></a>
+<a name="line-89"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Internal</span><span class='hs-varop'>.</span><span class='hs-conid'>Util</span>
+<a name="line-90"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Reverse</span>
+<a name="line-91"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Split</span>
+<a name="line-92"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Transform</span>
 <a name="line-93"></a>
-<a name="line-94"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Internal</span><span class='hs-varop'>.</span><span class='hs-conid'>Util</span>
-<a name="line-95"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Reverse</span>
-<a name="line-96"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Split</span>
-<a name="line-97"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Transform</span>
-<a name="line-98"></a>
-<a name="line-99"></a><a name="AttributeClass"></a><span class='hs-comment'>-- | Class of values that can be wrapped.</span>
-<a name="line-100"></a><a name="AttributeClass"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>AttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>Typeable</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Monoid</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Semigroup</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-101"></a>
-<a name="line-102"></a><a name="TAttributeClass"></a><span class='hs-comment'>-- | Class of values that can be wrapped and transformed.</span>
-<a name="line-103"></a><a name="TAttributeClass"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>TAttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>AttributeClass</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-94"></a><a name="AttributeClass"></a><span class='hs-comment'>-- | Class of values that can be wrapped.</span>
+<a name="line-95"></a><a name="AttributeClass"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>AttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>Typeable</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Monoid</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>Semigroup</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-96"></a>
+<a name="line-97"></a><a name="TAttributeClass"></a><span class='hs-comment'>-- | Class of values that can be wrapped and transformed.</span>
+<a name="line-98"></a><a name="TAttributeClass"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>TAttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>AttributeClass</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-99"></a>
+<a name="line-100"></a><span class='hs-comment'>-- | An existential wrapper type to hold attributes.</span>
+<a name="line-101"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>Attribute</span> <span class='hs-keyglyph'>::</span> <span class='hs-varop'>*</span> <span class='hs-keyword'>where</span>
+<a name="line-102"></a>  <span class='hs-conid'>Attribute</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Attribute</span>
+<a name="line-103"></a>  <span class='hs-conid'>TAttribute</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>TAttributeClass</span> <span class='hs-varid'>a</span>  <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Attribute</span>
 <a name="line-104"></a>
-<a name="line-105"></a><span class='hs-comment'>-- | An existential wrapper type to hold attributes.</span>
-<a name="line-106"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>Attribute</span> <span class='hs-keyglyph'>::</span> <span class='hs-varop'>*</span> <span class='hs-keyword'>where</span>
-<a name="line-107"></a>  <span class='hs-conid'>Attribute</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Attribute</span>
-<a name="line-108"></a>  <span class='hs-conid'>TAttribute</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>TAttributeClass</span> <span class='hs-varid'>a</span>  <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Attribute</span>
-<a name="line-109"></a>
-<a name="line-110"></a><a name="wrapAttr"></a><span class='hs-comment'>-- | Wrap up an attribute.</span>
-<a name="line-111"></a><span class='hs-definition'>wrapAttr</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Attribute</span>
-<a name="line-112"></a><span class='hs-definition'>wrapAttr</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Attribute</span>
-<a name="line-113"></a>
-<a name="line-114"></a><a name="wrapTAttr"></a><span class='hs-comment'>-- | Wrap up a transformable attribute.</span>
-<a name="line-115"></a><span class='hs-definition'>wrapTAttr</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>TAttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Attribute</span>
-<a name="line-116"></a><span class='hs-definition'>wrapTAttr</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>TAttribute</span>
-<a name="line-117"></a>
-<a name="line-118"></a><a name="unwrapAttr"></a><span class='hs-comment'>-- | Convert something from an attribute.</span>
-<a name="line-119"></a><span class='hs-comment'>--   Also works with transformable attributes</span>
-<a name="line-120"></a><span class='hs-definition'>unwrapAttr</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Attribute</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Maybe</span> <span class='hs-varid'>a</span>
-<a name="line-121"></a><span class='hs-definition'>unwrapAttr</span> <span class='hs-layout'>(</span><span class='hs-conid'>Attribute</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>  <span class='hs-keyglyph'>=</span> <span class='hs-varid'>cast</span> <span class='hs-varid'>a</span>
-<a name="line-122"></a><span class='hs-definition'>unwrapAttr</span> <span class='hs-layout'>(</span><span class='hs-conid'>TAttribute</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>cast</span> <span class='hs-varid'>a</span>
-<a name="line-123"></a>
-<a name="line-124"></a><a name="instance%20Semigroup%20Attribute"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Semigroup</span> <span class='hs-conid'>Attribute</span> <span class='hs-keyword'>where</span>
-<a name="line-125"></a>  <span class='hs-layout'>(</span><span class='hs-conid'>Attribute</span> <span class='hs-varid'>a1</span><span class='hs-layout'>)</span> <span class='hs-varop'>&lt;&gt;</span> <span class='hs-varid'>a2</span> <span class='hs-keyglyph'>=</span> <span class='hs-keyword'>case</span> <span class='hs-varid'>unwrapAttr</span> <span class='hs-varid'>a2</span> <span class='hs-keyword'>of</span>
-<a name="line-126"></a>    <span class='hs-conid'>Nothing</span>  <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>error</span> <span class='hs-str'>"Attribute.(&lt;&gt;) mismatch"</span>
-<a name="line-127"></a>    <span class='hs-conid'>Just</span> <span class='hs-varid'>a2'</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Attribute</span> <span class='hs-layout'>(</span><span class='hs-varid'>a1</span> <span class='hs-varop'>&lt;&gt;</span> <span class='hs-varid'>a2'</span><span class='hs-layout'>)</span>
-<a name="line-128"></a>  <span class='hs-layout'>(</span><span class='hs-conid'>TAttribute</span> <span class='hs-varid'>a1</span><span class='hs-layout'>)</span> <span class='hs-varop'>&lt;&gt;</span> <span class='hs-varid'>a2</span> <span class='hs-keyglyph'>=</span> <span class='hs-keyword'>case</span> <span class='hs-varid'>unwrapAttr</span> <span class='hs-varid'>a2</span> <span class='hs-keyword'>of</span>
-<a name="line-129"></a>    <span class='hs-conid'>Nothing</span>  <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>error</span> <span class='hs-str'>"Attribute.(&lt;&gt;) mismatch"</span>
-<a name="line-130"></a>    <span class='hs-conid'>Just</span> <span class='hs-varid'>a2'</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>TAttribute</span> <span class='hs-layout'>(</span><span class='hs-varid'>a1</span> <span class='hs-varop'>&lt;&gt;</span> <span class='hs-varid'>a2'</span><span class='hs-layout'>)</span>
-<a name="line-131"></a>
-<a name="line-132"></a><a name="instance%20Transformable%20Attribute"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Transformable</span> <span class='hs-conid'>Attribute</span> <span class='hs-keyword'>where</span>
-<a name="line-133"></a>  <span class='hs-varid'>transform</span> <span class='hs-keyword'>_</span> <span class='hs-layout'>(</span><span class='hs-conid'>Attribute</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Attribute</span> <span class='hs-varid'>a</span>
-<a name="line-134"></a>  <span class='hs-varid'>transform</span> <span class='hs-varid'>s</span> <span class='hs-layout'>(</span><span class='hs-conid'>TAttribute</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>TAttribute</span> <span class='hs-layout'>(</span><span class='hs-varid'>transform</span> <span class='hs-varid'>s</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-135"></a>
-<a name="line-136"></a><a name="instance%20Splittable%20Attribute"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Splittable</span> <span class='hs-conid'>Attribute</span> <span class='hs-keyword'>where</span>
-<a name="line-137"></a>  <span class='hs-varid'>split</span> <span class='hs-keyword'>_</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>x</span><span class='hs-layout'>,</span><span class='hs-varid'>x</span><span class='hs-layout'>)</span>
-<a name="line-138"></a>
-<a name="line-139"></a><a name="instance%20Reversible%20Attribute"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Reversible</span> <span class='hs-conid'>Attribute</span> <span class='hs-keyword'>where</span>
-<a name="line-140"></a>  <span class='hs-varid'>rev</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>id</span>
-<a name="line-141"></a>
-<a name="line-142"></a><a name="Meta"></a><span class='hs-comment'>-- Meta is Transformable because the contents of the map is transformable</span>
-<a name="line-143"></a><a name="Meta"></a><span class='hs-keyword'>newtype</span> <span class='hs-conid'>Meta</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Meta</span> <span class='hs-layout'>(</span><span class='hs-conid'>Map</span> <span class='hs-conid'>String</span> <span class='hs-conid'>Attribute</span><span class='hs-layout'>)</span>
-<a name="line-144"></a>  <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Transformable</span><span class='hs-layout'>,</span> <span class='hs-conid'>Reversible</span><span class='hs-layout'>,</span> <span class='hs-conid'>Splittable</span><span class='hs-layout'>)</span>
-<a name="line-145"></a>
-<a name="line-146"></a><a name="instance%20Semigroup%20Meta"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Semigroup</span> <span class='hs-conid'>Meta</span> <span class='hs-keyword'>where</span>
-<a name="line-147"></a>  <span class='hs-conid'>Meta</span> <span class='hs-varid'>s1</span> <span class='hs-varop'>&lt;&gt;</span> <span class='hs-conid'>Meta</span> <span class='hs-varid'>s2</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Meta</span> <span class='hs-varop'>$</span> <span class='hs-conid'>Map</span><span class='hs-varop'>.</span><span class='hs-varid'>unionWith</span> <span class='hs-layout'>(</span><span class='hs-varop'>&lt;&gt;</span><span class='hs-layout'>)</span> <span class='hs-varid'>s1</span> <span class='hs-varid'>s2</span>
-<a name="line-148"></a>
-<a name="line-149"></a><a name="instance%20Monoid%20Meta"></a><span class='hs-comment'>-- | The empty meta contains no attributes; composition of metas is</span>
-<a name="line-150"></a><a name="instance%20Monoid%20Meta"></a><span class='hs-comment'>--   a union of attributes; if the two metas have attributes of the</span>
-<a name="line-151"></a><a name="instance%20Monoid%20Meta"></a><span class='hs-comment'>--   same type they are combined according to their semigroup</span>
-<a name="line-152"></a><a name="instance%20Monoid%20Meta"></a><span class='hs-comment'>--   structure.</span>
-<a name="line-153"></a><a name="instance%20Monoid%20Meta"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Monoid</span> <span class='hs-conid'>Meta</span> <span class='hs-keyword'>where</span>
-<a name="line-154"></a>  <span class='hs-varid'>mempty</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Meta</span> <span class='hs-conid'>Map</span><span class='hs-varop'>.</span><span class='hs-varid'>empty</span>
-<a name="line-155"></a>  <span class='hs-varid'>mappend</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varop'>&lt;&gt;</span><span class='hs-layout'>)</span>
-<a name="line-156"></a>
-<a name="line-157"></a><a name="wrapTMeta"></a><span class='hs-comment'>-- | Convert something to meta-data.</span>
-<a name="line-158"></a><span class='hs-definition'>wrapTMeta</span> <span class='hs-keyglyph'>::</span> <span class='hs-keyword'>forall</span> <span class='hs-varid'>a</span><span class='hs-varop'>.</span> <span class='hs-conid'>TAttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Meta</span>
-<a name="line-159"></a><span class='hs-definition'>wrapTMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Meta</span> <span class='hs-varop'>$</span> <span class='hs-conid'>Map</span><span class='hs-varop'>.</span><span class='hs-varid'>singleton</span> <span class='hs-varid'>key</span> <span class='hs-varop'>$</span> <span class='hs-varid'>wrapTAttr</span> <span class='hs-varid'>a</span>
-<a name="line-160"></a>  <span class='hs-keyword'>where</span>
-<a name="line-161"></a>    <span class='hs-varid'>key</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>show</span> <span class='hs-varop'>$</span> <span class='hs-varid'>typeOf</span> <span class='hs-layout'>(</span><span class='hs-varid'>undefined</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-162"></a>
-<a name="line-163"></a><a name="unwrapMeta"></a><span class='hs-comment'>-- | Convert something from meta-data.</span>
-<a name="line-164"></a><span class='hs-definition'>unwrapMeta</span> <span class='hs-keyglyph'>::</span> <span class='hs-keyword'>forall</span> <span class='hs-varid'>a</span><span class='hs-varop'>.</span> <span class='hs-conid'>AttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Meta</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Maybe</span> <span class='hs-varid'>a</span>
-<a name="line-165"></a><span class='hs-definition'>unwrapMeta</span> <span class='hs-layout'>(</span><span class='hs-conid'>Meta</span> <span class='hs-varid'>s</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>unwrapAttr</span> <span class='hs-varop'>=&lt;&lt;</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-conid'>Map</span><span class='hs-varop'>.</span><span class='hs-varid'>lookup</span> <span class='hs-varid'>key</span> <span class='hs-varid'>s</span>
-<a name="line-166"></a><span class='hs-comment'>-- Note: unwrapAttr should never fail</span>
-<a name="line-167"></a>  <span class='hs-keyword'>where</span>
-<a name="line-168"></a>    <span class='hs-varid'>key</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>show</span> <span class='hs-varop'>.</span> <span class='hs-varid'>typeOf</span> <span class='hs-varop'>$</span> <span class='hs-layout'>(</span><span class='hs-varid'>undefined</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-169"></a>
-<a name="line-170"></a><a name="wrapMeta"></a><span class='hs-comment'>-- | Convert something from meta-data.</span>
-<a name="line-171"></a><span class='hs-comment'>--   Also works with transformable attributes</span>
-<a name="line-172"></a><span class='hs-definition'>wrapMeta</span> <span class='hs-keyglyph'>::</span> <span class='hs-keyword'>forall</span> <span class='hs-varid'>a</span><span class='hs-varop'>.</span> <span class='hs-conid'>AttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Meta</span>
-<a name="line-173"></a><span class='hs-definition'>wrapMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Meta</span> <span class='hs-varop'>$</span> <span class='hs-conid'>Map</span><span class='hs-varop'>.</span><span class='hs-varid'>singleton</span> <span class='hs-varid'>key</span> <span class='hs-varop'>$</span> <span class='hs-varid'>wrapAttr</span> <span class='hs-varid'>a</span>
-<a name="line-174"></a>  <span class='hs-keyword'>where</span>
-<a name="line-175"></a>    <span class='hs-varid'>key</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>show</span> <span class='hs-varop'>$</span> <span class='hs-varid'>typeOf</span> <span class='hs-layout'>(</span><span class='hs-varid'>undefined</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-176"></a>
+<a name="line-105"></a><a name="wrapAttr"></a><span class='hs-comment'>-- | Wrap up an attribute.</span>
+<a name="line-106"></a><span class='hs-definition'>wrapAttr</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Attribute</span>
+<a name="line-107"></a><span class='hs-definition'>wrapAttr</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Attribute</span>
+<a name="line-108"></a>
+<a name="line-109"></a><a name="wrapTAttr"></a><span class='hs-comment'>-- | Wrap up a transformable attribute.</span>
+<a name="line-110"></a><span class='hs-definition'>wrapTAttr</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>TAttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Attribute</span>
+<a name="line-111"></a><span class='hs-definition'>wrapTAttr</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>TAttribute</span>
+<a name="line-112"></a>
+<a name="line-113"></a><a name="unwrapAttr"></a><span class='hs-comment'>-- | Convert something from an attribute.</span>
+<a name="line-114"></a><span class='hs-comment'>--   Also works with transformable attributes</span>
+<a name="line-115"></a><span class='hs-definition'>unwrapAttr</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Attribute</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Maybe</span> <span class='hs-varid'>a</span>
+<a name="line-116"></a><span class='hs-definition'>unwrapAttr</span> <span class='hs-layout'>(</span><span class='hs-conid'>Attribute</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>  <span class='hs-keyglyph'>=</span> <span class='hs-varid'>cast</span> <span class='hs-varid'>a</span>
+<a name="line-117"></a><span class='hs-definition'>unwrapAttr</span> <span class='hs-layout'>(</span><span class='hs-conid'>TAttribute</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>cast</span> <span class='hs-varid'>a</span>
+<a name="line-118"></a>
+<a name="line-119"></a><a name="instance%20Semigroup%20Attribute"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Semigroup</span> <span class='hs-conid'>Attribute</span> <span class='hs-keyword'>where</span>
+<a name="line-120"></a>  <span class='hs-layout'>(</span><span class='hs-conid'>Attribute</span> <span class='hs-varid'>a1</span><span class='hs-layout'>)</span> <span class='hs-varop'>&lt;&gt;</span> <span class='hs-varid'>a2</span> <span class='hs-keyglyph'>=</span> <span class='hs-keyword'>case</span> <span class='hs-varid'>unwrapAttr</span> <span class='hs-varid'>a2</span> <span class='hs-keyword'>of</span>
+<a name="line-121"></a>    <span class='hs-conid'>Nothing</span>  <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>error</span> <span class='hs-str'>"Attribute.(&lt;&gt;) mismatch"</span>
+<a name="line-122"></a>    <span class='hs-conid'>Just</span> <span class='hs-varid'>a2'</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Attribute</span> <span class='hs-layout'>(</span><span class='hs-varid'>a1</span> <span class='hs-varop'>&lt;&gt;</span> <span class='hs-varid'>a2'</span><span class='hs-layout'>)</span>
+<a name="line-123"></a>  <span class='hs-layout'>(</span><span class='hs-conid'>TAttribute</span> <span class='hs-varid'>a1</span><span class='hs-layout'>)</span> <span class='hs-varop'>&lt;&gt;</span> <span class='hs-varid'>a2</span> <span class='hs-keyglyph'>=</span> <span class='hs-keyword'>case</span> <span class='hs-varid'>unwrapAttr</span> <span class='hs-varid'>a2</span> <span class='hs-keyword'>of</span>
+<a name="line-124"></a>    <span class='hs-conid'>Nothing</span>  <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>error</span> <span class='hs-str'>"Attribute.(&lt;&gt;) mismatch"</span>
+<a name="line-125"></a>    <span class='hs-conid'>Just</span> <span class='hs-varid'>a2'</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>TAttribute</span> <span class='hs-layout'>(</span><span class='hs-varid'>a1</span> <span class='hs-varop'>&lt;&gt;</span> <span class='hs-varid'>a2'</span><span class='hs-layout'>)</span>
+<a name="line-126"></a>
+<a name="line-127"></a><a name="instance%20Transformable%20Attribute"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Transformable</span> <span class='hs-conid'>Attribute</span> <span class='hs-keyword'>where</span>
+<a name="line-128"></a>  <span class='hs-varid'>transform</span> <span class='hs-keyword'>_</span> <span class='hs-layout'>(</span><span class='hs-conid'>Attribute</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Attribute</span> <span class='hs-varid'>a</span>
+<a name="line-129"></a>  <span class='hs-varid'>transform</span> <span class='hs-varid'>s</span> <span class='hs-layout'>(</span><span class='hs-conid'>TAttribute</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>TAttribute</span> <span class='hs-layout'>(</span><span class='hs-varid'>transform</span> <span class='hs-varid'>s</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-130"></a>
+<a name="line-131"></a><a name="instance%20Splittable%20Attribute"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Splittable</span> <span class='hs-conid'>Attribute</span> <span class='hs-keyword'>where</span>
+<a name="line-132"></a>  <span class='hs-varid'>split</span> <span class='hs-keyword'>_</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>x</span><span class='hs-layout'>,</span><span class='hs-varid'>x</span><span class='hs-layout'>)</span>
+<a name="line-133"></a>
+<a name="line-134"></a><a name="instance%20Reversible%20Attribute"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Reversible</span> <span class='hs-conid'>Attribute</span> <span class='hs-keyword'>where</span>
+<a name="line-135"></a>  <span class='hs-varid'>rev</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>id</span>
+<a name="line-136"></a>
+<a name="line-137"></a><a name="Meta"></a><span class='hs-comment'>-- Meta is Transformable because the contents of the map is transformable</span>
+<a name="line-138"></a><a name="Meta"></a><span class='hs-keyword'>newtype</span> <span class='hs-conid'>Meta</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Meta</span> <span class='hs-layout'>(</span><span class='hs-conid'>Map</span> <span class='hs-conid'>String</span> <span class='hs-conid'>Attribute</span><span class='hs-layout'>)</span>
+<a name="line-139"></a>  <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Transformable</span><span class='hs-layout'>,</span> <span class='hs-conid'>Reversible</span><span class='hs-layout'>,</span> <span class='hs-conid'>Splittable</span><span class='hs-layout'>)</span>
+<a name="line-140"></a>
+<a name="line-141"></a><a name="instance%20Semigroup%20Meta"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Semigroup</span> <span class='hs-conid'>Meta</span> <span class='hs-keyword'>where</span>
+<a name="line-142"></a>  <span class='hs-conid'>Meta</span> <span class='hs-varid'>s1</span> <span class='hs-varop'>&lt;&gt;</span> <span class='hs-conid'>Meta</span> <span class='hs-varid'>s2</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Meta</span> <span class='hs-varop'>$</span> <span class='hs-conid'>Map</span><span class='hs-varop'>.</span><span class='hs-varid'>unionWith</span> <span class='hs-layout'>(</span><span class='hs-varop'>&lt;&gt;</span><span class='hs-layout'>)</span> <span class='hs-varid'>s1</span> <span class='hs-varid'>s2</span>
+<a name="line-143"></a>
+<a name="line-144"></a><a name="instance%20Monoid%20Meta"></a><span class='hs-comment'>-- | The empty meta contains no attributes; composition of metas is</span>
+<a name="line-145"></a><a name="instance%20Monoid%20Meta"></a><span class='hs-comment'>--   a union of attributes; if the two metas have attributes of the</span>
+<a name="line-146"></a><a name="instance%20Monoid%20Meta"></a><span class='hs-comment'>--   same type they are combined according to their semigroup</span>
+<a name="line-147"></a><a name="instance%20Monoid%20Meta"></a><span class='hs-comment'>--   structure.</span>
+<a name="line-148"></a><a name="instance%20Monoid%20Meta"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Monoid</span> <span class='hs-conid'>Meta</span> <span class='hs-keyword'>where</span>
+<a name="line-149"></a>  <span class='hs-varid'>mempty</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Meta</span> <span class='hs-conid'>Map</span><span class='hs-varop'>.</span><span class='hs-varid'>empty</span>
+<a name="line-150"></a>  <span class='hs-varid'>mappend</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varop'>&lt;&gt;</span><span class='hs-layout'>)</span>
+<a name="line-151"></a>
+<a name="line-152"></a><a name="wrapTMeta"></a><span class='hs-comment'>-- | Convert something to meta-data.</span>
+<a name="line-153"></a><span class='hs-definition'>wrapTMeta</span> <span class='hs-keyglyph'>::</span> <span class='hs-keyword'>forall</span> <span class='hs-varid'>a</span><span class='hs-varop'>.</span> <span class='hs-conid'>TAttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Meta</span>
+<a name="line-154"></a><span class='hs-definition'>wrapTMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Meta</span> <span class='hs-varop'>$</span> <span class='hs-conid'>Map</span><span class='hs-varop'>.</span><span class='hs-varid'>singleton</span> <span class='hs-varid'>key</span> <span class='hs-varop'>$</span> <span class='hs-varid'>wrapTAttr</span> <span class='hs-varid'>a</span>
+<a name="line-155"></a>  <span class='hs-keyword'>where</span>
+<a name="line-156"></a>    <span class='hs-varid'>key</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>show</span> <span class='hs-varop'>$</span> <span class='hs-varid'>typeOf</span> <span class='hs-layout'>(</span><span class='hs-varid'>undefined</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-157"></a>
+<a name="line-158"></a><a name="unwrapMeta"></a><span class='hs-comment'>-- | Convert something from meta-data.</span>
+<a name="line-159"></a><span class='hs-definition'>unwrapMeta</span> <span class='hs-keyglyph'>::</span> <span class='hs-keyword'>forall</span> <span class='hs-varid'>a</span><span class='hs-varop'>.</span> <span class='hs-conid'>AttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Meta</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Maybe</span> <span class='hs-varid'>a</span>
+<a name="line-160"></a><span class='hs-definition'>unwrapMeta</span> <span class='hs-layout'>(</span><span class='hs-conid'>Meta</span> <span class='hs-varid'>s</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>unwrapAttr</span> <span class='hs-varop'>=&lt;&lt;</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-conid'>Map</span><span class='hs-varop'>.</span><span class='hs-varid'>lookup</span> <span class='hs-varid'>key</span> <span class='hs-varid'>s</span>
+<a name="line-161"></a><span class='hs-comment'>-- Note: unwrapAttr should never fail</span>
+<a name="line-162"></a>  <span class='hs-keyword'>where</span>
+<a name="line-163"></a>    <span class='hs-varid'>key</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>show</span> <span class='hs-varop'>.</span> <span class='hs-varid'>typeOf</span> <span class='hs-varop'>$</span> <span class='hs-layout'>(</span><span class='hs-varid'>undefined</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-164"></a>
+<a name="line-165"></a><a name="wrapMeta"></a><span class='hs-comment'>-- | Convert something from meta-data.</span>
+<a name="line-166"></a><span class='hs-comment'>--   Also works with transformable attributes</span>
+<a name="line-167"></a><span class='hs-definition'>wrapMeta</span> <span class='hs-keyglyph'>::</span> <span class='hs-keyword'>forall</span> <span class='hs-varid'>a</span><span class='hs-varop'>.</span> <span class='hs-conid'>AttributeClass</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Meta</span>
+<a name="line-168"></a><span class='hs-definition'>wrapMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Meta</span> <span class='hs-varop'>$</span> <span class='hs-conid'>Map</span><span class='hs-varop'>.</span><span class='hs-varid'>singleton</span> <span class='hs-varid'>key</span> <span class='hs-varop'>$</span> <span class='hs-varid'>wrapAttr</span> <span class='hs-varid'>a</span>
+<a name="line-169"></a>  <span class='hs-keyword'>where</span>
+<a name="line-170"></a>    <span class='hs-varid'>key</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>show</span> <span class='hs-varop'>$</span> <span class='hs-varid'>typeOf</span> <span class='hs-layout'>(</span><span class='hs-varid'>undefined</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-171"></a>
+<a name="line-172"></a>
+<a name="line-173"></a><a name="HasMeta"></a><span class='hs-comment'>-- | Type class for things which have meta-data.</span>
+<a name="line-174"></a><a name="HasMeta"></a><span class='hs-keyword'>class</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyword'>where</span>
+<a name="line-175"></a>  <span class='hs-comment'>-- | Access the meta-data.</span>
+<a name="line-176"></a>  <span class='hs-varid'>meta</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Meta</span>
 <a name="line-177"></a>
-<a name="line-178"></a><a name="HasMeta"></a><span class='hs-comment'>-- | Type class for things which have meta-data.</span>
-<a name="line-179"></a><a name="HasMeta"></a><span class='hs-keyword'>class</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyword'>where</span>
-<a name="line-180"></a>  <span class='hs-comment'>-- | Access the meta-data.</span>
-<a name="line-181"></a>  <span class='hs-varid'>meta</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Meta</span>
-<a name="line-182"></a>
-<a name="line-183"></a><a name="instance%20Show%20Meta"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Show</span> <span class='hs-conid'>Meta</span> <span class='hs-keyword'>where</span>
-<a name="line-184"></a>  <span class='hs-varid'>show</span> <span class='hs-keyword'>_</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>"{ meta }"</span>
-<a name="line-185"></a>
-<a name="line-186"></a><a name="instance%20HasMeta%20Meta"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasMeta</span> <span class='hs-conid'>Meta</span> <span class='hs-keyword'>where</span>
-<a name="line-187"></a>  <span class='hs-varid'>meta</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varop'>$</span><span class='hs-layout'>)</span>
-<a name="line-188"></a>
-<a name="line-189"></a><a name="instance%20HasMeta%20(Maybe%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasMeta</span> <span class='hs-layout'>(</span><span class='hs-conid'>Maybe</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-190"></a>  <span class='hs-varid'>meta</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>lens</span> <span class='hs-varid'>viewM</span> <span class='hs-varop'>$</span> <span class='hs-varid'>flip</span> <span class='hs-varid'>setM</span>
-<a name="line-191"></a>    <span class='hs-keyword'>where</span>
-<a name="line-192"></a>      <span class='hs-varid'>viewM</span> <span class='hs-conid'>Nothing</span>  <span class='hs-keyglyph'>=</span> <span class='hs-varid'>mempty</span>
-<a name="line-193"></a>      <span class='hs-varid'>viewM</span> <span class='hs-layout'>(</span><span class='hs-conid'>Just</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>view</span> <span class='hs-varid'>meta</span> <span class='hs-varid'>x</span>
-<a name="line-194"></a>      <span class='hs-varid'>setM</span> <span class='hs-varid'>m</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-varid'>set</span> <span class='hs-varid'>meta</span> <span class='hs-varid'>m</span><span class='hs-layout'>)</span>
-<a name="line-195"></a>
-<a name="line-196"></a><a name="instance%20HasMeta%20(b,%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasMeta</span> <span class='hs-layout'>(</span><span class='hs-varid'>b</span><span class='hs-layout'>,</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-197"></a>  <span class='hs-varid'>meta</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_2</span> <span class='hs-varop'>.</span> <span class='hs-varid'>meta</span>
-<a name="line-198"></a>
-<a name="line-199"></a><a name="instance%20HasMeta%20(Twain%20b%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasMeta</span> <span class='hs-layout'>(</span><span class='hs-conid'>Twain</span> <span class='hs-varid'>b</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-200"></a>  <span class='hs-varid'>meta</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_Wrapped</span> <span class='hs-varop'>.</span> <span class='hs-varid'>meta</span>
-<a name="line-201"></a>
-<a name="line-202"></a><a name="setMeta"></a><span class='hs-comment'>-- TODO call withMeta a la Clojure?</span>
-<a name="line-203"></a><span class='hs-definition'>setMeta</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Meta</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
-<a name="line-204"></a><span class='hs-definition'>setMeta</span> <span class='hs-varid'>m</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>set</span> <span class='hs-varid'>meta</span> <span class='hs-varid'>m</span>
-<a name="line-205"></a>
-<a name="line-206"></a><a name="applyMeta"></a><span class='hs-comment'>-- | Apply meta-information by combining it (on the left) with the</span>
-<a name="line-207"></a><span class='hs-comment'>--   existing meta-information.</span>
-<a name="line-208"></a><span class='hs-definition'>applyMeta</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Meta</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
-<a name="line-209"></a><span class='hs-definition'>applyMeta</span> <span class='hs-varid'>m</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-varid'>meta</span> <span class='hs-layout'>(</span><span class='hs-varop'>&lt;&gt;</span> <span class='hs-varid'>m</span><span class='hs-layout'>)</span>
-<a name="line-210"></a>
-<a name="line-211"></a><a name="setMetaAttr"></a><span class='hs-comment'>-- | Update a meta attribute.</span>
-<a name="line-212"></a><span class='hs-definition'>setMetaAttr</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>AttributeClass</span> <span class='hs-varid'>b</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>b</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
-<a name="line-213"></a><span class='hs-definition'>setMetaAttr</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>applyMeta</span> <span class='hs-layout'>(</span><span class='hs-varid'>wrapMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-214"></a>
-<a name="line-215"></a><a name="setMetaTAttr"></a><span class='hs-comment'>-- | Update a meta attribute.</span>
-<a name="line-216"></a><span class='hs-definition'>setMetaTAttr</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>TAttributeClass</span> <span class='hs-varid'>b</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>b</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
-<a name="line-217"></a><span class='hs-definition'>setMetaTAttr</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>applyMeta</span> <span class='hs-layout'>(</span><span class='hs-varid'>wrapTMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-218"></a>
-<a name="line-219"></a><span class='hs-comment'>-- |</span>
-<a name="line-220"></a><span class='hs-comment'>-- Annotate an arbitrary type with meta-data, preserving instances of</span>
-<a name="line-221"></a><span class='hs-comment'>-- all common type classes. In particular 'Functor' and 'Applicative' is lifted and</span>
-<a name="line-222"></a><span class='hs-comment'>-- @'Compose' 'AddMeta'@ is semantically equivalent to 'Identity'. </span>
-<a name="line-223"></a>
-<a name="line-224"></a><a name="AddMeta"></a><span class='hs-comment'>-- Meta-data is carried along with the annotated value. It defaults to 'mempty'</span>
-<a name="line-225"></a><a name="AddMeta"></a><span class='hs-comment'>-- in 'pure'. When composing values using '&lt;*&gt;', 'liftA2' etc, meta-data is composed</span>
-<a name="line-226"></a><a name="AddMeta"></a><span class='hs-comment'>-- using 'mappend'.</span>
-<a name="line-227"></a><a name="AddMeta"></a><span class='hs-comment'>--</span>
-<a name="line-228"></a><a name="AddMeta"></a><span class='hs-comment'>-- Similar to the approach taken in Clojure, meta-data does not contribute to ordering,</span>
-<a name="line-229"></a><a name="AddMeta"></a><span class='hs-comment'>-- so both 'Eq' and 'Ord' ignore the meta-data.</span>
-<a name="line-230"></a><a name="AddMeta"></a><span class='hs-comment'>--</span>
-<a name="line-231"></a><a name="AddMeta"></a><span class='hs-comment'>-- You can access the meta-data using 'meta', and the annotated value using 'annotated'.</span>
-<a name="line-232"></a><a name="AddMeta"></a><span class='hs-comment'>--</span>
-<a name="line-233"></a><a name="AddMeta"></a><span class='hs-keyword'>newtype</span> <span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>AddMeta</span> <span class='hs-layout'>{</span> <span class='hs-varid'>getAddMeta</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Twain</span> <span class='hs-conid'>Meta</span> <span class='hs-varid'>a</span> <span class='hs-layout'>}</span>
-<a name="line-234"></a>  <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span>
-<a name="line-235"></a>    <span class='hs-conid'>Show</span><span class='hs-layout'>,</span> <span class='hs-conid'>Functor</span><span class='hs-layout'>,</span> <span class='hs-conid'>Foldable</span><span class='hs-layout'>,</span> <span class='hs-conid'>Typeable</span><span class='hs-layout'>,</span> <span class='hs-conid'>Applicative</span><span class='hs-layout'>,</span> <span class='hs-conid'>Monad</span><span class='hs-layout'>,</span> <span class='hs-conid'>Comonad</span><span class='hs-layout'>,</span>
-<a name="line-236"></a>    <span class='hs-conid'>Semigroup</span><span class='hs-layout'>,</span> <span class='hs-conid'>Monoid</span><span class='hs-layout'>,</span> <span class='hs-conid'>Num</span><span class='hs-layout'>,</span> <span class='hs-conid'>Fractional</span><span class='hs-layout'>,</span> <span class='hs-conid'>Floating</span><span class='hs-layout'>,</span> <span class='hs-conid'>Enum</span><span class='hs-layout'>,</span> <span class='hs-conid'>Bounded</span><span class='hs-layout'>,</span>
-<a name="line-237"></a>    <span class='hs-conid'>Integral</span><span class='hs-layout'>,</span> <span class='hs-conid'>Real</span><span class='hs-layout'>,</span> <span class='hs-conid'>RealFrac</span><span class='hs-layout'>,</span>
-<a name="line-238"></a>    <span class='hs-conid'>Eq</span><span class='hs-layout'>,</span> <span class='hs-conid'>Ord</span>
-<a name="line-239"></a>    <span class='hs-layout'>)</span>
-<a name="line-240"></a>
-<a name="line-241"></a><a name="instance%20Wrapped%20(AddMeta%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Wrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-242"></a>  <span class='hs-keyword'>type</span> <span class='hs-conid'>Unwrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Twain</span> <span class='hs-conid'>Meta</span> <span class='hs-varid'>a</span>
-<a name="line-243"></a>  <span class='hs-sel'>_Wrapped'</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>iso</span> <span class='hs-varid'>getAddMeta</span> <span class='hs-conid'>AddMeta</span>
-<a name="line-244"></a>
-<a name="line-245"></a><a name="instance%20Rewrapped%20(AddMeta%20a)%20(AddMeta%20b)%20instance%20HasMeta%20(AddMeta%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Rewrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span>
+<a name="line-178"></a><a name="instance%20Show%20Meta"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Show</span> <span class='hs-conid'>Meta</span> <span class='hs-keyword'>where</span>
+<a name="line-179"></a>  <span class='hs-varid'>show</span> <span class='hs-keyword'>_</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>"{ meta }"</span>
+<a name="line-180"></a>
+<a name="line-181"></a><a name="instance%20HasMeta%20Meta"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasMeta</span> <span class='hs-conid'>Meta</span> <span class='hs-keyword'>where</span>
+<a name="line-182"></a>  <span class='hs-varid'>meta</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varop'>$</span><span class='hs-layout'>)</span>
+<a name="line-183"></a>
+<a name="line-184"></a><a name="instance%20HasMeta%20(Maybe%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasMeta</span> <span class='hs-layout'>(</span><span class='hs-conid'>Maybe</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-185"></a>  <span class='hs-varid'>meta</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>lens</span> <span class='hs-varid'>viewM</span> <span class='hs-varop'>$</span> <span class='hs-varid'>flip</span> <span class='hs-varid'>setM</span>
+<a name="line-186"></a>    <span class='hs-keyword'>where</span>
+<a name="line-187"></a>      <span class='hs-varid'>viewM</span> <span class='hs-conid'>Nothing</span>  <span class='hs-keyglyph'>=</span> <span class='hs-varid'>mempty</span>
+<a name="line-188"></a>      <span class='hs-varid'>viewM</span> <span class='hs-layout'>(</span><span class='hs-conid'>Just</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>view</span> <span class='hs-varid'>meta</span> <span class='hs-varid'>x</span>
+<a name="line-189"></a>      <span class='hs-varid'>setM</span> <span class='hs-varid'>m</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-varid'>set</span> <span class='hs-varid'>meta</span> <span class='hs-varid'>m</span><span class='hs-layout'>)</span>
+<a name="line-190"></a>
+<a name="line-191"></a><a name="instance%20HasMeta%20(b,%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasMeta</span> <span class='hs-layout'>(</span><span class='hs-varid'>b</span><span class='hs-layout'>,</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-192"></a>  <span class='hs-varid'>meta</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_2</span> <span class='hs-varop'>.</span> <span class='hs-varid'>meta</span>
+<a name="line-193"></a>
+<a name="line-194"></a><a name="instance%20HasMeta%20(Twain%20b%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasMeta</span> <span class='hs-layout'>(</span><span class='hs-conid'>Twain</span> <span class='hs-varid'>b</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-195"></a>  <span class='hs-varid'>meta</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_Wrapped</span> <span class='hs-varop'>.</span> <span class='hs-varid'>meta</span>
+<a name="line-196"></a>
+<a name="line-197"></a><a name="getMeta"></a><span class='hs-comment'>-- | Extract meta-data.</span>
+<a name="line-198"></a><span class='hs-definition'>getMeta</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Meta</span>
+<a name="line-199"></a><span class='hs-definition'>getMeta</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>view</span> <span class='hs-varid'>meta</span>
+<a name="line-200"></a>
+<a name="line-201"></a><a name="setMeta"></a><span class='hs-comment'>-- | Update meta-data.</span>
+<a name="line-202"></a><span class='hs-definition'>setMeta</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Meta</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
+<a name="line-203"></a><span class='hs-definition'>setMeta</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>set</span> <span class='hs-varid'>meta</span>
+<a name="line-204"></a>
+<a name="line-205"></a><a name="mapMeta"></a><span class='hs-comment'>-- | Map over meta-data.</span>
+<a name="line-206"></a><span class='hs-definition'>mapMeta</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-layout'>(</span><span class='hs-conid'>Meta</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Meta</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
+<a name="line-207"></a><span class='hs-definition'>mapMeta</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-varid'>meta</span>
+<a name="line-208"></a>
+<a name="line-209"></a><a name="applyMeta"></a><span class='hs-comment'>-- | Apply meta-information by combining it with existing meta-information.</span>
+<a name="line-210"></a><span class='hs-definition'>applyMeta</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Meta</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
+<a name="line-211"></a><span class='hs-definition'>applyMeta</span> <span class='hs-varid'>m</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-varid'>meta</span> <span class='hs-layout'>(</span><span class='hs-varop'>&lt;&gt;</span> <span class='hs-varid'>m</span><span class='hs-layout'>)</span>
+<a name="line-212"></a>
+<a name="line-213"></a><a name="setMetaAttr"></a><span class='hs-comment'>-- | Update a meta attribute.</span>
+<a name="line-214"></a><span class='hs-definition'>setMetaAttr</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>AttributeClass</span> <span class='hs-varid'>b</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>b</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
+<a name="line-215"></a><span class='hs-definition'>setMetaAttr</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>applyMeta</span> <span class='hs-layout'>(</span><span class='hs-varid'>wrapMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-216"></a>
+<a name="line-217"></a><a name="setMetaTAttr"></a><span class='hs-comment'>-- | Update a meta attribute.</span>
+<a name="line-218"></a><span class='hs-definition'>setMetaTAttr</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>TAttributeClass</span> <span class='hs-varid'>b</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>b</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
+<a name="line-219"></a><span class='hs-definition'>setMetaTAttr</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>applyMeta</span> <span class='hs-layout'>(</span><span class='hs-varid'>wrapTMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-220"></a>
+<a name="line-221"></a><a name="preserveMeta"></a><span class='hs-comment'>-- | Apply a function without affecting meta-data.</span>
+<a name="line-222"></a><span class='hs-definition'>preserveMeta</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasMeta</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>b</span>
+<a name="line-223"></a><span class='hs-definition'>preserveMeta</span> <span class='hs-varid'>f</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-keyword'>let</span> <span class='hs-varid'>m</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>view</span> <span class='hs-varid'>meta</span> <span class='hs-varid'>x</span> <span class='hs-keyword'>in</span> <span class='hs-varid'>set</span> <span class='hs-varid'>meta</span> <span class='hs-varid'>m</span> <span class='hs-layout'>(</span><span class='hs-varid'>f</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span>
+<a name="line-224"></a>
+<a name="line-225"></a><span class='hs-comment'>-- |</span>
+<a name="line-226"></a><span class='hs-comment'>-- Annotate an arbitrary type with meta-data, preserving instances of</span>
+<a name="line-227"></a><span class='hs-comment'>-- all common type classes. In particular 'Functor' and 'Applicative' is lifted and</span>
+<a name="line-228"></a><span class='hs-comment'>-- @'Compose' 'AddMeta'@ is semantically equivalent to 'Identity'. </span>
+<a name="line-229"></a>
+<a name="line-230"></a><a name="AddMeta"></a><span class='hs-comment'>-- Meta-data is carried along with the annotated value. It defaults to 'mempty'</span>
+<a name="line-231"></a><a name="AddMeta"></a><span class='hs-comment'>-- in 'pure'. When composing values using '&lt;*&gt;', 'liftA2' etc, meta-data is composed</span>
+<a name="line-232"></a><a name="AddMeta"></a><span class='hs-comment'>-- using 'mappend'.</span>
+<a name="line-233"></a><a name="AddMeta"></a><span class='hs-comment'>--</span>
+<a name="line-234"></a><a name="AddMeta"></a><span class='hs-comment'>-- Similar to the approach taken in Clojure, meta-data does not contribute to ordering,</span>
+<a name="line-235"></a><a name="AddMeta"></a><span class='hs-comment'>-- so both 'Eq' and 'Ord' ignore the meta-data.</span>
+<a name="line-236"></a><a name="AddMeta"></a><span class='hs-comment'>--</span>
+<a name="line-237"></a><a name="AddMeta"></a><span class='hs-comment'>-- You can access the meta-data using 'meta', and the annotated value using 'annotated'.</span>
+<a name="line-238"></a><a name="AddMeta"></a><span class='hs-comment'>--</span>
+<a name="line-239"></a><a name="AddMeta"></a><span class='hs-keyword'>newtype</span> <span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>AddMeta</span> <span class='hs-layout'>{</span> <span class='hs-varid'>getAddMeta</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Twain</span> <span class='hs-conid'>Meta</span> <span class='hs-varid'>a</span> <span class='hs-layout'>}</span>
+<a name="line-240"></a>  <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span>
+<a name="line-241"></a>    <span class='hs-conid'>Show</span><span class='hs-layout'>,</span> <span class='hs-conid'>Functor</span><span class='hs-layout'>,</span> <span class='hs-conid'>Foldable</span><span class='hs-layout'>,</span> <span class='hs-conid'>Typeable</span><span class='hs-layout'>,</span> <span class='hs-conid'>Applicative</span><span class='hs-layout'>,</span> <span class='hs-conid'>Monad</span><span class='hs-layout'>,</span> <span class='hs-conid'>Comonad</span><span class='hs-layout'>,</span>
+<a name="line-242"></a>    <span class='hs-conid'>Semigroup</span><span class='hs-layout'>,</span> <span class='hs-conid'>Monoid</span><span class='hs-layout'>,</span> <span class='hs-conid'>Num</span><span class='hs-layout'>,</span> <span class='hs-conid'>Fractional</span><span class='hs-layout'>,</span> <span class='hs-conid'>Floating</span><span class='hs-layout'>,</span> <span class='hs-conid'>Enum</span><span class='hs-layout'>,</span> <span class='hs-conid'>Bounded</span><span class='hs-layout'>,</span>
+<a name="line-243"></a>    <span class='hs-conid'>Integral</span><span class='hs-layout'>,</span> <span class='hs-conid'>Real</span><span class='hs-layout'>,</span> <span class='hs-conid'>RealFrac</span><span class='hs-layout'>,</span>
+<a name="line-244"></a>    <span class='hs-conid'>Eq</span><span class='hs-layout'>,</span> <span class='hs-conid'>Ord</span>
+<a name="line-245"></a>    <span class='hs-layout'>)</span>
 <a name="line-246"></a>
-<a name="line-247"></a><a name="instance%20HasMeta%20(AddMeta%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasMeta</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-248"></a>  <span class='hs-comment'>-- twain, pair, element</span>
-<a name="line-249"></a>  <span class='hs-varid'>meta</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_Wrapped</span> <span class='hs-varop'>.</span> <span class='hs-sel'>_Wrapped</span> <span class='hs-varop'>.</span> <span class='hs-sel'>_1</span>
+<a name="line-247"></a><a name="instance%20Wrapped%20(AddMeta%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Wrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-248"></a>  <span class='hs-keyword'>type</span> <span class='hs-conid'>Unwrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Twain</span> <span class='hs-conid'>Meta</span> <span class='hs-varid'>a</span>
+<a name="line-249"></a>  <span class='hs-sel'>_Wrapped'</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>iso</span> <span class='hs-varid'>getAddMeta</span> <span class='hs-conid'>AddMeta</span>
 <a name="line-250"></a>
-<a name="line-251"></a>
-<a name="line-252"></a><span class='hs-comment'>-- instance FunctorWithIndex i AddMeta where</span>
-<a name="line-253"></a>  <span class='hs-comment'>-- imap f = over annotated $ imap f</span>
-<a name="line-254"></a><span class='hs-comment'>-- </span>
-<a name="line-255"></a><span class='hs-comment'>-- instance FoldableWithIndex Span Score where</span>
-<a name="line-256"></a><span class='hs-comment'>--   ifoldMap f (Score (m,x)) = ifoldMap f x</span>
-<a name="line-257"></a><span class='hs-comment'>-- </span>
-<a name="line-258"></a><span class='hs-comment'>-- instance TraversableWithIndex Span Score where</span>
-<a name="line-259"></a><span class='hs-comment'>--   itraverse f (Score (m,x)) = fmap (\x -&gt; Score (m,x)) $ itraverse f x</span>
-<a name="line-260"></a>
-<a name="line-261"></a><a name="instance%20Transformable%20(AddMeta%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Transformable</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-262"></a>  <span class='hs-varid'>transform</span> <span class='hs-varid'>t</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-varid'>meta</span> <span class='hs-layout'>(</span><span class='hs-varid'>transform</span> <span class='hs-varid'>t</span><span class='hs-layout'>)</span> <span class='hs-varop'>.</span> <span class='hs-varid'>over</span> <span class='hs-varid'>annotated</span> <span class='hs-layout'>(</span><span class='hs-varid'>transform</span> <span class='hs-varid'>t</span><span class='hs-layout'>)</span>
-<a name="line-263"></a>
-<a name="line-264"></a><a name="instance%20Reversible%20(AddMeta%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Reversible</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Reversible</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-265"></a>  <span class='hs-varid'>rev</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-varid'>meta</span> <span class='hs-varid'>rev</span> <span class='hs-varop'>.</span> <span class='hs-varid'>over</span> <span class='hs-varid'>annotated</span> <span class='hs-varid'>rev</span>
+<a name="line-251"></a><a name="instance%20Rewrapped%20(AddMeta%20a)%20(AddMeta%20b)%20instance%20HasMeta%20(AddMeta%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Rewrapped</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span>
+<a name="line-252"></a>
+<a name="line-253"></a><a name="instance%20HasMeta%20(AddMeta%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasMeta</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-254"></a>  <span class='hs-comment'>-- twain, pair, element</span>
+<a name="line-255"></a>  <span class='hs-varid'>meta</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_Wrapped</span> <span class='hs-varop'>.</span> <span class='hs-sel'>_Wrapped</span> <span class='hs-varop'>.</span> <span class='hs-sel'>_1</span>
+<a name="line-256"></a>
+<a name="line-257"></a>
+<a name="line-258"></a><span class='hs-comment'>-- instance FunctorWithIndex i AddMeta where</span>
+<a name="line-259"></a>  <span class='hs-comment'>-- imap f = over annotated $ imap f</span>
+<a name="line-260"></a><span class='hs-comment'>-- </span>
+<a name="line-261"></a><span class='hs-comment'>-- instance FoldableWithIndex Span Score where</span>
+<a name="line-262"></a><span class='hs-comment'>--   ifoldMap f (Score (m,x)) = ifoldMap f x</span>
+<a name="line-263"></a><span class='hs-comment'>-- </span>
+<a name="line-264"></a><span class='hs-comment'>-- instance TraversableWithIndex Span Score where</span>
+<a name="line-265"></a><span class='hs-comment'>--   itraverse f (Score (m,x)) = fmap (\x -&gt; Score (m,x)) $ itraverse f x</span>
 <a name="line-266"></a>
-<a name="line-267"></a><a name="instance%20Splittable%20(AddMeta%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Splittable</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Splittable</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-268"></a>  <span class='hs-varid'>split</span> <span class='hs-varid'>t</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>unzipR</span> <span class='hs-varop'>.</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-varid'>split</span> <span class='hs-varid'>t</span><span class='hs-layout'>)</span>
+<a name="line-267"></a><a name="instance%20Transformable%20(AddMeta%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Transformable</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-268"></a>  <span class='hs-varid'>transform</span> <span class='hs-varid'>t</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-varid'>meta</span> <span class='hs-layout'>(</span><span class='hs-varid'>transform</span> <span class='hs-varid'>t</span><span class='hs-layout'>)</span> <span class='hs-varop'>.</span> <span class='hs-varid'>over</span> <span class='hs-varid'>annotated</span> <span class='hs-layout'>(</span><span class='hs-varid'>transform</span> <span class='hs-varid'>t</span><span class='hs-layout'>)</span>
 <a name="line-269"></a>
-<a name="line-270"></a><a name="instance%20HasPosition%20(AddMeta%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasPosition</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-271"></a>  <span class='hs-sel'>_onset</span>    <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_onset</span> <span class='hs-varop'>.</span> <span class='hs-varid'>extract</span>
-<a name="line-272"></a>  <span class='hs-sel'>_offset</span>   <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_offset</span> <span class='hs-varop'>.</span> <span class='hs-varid'>extract</span>
-<a name="line-273"></a>  <span class='hs-sel'>_position</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_position</span> <span class='hs-varop'>.</span> <span class='hs-varid'>extract</span>
-<a name="line-274"></a>
-<a name="line-275"></a><a name="instance%20HasDuration%20(AddMeta%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-276"></a>  <span class='hs-sel'>_duration</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varop'>.</span> <span class='hs-varid'>extract</span>
-<a name="line-277"></a>
-<a name="line-278"></a><a name="annotated"></a><span class='hs-comment'>-- |</span>
-<a name="line-279"></a><span class='hs-comment'>-- Access the annotated value.</span>
-<a name="line-280"></a><span class='hs-comment'>--</span>
-<a name="line-281"></a><span class='hs-comment'>-- @</span>
-<a name="line-282"></a><span class='hs-comment'>-- over annotated = fmap</span>
-<a name="line-283"></a><span class='hs-comment'>-- @</span>
-<a name="line-284"></a><span class='hs-comment'>--</span>
-<a name="line-285"></a><span class='hs-definition'>annotated</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-varid'>a</span> <span class='hs-varid'>b</span>
-<a name="line-286"></a><span class='hs-definition'>annotated</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>unsafeAnnotated</span>
-<a name="line-287"></a>
-<a name="line-288"></a><a name="unannotated"></a><span class='hs-comment'>-- |</span>
-<a name="line-289"></a><span class='hs-comment'>-- Access the annotated value.</span>
+<a name="line-270"></a><a name="instance%20Reversible%20(AddMeta%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Reversible</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Reversible</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-271"></a>  <span class='hs-varid'>rev</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>over</span> <span class='hs-varid'>meta</span> <span class='hs-varid'>rev</span> <span class='hs-varop'>.</span> <span class='hs-varid'>over</span> <span class='hs-varid'>annotated</span> <span class='hs-varid'>rev</span>
+<a name="line-272"></a>
+<a name="line-273"></a><a name="instance%20Splittable%20(AddMeta%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Splittable</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Splittable</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-274"></a>  <span class='hs-varid'>split</span> <span class='hs-varid'>t</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>unzipR</span> <span class='hs-varop'>.</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-varid'>split</span> <span class='hs-varid'>t</span><span class='hs-layout'>)</span>
+<a name="line-275"></a>
+<a name="line-276"></a><a name="instance%20HasPosition%20(AddMeta%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasPosition</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasPosition</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-277"></a>  <span class='hs-sel'>_onset</span>    <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_onset</span> <span class='hs-varop'>.</span> <span class='hs-varid'>extract</span>
+<a name="line-278"></a>  <span class='hs-sel'>_offset</span>   <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_offset</span> <span class='hs-varop'>.</span> <span class='hs-varid'>extract</span>
+<a name="line-279"></a>  <span class='hs-sel'>_position</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_position</span> <span class='hs-varop'>.</span> <span class='hs-varid'>extract</span>
+<a name="line-280"></a>
+<a name="line-281"></a><a name="instance%20HasDuration%20(AddMeta%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-282"></a>  <span class='hs-sel'>_duration</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varop'>.</span> <span class='hs-varid'>extract</span>
+<a name="line-283"></a>
+<a name="line-284"></a><a name="annotated"></a><span class='hs-comment'>-- |</span>
+<a name="line-285"></a><span class='hs-comment'>-- Access the annotated value.</span>
+<a name="line-286"></a><span class='hs-comment'>--</span>
+<a name="line-287"></a><span class='hs-comment'>-- @</span>
+<a name="line-288"></a><span class='hs-comment'>-- over annotated = fmap</span>
+<a name="line-289"></a><span class='hs-comment'>-- @</span>
 <a name="line-290"></a><span class='hs-comment'>--</span>
-<a name="line-291"></a><span class='hs-comment'>-- @</span>
-<a name="line-292"></a><span class='hs-comment'>-- view fromAnnotated = pure</span>
-<a name="line-293"></a><span class='hs-comment'>-- @</span>
-<a name="line-294"></a><span class='hs-comment'>--</span>
-<a name="line-295"></a><span class='hs-definition'>unannotated</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Getter</span> <span class='hs-varid'>a</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-296"></a><span class='hs-definition'>unannotated</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>from</span> <span class='hs-varid'>unsafeAnnotated</span>
-<a name="line-297"></a>
-<a name="line-298"></a><a name="unsafeAnnotated"></a><span class='hs-comment'>-- |</span>
-<a name="line-299"></a><span class='hs-comment'>-- Access the annotated value. This is only an isomorphism up to meta-data</span>
-<a name="line-300"></a><span class='hs-comment'>-- equivalence. In particular @under unsafeAnnotated@ leads to meta-data being</span>
-<a name="line-301"></a><span class='hs-comment'>-- thrown away. See 'annotated' and 'unannotated' for safe (but less general)</span>
-<a name="line-302"></a><span class='hs-comment'>-- definitions.</span>
-<a name="line-303"></a><span class='hs-comment'>--</span>
-<a name="line-304"></a><span class='hs-comment'>-- @</span>
-<a name="line-305"></a><span class='hs-comment'>-- over annotated = fmap</span>
-<a name="line-306"></a><span class='hs-comment'>-- @</span>
-<a name="line-307"></a><span class='hs-comment'>-- </span>
-<a name="line-308"></a><span class='hs-definition'>unsafeAnnotated</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Iso</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-varid'>a</span> <span class='hs-varid'>b</span>
-<a name="line-309"></a><span class='hs-definition'>unsafeAnnotated</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_Wrapped</span> <span class='hs-varop'>.</span> <span class='hs-varid'>extracted</span>
-<a name="line-310"></a>
-<a name="line-311"></a>
-<a name="line-312"></a><span class='hs-comment'>-- Nice generalizations</span>
-<a name="line-313"></a><span class='hs-comment'>-- TODO move</span>
-<a name="line-314"></a>
-<a name="line-315"></a><a name="extracted"></a><span class='hs-definition'>extracted</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Applicative</span> <span class='hs-varid'>m</span><span class='hs-layout'>,</span> <span class='hs-conid'>Comonad</span> <span class='hs-varid'>m</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Iso</span> <span class='hs-layout'>(</span><span class='hs-varid'>m</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-varid'>m</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-varid'>a</span> <span class='hs-varid'>b</span>
-<a name="line-316"></a><span class='hs-definition'>extracted</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>iso</span> <span class='hs-varid'>extract</span> <span class='hs-varid'>pure</span>
+<a name="line-291"></a><span class='hs-definition'>annotated</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-varid'>a</span> <span class='hs-varid'>b</span>
+<a name="line-292"></a><span class='hs-definition'>annotated</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>unsafeAnnotated</span>
+<a name="line-293"></a>
+<a name="line-294"></a><a name="unannotated"></a><span class='hs-comment'>-- |</span>
+<a name="line-295"></a><span class='hs-comment'>-- Access the annotated value.</span>
+<a name="line-296"></a><span class='hs-comment'>--</span>
+<a name="line-297"></a><span class='hs-comment'>-- @</span>
+<a name="line-298"></a><span class='hs-comment'>-- view fromAnnotated = pure</span>
+<a name="line-299"></a><span class='hs-comment'>-- @</span>
+<a name="line-300"></a><span class='hs-comment'>--</span>
+<a name="line-301"></a><span class='hs-definition'>unannotated</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Getter</span> <span class='hs-varid'>a</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-302"></a><span class='hs-definition'>unannotated</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>from</span> <span class='hs-varid'>unsafeAnnotated</span>
+<a name="line-303"></a>
+<a name="line-304"></a><a name="unsafeAnnotated"></a><span class='hs-comment'>-- |</span>
+<a name="line-305"></a><span class='hs-comment'>-- Access the annotated value. This is only an isomorphism up to meta-data</span>
+<a name="line-306"></a><span class='hs-comment'>-- equivalence. In particular @under unsafeAnnotated@ leads to meta-data being</span>
+<a name="line-307"></a><span class='hs-comment'>-- thrown away. See 'annotated' and 'unannotated' for safe (but less general)</span>
+<a name="line-308"></a><span class='hs-comment'>-- definitions.</span>
+<a name="line-309"></a><span class='hs-comment'>--</span>
+<a name="line-310"></a><span class='hs-comment'>-- @</span>
+<a name="line-311"></a><span class='hs-comment'>-- over annotated = fmap</span>
+<a name="line-312"></a><span class='hs-comment'>-- @</span>
+<a name="line-313"></a><span class='hs-comment'>-- </span>
+<a name="line-314"></a><span class='hs-definition'>unsafeAnnotated</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Iso</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>AddMeta</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-varid'>a</span> <span class='hs-varid'>b</span>
+<a name="line-315"></a><span class='hs-definition'>unsafeAnnotated</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_Wrapped</span> <span class='hs-varop'>.</span> <span class='hs-varid'>extracted</span>
+<a name="line-316"></a>
 <a name="line-317"></a>
-<a name="line-318"></a><a name="extractedRep"></a><span class='hs-definition'>extractedRep</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Representable</span> <span class='hs-varid'>m</span><span class='hs-layout'>,</span> <span class='hs-varid'>w</span> <span class='hs-keyglyph'>~</span> <span class='hs-conid'>Rep</span> <span class='hs-varid'>m</span><span class='hs-layout'>,</span> <span class='hs-conid'>Monoid</span> <span class='hs-varid'>w</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Iso</span> <span class='hs-layout'>(</span><span class='hs-varid'>m</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-varid'>m</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-varid'>a</span> <span class='hs-varid'>b</span>
-<a name="line-319"></a><span class='hs-definition'>extractedRep</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>iso</span> <span class='hs-varid'>extractRep</span> <span class='hs-varid'>pureRep</span>
+<a name="line-318"></a><span class='hs-comment'>-- Nice generalizations</span>
+<a name="line-319"></a><span class='hs-comment'>-- TODO move</span>
 <a name="line-320"></a>
+<a name="line-321"></a><a name="extracted"></a><span class='hs-definition'>extracted</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Applicative</span> <span class='hs-varid'>m</span><span class='hs-layout'>,</span> <span class='hs-conid'>Comonad</span> <span class='hs-varid'>m</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Iso</span> <span class='hs-layout'>(</span><span class='hs-varid'>m</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-varid'>m</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-varid'>a</span> <span class='hs-varid'>b</span>
+<a name="line-322"></a><span class='hs-definition'>extracted</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>iso</span> <span class='hs-varid'>extract</span> <span class='hs-varid'>pure</span>
+<a name="line-323"></a>
+<a name="line-324"></a><a name="extractedRep"></a><span class='hs-definition'>extractedRep</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Representable</span> <span class='hs-varid'>m</span><span class='hs-layout'>,</span> <span class='hs-varid'>w</span> <span class='hs-keyglyph'>~</span> <span class='hs-conid'>Rep</span> <span class='hs-varid'>m</span><span class='hs-layout'>,</span> <span class='hs-conid'>Monoid</span> <span class='hs-varid'>w</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Iso</span> <span class='hs-layout'>(</span><span class='hs-varid'>m</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-varid'>m</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-varid'>a</span> <span class='hs-varid'>b</span>
+<a name="line-325"></a><span class='hs-definition'>extractedRep</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>iso</span> <span class='hs-varid'>extractRep</span> <span class='hs-varid'>pureRep</span>
+<a name="line-326"></a>
 </pre></body>
 </html>

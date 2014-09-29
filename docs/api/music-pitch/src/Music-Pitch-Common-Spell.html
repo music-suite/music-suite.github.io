@@ -12,7 +12,7 @@
 <a name="line-3"></a>
 <a name="line-4"></a><span class='hs-comment'>------------------------------------------------------------------------------------</span>
 <a name="line-5"></a><span class='hs-comment'>-- |</span>
-<a name="line-6"></a><span class='hs-comment'>-- Copyright   : (c) Hans Hoglund 2012</span>
+<a name="line-6"></a><span class='hs-comment'>-- Copyright   : (c) Hans Hoglund, Edward Lilley 2012–2014</span>
 <a name="line-7"></a><span class='hs-comment'>--</span>
 <a name="line-8"></a><span class='hs-comment'>-- License     : BSD-style</span>
 <a name="line-9"></a><span class='hs-comment'>--</span>
@@ -94,7 +94,7 @@
 <a name="line-85"></a>    <span class='hs-layout'>(</span><span class='hs-varid'>octaves</span><span class='hs-layout'>,</span> <span class='hs-varid'>steps</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>semitones</span> <span class='hs-varid'>x</span> <span class='hs-varop'>`divMod`</span> <span class='hs-num'>12</span>
 <a name="line-86"></a>    <span class='hs-varid'>num</span>  <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromIntegral</span> <span class='hs-layout'>(</span><span class='hs-varid'>spelling</span> <span class='hs-varid'>steps</span><span class='hs-layout'>)</span>
 <a name="line-87"></a>    <span class='hs-varid'>diff</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromIntegral</span> <span class='hs-varid'>steps</span> <span class='hs-comment'>-</span> <span class='hs-varid'>fromIntegral</span> <span class='hs-layout'>(</span><span class='hs-varid'>diatonicToChromatic</span> <span class='hs-varid'>num</span><span class='hs-layout'>)</span>
-<a name="line-88"></a>    <span class='hs-keyword'>in</span> <span class='hs-varid'>mkInterval'</span> <span class='hs-varid'>diff</span> <span class='hs-layout'>(</span><span class='hs-varid'>num</span> <span class='hs-varop'>+</span> <span class='hs-num'>1</span><span class='hs-layout'>)</span> <span class='hs-varop'>^+^</span> <span class='hs-sel'>_P8</span><span class='hs-varop'>^*</span><span class='hs-layout'>(</span><span class='hs-varid'>fromIntegral</span> <span class='hs-varid'>octaves</span><span class='hs-layout'>)</span>
+<a name="line-88"></a>    <span class='hs-keyword'>in</span> <span class='hs-varid'>mkInterval'</span> <span class='hs-varid'>diff</span> <span class='hs-varid'>num</span> <span class='hs-varop'>^+^</span> <span class='hs-sel'>_P8</span><span class='hs-varop'>^*</span><span class='hs-layout'>(</span><span class='hs-varid'>fromIntegral</span> <span class='hs-varid'>octaves</span><span class='hs-layout'>)</span>
 <a name="line-89"></a>    <span class='hs-keyword'>where</span>
 <a name="line-90"></a>        <span class='hs-varid'>diatonicToChromatic</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>go</span>
 <a name="line-91"></a>            <span class='hs-keyword'>where</span>

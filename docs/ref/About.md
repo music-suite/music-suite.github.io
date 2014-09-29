@@ -27,9 +27,9 @@ To generate music we write an *expressions* such as this one:
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='4ea6815a58473e70.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='77fe359350a2c685.mid'>[listen]</a></div>
 
-![](4ea6815a58473e70x.png)
+![](77fe359350a2c685x.png)
 
 ```haskell
 let
@@ -49,9 +49,9 @@ up m6 . compress 2
 
 Applied to the above music we get:
 
-<div class='haskell-music-listen'><a href='702bad1be0859e8d.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='553782edbeb93558.mid'>[listen]</a></div>
 
-![](702bad1be0859e8dx.png)
+![](553782edbeb93558x.png)
 
 ### Input and output
 
@@ -73,7 +73,7 @@ Please note that the Suite is quite usable, parts of it are still experimental, 
 
 ### Contributing to the Suite
 
-If you are interested in contributing to the Suite, please join the Github organization (see the link below). In addition to code, we appreciate contributions in the form of tutorials, examples or musical compositions. Hopefully we may soon have a showcase of works created with Music Suite, like [Diagrams gallery](http://projects.haskell.org/diagrams/gallery.html).
+If you are interested in contributing to the Suite, please join the Github organization (see the link below). In addition to code, we appreciate contributions in the form of tutorials, examples or musical compositions. Hopefully we may soon have a showcase of works created with Music Suite, like the [Diagrams gallery](http://projects.haskell.org/diagrams/gallery.html).
 
 ### More information
 

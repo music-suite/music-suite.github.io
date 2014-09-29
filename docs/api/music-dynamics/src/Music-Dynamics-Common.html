@@ -18,19 +18,22 @@
 <a name="line-9"></a><span class='hs-comment'>-- Stability   : experimental</span>
 <a name="line-10"></a><span class='hs-comment'>-- Portability : portable</span>
 <a name="line-11"></a><span class='hs-comment'>--</span>
-<a name="line-12"></a><span class='hs-comment'>-- Provides overloaded pitch literals.</span>
+<a name="line-12"></a><span class='hs-comment'>-- Provides relative dynamics.</span>
 <a name="line-13"></a><span class='hs-comment'>--</span>
 <a name="line-14"></a><span class='hs-comment'>-------------------------------------------------------------------------------------</span>
 <a name="line-15"></a>
-<a name="line-16"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Common</span> <span class='hs-comment'>-- (</span>
-<a name="line-17"></a><span class='hs-comment'>-- )</span>
-<a name="line-18"></a><span class='hs-keyword'>where</span>
-<a name="line-19"></a>
-<a name="line-20"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Maybe</span>
-<a name="line-21"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Either</span>
-<a name="line-22"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
-<a name="line-23"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Monad</span>
-<a name="line-24"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Applicative</span>
-<a name="line-25"></a>
+<a name="line-16"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Common</span> <span class='hs-layout'>(</span>
+<a name="line-17"></a>  <span class='hs-conid'>Dynamics</span><span class='hs-layout'>,</span>
+<a name="line-18"></a><span class='hs-layout'>)</span>
+<a name="line-19"></a><span class='hs-keyword'>where</span>
+<a name="line-20"></a>
+<a name="line-21"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Maybe</span>
+<a name="line-22"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Either</span>
+<a name="line-23"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
+<a name="line-24"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Monad</span>
+<a name="line-25"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Applicative</span>
+<a name="line-26"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Monoid</span><span class='hs-varop'>.</span><span class='hs-conid'>Average</span>
+<a name="line-27"></a>
+<a name="line-28"></a><a name="Dynamics"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>Dynamics</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Average</span> <span class='hs-conid'>Double</span>
 </pre></body>
 </html>
