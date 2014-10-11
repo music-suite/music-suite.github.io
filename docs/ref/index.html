@@ -138,12 +138,9 @@ It is based on the [Haskell][Haskell] language. It is designed with three goals 
 
 The Music Suite is both a language in its own right and a Haskell library. Being embedded in Haskell has several advantages, it allow the developers to focus on the contents and the users to make use of any feature in the Haskell language.
 -->
-
 <!--
 The Music Suite uses several advanced language constructs internally and requires a relatively new Haskell compiler (see [Installing the Suite](#installing-the-suite)).
 -->
-
-
 <h3 id="an-example">An example</h3>
 <p>To generate music we write an <em>expressions</em> such as this one:</p>
 <div class="haskell-music">
@@ -186,13 +183,12 @@ The Music Suite uses several advanced language constructs internally and require
 <li><p>The <a href="/docs/api">full API documentation</a></p></li>
 <li><p>The <a href="https://github.com/music-suite">source code on Github</a></p></li>
 <li><p>For more examples, see <a href="https://github.com/music-suite/music-preludes/tree/master/examples">music-preludes/examples</a> directory. You can download this directory from Hackage using <code>cabal unpack music-preludes</code>.</p></li>
-<li><p>For bug reports, please use the relevant Github tracker, i.e. for <code>music-score</code> use <a href="https://github.com/music-suite/music-score/issues">https://github.com/music-suite/music-score/issues</a></p></li>
+<li><p>For bug reports, please use the relevant Github tracker, i.e. for <code>music-score</code> use <a href="https://github.com/music-suite/music-score/issues" class="uri">https://github.com/music-suite/music-score/issues</a></p></li>
 <li><p>For questions, feedback and general discussion, see <a href="http://groups.google.com/d/forum/music-suite-discuss">the Google discussion group</a></p></li>
 </ul>
 <!--
 For an introduction, see [User Guide](User-Guide).
 -->
-
 <h1 id="first-steps">First steps</h1>
 <h2 id="installing-the-suite">Installing the Suite</h2>
 <p>The Music Suite depends on the <a href="http://www.haskell.org/platform/">Haskell platform</a>.</p>
@@ -264,8 +260,6 @@ putStrLn &quot;Try :open &lt;music&gt; or :play &lt;music&gt;&quot;</code></pre>
 <!--
 See [Customizing the Music Representation](#customizing-music-representation) for other examples.
 -->
-
-
 <h2 id="time-and-duration">Time and Duration</h2>
 <p>A single note can be entered by its name. This will render a note in the middle octave with a duration of one. Note that note values and durations correspond exactly, a duration of <code>1</code> is a whole note, a duration of <code>1/2</code> is a half note, and so on.</p>
 <div class="haskell-music">
@@ -277,7 +271,7 @@ See [Customizing the Music Representation](#customizing-music-representation) fo
 </div>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">c</code></pre>
 </div>
-<p>To change the duration of a note, use <a href="/docs/api/Music-Time-Internal-Transform.html#v:stretch"><code>stretch</code></a> or <a href="/docs/api/Music-Time-Internal-Transform.html#v:compress"><code>compress</code></a>. Note that:</p>
+<p>To change the duration of a note, use <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#v:stretch"><code>stretch</code></a> or <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#v:compress"><code>compress</code></a>. Note that:</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">compress x <span class="fu">=</span> stretch (<span class="dv">1</span><span class="fu">/</span>x)</code></pre>
 <p>for all values of <em>x</em>.</p>
 <div class="haskell-music">
@@ -349,7 +343,7 @@ See [Customizing the Music Representation](#customizing-music-representation) fo
 <pre class="sourceCode haskell"><code class="sourceCode haskell">up _<span class="dt">P8</span> <span class="fu">.</span> compress <span class="dv">2</span> <span class="fu">.</span> delay <span class="dv">3</span> <span class="fu">$</span> c</code></pre>
 </div>
 <h2 id="composition">Composition</h2>
-<p>Music expressions can be composed <a href="/docs/api/Music-Pitch.html#v:-60--62-"><code>&lt;&gt;</code></a>:</p>
+<p>Music expressions can be composed <a href="/docs/api/music-pitch/Music-Pitch.html#v:-60--62-"><code>&lt;&gt;</code></a>:</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='58ba103b1360ba6d.mid'>[listen]</a>
@@ -360,7 +354,7 @@ See [Customizing the Music Representation](#customizing-music-representation) fo
 <pre class="sourceCode haskell"><code class="sourceCode haskell">c <span class="fu">&lt;&gt;</span> e <span class="fu">&lt;&gt;</span> g</code></pre>
 </div>
 <p>TODO fundamentally, <code>&lt;&gt;</code> is the only way to compose music...</p>
-<p>Or in sequence using <a href="/docs/api/Music-Time-Juxtapose.html#v:-124--62-"><code>|&gt;</code></a>:</p>
+<p>Or in sequence using <a href="/docs/api/music-score/Music-Time-Juxtapose.html#v:-124--62-"><code>|&gt;</code></a>:</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='7c428aa142b5aa58.mid'>[listen]</a>
@@ -370,7 +364,7 @@ See [Customizing the Music Representation](#customizing-music-representation) fo
 </div>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">c <span class="fu">|&gt;</span> d <span class="fu">|&gt;</span> e</code></pre>
 </div>
-<p>Or partwise using <a href="/docs/api/Music-Score-Meta.html#v:-60--47--62-"><code>&lt;/&gt;</code></a>:</p>
+<p>Or partwise using <a href="/docs/api/music-score/Music-Score-Meta.html#v:-60--47--62-"><code>&lt;/&gt;</code></a>:</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='639edb196663a571.mid'>[listen]</a>
@@ -393,7 +387,7 @@ See [Customizing the Music Representation](#customizing-music-representation) fo
     triad a <span class="fu">=</span> a <span class="fu">&lt;&gt;</span> up _<span class="dt">M3</span> a <span class="fu">&lt;&gt;</span> up _<span class="dt">P5</span> a
 <span class="kw">in</span> up _<span class="dt">P8</span> scale <span class="fu">&lt;/&gt;</span> (triad c)<span class="fu">^/</span><span class="dv">2</span> <span class="fu">|&gt;</span> (triad g_)<span class="fu">^/</span><span class="dv">2</span></code></pre>
 </div>
-<p>As a shorthand for <code>x |&gt; y |&gt; z ..</code>, we can write <a href="/docs/api/Music-Time-Juxtapose.html#v:scat"><code>scat</code></a> <code>[x, y, z]</code> (short for <em>sequential concatenation</em>).</p>
+<p>As a shorthand for <code>x |&gt; y |&gt; z ..</code>, we can write <a href="/docs/api/music-score/Music-Time-Juxtapose.html#v:scat"><code>scat</code></a> <code>[x, y, z]</code> (short for <em>sequential concatenation</em>).</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='2f35e3e0e2ed2a9.mid'>[listen]</a>
@@ -403,7 +397,7 @@ See [Customizing the Music Representation](#customizing-music-representation) fo
 </div>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">scat [c,e<span class="fu">..</span>g]<span class="fu">^/</span><span class="dv">4</span></code></pre>
 </div>
-<p>For <code>x &lt;&gt; y &lt;&gt; z ..</code>, we can write <a href="/docs/api/Music-Time-Juxtapose.html#v:pcat"><code>pcat</code></a> <code>[x, y, z]</code> (short for <em>parallel concatenation</em>).</p>
+<p>For <code>x &lt;&gt; y &lt;&gt; z ..</code>, we can write <a href="/docs/api/music-score/Music-Time-Juxtapose.html#v:pcat"><code>pcat</code></a> <code>[x, y, z]</code> (short for <em>parallel concatenation</em>).</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='10dd63b892f7364a.mid'>[listen]</a>
@@ -413,11 +407,11 @@ See [Customizing the Music Representation](#customizing-music-representation) fo
 </div>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">pcat [c,e<span class="fu">..</span>g]<span class="fu">^/</span><span class="dv">2</span></code></pre>
 </div>
-<p>Actually, <a href="/docs/api/Music-Time-Juxtapose.html#v:scat"><code>scat</code></a> and <a href="/docs/api/Music-Time-Juxtapose.html#v:pcat"><code>pcat</code></a> used to be called <code>melody</code> and <code>chord</code> back in the days, but I figured out that these are names that you actually want to use in your own code.</p>
+<p>Actually, <a href="/docs/api/music-score/Music-Time-Juxtapose.html#v:scat"><code>scat</code></a> and <a href="/docs/api/music-score/Music-Time-Juxtapose.html#v:pcat"><code>pcat</code></a> used to be called <code>melody</code> and <code>chord</code> back in the days, but I figured out that these are names that you actually want to use in your own code.</p>
 <h2 id="pitch">Pitch</h2>
 <h3 id="pitch-names">Pitch names</h3>
 <p>To facilitate the use of non-standard pitch, the standard pitch names are provided as overloaded values, referred to as <em>pitch literals</em>.</p>
-<p>To understand how this works, think about the type of numeric literal. The values <span class="math">0, 1, 2</span> etc. have type <code>Num a =&gt; a</code>, similarly, the pitch literals <span class="math"><em>c</em>, <em>d</em>, <em>e</em>, <em>f</em>...</span> have type <a href="/docs/api/Music-Pitch-Literal-Pitch.html#t:IsPitch"><code>IsPitch</code></a> <code>a =&gt; a</code>.</p>
+<p>To understand how this works, think about the type of numeric literal. The values <span class="math">0, 1, 2</span> etc. have type <code>Num a =&gt; a</code>, similarly, the pitch literals <span class="math"><em>c</em>, <em>d</em>, <em>e</em>, <em>f</em>...</span> have type <a href="/docs/api/music-pitch-literal/Music-Pitch-Literal-Pitch.html#t:IsPitch"><code>IsPitch</code></a> <code>a =&gt; a</code>.</p>
 <p>For Western-style pitch types, the standard pitch names can be used:</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
@@ -441,9 +435,7 @@ b = P.bb
 
 ```
 -->
-
-
-<p>You can change octave using <a href="/docs/api/Music-Score-Pitch.html#v:octavesUp"><code>octavesUp</code></a> and <a href="/docs/api/Music-Score-Pitch.html#v:octavesDown"><code>octavesDown</code></a>:</p>
+<p>You can change octave using <a href="/docs/api/music-score/Music-Score-Pitch.html#v:octavesUp"><code>octavesUp</code></a> and <a href="/docs/api/music-score/Music-Score-Pitch.html#v:octavesDown"><code>octavesDown</code></a>:</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='61074d8c25701bf5.mid'>[listen]</a>
@@ -467,7 +459,7 @@ octavesDown <span class="dv">2</span> c</code></pre>
 </div>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">c__ <span class="fu">|&gt;</span> c_ <span class="fu">|&gt;</span> c <span class="fu">|&gt;</span> c&#39; <span class="fu">|&gt;</span> c&#39;&#39;</code></pre>
 </div>
-<p>Sharps and flats can be added by the functions <a href="/docs/api/Music-Pitch-Common-Pitch.html#v:sharp"><code>sharp</code></a> and <a href="/docs/api/Music-Pitch-Common-Pitch.html#v:flat"><code>flat</code></a>, which are written <em>postfix</em> thanks to some overloading magic.</p>
+<p>Sharps and flats can be added by the functions <a href="/docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:sharp"><code>sharp</code></a> and <a href="/docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:flat"><code>flat</code></a>, which are written <em>postfix</em> thanks to some overloading magic.</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='22ce387a0ab4ff85.mid'>[listen]</a>
@@ -477,7 +469,7 @@ octavesDown <span class="dv">2</span> c</code></pre>
 </div>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">c sharp <span class="fu">|&gt;</span> d <span class="fu">|&gt;</span> e flat</code></pre>
 </div>
-<p>You can also use the ordinary (prefix) versions <a href="/docs/api/Music-Pitch-Alterable.html#v:sharpen"><code>sharpen</code></a> and <a href="/docs/api/Music-Pitch-Alterable.html#v:flatten"><code>flatten</code></a>.</p>
+<p>You can also use the ordinary (prefix) versions <a href="/docs/api/music-pitch-literal/Music-Pitch-Alterable.html#v:sharpen"><code>sharpen</code></a> and <a href="/docs/api/music-pitch-literal/Music-Pitch-Alterable.html#v:flatten"><code>flatten</code></a>.</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='49c22911c4f4e58f.mid'>[listen]</a>
@@ -508,14 +500,14 @@ flatten d             <span class="fu">==</span> d flat        <span class="fu">
 (flatten <span class="fu">.</span> flatten) d <span class="fu">==</span> d doubleFlat  <span class="fu">==</span> dss</code></pre>
 <p>Note that <code>cs == db</code> may or may not hold depending on which pitch representation you use.</p>
 <h3 id="interval-names">Interval names</h3>
-<p>Interval names are overloaded in a manner similar to pitches, and are consequently referred to as <em>interval literals</em>. The corresponding class is called <a href="/docs/api/Music-Pitch-Literal-Interval.html#t:IsInterval"><code>IsInterval</code></a>.</p>
+<p>Interval names are overloaded in a manner similar to pitches, and are consequently referred to as <em>interval literals</em>. The corresponding class is called <a href="/docs/api/music-pitch-literal/Music-Pitch-Literal-Interval.html#t:IsInterval"><code>IsInterval</code></a>.</p>
 <p>Here and elsewhere in the Music Suite, the convention is to follow standard theoretical notation, so <em>minor</em> and <em>diminished</em> intervals are written in lower-case, while <em>major</em> and <em>perfect</em> intervals are written in upper-case. Unfortunately, Haskell does not support overloaded upper-case values, so we have to adopt an underscore prefix:</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">minor third      <span class="fu">==</span> m3
 major third      <span class="fu">==</span> _<span class="dt">M3</span>
 perfect fifth    <span class="fu">==</span> _<span class="dt">P5</span>
 diminished fifth <span class="fu">==</span> d5
 minor ninth      <span class="fu">==</span> m9</code></pre>
-<p>Similar to <a href="/docs/api/Music-Pitch-Alterable.html#v:sharpen"><code>sharpen</code></a> and <a href="/docs/api/Music-Pitch-Alterable.html#v:flatten"><code>flatten</code></a>, the <a href="/docs/api/Music-Pitch-Augmentable.html#v:augment"><code>augment</code></a> and <a href="/docs/api/Music-Pitch-Augmentable.html#v:diminish"><code>diminish</code></a> functions can be used to alter the size of an interval. For example:</p>
+<p>Similar to <a href="/docs/api/music-pitch-literal/Music-Pitch-Alterable.html#v:sharpen"><code>sharpen</code></a> and <a href="/docs/api/music-pitch-literal/Music-Pitch-Alterable.html#v:flatten"><code>flatten</code></a>, the <a href="/docs/api/music-pitch-literal/Music-Pitch-Augmentable.html#v:augment"><code>augment</code></a> and <a href="/docs/api/music-pitch-literal/Music-Pitch-Augmentable.html#v:diminish"><code>diminish</code></a> functions can be used to alter the size of an interval. For example:</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='63d0ef62823cacd3.mid'>[listen]</a>
@@ -527,7 +519,7 @@ minor ninth      <span class="fu">==</span> m9</code></pre>
     intervals <span class="fu">=</span> [diminish _<span class="dt">P5</span>, (diminish <span class="fu">.</span> diminish) _<span class="dt">P5</span>]
 <span class="kw">in</span> scat <span class="fu">$</span> fmap (<span class="ot">`up`</span> c) intervals</code></pre>
 </div>
-<p>You can add pitches and intervals using the <a href="/docs/api/Music-Pitch.html#v:-46--45--46-"><code>.-.</code></a> and <a href="/docs/api/Music-Pitch.html#v:-46--43--94-"><code>.+^</code></a> operators. To memorize these operators, think of pitches and points <code>.</code> and intervals as vectors <code>^</code>.</p>
+<p>You can add pitches and intervals using the <a href="/docs/api/music-pitch/Music-Pitch.html#v:-46--45--46-"><code>.-.</code></a> and <a href="/docs/api/music-pitch/Music-Pitch.html#v:-46--43--94-"><code>.+^</code></a> operators. To memorize these operators, think of pitches and points <code>.</code> and intervals as vectors <code>^</code>.</p>
 <h3 id="qualified-pitch-and-interval-names">Qualified pitch and interval names</h3>
 <p>There is nothing special about the pitch and interval literals, they are simply values exported by the <code>Music.Pitch.Literal</code> module. While this module is reexported by the standard music preludes, you can also import it qualified if you want to avoid bringing the single-letter pitch names into scope.</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">Pitch.c <span class="fu">|&gt;</span> Pitch.d <span class="fu">.+^</span> Interval.m3</code></pre>
@@ -535,7 +527,7 @@ minor ninth      <span class="fu">==</span> m9</code></pre>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">return (<span class="ot">c::</span><span class="dt">Note</span>) <span class="fu">==</span> (<span class="ot">c::</span><span class="dt">Score</span> <span class="dt">Note</span>)</code></pre>
 <h2 id="dynamics">Dynamics</h2>
 <p>Dynamic values are overloaded in the same way as pitches. The dynamic literals are defined in <code>Music.Dynamics.Literal</code> and have type <code>IsDynamics a =&gt; a</code>.</p>
-<p><a href="/docs/api/Music-Score-Dynamics.html#v:level"><code>level</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Dynamics.html#v:level"><code>level</code></a></p>
 <p>An overview of the dynamic values:</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
@@ -548,7 +540,7 @@ minor ninth      <span class="fu">==</span> m9</code></pre>
 </div>
 <p>TODO other ways of applying level</p>
 <h2 id="articulation">Articulation</h2>
-<p>Some basic articulation functions are <a href="/docs/api/Music-Score-Articulation.html#v:legato"><code>legato</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:staccato"><code>staccato</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:portato"><code>portato</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:tenuto"><code>tenuto</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:separated"><code>separated</code></a>, <a href="/docs/api/Music-Score-Articulation.html#v:staccatissimo"><code>staccatissimo</code></a>:</p>
+<p>Some basic articulation functions are <a href="/docs/api/music-score/Music-Score-Articulation.html#v:legato"><code>legato</code></a>, <a href="/docs/api/music-score/Music-Score-Articulation.html#v:staccato"><code>staccato</code></a>, <a href="/docs/api/music-score/Music-Score-Articulation.html#v:portato"><code>portato</code></a>, <a href="/docs/api/music-score/Music-Score-Articulation.html#v:tenuto"><code>tenuto</code></a>, <a href="/docs/api/music-score/Music-Score-Articulation.html#v:separated"><code>separated</code></a>, <a href="/docs/api/music-score/Music-Score-Articulation.html#v:staccatissimo"><code>staccatissimo</code></a>:</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='513ffd34306fe543.mid'>[listen]</a>
@@ -568,7 +560,7 @@ separated (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
     <span class="fu">&lt;/&gt;</span>
 staccatissimo (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span class="dv">8</span>)</code></pre>
 </div>
-<p><a href="/docs/api/Music-Score-Articulation.html#v:accent"><code>accent</code></a> <a href="/docs/api/Music-Score-Articulation.html#v:marcato"><code>marcato</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Articulation.html#v:accent"><code>accent</code></a> <a href="/docs/api/music-score/Music-Score-Articulation.html#v:marcato"><code>marcato</code></a></p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='2b6f7c06545d06fe.mid'>[listen]</a>
@@ -580,7 +572,7 @@ staccatissimo (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><spa
     <span class="fu">&lt;/&gt;</span>
 marcato (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span class="dv">8</span>)</code></pre>
 </div>
-<p><a href="/docs/api/Music-Score-Articulation.html#v:accentLast"><code>accentLast</code></a> <a href="/docs/api/Music-Score-Articulation.html#v:accentAll"><code>accentAll</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Articulation.html#v:accentLast"><code>accentLast</code></a> <a href="/docs/api/music-score/Music-Score-Articulation.html#v:accentAll"><code>accentAll</code></a></p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='673f78909bc2f782.mid'>[listen]</a>
@@ -607,15 +599,15 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <span class="kw">in</span> (accent <span class="fu">.</span> legato) (p1 <span class="fu">&lt;/&gt;</span> p2 <span class="fu">&lt;/&gt;</span> p3)</code></pre>
 </div>
 <h2 id="parts">Parts</h2>
-<p><a href="/docs/api/Music-Parts.html#t:Division"><code>Division</code></a></p>
-<p><a href="/docs/api/Music-Parts.html#t:Subpart"><code>Subpart</code></a></p>
-<p><a href="/docs/api/Music-Score-Part.html#t:Part"><code>Part</code></a></p>
-<p><a href="/docs/api/Music-Parts.html#t:Instrument"><code>Instrument</code></a></p>
-<p><a href="/docs/api/Music-Parts.html#t:Solo"><code>Solo</code></a></p>
+<p><a href="/docs/api/music-parts/Music-Parts-Division.html#t:Division"><code>Division</code></a></p>
+<p><a href="/docs/api/music-parts/Music-Parts-Subpart.html#t:Subpart"><code>Subpart</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Part.html#t:Part"><code>Part</code></a></p>
+<p><a href="/docs/api/music-parts/Music-Parts-Instrument.html#t:Instrument"><code>Instrument</code></a></p>
+<p><a href="/docs/api/music-parts/Music-Parts-Solo.html#t:Solo"><code>Solo</code></a></p>
 <h2 id="space">Space</h2>
 <p>TODO</p>
 <h2 id="tremolo">Tremolo</h2>
-<p><a href="/docs/api/Music-Score-Tremolo.html#v:tremolo"><code>tremolo</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Tremolo.html#v:tremolo"><code>tremolo</code></a></p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='66b80c6224eada81.mid'>[listen]</a>
@@ -627,7 +619,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 </div>
 <p>TODO chord tremolo</p>
 <h2 id="slides-and-glissando">Slides and glissando</h2>
-<p><a href="/docs/api/Music-Score-Slide.html#v:slide"><code>slide</code></a> <a href="/docs/api/Music-Score-Slide.html#v:glissando"><code>glissando</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Slide.html#v:slide"><code>slide</code></a> <a href="/docs/api/music-score/Music-Score-Slide.html#v:glissando"><code>glissando</code></a></p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='53ec95ac1de17e43.mid'>[listen]</a>
@@ -638,7 +630,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <pre class="sourceCode haskell"><code class="sourceCode haskell">glissando <span class="fu">$</span> scat [c,d]<span class="fu">^/</span><span class="dv">2</span></code></pre>
 </div>
 <h2 id="harmonics">Harmonics</h2>
-<p>Use the <a href="/docs/api/Music-Score-Harmonics.html#v:harmonic"><code>harmonic</code></a> function:</p>
+<p>Use the <a href="/docs/api/music-score/Music-Score-Harmonics.html#v:harmonic"><code>harmonic</code></a> function:</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='233d44093180d816.mid'>[listen]</a>
@@ -653,10 +645,10 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 (harmonic <span class="dv">3</span> <span class="fu">$</span> c<span class="fu">^/</span><span class="dv">2</span>)</code></pre>
 </div>
 <p>TODO artificial harmonics</p>
-<p><a href="/docs/api/Music-Score-Harmonics.html#v:artificial"><code>artificial</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Harmonics.html#v:artificial"><code>artificial</code></a></p>
 <h2 id="text">Text</h2>
 <p>TODO</p>
-<p><a href="/docs/api/Music-Score-Text.html#v:text"><code>text</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Text.html#v:text"><code>text</code></a></p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='6934c41494386194.mid'>[listen]</a>
@@ -688,12 +680,12 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 <pre class="sourceCode haskell"><code class="sourceCode haskell">pcat [c,e,g] <span class="fu">|&gt;</span> pcat [d,f,a] <span class="fu">|&gt;</span> pcat [e,g,b] <span class="fu">|&gt;</span> pcat [c,e,g]</code></pre>
 </div>
 <p>TODO how part separation works w.r.t. division etc</p>
-<p><a href="/docs/api/Music-Time-Score.html#v:simultaneous"><code>simultaneous</code></a></p>
-<p><a href="/docs/api/Music-Time-Score.html#v:simult"><code>simult</code></a></p>
+<p><a href="/docs/api/music-score/Music-Time-Score.html#v:simultaneous"><code>simultaneous</code></a></p>
+<p><a href="/docs/api/music-score/Music-Time-Score.html#v:simult"><code>simult</code></a></p>
 <h2 id="rests">Rests</h2>
 <p>Similar to chords, there is usually no need to handle rests explicitly.</p>
 <p>TODO add explicit rests etc</p>
-<p><a href="/docs/api/Music-Score.html#v:mcatMaybes"><code>mcatMaybes</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score.html#v:mcatMaybes"><code>mcatMaybes</code></a></p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='a7ef465bd0ee974.mid'>[listen]</a>
@@ -849,38 +841,37 @@ TODO
 ## Part composition
 
 -->
-
 <h1 id="musical-aspects">Musical aspects</h1>
 <h2 id="pitch-1">Pitch</h2>
-<p><a href="/docs/api/Music-Score-Pitch.html#t:HasPitch"><code>HasPitch</code></a></p>
-<p><a href="/docs/api/Music-Score-Pitch.html#v:pitch"><code>pitch</code></a></p>
-<p><a href="/docs/api/Music-Score-Pitch.html#v:pitch&#39;"><code>pitch'</code></a></p>
-<p><a href="/docs/api/Music-Score-Pitch.html#t:HasPitches"><code>HasPitches</code></a></p>
-<p><a href="/docs/api/Music-Score-Pitch.html#v:pitches"><code>pitches</code></a></p>
-<p><a href="/docs/api/Music-Score-Pitch.html#v:pitches&#39;"><code>pitches'</code></a></p>
-<p><a href="/docs/api/Music-Score-Pitch.html#v:up"><code>up</code></a></p>
-<p><a href="/docs/api/Music-Score-Pitch.html#v:down"><code>down</code></a></p>
-<p><a href="/docs/api/Music-Score-Pitch.html#v:above"><code>above</code></a></p>
-<p><a href="/docs/api/Music-Score-Pitch.html#v:below"><code>below</code></a></p>
-<p><a href="/docs/api/Music-Pitch-Common-Interval.html#v:number"><code>number</code></a> <a href="/docs/api/Music-Pitch-Common-Interval.html#v:quality"><code>quality</code></a> <a href="/docs/api/Music-Pitch-Common-Pitch.html#v:name"><code>name</code></a> <a href="/docs/api/Music-Pitch-Common-Pitch.html#v:accidental"><code>accidental</code></a> <a href="/docs/api/Music-Pitch-Common-Interval.html#v:number"><code>number</code></a> <a href="/docs/api/Music-Pitch-Common-Interval.html#v:invert"><code>invert</code></a> <a href="/docs/api/Music-Pitch-Common-Interval.html#v:simple"><code>simple</code></a> <a href="/docs/api/Music-Pitch-Common-Interval.html#v:octaves"><code>octaves</code></a> <a href="/docs/api/Music-Pitch-Common-Pitch.html#v:asPitch"><code>asPitch</code></a> [<code>asAccidental</code>][asAccidental]</p>
+<p><a href="/docs/api/music-score/Music-Score-Pitch.html#t:HasPitch"><code>HasPitch</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Pitch.html#v:pitch"><code>pitch</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Pitch.html#v:pitch&#39;"><code>pitch'</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Pitch.html#t:HasPitches"><code>HasPitches</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Pitch.html#v:pitches"><code>pitches</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Pitch.html#v:pitches&#39;"><code>pitches'</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Pitch.html#v:up"><code>up</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Pitch.html#v:down"><code>down</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Pitch.html#v:above"><code>above</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Pitch.html#v:below"><code>below</code></a></p>
+<p><a href="/docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:number"><code>number</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:quality"><code>quality</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:name"><code>name</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:accidental"><code>accidental</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:number"><code>number</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:invert"><code>invert</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:simple"><code>simple</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:octaves"><code>octaves</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:asPitch"><code>asPitch</code></a> <a href="!--%20Unknown:%20asAccidental%20No%20such%20identifier:%20asAccidental--"><code>asAccidental</code></a></p>
 <h2 id="articulation-1">Articulation</h2>
 <h2 id="dynamics-1">Dynamics</h2>
 <h2 id="parts-1">Parts</h2>
 <h2 id="space-1">Space</h2>
 <h1 id="time-and-structure">Time and structure</h1>
-<p><a href="/docs/api/Music-Time-Internal-Transform.html#t:Transformable"><code>Transformable</code></a></p>
-<p><a href="/docs/api/Music-Time-Split.html#t:Splittable"><code>Splittable</code></a></p>
-<p><a href="/docs/api/Music-Time-Reverse.html#t:Reversible"><code>Reversible</code></a></p>
-<p><a href="/docs/api/Music-Time-Position.html#t:HasPosition"><code>HasPosition</code></a></p>
-<p><a href="/docs/api/Music-Time-Duration.html#t:HasDuration"><code>HasDuration</code></a></p>
+<p><a href="/docs/api/music-score/Music-Time-Internal-Transform.html#t:Transformable"><code>Transformable</code></a></p>
+<p><a href="/docs/api/music-score/Music-Time-Split.html#t:Splittable"><code>Splittable</code></a></p>
+<p><a href="/docs/api/music-score/Music-Time-Reverse.html#t:Reversible"><code>Reversible</code></a></p>
+<p><a href="/docs/api/music-score/Music-Time-Position.html#t:HasPosition"><code>HasPosition</code></a></p>
+<p><a href="/docs/api/music-score/Music-Time-Duration.html#t:HasDuration"><code>HasDuration</code></a></p>
 <h2 id="time-duration-and-span">Time, duration and span</h2>
-<p>Time points and vectors are represented by two types <a href="/docs/api/Music-Score-Meta-Time.html#v:time"><code>Time</code></a> and <a href="/docs/api/Music-Time-Internal-Transform.html#t:Duration"><code>Duration</code></a>. The difference between these types is similar to the distinction between points and vectors in ordinary geometry. One way of thinking about time vs. duration is that duration are always <em>relative</em> (i.e. the duration between the start of two notes), while <em>time</em> is absolute.</p>
-<p>Time points form an affine space over durations, so we can use the operators <a href="/docs/api/Music-Pitch.html#v:-46--43--94-"><code>.+^</code></a> and <a href="/docs/api/Music-Pitch.html#v:-46--45--46-"><code>.-.</code></a> to convert between the two.</p>
-<p>The <a href="/docs/api/Music-Time-Internal-Transform.html#t:Span"><code>Span</code></a> type represents a <em>slice</em> of time. We can represent spans in exactly three ways: as two points representing <em>onset</em> and <em>offset</em>, as one point representing <em>onset</em> and a duration, or alternatively as a point representing <em>offset</em> and a duration. To convert between these representations, we can use <a href="/docs/api/Music-Time-Internal-Transform.html#v:range"><code>range</code></a>, <a href="/docs/api/Music-Time-Internal-Transform.html#v:delta"><code>delta</code></a> and <a href="/docs/api/Music-Time-Internal-Transform.html#v:codelta"><code>codelta</code></a>, which are <em>isomorphisms</em> using the definition from the <code>lens</code> package.</p>
+<p>Time points and vectors are represented by two types <a href="/docs/api/music-score/Music-Score-Meta-Time.html#v:time"><code>Time</code></a> and <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#t:Duration"><code>Duration</code></a>. The difference between these types is similar to the distinction between points and vectors in ordinary geometry. One way of thinking about time vs. duration is that duration are always <em>relative</em> (i.e. the duration between the start of two notes), while <em>time</em> is absolute.</p>
+<p>Time points form an affine space over durations, so we can use the operators <a href="/docs/api/music-pitch/Music-Pitch.html#v:-46--43--94-"><code>.+^</code></a> and <a href="/docs/api/music-pitch/Music-Pitch.html#v:-46--45--46-"><code>.-.</code></a> to convert between the two.</p>
+<p>The <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#t:Span"><code>Span</code></a> type represents a <em>slice</em> of time. We can represent spans in exactly three ways: as two points representing <em>onset</em> and <em>offset</em>, as one point representing <em>onset</em> and a duration, or alternatively as a point representing <em>offset</em> and a duration. To convert between these representations, we can use <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#v:range"><code>range</code></a>, <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#v:delta"><code>delta</code></a> and <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#v:codelta"><code>codelta</code></a>, which are <em>isomorphisms</em> using the definition from the <code>lens</code> package.</p>
 <h2 id="rests-notes-and-chords">Rests, Notes and Chords</h2>
-<p><a href="/docs/api/Music-Time-Note.html#t:Note"><code>Note</code></a></p>
+<p><a href="/docs/api/music-score/Music-Time-Note.html#t:Note"><code>Note</code></a></p>
 <h2 id="voices">Voices</h2>
-<p>A <a href="/docs/api/Music-Time-Voice.html#t:Voice"><code>Voice</code></a> represents a single voice of music. It consists of a sequence of values with duration.</p>
+<p>A <a href="/docs/api/music-score/Music-Time-Voice.html#t:Voice"><code>Voice</code></a> represents a single voice of music. It consists of a sequence of values with duration.</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='16cf79cdceb9f1dc.mid'>[listen]</a>
@@ -915,11 +906,10 @@ let
 in stretch (1/8) $ voiceToScore $ y
 ```
 -->
-
 <h2 id="segment-and-linear">Segment and Linear</h2>
 <h2 id="behavior-and-reactive">Behavior and Reactive</h2>
 <h2 id="tracks">Tracks</h2>
-<p>A <a href="/docs/api/Music-Time-Track.html#t:Track"><code>Track</code></a> is similar to a score, except that it events have no offset or duration. It is useful for representing point-wise occurrences such as samples, cues or percussion notes.</p>
+<p>A <a href="/docs/api/music-score/Music-Time-Track.html#t:Track"><code>Track</code></a> is similar to a score, except that it events have no offset or duration. It is useful for representing point-wise occurrences such as samples, cues or percussion notes.</p>
 <p>It can be converted into a score by delaying each element and composing in parallel. An explicit duration has to be provided.</p>
 <!--
 ```music+haskellx
@@ -932,16 +922,15 @@ let
 in trackToScore (1/8) y
 ```
 -->
-
 <h2 id="scores">Scores</h2>
-<p><a href="/docs/api/Music-Time-Score.html#t:Score"><code>Score</code></a></p>
+<p><a href="/docs/api/music-score/Music-Time-Score.html#t:Score"><code>Score</code></a></p>
 <h1 id="meta-information">Meta-information</h1>
 <p>It is often desirable to annotate music with extraneous information, such as title, creator or, key or time signature. Also, it is often useful to mark scores with structural information such as movement numbers, rehearsal marks or general annotations. In the Music Suite these are grouped together under the common label <em>meta-information</em>.</p>
-<p>The notion of meta-data used in the Music Suite is more extensive than just static values: any <a href="/docs/api/Music-Time-Internal-Transform.html#t:Transformable"><code>Transformable</code></a> container can be wrapped, and the meta-data will be transformed when the annotated value is transformed. This is why meta-data is often variable values, such as <a href="http://www.haskell.org/haskellwiki/Reactive"><code>Reactive</code></a> or <a href="/docs/api/Music-Time-Behavior.html#t:Behavior"><code>Behavior</code></a>.</p>
+<p>The notion of meta-data used in the Music Suite is more extensive than just static values: any <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#t:Transformable"><code>Transformable</code></a> container can be wrapped, and the meta-data will be transformed when the annotated value is transformed. This is why meta-data is often variable values, such as <a href="http://www.haskell.org/haskellwiki/Reactive"><code>Reactive</code></a> or <a href="/docs/api/music-score/Music-Time-Behavior.html#t:Behavior"><code>Behavior</code></a>.</p>
 <p>All time structures in the Suite support an arbitrary number of meta-data fields, indexed by type. All meta-information is required to satisfy the <code>Typeable</code>, so that meta-data can be packed and unpacked dynamically), and <code>Monoid</code>, so that values can be created and composed without having to worry about meta-data. The <code>mempty</code> value is implicitly chosen if no meta-information of the given type has been entered: for example the default title is empty, the default time signature is <code>4/4</code>. If two values annotated with meta-data are composed, their associated meta-data maps are composed as well, using the <code>&lt;&gt;</code> operator on each of the types.</p>
 <p>The distinction between ordinary musical data and meta-data is not always clear cut. As a rule of thumb, meta-events are any kind of event that does not directly affect how the represented music sounds when performed. However they might affect the appearance of the musical notation. For example, a <em>clef</em> is meta-information, while a <em>slur</em> is not. A notable exception to this rule is meta-events affecting tempo such as metronome marks and fermatas, which usually <em>do</em> affect the performance of the music.</p>
 <h2 id="title">Title</h2>
-<p>Title, subtitle etc is grouped together as a single type <code>Title</code>, thus an arbitrary number of nested titles is supported. The simplest way to add a title is to use the functions <a href="/docs/api/Music-Score-Meta-Title.html#v:title"><code>title</code></a>, <a href="/docs/api/Music-Score-Meta-Title.html#v:subtitle"><code>subtitle</code></a>, <a href="/docs/api/Music-Score-Meta-Title.html#v:subsubtitle"><code>subsubtitle</code></a> and so son.</p>
+<p>Title, subtitle etc is grouped together as a single type <code>Title</code>, thus an arbitrary number of nested titles is supported. The simplest way to add a title is to use the functions <a href="/docs/api/music-score/Music-Score-Meta-Title.html#v:title"><code>title</code></a>, <a href="/docs/api/music-score/Music-Score-Meta-Title.html#v:subtitle"><code>subtitle</code></a>, <a href="/docs/api/music-score/Music-Score-Meta-Title.html#v:subsubtitle"><code>subsubtitle</code></a> and so son.</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='28e4b79978d7eabe.mid'>[listen]</a>
@@ -952,7 +941,7 @@ in trackToScore (1/8) y
 <pre class="sourceCode haskell"><code class="sourceCode haskell">title <span class="st">&quot;Frere Jaques&quot;</span> <span class="fu">$</span> scat [c,d,e,c]<span class="fu">^/</span><span class="dv">4</span></code></pre>
 </div>
 <h2 id="attribution">Attribution</h2>
-<p>Similar to titles, the attribution of the creators of music can be annotated according to description such as <a href="/docs/api/Music-Score-Meta-Attribution.html#v:composer"><code>composer</code></a>, <a href="/docs/api/Music-Score-Meta-Attribution.html#v:lyricist"><code>lyricist</code></a>, <a href="/docs/api/Music-Score-Meta-Attribution.html#v:arranger"><code>arranger</code></a> etc. More generally, <a href="/docs/api/Music-Score-Meta-Attribution.html#v:attribution"><code>attribution</code></a> or <a href="/docs/api/Music-Score-Meta-Attribution.html#v:attributions"><code>attributions</code></a> can be used to embed arbitrary <code>(profession, name)</code> mappings.</p>
+<p>Similar to titles, the attribution of the creators of music can be annotated according to description such as <a href="/docs/api/music-score/Music-Score-Meta-Attribution.html#v:composer"><code>composer</code></a>, <a href="/docs/api/music-score/Music-Score-Meta-Attribution.html#v:lyricist"><code>lyricist</code></a>, <a href="/docs/api/music-score/Music-Score-Meta-Attribution.html#v:arranger"><code>arranger</code></a> etc. More generally, <a href="/docs/api/music-score/Music-Score-Meta-Attribution.html#v:attribution"><code>attribution</code></a> or <a href="/docs/api/music-score/Music-Score-Meta-Attribution.html#v:attributions"><code>attributions</code></a> can be used to embed arbitrary <code>(profession, name)</code> mappings.</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='5779fddc95fb274d.mid'>[listen]</a>
@@ -972,30 +961,30 @@ in trackToScore (1/8) y
 <pre class="sourceCode haskell"><code class="sourceCode haskell">composer <span class="st">&quot;Anonymous&quot;</span> <span class="fu">$</span> lyricist <span class="st">&quot;Anonymous&quot;</span> <span class="fu">$</span> arranger <span class="st">&quot;Hans&quot;</span> <span class="fu">$</span> scat [c,d,e,c]<span class="fu">^/</span><span class="dv">4</span></code></pre>
 </div>
 <h2 id="key-signatures">Key signatures</h2>
-<p><a href="/docs/api/Music-Score-Meta-Key.html#v:key"><code>key</code></a></p>
-<p><a href="/docs/api/Music-Score-Meta-Key.html#v:keySignature"><code>keySignature</code></a></p>
-<p><a href="/docs/api/Music-Score-Meta-Key.html#v:keySignatureDuring"><code>keySignatureDuring</code></a></p>
-<p><a href="/docs/api/Music-Score-Meta-Key.html#v:withKeySignature"><code>withKeySignature</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-Key.html#v:key"><code>key</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-Key.html#v:keySignature"><code>keySignature</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-Key.html#v:keySignatureDuring"><code>keySignatureDuring</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-Key.html#v:withKeySignature"><code>withKeySignature</code></a></p>
 <h2 id="time-signatures">Time signatures</h2>
-<p><a href="/docs/api/Music-Score-Meta-Time.html#v:time"><code>time</code></a></p>
-<p><a href="/docs/api/Music-Score-Meta-Time.html#v:compoundTime"><code>compoundTime</code></a></p>
-<p><a href="/docs/api/Music-Score-Meta-Time.html#v:timeSignature"><code>timeSignature</code></a></p>
-<p><a href="/docs/api/Music-Score-Meta-Time.html#v:timeSignatureDuring"><code>timeSignatureDuring</code></a></p>
-<p><a href="/docs/api/Music-Score-Meta-Time.html#v:withTimeSignature"><code>withTimeSignature</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-Time.html#v:time"><code>time</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-Time.html#v:compoundTime"><code>compoundTime</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-Time.html#v:timeSignature"><code>timeSignature</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-Time.html#v:timeSignatureDuring"><code>timeSignatureDuring</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-Time.html#v:withTimeSignature"><code>withTimeSignature</code></a></p>
 <h2 id="tempo">Tempo</h2>
-<p><a href="/docs/api/Music-Score-Meta-Tempo.html#v:metronome"><code>metronome</code></a></p>
-<p><a href="/docs/api/Music-Score-Meta-Tempo.html#v:tempo"><code>tempo</code></a></p>
-<p><a href="/docs/api/Music-Score-Meta-Tempo.html#v:tempoDuring"><code>tempoDuring</code></a></p>
-<p><a href="/docs/api/Music-Score-Meta-Tempo.html#v:renderTempo"><code>renderTempo</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-Tempo.html#v:metronome"><code>metronome</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-Tempo.html#v:tempo"><code>tempo</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-Tempo.html#v:tempoDuring"><code>tempoDuring</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-Tempo.html#v:renderTempo"><code>renderTempo</code></a></p>
 <h2 id="fermatas-caesuras-and-breathing-marks">Fermatas, caesuras and breathing marks</h2>
 <p>TODO</p>
 <h2 id="ritardando-and-accellerando">Ritardando and accellerando</h2>
 <p>TODO</p>
 <h2 id="rehearsal-marks">Rehearsal marks</h2>
 <p>TODO</p>
-<p><a href="/docs/api/Music-Score-Meta-RehearsalMark.html#v:rehearsalMark"><code>rehearsalMark</code></a></p>
-<p><a href="/docs/api/Music-Score-Meta-RehearsalMark.html#v:rehearsalMarkDuring"><code>rehearsalMarkDuring</code></a></p>
-<p><a href="/docs/api/Music-Score-Meta-RehearsalMark.html#v:withRehearsalMark"><code>withRehearsalMark</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-RehearsalMark.html#v:rehearsalMark"><code>rehearsalMark</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-RehearsalMark.html#v:rehearsalMarkDuring"><code>rehearsalMarkDuring</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-RehearsalMark.html#v:withRehearsalMark"><code>withRehearsalMark</code></a></p>
 <h2 id="barlines-and-repeats">Barlines and repeats</h2>
 <p>There is generally no need to enter bars explicitly, as this information can be inferred from other meta-information. Generally, the following meta-events (in any part), will force a change of bar:</p>
 <ul>
@@ -1005,9 +994,9 @@ in trackToScore (1/8) y
 <li>Rehearsal marks</li>
 </ul>
 <p>However, the user may also enter explicit bar lines using the following functions:</p>
-<p><a href="/docs/api/Music-Score-Meta-Barline.html#v:barline"><code>barline</code></a></p>
-<p><a href="/docs/api/Music-Score-Meta-Barline.html#v:doubleBarline"><code>doubleBarline</code></a></p>
-<p><a href="/docs/api/Music-Score-Meta-Barline.html#v:finalBarline"><code>finalBarline</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-Barline.html#v:barline"><code>barline</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-Barline.html#v:doubleBarline"><code>doubleBarline</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta-Barline.html#v:finalBarline"><code>finalBarline</code></a></p>
 <p>Whenever a bar line is created as a result of a meta-event, an shorted time signature may need to be inserted as in:</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
@@ -1021,12 +1010,12 @@ in trackToScore (1/8) y
 <p>TODO adapt getBarDurations and getBarTimeSignatures to actually do this</p>
 <p>TODO repeats</p>
 <h2 id="clefs">Clefs</h2>
-<p>To set the clef for a whole passage, use <a href="/docs/api/Music-Score-Meta-Clef.html#v:clef"><code>clef</code></a>. The clef is used by most notation backends and ignored by audio backends.</p>
-<p>To set the clef for a preexisting passage in an existing score, use <a href="/docs/api/Music-Score-Meta-Clef.html#v:clefDuring"><code>clefDuring</code></a>.</p>
+<p>To set the clef for a whole passage, use <a href="/docs/api/music-score/Music-Score-Meta-Clef.html#v:clef"><code>clef</code></a>. The clef is used by most notation backends and ignored by audio backends.</p>
+<p>To set the clef for a preexisting passage in an existing score, use <a href="/docs/api/music-score/Music-Score-Meta-Clef.html#v:clefDuring"><code>clefDuring</code></a>.</p>
 <p>TODO example</p>
 <h2 id="annotations">Annotations</h2>
-<p>Annotations are simply textual values attached to a specific section of the score. In contrast to other types of meta-information annotations always apply to the whole score, not to a single part. To annotate a score use <a href="/docs/api/Music-Score-Meta-Annotations.html#v:annotate"><code>annotate</code></a>, to annotate a specific span, use <a href="/docs/api/Music-Score-Meta-Annotations.html#v:annotateSpan"><code>annotateSpan</code></a>.</p>
-<p>Annotations are invisible by default. To show annotations in the generated output, use <a href="/docs/api/Music-Score-Meta-Annotations.html#v:showAnnotations"><code>showAnnotations</code></a>.</p>
+<p>Annotations are simply textual values attached to a specific section of the score. In contrast to other types of meta-information annotations always apply to the whole score, not to a single part. To annotate a score use <a href="/docs/api/music-score/Music-Score-Meta-Annotations.html#v:annotate"><code>annotate</code></a>, to annotate a specific span, use <a href="/docs/api/music-score/Music-Score-Meta-Annotations.html#v:annotateSpan"><code>annotateSpan</code></a>.</p>
+<p>Annotations are invisible by default. To show annotations in the generated output, use <a href="/docs/api/music-score/Music-Score-Meta-Annotations.html#v:showAnnotations"><code>showAnnotations</code></a>.</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='10bdd160155b65f4.mid'>[listen]</a>
@@ -1037,17 +1026,16 @@ in trackToScore (1/8) y
 <pre class="sourceCode haskell"><code class="sourceCode haskell">showAnnotations <span class="fu">$</span> annotate <span class="st">&quot;First note&quot;</span> c <span class="fu">|&gt;</span> d <span class="fu">|&gt;</span> annotate <span class="st">&quot;Last note&quot;</span> d</code></pre>
 </div>
 <h2 id="custom-meta-information">Custom meta-information</h2>
-<p>Meta-information is not restricted to the types described above. In fact, the user can add meta-information of any type that satisfies the <a href="/docs/api/Music-Score-Meta.html#t:AttributeClass"><code>AttributeClass</code></a> constraint, including user-defined types. Meta-information is required to implement <code>Monoid</code>. The <code>mempty</code> value is used as a default value for the type, while the <code>mappend</code> function is used to combine the default value and all values added by the user.</p>
+<p>Meta-information is not restricted to the types described above. In fact, the user can add meta-information of any type that satisfies the <a href="/docs/api/music-score/Music-Score-Meta.html#t:AttributeClass"><code>AttributeClass</code></a> constraint, including user-defined types. Meta-information is required to implement <code>Monoid</code>. The <code>mempty</code> value is used as a default value for the type, while the <code>mappend</code> function is used to combine the default value and all values added by the user.</p>
 <p>Typically, you want to use a monoid similar to <code>Maybe</code>, <code>First</code> or <code>Last</code>, but not one derived from the list type. The reason for this is that meta-scores compose, so that <code>getMeta (x &lt;&gt; y) = getMeta x &lt;&gt; getMeta y</code>.</p>
 <!--
 TODO unexpected results with filter and recompose, solve by using a good Monoid
 Acceptable Monoids are Maybe and Set/Map, but not lists (ordered sets/unique lists OK)
 See issue 103
 -->
-
-<p><a href="/docs/api/Music-Score-Meta.html#t:HasMeta"><code>HasMeta</code></a></p>
-<p><a href="/docs/api/Music-Score-Meta.html#v:setMetaAttr"><code>setMetaAttr</code></a></p>
-<p><a href="/docs/api/Music-Score-Meta.html#v:setMetaTAttr"><code>setMetaTAttr</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta.html#t:HasMeta"><code>HasMeta</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta.html#v:setMetaAttr"><code>setMetaAttr</code></a></p>
+<p><a href="/docs/api/music-score/Music-Score-Meta.html#v:setMetaTAttr"><code>setMetaTAttr</code></a></p>
 <h1 id="import-and-export">Import and export</h1>
 <p>The standard distribution (installed as part of <code>music-suite</code>) of the Music Suite includes a variety of input and output formats. There are also some experimental formats, which are distributed in separate packages, these are marked as experimental below.</p>
 <p>The conventions for input or output formats is similar to the convention for properties (TODO ref above): for any type <code>a</code> and format <code>T a</code>, input formats are defined by an <em>is</em> constraint, and output format by a <em>has</em> constraint. For example, types that can be exported to Lilypond are defined by the constraint <code>HasLilypond a</code>, while types that can be imported from MIDI are defined by the constraint <code>IsMidi a</code>.</p>
@@ -1056,7 +1044,6 @@ See issue 103
 <!--
 You can read and write MIDI files using the functions [`readMidi`][readMidi] and [`writeMidi`][writeMidi]. To play MIDI back in real-time, use [`playMidi`][playMidi] or [`playMidiIO`][playMidiIO], which uses [reenact](http://hackage.haskell.org/package/reenact).
 -->
-
 <p>Beware that MIDI input may contain time and pitch values that yield a non-readable notation, you need an sophisticated piece of analysis software to convert raw MIDI input to quantized input.</p>
 <h2 id="lilypond">Lilypond</h2>
 <p>All standard representations support Lilypond output. The <a href="http://hackage.haskell.org/package/lilypond">lilypond</a> package is used for parsing and pretty printing of Lilypond syntax. Lilypond is the recommended way of rendering music notation.</p>
@@ -1155,9 +1142,6 @@ You can read and write MIDI files using the functions [`readMidi`][readMidi] and
 <!--
 This feature could of course also be used to convert Sibelius scores to other formats such as Guido or ABC without having to write in the ManuScript language used by Sibelius.
 -->
-
-
-
 <h1 id="customizing-music-representation">Customizing music representation</h1>
 <h2 id="adding-an-new-representation">Adding an new representation</h2>
 <p>You can use your own representation for all standard musical aspects.</p>
@@ -1169,9 +1153,9 @@ This feature could of course also be used to convert Sibelius scores to other fo
 <p>TODO</p>
 <ul>
 <li>Create a type of kind <code>* -&gt; *</code>.</li>
-<li>Add instances for the standard classes <a href="/docs/api/Music-Score.html#t:Functor"><code>Functor</code></a>, <a href="/docs/api/Music-Score.html#t:Applicative"><code>Applicative</code></a> and (if possible) <a href="/docs/api/Music-Score.html#t:Monad"><code>Monad</code></a> or [<code>Comonad</code>][Comonad].</li>
-<li>If your representation supports <em>parallel</em> composition it should be a trivial (non-lifted) <a href="/docs/api/Music-Pitch.html#t:Monoid"><code>Monoid</code></a>. It it also supports sequential composition, it should support <a href="/docs/api/Music-Time-Internal-Transform.html#t:Transformable"><code>Transformable</code></a> and <a href="/docs/api/Music-Time-Position.html#t:HasPosition"><code>HasPosition</code></a>.</li>
-<li>Optionally, add instances for <a href="/docs/api/Music-Time-Split.html#t:Splittable"><code>Splittable</code></a> and <a href="/docs/api/Music-Time-Reverse.html#t:Reversible"><code>Reversible</code></a>.</li>
+<li>Add instances for the standard classes <a href="/docs/api/music-score/Music-Score.html#t:Functor"><code>Functor</code></a>, <a href="/docs/api/music-score/Music-Score.html#t:Applicative"><code>Applicative</code></a> and (if possible) <a href="/docs/api/music-score/Music-Score.html#t:Monad"><code>Monad</code></a> or <a href="!--%20Unknown:%20Comonad%20No%20such%20identifier:%20Comonad--"><code>Comonad</code></a>.</li>
+<li>If your representation supports <em>parallel</em> composition it should be a trivial (non-lifted) <a href="/docs/api/music-pitch/Music-Pitch.html#t:Monoid"><code>Monoid</code></a>. It it also supports sequential composition, it should support <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#t:Transformable"><code>Transformable</code></a> and <a href="/docs/api/music-score/Music-Time-Position.html#t:HasPosition"><code>HasPosition</code></a>.</li>
+<li>Optionally, add instances for <a href="/docs/api/music-score/Music-Time-Split.html#t:Splittable"><code>Splittable</code></a> and <a href="/docs/api/music-score/Music-Time-Reverse.html#t:Reversible"><code>Reversible</code></a>.</li>
 </ul>
 <h1 id="acknowledgements">Acknowledgements</h1>
 <p>The Music Suite is indebted to many other previous libraries and computer music environments, particularly <a href="http://commonmusic.sourceforge.net/">Common Music</a>, <a href="http://www2.siba.fi/PWGL/">PWGL</a>, <a href="http://cycling74.com/products/max/">Max/MSP</a>, <a href="http://supercollider.sourceforge.net/">SuperCollider</a>, <a href="http://audacity.sourceforge.net/help/nyquist">nyquist</a>, <a href="http://music21-mit.blogspot.se/">music21</a>, <a href="http://guidolib.sourceforge.net/">Guido</a>, <a href="http://lilypond.org/">Lilypond</a> and <a href="https://pypi.python.org/pypi/Abjad/2.3">Abjad</a>. Some of the ideas for the quantization algorithms came from <a href="http://fomus.sourceforge.net/">Fomus</a>.</p>
@@ -1184,17 +1168,6 @@ This feature could of course also be used to convert Sibelius scores to other fo
 <script src="js/Base64.js" type="text/javascript"></script>
 <script src="js/base64binary.js" type="text/javascript"></script>
 <script src="js/main.js" type="text/javascript"></script>
-
-
-<!-- Unknown: asAccidental No such identifier: asAccidental-->
-
-<!-- Unknown: playMidi No such identifier: playMidi-->
-
-
-<!-- Unknown: playMidiIO No such identifier: playMidiIO-->
-
-<!-- Unknown: Comonad No such identifier: Comonad-->
-
 <hr />
 <p><em>Copyright Hans Jacob Höglund 2012–2013</em></p>
 <p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This documentation is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
@@ -1203,5 +1176,4 @@ This feature could of course also be used to convert Sibelius scores to other fo
   </div>
 </body>
 </html>
-
 
