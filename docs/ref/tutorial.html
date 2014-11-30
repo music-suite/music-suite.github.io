@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+<body>
+    <div class="container">
+    <div class="row">
+            <div id="TOC" class="span3">
+        <div class="well toc">
+        <ul>
+          <li class="nav-header">Table of Contents</li>
+        </ul>
+        <ul>
+        <li><a href="#todo-name-of-tutorial">TODO name of tutorial</a></li>
+        <li><a href="#hm-musical-expressions">(H+M) Musical expressions</a><ul>
+        <li><a href="#bracketing-up-expressions">Bracketing up expressions</a></li>
+        <li><a href="#recap">Recap:</a></li>
+        <li><a href="#exercises">Exercises:</a></li>
+        </ul></li>
+        <li><a href="#hm-defining-things">(H+M) Defining things</a><ul>
+        <li><a href="#exercises-1">Exercises:</a></li>
+        </ul></li>
+        <li><a href="#hm-lists-and-pairs">(H+M) Lists and pairs</a><ul>
+        <li><a href="#exercises-2">Exercises:</a></li>
+        </ul></li>
+        <li><a href="#delay-and-stretch">Delay and stretch</a><ul>
+        <li><a href="#exercises-3">Exercises:</a></li>
+        </ul></li>
+        <li><a href="#defining-functions">Defining functions</a></li>
+        <li><a href="#types-hm">Types (H+M)</a><ul>
+        <li><a href="#common-types">Common types</a></li>
+        </ul></li>
+        <li><a href="#accessing-things-using-lenses-traversals-etc.">Accessing things using lenses, traversals etc.</a><ul>
+        <li><a href="#traversals">Traversals</a></li>
+        <li><a href="#prisms">Prisms</a></li>
+        <li><a href="#isomorphisms">Isomorphisms</a></li>
+        <li><a href="#using-pitches-dynamics-parts-etc.">Using pitches, dynamics, parts etc.</a></li>
+        </ul></li>
+        <li><a href="#type-constructors">Type constructors</a><ul>
+        <li><a href="#standard-type-constructors">Standard type constructors</a></li>
+        </ul></li>
+        <li><a href="#voices-notes-chords-and-rests">Voices, Notes, Chords and Rests</a></li>
+        <li><a href="#working-with-melody-and-harmony">Working with melody and harmony</a></li>
+        <li><a href="#spans-time-and-delayed-values">Spans, time and delayed values</a></li>
+        <li><a href="#scores-and-tracks">Scores and Tracks</a></li>
+        <li><a href="#instruments-playing-techniques-and-percussion">Instruments, playing techniques and percussion</a></li>
+        </ul>
+        </div>
+      </div>
+            <div class="span9">
+            <h2 id="todo-name-of-tutorial">TODO name of tutorial</h2>
+<p>There are many great tutorials for learning Haskell:</p>
+<p>http://www.haskell.org/haskellwiki/Tutorials</p>
+<p>For beginners the best one is Learn You a Haskell:</p>
+<p>http://www.haskell.org/haskellwiki/Tutorials</p>
+<p>There are also many books introducing composition. Many deal with general properties of melody and harmony, others specifically with writing for classical instruments whether in a traditional or modern styles, some are written with recorded music in mind, and yet other countless tutorials deal with the increasingly XXX art of creating music on a computer – popular or experimental.</p>
+<p>Why is functional programming and musical composition related? For a start they are both (as Paul Graham famously pointed out) about creating things. But functional programming is especially suited to creative arts, a it is a programming style encourage us to think about computing in terms of relationships rather than actions. Actually, functional programming is not programming in the customary sense of the word at all, because it is not <em>technical</em> but <em>structural</em>. You don't need to know anything about computer hardware, operating systems or file formats to be a functional programmer, they only thing you need is a desire to express yourself and possibly an understanding of basic logic and arithmetic.</p>
+<p>The Haskell language that we use here is in part infamous for introducing &quot;difficult&quot; words such as &quot;Monad&quot;, &quot;Semigroup&quot; and &quot;Functor&quot;. However we need not to worry about these words at all as their meaning will be completely clear by understanding exactly how they apply to what we actually want to do: music.</p>
+<h2 id="hm-musical-expressions">(H+M) Musical expressions</h2>
+<p>TODO really simple way of getting started: write this, listen/look, save the result, go on.</p>
+<pre><code>&gt;&gt;&gt; c |&gt; d</code></pre>
+<p>What you just wrote is an <em>expression</em>. Expressions are a bit like sentences, in that they are built up from small words, and in that each expression has a <em>meaning</em>. The words here are of course just the pitches: <em>c</em> and <em>d</em>. In constrast to ordinary language, these words are actually complete expressions themselves:</p>
+<pre><code>&gt;&gt;&gt; c
+
+&gt;&gt;&gt; d</code></pre>
+<p>The odd-looking thing in the middle is something else: an operator. Operators are not complete expressions in themselves, but can be thought of as a glue used to put other things together, a bit like the conjunctions in English (<em>and</em>, <em>or</em>, <em>because</em>, etc.).</p>
+<p>Expressions are also the basis of mathematics, here the operators are simply called <em>+</em>, <em>-</em>, <em>*</em>, etc. Mathematical expressions have different meanings from musical ones, representing things like numbers, sets and so on, but the principle is the same:</p>
+<pre><code>&gt;&gt;&gt; 2
+
+&gt;&gt;&gt; 3
+
+&gt;&gt;&gt; 2 + 3
+
+&gt;&gt;&gt; 4 * (3 + 1)</code></pre>
+<h3 id="bracketing-up-expressions">Bracketing up expressions</h3>
+<p>Operators are actually part of a family of more general things called <em>functions</em>. A function can be thought of as a machine that takes <em>one or more things</em> and gives you back <em>one single thing</em>. We classify functions from how many things they take, so</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Number of inputs</th>
+<th align="left">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">Unary</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Binary</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Ternary</td>
+</tr>
+</tbody>
+</table>
+<p>Operators such as <code>|&gt;</code> and <code>+</code> are <em>binary</em> (takes two things).</p>
+<p>Binary functions with text names can be written in two ways: in the middle of the things it is taking as inputs or before them.</p>
+<pre><code>&gt;&gt;&gt; 2 + 3
+
+&gt;&gt;&gt; (+) 2 3
+
+&gt;&gt;&gt; up m3 c
+
+&gt;&gt;&gt; m3 `up` c
+
+&gt;&gt;&gt; inv c (c |&gt; d |&gt; e)
+
+&gt;&gt;&gt; c `inv` (c |&gt; d |&gt; e)
+
+&gt;&gt;&gt; compress 2 (c |&gt; d |&gt; e)
+
+&gt;&gt;&gt; 2 `compress` (c |&gt; d |&gt; e)</code></pre>
+<p>There are also many unary functions:</p>
+<pre><code>&gt;&gt;&gt; negate 3
+-3
+
+&gt;&gt;&gt; rev (c |&gt; d)
+
+&gt;&gt;&gt; sharpen</code></pre>
+<h3 id="recap">Recap:</h3>
+<ul>
+<li>Expressions are like sentences: they mean something</li>
+<li>Expressions are built from primitives and functions like a tree</li>
+<li>Brackets can be used to clarify the structure of expressions</li>
+<li>Functions transform 1 or more things into one thing</li>
+<li>Binary functions are often written as operators (in the middle)</li>
+</ul>
+<h3 id="exercises">Exercises:</h3>
+<ul>
+<li>Write a melody using just |&gt; and the pitch names</li>
+<li>Write a sequence of chords using &lt;&gt;, |&gt; and the pitch names</li>
+<li>Write a melody using stretch, compress, parentheses |&gt; and the ordinary pitch names</li>
+</ul>
+<h2 id="hm-defining-things">(H+M) Defining things</h2>
+<pre><code>&gt;&gt;&gt; let x = 1
+&gt;&gt;&gt; let y = 2
+&gt;&gt;&gt; x + y
+3</code></pre>
+<p>Don't bother about 'let' for now. You can think of the <em>=</em> sign as meaning &quot;is&quot;. The name written to its <em>left</em> is given the value to its <em>right</em>.</p>
+<pre><code>&gt;&gt;&gt; let melody = c |&gt; d |&gt; e
+&gt;&gt;&gt; let bass   = c |&gt; g |&gt; c
+&gt;&gt;&gt; melody &lt;&gt; bass</code></pre>
+<h3 id="exercises-1">Exercises:</h3>
+<ul>
+<li>Define several melodies using <code>let</code></li>
+<li>Define several chord sequences using <code>let</code></li>
+<li>Combine the melodies and chords you have written into a 1-minute composition</li>
+</ul>
+<h2 id="hm-lists-and-pairs">(H+M) Lists and pairs</h2>
+<p>Constructing:</p>
+<pre><code>&gt;&gt;&gt; (1,2)
+
+&gt;&gt;&gt; [1,2,3]</code></pre>
+<p>Destructing (also called <em>pattern matching</em>):</p>
+<pre><code>&gt;&gt;&gt; let (x,y) = (10,11)
+&gt;&gt;&gt; x
+10 
+
+&gt;&gt;&gt; let [a,b,c] = [1,2,3]
+&gt;&gt;&gt; a
+1</code></pre>
+<p>Beware that when destructing a list you must give it exactly the right length, for reasons that will become apparent later on.</p>
+<p>Functions taking lists</p>
+<pre><code>&gt;&gt;&gt; sum [2,3]
+6
+&gt;&gt;&gt; product [5,10,1]
+15
+&gt;&gt;&gt; highest [c,d]
+Just d
+&gt;&gt;&gt; scat [c,e,g]
+&gt;&gt;&gt; pcat [c,e,g]
+
+&gt;&gt;&gt; join [[1,2]‚[3,4]]
+[1,2,3,4]
+&gt;&gt;&gt; scat [c,e,g]
+&gt;&gt;&gt; pcat [c,e,g]</code></pre>
+<h3 id="exercises-2">Exercises:</h3>
+<ul>
+<li>Define several melodies and chords using <code>scat</code>, <code>pcat</code> and pitch names</li>
+<li>Combine the melodies and chords you have written into a 1-minute composition</li>
+</ul>
+<h2 id="delay-and-stretch">Delay and stretch</h2>
+<p>TODO needs work to be comprehensible</p>
+<h3 id="exercises-3">Exercises:</h3>
+<ul>
+<li>Write a canon consisting of a single melody with delayed entries (see above)</li>
+</ul>
+<h2 id="defining-functions">Defining functions</h2>
+<pre><code>&gt;&gt;&gt; let twice x = x |&gt; x</code></pre>
+<p>This function has the name 'twice', and is a unary function.</p>
+<pre><code>&gt;&gt;&gt; twice c
+
+&gt;&gt;&gt; twice (c |&gt; d)
+
+&gt;&gt;&gt; let id x = x
+&gt;&gt;&gt; id 2
+2
+&gt;&gt;&gt; id []
+[]</code></pre>
+<p>You can also define functions <em>inside</em> an expression. In this case you don't have to give the function a name (in fact you can't). You also have to replace the <code>=</code> sign with <code>-&gt;</code> and write a <code>\</code> before the first parameter name. Here is a way of defining and using <code>id</code> in a single line.</p>
+<pre><code>&gt;&gt;&gt; (\x -&gt; x) 22
+22</code></pre>
+<p>And the same thing with <code>twice</code>:</p>
+<pre><code>&gt;&gt;&gt; (\x -&gt; x |&gt; x) c</code></pre>
+<p>(This may not look that impressive but is in fact the most important and powerful thing you can do in Haskell.)</p>
+<h2 id="types-hm">Types (H+M)</h2>
+<p>When we want to see the type of something, we write <code>:t</code>.</p>
+<pre><code>&gt;&gt;&gt; :t c
+Pitch
+
+&gt;&gt;&gt; :t m3
+Interval
+
+&gt;&gt;&gt; :t True
+Bool</code></pre>
+<h3 id="common-types">Common types</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bool</td>
+<td align="left"><code>True</code>, <code>False</code></td>
+</tr>
+<tr class="even">
+<td align="left">Integer</td>
+<td align="left"><code>-1</code>,<code>0</code>,<code>1</code>,<code>2</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Double</td>
+<td align="left"><code>-1</code>,<code>0</code>,<code>0.5123</code></td>
+</tr>
+<tr class="even">
+<td align="left">Pitch</td>
+<td align="left"><code>c</code>,<code>cs</code>,<code>gb</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Interval</td>
+<td align="left"><code>_P1</code>,<code>m3</code>,<code>d9</code></td>
+</tr>
+<tr class="even">
+<td align="left">Time</td>
+<td align="left"><code>1</code>,<code>2</code>,<code>3</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Duration</td>
+<td align="left"><code>1</code>,<code>2</code>,<code>3</code></td>
+</tr>
+<tr class="even">
+<td align="left">Span</td>
+<td align="left"><code>1&lt;-&gt;2</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Dynamics</td>
+<td align="left"><code>ppp</code>,<code>pp</code>,<code>_p</code>,<code>mp</code>,<code>_f</code>,<code>ff</code></td>
+</tr>
+<tr class="even">
+<td align="left">Articulation</td>
+<td align="left"><code>staccato</code>,<code>legato</code>,<code>accent</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Instrument</td>
+<td align="left"><code>flute</code>,<code>piano</code></td>
+</tr>
+<tr class="even">
+<td align="left">Part</td>
+<td align="left"><code>flutes</code>,<code>divide 2 violins !! 0</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="accessing-things-using-lenses-traversals-etc.">Accessing things using lenses, traversals etc.</h2>
+<p>A lens is like a <em>label</em> that allows you to <em>view</em> and <em>set</em> a part of a larger structure. To view a value we use the <code>^.</code> operator (or simply <code>view</code>).</p>
+<pre><code>&gt;&gt;&gt; (1,2) ^. _1
+1
+
+&gt;&gt;&gt; (1,2) ^. _2
+2
+
+&gt;&gt;&gt; [c,d,e] ^. _head
+c
+
+&gt;&gt;&gt; [c,d,e] ^. _last
+e
+
+&gt;&gt;&gt; view _last [c,d,e]
+e</code></pre>
+<p>To set a value, use <em>set</em>:</p>
+<pre><code>&gt;&gt;&gt; set _1 10 (1,2)
+(10,2)
+
+&gt;&gt;&gt; set _head 10 [1,2,3]
+[10,2,3]</code></pre>
+<p>To update value, use <em>over</em>:</p>
+<pre><code>&gt;&gt;&gt; over _1 (* 10) (1,2)
+(10,2)</code></pre>
+<h3 id="traversals">Traversals</h3>
+<h3 id="prisms">Prisms</h3>
+<h3 id="isomorphisms">Isomorphisms</h3>
+<h3 id="using-pitches-dynamics-parts-etc.">Using pitches, dynamics, parts etc.</h3>
+<h2 id="type-constructors">Type constructors</h2>
+<p>We have already introduced pairs and lists</p>
+<h3 id="standard-type-constructors">Standard type constructors</h3>
+<p>Maybe</p>
+<p>Either</p>
+<p>Set</p>
+<p>Map</p>
+<h2 id="voices-notes-chords-and-rests">Voices, Notes, Chords and Rests</h2>
+<h2 id="working-with-melody-and-harmony">Working with melody and harmony</h2>
+<h2 id="spans-time-and-delayed-values">Spans, time and delayed values</h2>
+<h2 id="scores-and-tracks">Scores and Tracks</h2>
+<h2 id="instruments-playing-techniques-and-percussion">Instruments, playing techniques and percussion</h2>
+            </div>
+    </div>
+  </div>
+</body>
+</html>

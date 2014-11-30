@@ -601,11 +601,11 @@
 <a name="line-592"></a>        isMonophonic :: Score a -&gt; Bool
 <a name="line-593"></a>
 <a name="line-594"></a>        -- | Fails for polyphonic scores.
-<a name="line-595"></a>        scoreToVoice :: Score a -&gt; Voice (Maybe a)
+<a name="line-595"></a>        s_oreToVoice :: Score a -&gt; Voice (Maybe a)
 <a name="line-596"></a>
 <a name="line-597"></a>    A polyphonic score contains several voices, i.e.
 <a name="line-598"></a>
-<a name="line-599"></a>        scoreToVoices :: Score a -&gt; [Voice (Maybe a)]
+<a name="line-599"></a>        s_oreToVoices :: Score a -&gt; [Voice (Maybe a)]
 <a name="line-600"></a>
 <a name="line-601"></a>
 <a name="line-602"></a>    A part is any type a that satisfies (Ord a, Show a).

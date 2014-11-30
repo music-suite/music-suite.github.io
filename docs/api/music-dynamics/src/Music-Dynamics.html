@@ -26,41 +26,39 @@
 <a name="line-17"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Absolute</span><span class='hs-layout'>,</span>
 <a name="line-18"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Common</span><span class='hs-layout'>,</span>
 <a name="line-19"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Balance</span><span class='hs-layout'>,</span>
-<a name="line-20"></a>
-<a name="line-21"></a>        <span class='hs-comment'>-- * Dynamic literals</span>
-<a name="line-22"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span><span class='hs-layout'>,</span>      
-<a name="line-23"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-24"></a>
-<a name="line-25"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Maybe</span>
-<a name="line-26"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Either</span>
-<a name="line-27"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
-<a name="line-28"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Monad</span>
-<a name="line-29"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Applicative</span>
-<a name="line-30"></a>
-<a name="line-31"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Absolute</span>
-<a name="line-32"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Common</span>
-<a name="line-33"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Balance</span>
-<a name="line-34"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span>
-<a name="line-35"></a>
-<a name="line-36"></a><span class='hs-comment'>{-
-<a name="line-37"></a>    ppp -42    -36
-<a name="line-38"></a>    pp  -36    -36
-<a name="line-39"></a>    p   -30    -24
-<a name="line-40"></a>    mp  ?      
-<a name="line-41"></a>    mf  -24    -18
-<a name="line-42"></a>    f   -18    -12
-<a name="line-43"></a>    ff  -18    -12
-<a name="line-44"></a>
+<a name="line-20"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span><span class='hs-layout'>,</span>      
+<a name="line-21"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-22"></a>
+<a name="line-23"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Maybe</span>
+<a name="line-24"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Either</span>
+<a name="line-25"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
+<a name="line-26"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Monad</span>
+<a name="line-27"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Applicative</span>
+<a name="line-28"></a>
+<a name="line-29"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Absolute</span>
+<a name="line-30"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Common</span>
+<a name="line-31"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Balance</span>
+<a name="line-32"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span>
+<a name="line-33"></a>
+<a name="line-34"></a><span class='hs-comment'>{-
+<a name="line-35"></a>    ppp -42    -36
+<a name="line-36"></a>    pp  -36    -36
+<a name="line-37"></a>    p   -30    -24
+<a name="line-38"></a>    mp  ?      
+<a name="line-39"></a>    mf  -24    -18
+<a name="line-40"></a>    f   -18    -12
+<a name="line-41"></a>    ff  -18    -12
+<a name="line-42"></a>
+<a name="line-43"></a>    
+<a name="line-44"></a>    
 <a name="line-45"></a>    
-<a name="line-46"></a>    
-<a name="line-47"></a>    
-<a name="line-48"></a>    Midi velocities according to Apple:
-<a name="line-49"></a>        16  32  48  64  80  96  112  127
-<a name="line-50"></a>        ppp pp  p   mp  mf  f   ff   fff
-<a name="line-51"></a>
-<a name="line-52"></a>    Nakamura (1987) The communication of dynamics between musicians and listeners through musical performance
-<a name="line-53"></a>-}</span>
-<a name="line-54"></a>
-<a name="line-55"></a>
+<a name="line-46"></a>    Midi velocities according to Apple:
+<a name="line-47"></a>        16  32  48  64  80  96  112  127
+<a name="line-48"></a>        ppp pp  p   mp  mf  f   ff   fff
+<a name="line-49"></a>
+<a name="line-50"></a>    Nakamura (1987) The communication of dynamics between musicians and listeners through musical performance
+<a name="line-51"></a>-}</span>
+<a name="line-52"></a>
+<a name="line-53"></a>
 </pre></body>
 </html>

@@ -23,47 +23,38 @@
 <a name="line-14"></a><span class='hs-comment'>-------------------------------------------------------------------------------------</span>
 <a name="line-15"></a>
 <a name="line-16"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span> <span class='hs-layout'>(</span>
-<a name="line-17"></a>        <span class='hs-comment'>-- * Prerequisites</span>
-<a name="line-18"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span><span class='hs-layout'>,</span>
-<a name="line-19"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>VectorSpace</span><span class='hs-layout'>,</span>
-<a name="line-20"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span><span class='hs-layout'>,</span>
-<a name="line-21"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span><span class='hs-varop'>.</span><span class='hs-conid'>Point</span><span class='hs-layout'>,</span>
-<a name="line-22"></a>
-<a name="line-23"></a>        <span class='hs-comment'>-- * Pitch representation</span>
-<a name="line-24"></a>        
-<a name="line-25"></a>        <span class='hs-comment'>-- -- | Augmentation and diminishing, generalized to work on all interval types.</span>
-<a name="line-26"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Augmentable</span><span class='hs-layout'>,</span>
-<a name="line-27"></a>
-<a name="line-28"></a>        <span class='hs-comment'>-- -- | Alteration, sharps and flats, generalized to work on all pitch types.</span>
-<a name="line-29"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Alterable</span><span class='hs-layout'>,</span>
-<a name="line-30"></a>
-<a name="line-31"></a>        <span class='hs-comment'>-- -- | Frequency, cents and other absolute measurements of pitch.</span>
-<a name="line-32"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Absolute</span><span class='hs-layout'>,</span>
+<a name="line-17"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span><span class='hs-layout'>,</span>
+<a name="line-18"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>VectorSpace</span><span class='hs-layout'>,</span>
+<a name="line-19"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span><span class='hs-layout'>,</span>
+<a name="line-20"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span><span class='hs-varop'>.</span><span class='hs-conid'>Point</span><span class='hs-layout'>,</span>
+<a name="line-21"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Augmentable</span><span class='hs-layout'>,</span>
+<a name="line-22"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Alterable</span><span class='hs-layout'>,</span>
+<a name="line-23"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Absolute</span><span class='hs-layout'>,</span>
+<a name="line-24"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Ambitus</span><span class='hs-layout'>,</span>
+<a name="line-25"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Equal</span><span class='hs-layout'>,</span>
+<a name="line-26"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Common</span><span class='hs-layout'>,</span>
+<a name="line-27"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Common</span><span class='hs-varop'>.</span><span class='hs-conid'>Names</span><span class='hs-layout'>,</span>
+<a name="line-28"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>StaffLines</span><span class='hs-layout'>,</span>
+<a name="line-29"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Clef</span><span class='hs-layout'>,</span>
+<a name="line-30"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Intonation</span><span class='hs-layout'>,</span>
+<a name="line-31"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span><span class='hs-layout'>,</span>
+<a name="line-32"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
 <a name="line-33"></a>
-<a name="line-34"></a>        <span class='hs-comment'>-- -- | Pitch and intervals, as defined in Common Music Theory (CMT).</span>
-<a name="line-35"></a>        <span class='hs-comment'>-- --</span>
-<a name="line-36"></a>        <span class='hs-comment'>-- --   Includes representation of common practice pitches and intervals such as /c sharp/, </span>
-<a name="line-37"></a>        <span class='hs-comment'>-- --   /diminished second/ and so on.</span>
-<a name="line-38"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Common</span><span class='hs-layout'>,</span>
-<a name="line-39"></a>
-<a name="line-40"></a>        <span class='hs-comment'>-- * Intonation</span>
-<a name="line-41"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Intonation</span><span class='hs-layout'>,</span>
-<a name="line-42"></a>        
-<a name="line-43"></a>        <span class='hs-comment'>-- * Pitch literals</span>
-<a name="line-44"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span><span class='hs-layout'>,</span>
-<a name="line-45"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-46"></a>
-<a name="line-47"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
-<a name="line-48"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>VectorSpace</span> <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Sum</span><span class='hs-layout'>,</span> <span class='hs-varid'>getSum</span><span class='hs-layout'>)</span>
-<a name="line-49"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span>
-<a name="line-50"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span><span class='hs-varop'>.</span><span class='hs-conid'>Point</span>
-<a name="line-51"></a>
-<a name="line-52"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Absolute</span>
-<a name="line-53"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Augmentable</span>
-<a name="line-54"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Alterable</span>
-<a name="line-55"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Common</span>
-<a name="line-56"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span>
-<a name="line-57"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Intonation</span>
-<a name="line-58"></a>
+<a name="line-34"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
+<a name="line-35"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>VectorSpace</span> <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Sum</span><span class='hs-layout'>,</span> <span class='hs-varid'>getSum</span><span class='hs-layout'>)</span>
+<a name="line-36"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span>
+<a name="line-37"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span><span class='hs-varop'>.</span><span class='hs-conid'>Point</span>
+<a name="line-38"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Absolute</span>
+<a name="line-39"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Augmentable</span>
+<a name="line-40"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Alterable</span>
+<a name="line-41"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Ambitus</span>
+<a name="line-42"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Equal</span>
+<a name="line-43"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Common</span>
+<a name="line-44"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Common</span><span class='hs-varop'>.</span><span class='hs-conid'>Names</span>
+<a name="line-45"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span>
+<a name="line-46"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>StaffLines</span>
+<a name="line-47"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Clef</span>
+<a name="line-48"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Intonation</span>
+<a name="line-49"></a>
 </pre></body>
 </html>

@@ -198,30 +198,7 @@ For an introduction, see [User Guide](User-Guide).
 <h2 id="using-music-files">Using Music files</h2>
 <p>A piece of music is described by a <em>expressions</em> such as this one:</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">c <span class="fu">|&gt;</span> d <span class="fu">|&gt;</span> e</code></pre>
-<p>The simplest way to render this expression is to save it in a file named <code>foo.music</code> (or similar) and convert it using <code>music2pdf foo.music</code>. This should render a file called <code>foo.pdf</code> containing the following:</p>
-<div class="haskell-music-listen">
-<a href='7c428aa142b5aa58.mid'>[listen]</a>
-</div>
-<div class="figure">
-<img src="7c428aa142b5aa58x.png" />
-</div>
-<p>While most simple music files contains only a single expression, it is also possible to write music files in <a href="http://www.haskell.org/haskellwiki/Declaration_vs._expression_style">declaration style</a>. In this style you can provide an arbitrary number of top-level declarations, including type, class and instance declarations. You must provide a single top-level declaration called <code>example</code> which takes the place of the top-level music expression.</p>
-<div class="haskell-music">
-<div class="haskell-music-listen">
-<a href='7aceab240c0c3230.mid'>[listen]</a>
-</div>
-<div class="figure">
-<img src="7aceab240c0c3230x.png" />
-</div>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Foo</span> <span class="fu">=</span> <span class="dt">Foo</span>
-
-<span class="kw">instance</span> <span class="dt">Eq</span> <span class="dt">Foo</span> <span class="kw">where</span>
-  <span class="dt">Foo</span> <span class="fu">==</span> <span class="dt">Foo</span> <span class="fu">=</span> <span class="dt">True</span>
-
-example <span class="fu">=</span> chord <span class="fu">|&gt;</span> up d5 chord
-  <span class="kw">where</span>
-    chord <span class="fu">=</span> c <span class="fu">&lt;&gt;</span> e <span class="fu">&lt;&gt;</span> g</code></pre>
-</div>
+<p>The simplest way to render this expression is to save it in a file named <code>foo.music</code> (or similar) and convert it using <code>music2pdf foo.music</code>. This should render a file called <code>foo.pdf</code>.</p>
 <p>There are several programs for converting music files:</p>
 <ul>
 <li><code>music2midi</code> – converts to MIDI</li>
@@ -262,15 +239,11 @@ See [Customizing the Music Representation](#customizing-music-representation) fo
 -->
 <h2 id="time-and-duration">Time and Duration</h2>
 <p>A single note can be entered by its name. This will render a note in the middle octave with a duration of one. Note that note values and durations correspond exactly, a duration of <code>1</code> is a whole note, a duration of <code>1/2</code> is a half note, and so on.</p>
-<div class="haskell-music">
-<div class="haskell-music-listen">
-<a href='6465c88fb8d55da9.mid'>[listen]</a>
-</div>
-<div class="figure">
-<img src="6465c88fb8d55da9x.png" />
-</div>
-<pre class="sourceCode haskell"><code class="sourceCode haskell">c</code></pre>
-</div>
+<!--
+```music+haskellx
+c
+```
+-->
 <p>To change the duration of a note, use <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#v:stretch"><code>stretch</code></a> or <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#v:compress"><code>compress</code></a>. Note that:</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">compress x <span class="fu">=</span> stretch (<span class="dv">1</span><span class="fu">/</span>x)</code></pre>
 <p>for all values of <em>x</em>.</p>
@@ -364,7 +337,7 @@ See [Customizing the Music Representation](#customizing-music-representation) fo
 </div>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">c <span class="fu">|&gt;</span> d <span class="fu">|&gt;</span> e</code></pre>
 </div>
-<p>Or partwise using <a href="/docs/api/music-score/Music-Score-Meta.html#v:-60--47--62-"><code>&lt;/&gt;</code></a>:</p>
+<p>Or partwise using <a href="/docs/api/music-score/Music-Score-Part.html#v:-60--47--62-"><code>&lt;/&gt;</code></a>:</p>
 <div class="haskell-music">
 <div class="haskell-music-listen">
 <a href='639edb196663a571.mid'>[listen]</a>
@@ -681,7 +654,7 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">^/</span><span cl
 </div>
 <p>TODO how part separation works w.r.t. division etc</p>
 <p><a href="/docs/api/music-score/Music-Time-Score.html#v:simultaneous"><code>simultaneous</code></a></p>
-<p><a href="/docs/api/music-score/Music-Time-Score.html#v:simult"><code>simult</code></a></p>
+<p><a href="!--%20Unknown:%20simult%20No%20such%20identifier:%20simult--"><code>simult</code></a></p>
 <h2 id="rests">Rests</h2>
 <p>Similar to chords, there is usually no need to handle rests explicitly.</p>
 <p>TODO add explicit rests etc</p>
@@ -853,7 +826,7 @@ TODO
 <p><a href="/docs/api/music-score/Music-Score-Pitch.html#v:down"><code>down</code></a></p>
 <p><a href="/docs/api/music-score/Music-Score-Pitch.html#v:above"><code>above</code></a></p>
 <p><a href="/docs/api/music-score/Music-Score-Pitch.html#v:below"><code>below</code></a></p>
-<p><a href="/docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:number"><code>number</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:quality"><code>quality</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:name"><code>name</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:accidental"><code>accidental</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:number"><code>number</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:invert"><code>invert</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:simple"><code>simple</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:octaves"><code>octaves</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:asPitch"><code>asPitch</code></a> <a href="!--%20Unknown:%20asAccidental%20No%20such%20identifier:%20asAccidental--"><code>asAccidental</code></a></p>
+<p><a href="/docs/api/music-pitch/Music-Pitch-Common-Number.html#v:number"><code>number</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Quality.html#v:quality"><code>quality</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:name"><code>name</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:accidental"><code>accidental</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Number.html#v:number"><code>number</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:invert"><code>invert</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:simple"><code>simple</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:octaves"><code>octaves</code></a> <a href="/docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:asPitch"><code>asPitch</code></a> <a href="!--%20Unknown:%20asAccidental%20No%20such%20identifier:%20asAccidental--"><code>asAccidental</code></a></p>
 <h2 id="articulation-1">Articulation</h2>
 <h2 id="dynamics-1">Dynamics</h2>
 <h2 id="parts-1">Parts</h2>

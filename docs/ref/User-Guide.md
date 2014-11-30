@@ -23,33 +23,7 @@ c |> d |> e
 
 The simplest way to render this expression is to save it in a file named
 `foo.music` (or similar) and convert it using `music2pdf foo.music`. This
-should render a file called `foo.pdf` containing the following:
-
-<div class='haskell-music-listen'><a href='7c428aa142b5aa58.mid'>[listen]</a></div>
-
-![](7c428aa142b5aa58x.png)
-
-While most simple music files contains only a single expression, it is also possible to write music files in [declaration style][declaration-style]. In this style you can provide an arbitrary number of top-level declarations, including type, class and instance declarations. You must provide a single top-level declaration called `example` which takes the place of the top-level music expression.
-
-<div class='haskell-music'>
-
-<div class='haskell-music-listen'><a href='7aceab240c0c3230.mid'>[listen]</a></div>
-
-![](7aceab240c0c3230x.png)
-
-```haskell
-data Foo = Foo
-
-instance Eq Foo where
-  Foo == Foo = True
-
-example = chord |> up d5 chord
-  where
-    chord = c <> e <> g
-
-```
-
-</div>
+should render a file called `foo.pdf`.
 
 There are several programs for converting music files:
 
@@ -119,18 +93,11 @@ See [Customizing the Music Representation](#customizing-music-representation) fo
 
 A single note can be entered by its name. This will render a note in the middle octave with a duration of one. Note that note values and durations correspond exactly, a duration of `1` is a whole note, a duration of `1/2` is a half note, and so on.
 
-<div class='haskell-music'>
-
-<div class='haskell-music-listen'><a href='6465c88fb8d55da9.mid'>[listen]</a></div>
-
-![](6465c88fb8d55da9x.png)
-
-```haskell
+<!--
+```music+haskellx
 c
-
 ```
-
-</div>
+-->
 
 To change the duration of a note, use [`stretch`][stretch] or [`compress`][compress]. Note that:
     
@@ -1477,7 +1444,7 @@ The temporal structures, their instances and the concept of denotational design 
 
 [.+^]: /docs/api/music-pitch/Music-Pitch.html#v:-46--43--94-
 [.-.]: /docs/api/music-pitch/Music-Pitch.html#v:-46--45--46-
-[</>]: /docs/api/music-score/Music-Score-Meta.html#v:-60--47--62-
+[</>]: /docs/api/music-score/Music-Score-Part.html#v:-60--47--62-
 [<>]: /docs/api/music-pitch/Music-Pitch.html#v:-60--62-
 [Applicative]: /docs/api/music-score/Music-Score.html#t:Applicative
 [AttributeClass]: /docs/api/music-score/Music-Score-Meta.html#t:AttributeClass
@@ -1556,7 +1523,7 @@ The temporal structures, their instances and the concept of denotational design 
 [mcatMaybes]: /docs/api/music-score/Music-Score.html#v:mcatMaybes
 [metronome]: /docs/api/music-score/Music-Score-Meta-Tempo.html#v:metronome
 [name]: /docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:name
-[number]: /docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:number
+[number]: /docs/api/music-pitch/Music-Pitch-Common-Number.html#v:number
 [octavesDown]: /docs/api/music-score/Music-Score-Pitch.html#v:octavesDown
 [octavesUp]: /docs/api/music-score/Music-Score-Pitch.html#v:octavesUp
 [octaves]: /docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:octaves
@@ -1572,7 +1539,7 @@ The temporal structures, their instances and the concept of denotational design 
 <!-- Unknown: playMidi No such identifier: playMidi-->
 
 [portato]: /docs/api/music-score/Music-Score-Articulation.html#v:portato
-[quality]: /docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:quality
+[quality]: /docs/api/music-pitch/Music-Pitch-Common-Quality.html#v:quality
 [range]: /docs/api/music-score/Music-Time-Internal-Transform.html#v:range
 [readMidi]: /docs/api/music-score/Music-Score-Import-Midi.html#v:readMidi
 [rehearsalMarkDuring]: /docs/api/music-score/Music-Score-Meta-RehearsalMark.html#v:rehearsalMarkDuring
@@ -1587,7 +1554,9 @@ The temporal structures, their instances and the concept of denotational design 
 [sharpen]: /docs/api/music-pitch-literal/Music-Pitch-Alterable.html#v:sharpen
 [showAnnotations]: /docs/api/music-score/Music-Score-Meta-Annotations.html#v:showAnnotations
 [simple]: /docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:simple
-[simult]: /docs/api/music-score/Music-Time-Score.html#v:simult
+[simult]: 
+<!-- Unknown: simult No such identifier: simult-->
+
 [simultaneous]: /docs/api/music-score/Music-Time-Score.html#v:simultaneous
 [slide]: /docs/api/music-score/Music-Score-Slide.html#v:slide
 [staccatissimo]: /docs/api/music-score/Music-Score-Articulation.html#v:staccatissimo

@@ -8,135 +8,115 @@
 </head>
 <body>
 <pre><a name="line-1"></a>
-<a name="line-2"></a><span class='hs-comment'>{-# LANGUAGE ConstraintKinds           #-}</span>
-<a name="line-3"></a><span class='hs-comment'>{-# LANGUAGE FlexibleContexts          #-}</span>
-<a name="line-4"></a><span class='hs-comment'>{-# LANGUAGE FlexibleInstances         #-}</span>
-<a name="line-5"></a><span class='hs-comment'>{-# LANGUAGE MultiParamTypeClasses     #-}</span>
-<a name="line-6"></a><span class='hs-comment'>{-# LANGUAGE NoMonomorphismRestriction #-}</span>
-<a name="line-7"></a><span class='hs-comment'>{-# LANGUAGE RankNTypes                #-}</span>
-<a name="line-8"></a><span class='hs-comment'>{-# LANGUAGE ScopedTypeVariables       #-}</span>
-<a name="line-9"></a><span class='hs-comment'>{-# LANGUAGE TupleSections             #-}</span>
-<a name="line-10"></a><span class='hs-comment'>{-# LANGUAGE TypeFamilies              #-}</span>
-<a name="line-11"></a><span class='hs-comment'>{-# LANGUAGE UndecidableInstances      #-}</span>
-<a name="line-12"></a>
-<a name="line-13"></a><span class='hs-comment'>-------------------------------------------------------------------------------------</span>
-<a name="line-14"></a><span class='hs-comment'>-- |</span>
-<a name="line-15"></a><span class='hs-comment'>-- Copyright   : (c) Hans Hoglund 2012-2014</span>
-<a name="line-16"></a><span class='hs-comment'>--</span>
-<a name="line-17"></a><span class='hs-comment'>-- License     : BSD-style</span>
-<a name="line-18"></a><span class='hs-comment'>--</span>
-<a name="line-19"></a><span class='hs-comment'>-- Maintainer  : hans@hanshoglund.se</span>
-<a name="line-20"></a><span class='hs-comment'>-- Stability   : experimental</span>
-<a name="line-21"></a><span class='hs-comment'>-- Portability : non-portable (TF,GNTD)</span>
-<a name="line-22"></a><span class='hs-comment'>--</span>
-<a name="line-23"></a><span class='hs-comment'>-------------------------------------------------------------------------------------</span>
-<a name="line-24"></a>
-<a name="line-25"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Duration</span> <span class='hs-layout'>(</span>
-<a name="line-26"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Transform</span><span class='hs-layout'>,</span>
-<a name="line-27"></a>
-<a name="line-28"></a>        <span class='hs-comment'>-- * The HasDuration class</span>
-<a name="line-29"></a>        <span class='hs-conid'>HasDuration</span><span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
-<a name="line-30"></a>
-<a name="line-31"></a>        <span class='hs-comment'>-- * Absolute duration</span>
-<a name="line-32"></a>        <span class='hs-varid'>duration</span><span class='hs-layout'>,</span>
-<a name="line-33"></a>        <span class='hs-varid'>stretchTo</span><span class='hs-layout'>,</span>
-<a name="line-34"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-35"></a>
-<a name="line-36"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Transform</span>
-<a name="line-37"></a>
-<a name="line-38"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span>         <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Indexable</span><span class='hs-layout'>,</span> <span class='hs-conid'>Level</span><span class='hs-layout'>,</span> <span class='hs-varid'>above</span><span class='hs-layout'>,</span> <span class='hs-varid'>below</span><span class='hs-layout'>,</span>
-<a name="line-39"></a>                                       <span class='hs-varid'>index</span><span class='hs-layout'>,</span> <span class='hs-varid'>inside</span><span class='hs-layout'>,</span> <span class='hs-varid'>parts</span><span class='hs-layout'>,</span> <span class='hs-varid'>reversed</span><span class='hs-layout'>,</span>
-<a name="line-40"></a>                                       <span class='hs-varid'>transform</span><span class='hs-layout'>,</span> <span class='hs-layout'>(</span><span class='hs-varop'>&lt;|</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span> <span class='hs-layout'>(</span><span class='hs-varop'>|&gt;</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
-<a name="line-41"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>NumInstances</span>    <span class='hs-conid'>()</span>
-<a name="line-42"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>       <span class='hs-varid'>hiding</span> <span class='hs-conid'>()</span>
-<a name="line-43"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>VectorSpace</span>     <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Sum</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
-<a name="line-44"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Functor</span><span class='hs-varop'>.</span><span class='hs-conid'>Contravariant</span>
-<a name="line-45"></a>
-<a name="line-46"></a><a name="HasDuration"></a><span class='hs-comment'>-- |</span>
-<a name="line-47"></a><a name="HasDuration"></a><span class='hs-comment'>-- Class of values that have a duration.</span>
-<a name="line-48"></a><a name="HasDuration"></a><span class='hs-comment'>--</span>
-<a name="line-49"></a><a name="HasDuration"></a><span class='hs-comment'>-- Law Duration</span>
-<a name="line-50"></a><a name="HasDuration"></a><span class='hs-comment'>--</span>
-<a name="line-51"></a><a name="HasDuration"></a><span class='hs-comment'>-- @</span>
-<a name="line-52"></a><a name="HasDuration"></a><span class='hs-comment'>-- '_duration' x = ('offset' x '.-.' 'onset' x)</span>
-<a name="line-53"></a><a name="HasDuration"></a><span class='hs-comment'>-- @</span>
-<a name="line-54"></a><a name="HasDuration"></a><span class='hs-comment'>--</span>
-<a name="line-55"></a><a name="HasDuration"></a><span class='hs-keyword'>class</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span> <span class='hs-keyword'>where</span>
-<a name="line-56"></a>  <span class='hs-sel'>_duration</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Duration</span>
-<a name="line-57"></a>
-<a name="line-58"></a><a name="instance%20HasDuration%20Time"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-conid'>Time</span> <span class='hs-keyword'>where</span>
-<a name="line-59"></a>  <span class='hs-sel'>_duration</span> <span class='hs-keyglyph'>=</span> <span class='hs-num'>0</span>
-<a name="line-60"></a>
-<a name="line-61"></a><a name="instance%20HasDuration%20Duration"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-conid'>Duration</span> <span class='hs-keyword'>where</span>
-<a name="line-62"></a>  <span class='hs-sel'>_duration</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>id</span>
-<a name="line-63"></a>
-<a name="line-64"></a><a name="instance%20HasDuration%20Span"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-conid'>Span</span> <span class='hs-keyword'>where</span>
-<a name="line-65"></a>  <span class='hs-sel'>_duration</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>snd</span> <span class='hs-varop'>.</span> <span class='hs-varid'>view</span> <span class='hs-varid'>delta</span>
-<a name="line-66"></a>
-<a name="line-67"></a><span class='hs-comment'>--</span>
-<a name="line-68"></a><span class='hs-comment'>-- By convention, we treat pairs and triplets as having the form</span>
-<a name="line-69"></a><span class='hs-comment'>-- (t,x), (d,x) and (t,d,x) where t has a position and d has a</span>
-<a name="line-70"></a><span class='hs-comment'>-- duration. This makes it convenient to represent simple event</span>
-<a name="line-71"></a><span class='hs-comment'>-- lists as [(Time, Duration, a)] without needing any special</span>
-<a name="line-72"></a><span class='hs-comment'>-- structure.</span>
-<a name="line-73"></a><span class='hs-comment'>--</span>
-<a name="line-74"></a>
-<a name="line-75"></a><a name="instance%20HasDuration%20(a,%20b)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-76"></a>  <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-varid'>d</span><span class='hs-layout'>,</span><span class='hs-keyword'>_</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>d</span>
-<a name="line-77"></a>
-<a name="line-78"></a><a name="instance%20HasDuration%20(a,%20b,%20c)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>b</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-varid'>b</span><span class='hs-layout'>,</span> <span class='hs-varid'>c</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-79"></a>  <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-keyword'>_</span><span class='hs-layout'>,</span><span class='hs-varid'>d</span><span class='hs-layout'>,</span><span class='hs-keyword'>_</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>d</span>
-<a name="line-80"></a>
-<a name="line-81"></a><a name="instance%20HasDuration%20(Product%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Product</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-82"></a>  <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Product</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span>
-<a name="line-83"></a>
-<a name="line-84"></a><a name="instance%20HasDuration%20(Sum%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Sum</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-85"></a>  <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Sum</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span>
-<a name="line-86"></a>
-<a name="line-87"></a><a name="instance%20HasDuration%20(Min%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Min</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-88"></a>  <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Min</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span>
-<a name="line-89"></a>
-<a name="line-90"></a><a name="instance%20HasDuration%20(Max%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Max</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-91"></a>  <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Max</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span>
-<a name="line-92"></a>
-<a name="line-93"></a><span class='hs-comment'>-- For HasDuration [a] we assume parallel composition and</span>
-<a name="line-94"></a><span class='hs-comment'>-- use the HasPosition instance, see Music.Time.Position.</span>
-<a name="line-95"></a>
-<a name="line-96"></a><a name="instance%20HasDuration%20(Either%20a%20b)"></a><span class='hs-keyword'>instance</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Either</span> <span class='hs-varid'>a</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-97"></a>  <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Left</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span>  <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span>
-<a name="line-98"></a>  <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Right</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span>
-<a name="line-99"></a>
-<a name="line-100"></a><a name="duration"></a><span class='hs-comment'>-- |</span>
-<a name="line-101"></a><span class='hs-comment'>-- Access the duration.</span>
-<a name="line-102"></a><span class='hs-comment'>--</span>
-<a name="line-103"></a><span class='hs-definition'>duration</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Duration</span>
-<a name="line-104"></a><span class='hs-definition'>duration</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>lens</span> <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-varid'>flip</span> <span class='hs-varid'>stretchTo</span><span class='hs-layout'>)</span>
-<a name="line-105"></a><span class='hs-comment'>{-# INLINE duration #-}</span>
-<a name="line-106"></a>
-<a name="line-107"></a><a name="stretchTo"></a><span class='hs-comment'>-- |</span>
-<a name="line-108"></a><span class='hs-comment'>-- Stretch a value to have the given duration.</span>
-<a name="line-109"></a><span class='hs-comment'>--</span>
-<a name="line-110"></a><span class='hs-definition'>stretchTo</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Duration</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
-<a name="line-111"></a><span class='hs-definition'>stretchTo</span> <span class='hs-varid'>d</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>d</span> <span class='hs-varop'>^/</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-varop'>`stretch`</span> <span class='hs-varid'>x</span>
-<a name="line-112"></a><span class='hs-comment'>{-# INLINE stretchTo #-}</span>
-<a name="line-113"></a>
-<a name="line-114"></a><span class='hs-comment'>{-
-<a name="line-115"></a>
-<a name="line-116"></a>-- TODO more general pattern here
-<a name="line-117"></a>withDurationR :: (Functor f, HasDuration a) =&gt; f a -&gt; f (Duration, a)
-<a name="line-118"></a>withDurationR = fmap $ \x -&gt; (_duration x, x)
-<a name="line-119"></a>
-<a name="line-120"></a>withDurationL :: (Contravariant f, HasDuration a) =&gt; f (Duration, a) -&gt; f a
-<a name="line-121"></a>withDurationL = contramap $ \x -&gt; (_duration x, x)
-<a name="line-122"></a>
-<a name="line-123"></a>mapWithDuration :: HasDuration a =&gt; (Duration -&gt; a -&gt; b) -&gt; a -&gt; b
-<a name="line-124"></a>mapWithDuration = over dual withDurationL . uncurry
-<a name="line-125"></a>  where
-<a name="line-126"></a>    dual :: Iso (a -&gt; b) (c -&gt; d) (Op b a) (Op d c)
-<a name="line-127"></a>    dual = iso Op getOp
-<a name="line-128"></a>
-<a name="line-129"></a>-}</span>
-<a name="line-130"></a>
-<a name="line-131"></a>
+<a name="line-2"></a><span class='hs-comment'>{-# LANGUAGE ConstraintKinds            #-}</span>
+<a name="line-3"></a><span class='hs-comment'>{-# LANGUAGE DeriveDataTypeable         #-}</span>
+<a name="line-4"></a><span class='hs-comment'>{-# LANGUAGE DeriveFunctor              #-}</span>
+<a name="line-5"></a><span class='hs-comment'>{-# LANGUAGE DeriveFoldable             #-}</span>
+<a name="line-6"></a><span class='hs-comment'>{-# LANGUAGE DeriveTraversable          #-}</span>
+<a name="line-7"></a><span class='hs-comment'>{-# LANGUAGE GeneralizedNewtypeDeriving #-}</span>
+<a name="line-8"></a><span class='hs-comment'>{-# LANGUAGE MultiParamTypeClasses      #-}</span>
+<a name="line-9"></a><span class='hs-comment'>{-# LANGUAGE StandaloneDeriving         #-}</span>
+<a name="line-10"></a><span class='hs-comment'>{-# LANGUAGE TupleSections              #-}</span>
+<a name="line-11"></a><span class='hs-comment'>{-# LANGUAGE TypeFamilies               #-}</span>
+<a name="line-12"></a><span class='hs-comment'>{-# LANGUAGE ViewPatterns               #-}</span>
+<a name="line-13"></a>
+<a name="line-14"></a><span class='hs-comment'>-------------------------------------------------------------------------------------</span>
+<a name="line-15"></a><span class='hs-comment'>-- |</span>
+<a name="line-16"></a><span class='hs-comment'>-- Copyright   : (c) Hans Hoglund 2012-2014</span>
+<a name="line-17"></a><span class='hs-comment'>--</span>
+<a name="line-18"></a><span class='hs-comment'>-- License     : BSD-style</span>
+<a name="line-19"></a><span class='hs-comment'>--</span>
+<a name="line-20"></a><span class='hs-comment'>-- Maintainer  : hans@hanshoglund.se</span>
+<a name="line-21"></a><span class='hs-comment'>-- Stability   : experimental</span>
+<a name="line-22"></a><span class='hs-comment'>-- Portability : non-portable (TF,GNTD)</span>
+<a name="line-23"></a><span class='hs-comment'>--</span>
+<a name="line-24"></a><span class='hs-comment'>-------------------------------------------------------------------------------------</span>
+<a name="line-25"></a>
+<a name="line-26"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Duration</span> <span class='hs-layout'>(</span>
+<a name="line-27"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Transform</span><span class='hs-layout'>,</span>
+<a name="line-28"></a>
+<a name="line-29"></a>        <span class='hs-comment'>-- * The HasDuration class</span>
+<a name="line-30"></a>        <span class='hs-conid'>HasDuration</span><span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
+<a name="line-31"></a>
+<a name="line-32"></a>        <span class='hs-comment'>-- * Absolute duration</span>
+<a name="line-33"></a>        <span class='hs-varid'>duration</span><span class='hs-layout'>,</span>
+<a name="line-34"></a>        <span class='hs-varid'>stretchTo</span><span class='hs-layout'>,</span>
+<a name="line-35"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-36"></a>
+<a name="line-37"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span><span class='hs-varop'>.</span><span class='hs-conid'>Transform</span>
+<a name="line-38"></a>
+<a name="line-39"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span>         <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Indexable</span><span class='hs-layout'>,</span> <span class='hs-conid'>Level</span><span class='hs-layout'>,</span> <span class='hs-varid'>above</span><span class='hs-layout'>,</span> <span class='hs-varid'>below</span><span class='hs-layout'>,</span>
+<a name="line-40"></a>                                       <span class='hs-varid'>index</span><span class='hs-layout'>,</span> <span class='hs-varid'>inside</span><span class='hs-layout'>,</span> <span class='hs-varid'>parts</span><span class='hs-layout'>,</span> <span class='hs-varid'>reversed</span><span class='hs-layout'>,</span>
+<a name="line-41"></a>                                       <span class='hs-varid'>transform</span><span class='hs-layout'>,</span> <span class='hs-layout'>(</span><span class='hs-varop'>&lt;|</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span> <span class='hs-layout'>(</span><span class='hs-varop'>|&gt;</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
+<a name="line-42"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>NumInstances</span>    <span class='hs-conid'>()</span>
+<a name="line-43"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>       <span class='hs-varid'>hiding</span> <span class='hs-conid'>()</span>
+<a name="line-44"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>VectorSpace</span>     <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Sum</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
+<a name="line-45"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Functor</span><span class='hs-varop'>.</span><span class='hs-conid'>Contravariant</span>
+<a name="line-46"></a>
+<a name="line-47"></a><a name="HasDuration"></a><span class='hs-comment'>-- |</span>
+<a name="line-48"></a><a name="HasDuration"></a><span class='hs-comment'>-- Class of values that have a duration.</span>
+<a name="line-49"></a><a name="HasDuration"></a><span class='hs-comment'>--</span>
+<a name="line-50"></a><a name="HasDuration"></a><span class='hs-comment'>-- Law Duration</span>
+<a name="line-51"></a><a name="HasDuration"></a><span class='hs-comment'>--</span>
+<a name="line-52"></a><a name="HasDuration"></a><span class='hs-comment'>-- @</span>
+<a name="line-53"></a><a name="HasDuration"></a><span class='hs-comment'>-- '_duration' x = ('offset' x '.-.' 'onset' x)</span>
+<a name="line-54"></a><a name="HasDuration"></a><span class='hs-comment'>-- @</span>
+<a name="line-55"></a><a name="HasDuration"></a><span class='hs-comment'>--</span>
+<a name="line-56"></a><a name="HasDuration"></a><span class='hs-keyword'>class</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span> <span class='hs-keyword'>where</span>
+<a name="line-57"></a>  <span class='hs-sel'>_duration</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Duration</span>
+<a name="line-58"></a>
+<a name="line-59"></a><a name="instance%20HasDuration%20Duration"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-conid'>Duration</span> <span class='hs-keyword'>where</span>
+<a name="line-60"></a>  <span class='hs-sel'>_duration</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>id</span>
+<a name="line-61"></a>
+<a name="line-62"></a><a name="instance%20HasDuration%20Span"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-conid'>Span</span> <span class='hs-keyword'>where</span>
+<a name="line-63"></a>  <span class='hs-sel'>_duration</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>snd</span> <span class='hs-varop'>.</span> <span class='hs-varid'>view</span> <span class='hs-varid'>delta</span>
+<a name="line-64"></a>
+<a name="line-65"></a><span class='hs-comment'>--</span>
+<a name="line-66"></a><span class='hs-comment'>-- By convention, we treat pairs and triplets as having the form</span>
+<a name="line-67"></a><span class='hs-comment'>-- (t,x), (d,x) and (t,d,x) where t has a position and d has a</span>
+<a name="line-68"></a><span class='hs-comment'>-- duration. This makes it convenient to represent simple event</span>
+<a name="line-69"></a><span class='hs-comment'>-- lists as [(Time, Duration, a)] without needing any special</span>
+<a name="line-70"></a><span class='hs-comment'>-- structure.</span>
+<a name="line-71"></a><span class='hs-comment'>--</span>
+<a name="line-72"></a>
+<a name="line-73"></a><a name="instance%20HasDuration%20(a,%20b)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-74"></a>  <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-varid'>d</span><span class='hs-layout'>,</span><span class='hs-keyword'>_</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>d</span>
+<a name="line-75"></a>
+<a name="line-76"></a><a name="instance%20HasDuration%20(a,%20b,%20c)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>b</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-varid'>b</span><span class='hs-layout'>,</span> <span class='hs-varid'>c</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-77"></a>  <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-keyword'>_</span><span class='hs-layout'>,</span><span class='hs-varid'>d</span><span class='hs-layout'>,</span><span class='hs-keyword'>_</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>d</span>
+<a name="line-78"></a>
+<a name="line-79"></a><a name="instance%20HasDuration%20(Product%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Product</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-80"></a>  <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Product</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span>
+<a name="line-81"></a>
+<a name="line-82"></a><a name="instance%20HasDuration%20(Sum%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Sum</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-83"></a>  <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Sum</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span>
+<a name="line-84"></a>
+<a name="line-85"></a><a name="instance%20HasDuration%20(Min%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Min</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-86"></a>  <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Min</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span>
+<a name="line-87"></a>
+<a name="line-88"></a><a name="instance%20HasDuration%20(Max%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Max</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-89"></a>  <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Max</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span>
+<a name="line-90"></a>
+<a name="line-91"></a><span class='hs-comment'>-- For HasDuration [a] we assume parallel composition and</span>
+<a name="line-92"></a><span class='hs-comment'>-- use the HasPosition instance, see Music.Time.Position.</span>
+<a name="line-93"></a>
+<a name="line-94"></a><a name="instance%20HasDuration%20(Either%20a%20b)"></a><span class='hs-keyword'>instance</span> <span class='hs-layout'>(</span><span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>HasDuration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Either</span> <span class='hs-varid'>a</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-95"></a>  <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Left</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span>  <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span>
+<a name="line-96"></a>  <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-conid'>Right</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span>
+<a name="line-97"></a>
+<a name="line-98"></a><a name="stretchTo"></a><span class='hs-comment'>-- |</span>
+<a name="line-99"></a><span class='hs-comment'>-- Stretch a value to have the given duration.</span>
+<a name="line-100"></a><span class='hs-comment'>--</span>
+<a name="line-101"></a><span class='hs-definition'>stretchTo</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Duration</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
+<a name="line-102"></a><span class='hs-definition'>stretchTo</span> <span class='hs-varid'>d</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>d</span> <span class='hs-varop'>^/</span> <span class='hs-sel'>_duration</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-varop'>`stretch`</span> <span class='hs-varid'>x</span>
+<a name="line-103"></a><span class='hs-comment'>{-# INLINE stretchTo #-}</span>
+<a name="line-104"></a>
+<a name="line-105"></a><a name="duration"></a><span class='hs-comment'>-- |</span>
+<a name="line-106"></a><span class='hs-comment'>-- Access the duration.</span>
+<a name="line-107"></a><span class='hs-comment'>--</span>
+<a name="line-108"></a><span class='hs-definition'>duration</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>Transformable</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>HasDuration</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Lens'</span> <span class='hs-varid'>a</span> <span class='hs-conid'>Duration</span>
+<a name="line-109"></a><span class='hs-definition'>duration</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>lens</span> <span class='hs-sel'>_duration</span> <span class='hs-layout'>(</span><span class='hs-varid'>flip</span> <span class='hs-varid'>stretchTo</span><span class='hs-layout'>)</span>
+<a name="line-110"></a><span class='hs-comment'>{-# INLINE duration #-}</span>
+<a name="line-111"></a>
 </pre></body>
 </html>
