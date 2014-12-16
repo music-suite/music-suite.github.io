@@ -436,7 +436,7 @@
 <a name="line-427"></a><span class='hs-comment'>-- semitones.</span>
 <a name="line-428"></a><span class='hs-comment'>--</span>
 <a name="line-429"></a><span class='hs-definition'>isStep</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Interval</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bool</span>
-<a name="line-430"></a><span class='hs-definition'>isStep</span> <span class='hs-layout'>(</span><span class='hs-conid'>Interval</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-varid'>d</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>abs</span> <span class='hs-varid'>d</span><span class='hs-layout'>)</span> <span class='hs-varop'>&lt;=</span> <span class='hs-num'>2</span>
+<a name="line-430"></a><span class='hs-definition'>isStep</span> <span class='hs-layout'>(</span><span class='hs-conid'>Interval</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-varid'>d</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>abs</span> <span class='hs-varid'>d</span><span class='hs-layout'>)</span> <span class='hs-varop'>&lt;=</span> <span class='hs-num'>1</span>
 <a name="line-431"></a>
 <a name="line-432"></a><a name="isLeap"></a><span class='hs-comment'>-- |</span>
 <a name="line-433"></a><span class='hs-comment'>-- Returns whether the given interval is a leap (larger than a second).</span>
@@ -446,7 +446,7 @@
 <a name="line-437"></a><span class='hs-comment'>-- semitones.</span>
 <a name="line-438"></a><span class='hs-comment'>--</span>
 <a name="line-439"></a><span class='hs-definition'>isLeap</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Interval</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bool</span>
-<a name="line-440"></a><span class='hs-definition'>isLeap</span> <span class='hs-layout'>(</span><span class='hs-conid'>Interval</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-varid'>d</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>abs</span> <span class='hs-varid'>d</span><span class='hs-layout'>)</span> <span class='hs-varop'>&gt;</span> <span class='hs-num'>2</span>
+<a name="line-440"></a><span class='hs-definition'>isLeap</span> <span class='hs-layout'>(</span><span class='hs-conid'>Interval</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-varid'>d</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varid'>abs</span> <span class='hs-varid'>d</span><span class='hs-layout'>)</span> <span class='hs-varop'>&gt;</span> <span class='hs-num'>1</span>
 <a name="line-441"></a>
 <a name="line-442"></a>
 <a name="line-443"></a><a name="invert"></a><span class='hs-comment'>-- |</span>

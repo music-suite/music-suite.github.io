@@ -52,7 +52,7 @@
 <a name="line-43"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Traversable</span>                <span class='hs-layout'>(</span><span class='hs-varid'>traverse</span><span class='hs-layout'>)</span>
 <a name="line-44"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Typeable</span>
 <a name="line-45"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span>                  <span class='hs-layout'>(</span><span class='hs-conid'>Dynamics</span><span class='hs-layout'>)</span>
-<a name="line-46"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span>                     <span class='hs-layout'>(</span><span class='hs-conid'>Ambitus</span><span class='hs-layout'>,</span> <span class='hs-conid'>Clef</span><span class='hs-layout'>)</span>
+<a name="line-46"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span>                     <span class='hs-layout'>(</span><span class='hs-conid'>Ambitus</span><span class='hs-layout'>,</span> <span class='hs-conid'>Clef</span><span class='hs-layout'>,</span> <span class='hs-varid'>trebleClef</span><span class='hs-layout'>,</span> <span class='hs-varid'>bassClef</span><span class='hs-layout'>)</span>
 <a name="line-47"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Common</span>              <span class='hs-layout'>(</span><span class='hs-conid'>Interval</span><span class='hs-layout'>,</span> <span class='hs-conid'>Pitch</span><span class='hs-layout'>)</span>
 <a name="line-48"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Text</span><span class='hs-varop'>.</span><span class='hs-conid'>Numeral</span><span class='hs-varop'>.</span><span class='hs-conid'>Roman</span>              <span class='hs-layout'>(</span><span class='hs-varid'>toRoman</span><span class='hs-layout'>)</span>
 <a name="line-49"></a>
@@ -318,30 +318,37 @@
 <a name="line-309"></a><a name="allowedClefs"></a><span class='hs-definition'>allowedClefs</span>      <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Set</span> <span class='hs-conid'>Clef</span>
 <a name="line-310"></a><span class='hs-definition'>allowedClefs</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No allowedClefs"</span>
 <a name="line-311"></a>
-<a name="line-312"></a><a name="playableRange"></a><span class='hs-definition'>playableRange</span>     <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Ambitus</span> <span class='hs-conid'>Pitch</span>
-<a name="line-313"></a><span class='hs-definition'>playableRange</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No playableRange"</span>
+<a name="line-312"></a><a name="BracketType"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>BracketType</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Bracket</span> <span class='hs-keyglyph'>|</span> <span class='hs-conid'>Brace</span> <span class='hs-keyglyph'>|</span> <span class='hs-conid'>SubBracket</span>
+<a name="line-313"></a><a name="StaffLayout"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>StaffLayout</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Staff</span> <span class='hs-conid'>Clef</span> <span class='hs-keyglyph'>|</span> <span class='hs-conid'>Staves</span> <span class='hs-conid'>BracketType</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>StaffLayout</span><span class='hs-keyglyph'>]</span>
 <a name="line-314"></a>
-<a name="line-315"></a><a name="comfortableRange"></a><span class='hs-definition'>comfortableRange</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Ambitus</span> <span class='hs-conid'>Pitch</span>
-<a name="line-316"></a><span class='hs-definition'>comfortableRange</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No comfortableRange"</span>
+<a name="line-315"></a><a name="pianoStaff"></a><span class='hs-definition'>pianoStaff</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>StaffLayout</span>
+<a name="line-316"></a><span class='hs-definition'>pianoStaff</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Staves</span> <span class='hs-conid'>Brace</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Staff</span> <span class='hs-varid'>trebleClef</span><span class='hs-layout'>,</span> <span class='hs-conid'>Staff</span> <span class='hs-varid'>bassClef</span><span class='hs-keyglyph'>]</span>
 <a name="line-317"></a>
-<a name="line-318"></a><a name="playableDynamics"></a><span class='hs-definition'>playableDynamics</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Pitch</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Dynamics</span>
-<a name="line-319"></a><span class='hs-definition'>playableDynamics</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No playableDynamics"</span>
-<a name="line-320"></a>
-<a name="line-321"></a><a name="instrumentName"></a><span class='hs-definition'>instrumentName</span>              <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>String</span>
-<a name="line-322"></a><span class='hs-definition'>instrumentName</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No name"</span>
-<a name="line-323"></a>
-<a name="line-324"></a><a name="fullName"></a><span class='hs-definition'>fullName</span>          <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>String</span>
-<a name="line-325"></a><span class='hs-definition'>fullName</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No fullName"</span>
-<a name="line-326"></a>
-<a name="line-327"></a><a name="shortName"></a><span class='hs-definition'>shortName</span>         <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>String</span>
-<a name="line-328"></a><span class='hs-definition'>shortName</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No shortName"</span>
-<a name="line-329"></a>
-<a name="line-330"></a><a name="transposition"></a><span class='hs-comment'>-- sounding .-. written, i.e. -P5 for clarinet</span>
-<a name="line-331"></a><span class='hs-definition'>transposition</span>     <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Interval</span>
-<a name="line-332"></a><span class='hs-definition'>transposition</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No transposition"</span>
+<a name="line-318"></a>
+<a name="line-319"></a><a name="playableRange"></a><span class='hs-definition'>playableRange</span>     <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Ambitus</span> <span class='hs-conid'>Pitch</span>
+<a name="line-320"></a><span class='hs-definition'>playableRange</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No playableRange"</span>
+<a name="line-321"></a>
+<a name="line-322"></a><a name="comfortableRange"></a><span class='hs-definition'>comfortableRange</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Ambitus</span> <span class='hs-conid'>Pitch</span>
+<a name="line-323"></a><span class='hs-definition'>comfortableRange</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No comfortableRange"</span>
+<a name="line-324"></a>
+<a name="line-325"></a><a name="playableDynamics"></a><span class='hs-definition'>playableDynamics</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Pitch</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Dynamics</span>
+<a name="line-326"></a><span class='hs-definition'>playableDynamics</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No playableDynamics"</span>
+<a name="line-327"></a>
+<a name="line-328"></a><a name="instrumentName"></a><span class='hs-definition'>instrumentName</span>              <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>String</span>
+<a name="line-329"></a><span class='hs-definition'>instrumentName</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No name"</span>
+<a name="line-330"></a>
+<a name="line-331"></a><a name="fullName"></a><span class='hs-definition'>fullName</span>          <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>String</span>
+<a name="line-332"></a><span class='hs-definition'>fullName</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No fullName"</span>
 <a name="line-333"></a>
-<a name="line-334"></a><a name="transpositionString"></a><span class='hs-definition'>transpositionString</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>String</span>
-<a name="line-335"></a><span class='hs-definition'>transpositionString</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No transpositionString"</span>
+<a name="line-334"></a><a name="shortName"></a><span class='hs-definition'>shortName</span>         <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>String</span>
+<a name="line-335"></a><span class='hs-definition'>shortName</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No shortName"</span>
 <a name="line-336"></a>
+<a name="line-337"></a><a name="transposition"></a><span class='hs-comment'>-- sounding .-. written, i.e. -P5 for clarinet</span>
+<a name="line-338"></a><span class='hs-definition'>transposition</span>     <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Interval</span>
+<a name="line-339"></a><span class='hs-definition'>transposition</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No transposition"</span>
+<a name="line-340"></a>
+<a name="line-341"></a><a name="transpositionString"></a><span class='hs-definition'>transpositionString</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Instrument</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>String</span>
+<a name="line-342"></a><span class='hs-definition'>transpositionString</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"No transpositionString"</span>
+<a name="line-343"></a>
 </pre></body>
 </html>

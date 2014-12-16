@@ -93,11 +93,18 @@ See [Customizing the Music Representation](#customizing-music-representation) fo
 
 A single note can be entered by its name. This will render a note in the middle octave with a duration of one. Note that note values and durations correspond exactly, a duration of `1` is a whole note, a duration of `1/2` is a half note, and so on.
 
-<!--
-```music+haskellx
+<div class='haskell-music'>
+
+<div class='haskell-music-listen'><a href='6465c88fb8d55da9.mid'>[listen]</a></div>
+
+![](6465c88fb8d55da9x.png)
+
+```haskell
 c
+
 ```
--->
+
+</div>
 
 To change the duration of a note, use [`stretch`][stretch] or [`compress`][compress]. Note that:
     

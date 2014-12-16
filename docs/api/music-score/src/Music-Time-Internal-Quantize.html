@@ -182,8 +182,8 @@
 <a name="line-173"></a>
 <a name="line-174"></a><a name="rewrite1"></a><span class='hs-definition'>rewrite1</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tupletDot</span> <span class='hs-varop'>.</span> <span class='hs-varid'>splitTupletIfLongEnough</span> <span class='hs-varop'>.</span> <span class='hs-varid'>singleGroup</span>
 <a name="line-175"></a>
-<a name="line-176"></a>
-<a name="line-177"></a><a name="singleGroup"></a><span class='hs-definition'>singleGroup</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Rhythm</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Rhythm</span> <span class='hs-varid'>a</span>
+<a name="line-176"></a><a name="singleGroup"></a><span class='hs-comment'>-- | Removes single-note groups</span>
+<a name="line-177"></a><span class='hs-definition'>singleGroup</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Rhythm</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Rhythm</span> <span class='hs-varid'>a</span>
 <a name="line-178"></a><span class='hs-definition'>singleGroup</span> <span class='hs-varid'>orig</span><span class='hs-keyglyph'>@</span><span class='hs-layout'>(</span><span class='hs-conid'>Group</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>x</span><span class='hs-keyglyph'>]</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>x</span>
 <a name="line-179"></a><span class='hs-definition'>singleGroup</span> <span class='hs-varid'>orig</span>             <span class='hs-keyglyph'>=</span> <span class='hs-varid'>orig</span>
 <a name="line-180"></a>

@@ -239,11 +239,15 @@ See [Customizing the Music Representation](#customizing-music-representation) fo
 -->
 <h2 id="time-and-duration">Time and Duration</h2>
 <p>A single note can be entered by its name. This will render a note in the middle octave with a duration of one. Note that note values and durations correspond exactly, a duration of <code>1</code> is a whole note, a duration of <code>1/2</code> is a half note, and so on.</p>
-<!--
-```music+haskellx
-c
-```
--->
+<div class="haskell-music">
+<div class="haskell-music-listen">
+<a href='6465c88fb8d55da9.mid'>[listen]</a>
+</div>
+<div class="figure">
+<img src="6465c88fb8d55da9x.png" />
+</div>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">c</code></pre>
+</div>
 <p>To change the duration of a note, use <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#v:stretch"><code>stretch</code></a> or <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#v:compress"><code>compress</code></a>. Note that:</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">compress x <span class="fu">=</span> stretch (<span class="dv">1</span><span class="fu">/</span>x)</code></pre>
 <p>for all values of <em>x</em>.</p>
