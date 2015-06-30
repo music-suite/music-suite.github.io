@@ -41,8 +41,8 @@
 <a name="line-32"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span>
 <a name="line-33"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span>            <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Fifths</span><span class='hs-layout'>,</span> <span class='hs-conid'>Interval</span><span class='hs-layout'>,</span> <span class='hs-conid'>Note</span><span class='hs-layout'>,</span> <span class='hs-conid'>Pitch</span><span class='hs-layout'>)</span>
 <a name="line-34"></a>
-<a name="line-35"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Lilypond</span>         <span class='hs-keyword'>as</span> <span class='hs-conid'>Lilypond</span>
-<a name="line-36"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>MusicXml</span><span class='hs-varop'>.</span><span class='hs-conid'>Simple</span>  <span class='hs-keyword'>as</span> <span class='hs-conid'>Xml</span>
+<a name="line-35"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Lilypond</span>         <span class='hs-keyword'>as</span> <span class='hs-conid'>Lilypond</span>
+<a name="line-36"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>MusicXml</span><span class='hs-varop'>.</span><span class='hs-conid'>Simple</span>  <span class='hs-keyword'>as</span> <span class='hs-conid'>Xml</span>
 <a name="line-37"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span>            <span class='hs-keyword'>as</span> <span class='hs-conid'>Score</span>
 <a name="line-38"></a>
 <a name="line-39"></a><span class='hs-keyword'>deriving</span> <span class='hs-keyword'>instance</span> <span class='hs-conid'>Typeable</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Part</span>
@@ -157,9 +157,15 @@
 <a name="line-148"></a>
 <a name="line-149"></a><a name="instance%20HasMusicXmlInstrument%20BasicPart"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasMusicXmlInstrument</span> <span class='hs-conid'>BasicPart</span> <span class='hs-keyword'>where</span>
 <a name="line-150"></a>    <span class='hs-varid'>getMusicXmlClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-num'>0</span>
-<a name="line-151"></a>
-<a name="line-152"></a><a name="instance%20HasMusicXmlInstrument%20Music.Parts.Part"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasMusicXmlInstrument</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Part</span> <span class='hs-keyword'>where</span>
-<a name="line-153"></a>    <span class='hs-varid'>getMusicXmlClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>defaultClef</span>
-<a name="line-154"></a>
+<a name="line-151"></a>    <span class='hs-varid'>getMusicXmlNumberOfStaves</span> <span class='hs-keyglyph'>=</span> <span class='hs-num'>1</span>
+<a name="line-152"></a>
+<a name="line-153"></a><a name="instance%20HasMusicXmlInstrument%20Music.Parts.Part"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>HasMusicXmlInstrument</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Part</span> <span class='hs-keyword'>where</span>
+<a name="line-154"></a>    <span class='hs-varid'>getMusicXmlClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>defaultClef</span>
+<a name="line-155"></a>    <span class='hs-varid'>getMusicXmlNumberOfStaves</span> <span class='hs-varid'>p</span>
+<a name="line-156"></a>      <span class='hs-keyglyph'>|</span> <span class='hs-varid'>p</span> <span class='hs-varop'>==</span> <span class='hs-varid'>harp</span>                 <span class='hs-keyglyph'>=</span> <span class='hs-num'>2</span>
+<a name="line-157"></a>      <span class='hs-keyglyph'>|</span> <span class='hs-varid'>p</span><span class='hs-varop'>^.</span><span class='hs-sel'>_instrument</span> <span class='hs-varop'>==</span> <span class='hs-varid'>piano</span>   <span class='hs-keyglyph'>=</span> <span class='hs-num'>2</span>
+<a name="line-158"></a>      <span class='hs-keyglyph'>|</span> <span class='hs-varid'>p</span><span class='hs-varop'>^.</span><span class='hs-sel'>_instrument</span> <span class='hs-varop'>==</span> <span class='hs-varid'>celesta</span> <span class='hs-keyglyph'>=</span> <span class='hs-num'>2</span>
+<a name="line-159"></a>      <span class='hs-keyglyph'>|</span> <span class='hs-varid'>otherwise</span>                 <span class='hs-keyglyph'>=</span> <span class='hs-num'>1</span>
+<a name="line-160"></a>
 </pre></body>
 </html>

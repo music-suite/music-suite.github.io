@@ -8,184 +8,173 @@
 </head>
 <body>
 <pre><a name="line-1"></a>
-<a name="line-2"></a><span class='hs-comment'>{-# LANGUAGE StandaloneDeriving #-}</span>
-<a name="line-3"></a><span class='hs-comment'>{-# LANGUAGE RankNTypes #-}</span>
-<a name="line-4"></a><span class='hs-comment'>{-# LANGUAGE TypeOperators #-}</span>
-<a name="line-5"></a><span class='hs-comment'>{-# LANGUAGE TypeFamilies #-}</span>
-<a name="line-6"></a>
-<a name="line-7"></a><span class='hs-comment'>-------------------------------------------------------------------------------------</span>
-<a name="line-8"></a><span class='hs-comment'>-- |</span>
-<a name="line-9"></a><span class='hs-comment'>-- Copyright   : (c) Hans Hoglund 2012</span>
-<a name="line-10"></a><span class='hs-comment'>--</span>
-<a name="line-11"></a><span class='hs-comment'>-- License     : BSD-style</span>
-<a name="line-12"></a><span class='hs-comment'>--</span>
-<a name="line-13"></a><span class='hs-comment'>-- Maintainer  : hans@hanshoglund.se</span>
-<a name="line-14"></a><span class='hs-comment'>-- Stability   : experimental</span>
-<a name="line-15"></a><span class='hs-comment'>-- Portability : portable</span>
-<a name="line-16"></a><span class='hs-comment'>--</span>
-<a name="line-17"></a><span class='hs-comment'>-- Generic equal temperament pitch.</span>
-<a name="line-18"></a><span class='hs-comment'>--</span>
-<a name="line-19"></a><span class='hs-comment'>-- Use the type-level numbers from @type-unary@ to construct an temperement dividing</span>
-<a name="line-20"></a><span class='hs-comment'>-- the octave in any number of steps. Common cases such as 6-TET (whole-tones),</span>
-<a name="line-21"></a><span class='hs-comment'>-- 12-TET (half-tones) and 24-TET (quarter-tones) are provided for convenience.</span>
-<a name="line-22"></a><span class='hs-comment'>--</span>
-<a name="line-23"></a><span class='hs-comment'>-------------------------------------------------------------------------------------</span>
-<a name="line-24"></a>
-<a name="line-25"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Equal</span> <span class='hs-layout'>(</span>
-<a name="line-26"></a>    <span class='hs-comment'>-- * Equal temperament</span>
-<a name="line-27"></a>    <span class='hs-conid'>Equal</span><span class='hs-layout'>,</span>
-<a name="line-28"></a>    <span class='hs-varid'>toEqual</span><span class='hs-layout'>,</span>
-<a name="line-29"></a>    <span class='hs-varid'>fromEqual</span><span class='hs-layout'>,</span>
-<a name="line-30"></a>    <span class='hs-varid'>equalToRatio</span><span class='hs-layout'>,</span>
-<a name="line-31"></a>    <span class='hs-varid'>size</span><span class='hs-layout'>,</span>
-<a name="line-32"></a>    <span class='hs-varid'>cast</span><span class='hs-layout'>,</span>
-<a name="line-33"></a>
-<a name="line-34"></a>    <span class='hs-comment'>-- ** Synonyms</span>
-<a name="line-35"></a>    <span class='hs-conid'>Equal6</span><span class='hs-layout'>,</span>
-<a name="line-36"></a>    <span class='hs-conid'>Equal12</span><span class='hs-layout'>,</span>
-<a name="line-37"></a>    <span class='hs-conid'>Equal17</span><span class='hs-layout'>,</span>
-<a name="line-38"></a>    <span class='hs-conid'>Equal24</span><span class='hs-layout'>,</span>
-<a name="line-39"></a>    <span class='hs-conid'>Equal36</span><span class='hs-layout'>,</span>
-<a name="line-40"></a>
-<a name="line-41"></a>    <span class='hs-comment'>-- ** Extra type-level naturals</span>
-<a name="line-42"></a>    <span class='hs-conid'>N20</span><span class='hs-layout'>,</span>
-<a name="line-43"></a>    <span class='hs-conid'>N30</span><span class='hs-layout'>,</span>
-<a name="line-44"></a>    <span class='hs-conid'>N17</span><span class='hs-layout'>,</span>
-<a name="line-45"></a>    <span class='hs-conid'>N24</span><span class='hs-layout'>,</span>
-<a name="line-46"></a>    <span class='hs-conid'>N36</span><span class='hs-layout'>,</span>
-<a name="line-47"></a><span class='hs-layout'>)</span>
-<a name="line-48"></a><span class='hs-keyword'>where</span>
-<a name="line-49"></a>
-<a name="line-50"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Maybe</span>
-<a name="line-51"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Either</span>
-<a name="line-52"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
-<a name="line-53"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>VectorSpace</span>
-<a name="line-54"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span>
-<a name="line-55"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Monad</span>
-<a name="line-56"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Applicative</span>
-<a name="line-57"></a>
-<a name="line-58"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Absolute</span>
-<a name="line-59"></a>
-<a name="line-60"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>TypeUnary</span><span class='hs-varop'>.</span><span class='hs-conid'>Nat</span>
-<a name="line-61"></a>
-<a name="line-62"></a><span class='hs-comment'>-- Based on Data.Fixed</span>
-<a name="line-63"></a>
-<a name="line-64"></a><a name="Equal"></a><span class='hs-keyword'>newtype</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-layout'>{</span><span class='hs-varid'>getEqual</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Int</span> <span class='hs-layout'>}</span>
-<a name="line-65"></a>
-<a name="line-66"></a><span class='hs-keyword'>deriving</span> <span class='hs-keyword'>instance</span> <span class='hs-comment'>{-IsNat a =&gt;-}</span> <span class='hs-conid'>Eq</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-67"></a><span class='hs-keyword'>deriving</span> <span class='hs-keyword'>instance</span> <span class='hs-comment'>{-IsNat a =&gt;-}</span> <span class='hs-conid'>Ord</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-68"></a>
-<a name="line-69"></a><a name="instance%20%7b-IsNat%20a%20=%3e-%7d%20Show%20(Equal%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-comment'>{-IsNat a =&gt;-}</span> <span class='hs-conid'>Show</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-70"></a>  <span class='hs-varid'>show</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>show</span> <span class='hs-varid'>a</span>
-<a name="line-71"></a>  <span class='hs-comment'>-- showsPrec d (Equal x) = showParen (d &gt; app_prec) $</span>
-<a name="line-72"></a>  <span class='hs-comment'>--      showString "Equal " . showsPrec (app_prec+1) x</span>
-<a name="line-73"></a>  <span class='hs-comment'>--   where app_prec = 10</span>
-<a name="line-74"></a>
-<a name="line-75"></a><a name="instance%20Num%20(Equal%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Num</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-76"></a>  <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-varop'>+</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>b</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span> <span class='hs-varop'>+</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span>
-<a name="line-77"></a>  <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-varop'>*</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>b</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span> <span class='hs-varop'>*</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span>
-<a name="line-78"></a>  <span class='hs-varid'>negate</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>  <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-layout'>(</span><span class='hs-varid'>negate</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-79"></a>  <span class='hs-varid'>abs</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>     <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-layout'>(</span><span class='hs-varid'>abs</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-80"></a>  <span class='hs-varid'>signum</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>  <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-layout'>(</span><span class='hs-varid'>signum</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-81"></a>  <span class='hs-varid'>fromInteger</span>       <span class='hs-keyglyph'>=</span> <span class='hs-varid'>toEqual</span> <span class='hs-varop'>.</span> <span class='hs-varid'>fromIntegral</span>
+<a name="line-2"></a><span class='hs-comment'>{-# LANGUAGE RankNTypes #-}</span>
+<a name="line-3"></a>
+<a name="line-4"></a><span class='hs-comment'>{-| Generic equal temperament pitch.
+<a name="line-5"></a>
+<a name="line-6"></a>Use the type-level numbers to construct an temperement dividing
+<a name="line-7"></a>the octave in any number of equal-sized steps.
+<a name="line-8"></a>
+<a name="line-9"></a>Common cases such as 6, 12 and 24 are provided for convenience.
+<a name="line-10"></a>-}</span>
+<a name="line-11"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Equal</span>
+<a name="line-12"></a><span class='hs-layout'>(</span>
+<a name="line-13"></a>    <span class='hs-comment'>-- * Equal temperament</span>
+<a name="line-14"></a>    <span class='hs-conid'>Equal</span><span class='hs-layout'>,</span>
+<a name="line-15"></a>    <span class='hs-varid'>toEqual</span><span class='hs-layout'>,</span>
+<a name="line-16"></a>    <span class='hs-varid'>fromEqual</span><span class='hs-layout'>,</span>
+<a name="line-17"></a>    <span class='hs-varid'>equalToRatio</span><span class='hs-layout'>,</span>
+<a name="line-18"></a>    <span class='hs-varid'>size</span><span class='hs-layout'>,</span>
+<a name="line-19"></a>    <span class='hs-varid'>cast</span><span class='hs-layout'>,</span>
+<a name="line-20"></a>
+<a name="line-21"></a>    <span class='hs-comment'>-- ** Synonyms</span>
+<a name="line-22"></a>    <span class='hs-conid'>Equal6</span><span class='hs-layout'>,</span>
+<a name="line-23"></a>    <span class='hs-conid'>Equal12</span><span class='hs-layout'>,</span>
+<a name="line-24"></a>    <span class='hs-conid'>Equal17</span><span class='hs-layout'>,</span>
+<a name="line-25"></a>    <span class='hs-conid'>Equal24</span><span class='hs-layout'>,</span>
+<a name="line-26"></a>    <span class='hs-conid'>Equal36</span><span class='hs-layout'>,</span>
+<a name="line-27"></a>
+<a name="line-28"></a>    <span class='hs-comment'>-- ** Extra type-level naturals</span>
+<a name="line-29"></a>    <span class='hs-conid'>N20</span><span class='hs-layout'>,</span>
+<a name="line-30"></a>    <span class='hs-conid'>N30</span><span class='hs-layout'>,</span>
+<a name="line-31"></a>    <span class='hs-conid'>N17</span><span class='hs-layout'>,</span>
+<a name="line-32"></a>    <span class='hs-conid'>N24</span><span class='hs-layout'>,</span>
+<a name="line-33"></a>    <span class='hs-conid'>N36</span><span class='hs-layout'>,</span>
+<a name="line-34"></a><span class='hs-layout'>)</span>
+<a name="line-35"></a><span class='hs-keyword'>where</span>
+<a name="line-36"></a>
+<a name="line-37"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Maybe</span>
+<a name="line-38"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Either</span>
+<a name="line-39"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
+<a name="line-40"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>VectorSpace</span>
+<a name="line-41"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span>
+<a name="line-42"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Monad</span>
+<a name="line-43"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Applicative</span>
+<a name="line-44"></a>
+<a name="line-45"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Absolute</span>
+<a name="line-46"></a>
+<a name="line-47"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>TypeUnary</span><span class='hs-varop'>.</span><span class='hs-conid'>Nat</span>
+<a name="line-48"></a>
+<a name="line-49"></a><span class='hs-comment'>-- Based on Data.Fixed</span>
+<a name="line-50"></a>
+<a name="line-51"></a><a name="Equal"></a><span class='hs-keyword'>newtype</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-layout'>{</span><span class='hs-varid'>getEqual</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Int</span> <span class='hs-layout'>}</span>
+<a name="line-52"></a>
+<a name="line-53"></a><span class='hs-keyword'>deriving</span> <span class='hs-keyword'>instance</span> <span class='hs-conid'>Eq</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-54"></a><span class='hs-keyword'>deriving</span> <span class='hs-keyword'>instance</span> <span class='hs-conid'>Ord</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-55"></a>
+<a name="line-56"></a><a name="instance%20Show%20(Equal%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Show</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-57"></a>  <span class='hs-varid'>show</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>show</span> <span class='hs-varid'>a</span>
+<a name="line-58"></a>  <span class='hs-comment'>-- OR:</span>
+<a name="line-59"></a>  <span class='hs-comment'>-- showsPrec d (Equal x) = showParen (d &gt; app_prec) $</span>
+<a name="line-60"></a>  <span class='hs-comment'>--      showString "Equal " . showsPrec (app_prec+1) x</span>
+<a name="line-61"></a>  <span class='hs-comment'>--   where app_prec = 10</span>
+<a name="line-62"></a>
+<a name="line-63"></a><a name="instance%20Num%20(Equal%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Num</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-64"></a>  <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-varop'>+</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>b</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span> <span class='hs-varop'>+</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span>
+<a name="line-65"></a>  <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-varop'>*</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>b</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span> <span class='hs-varop'>*</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span>
+<a name="line-66"></a>  <span class='hs-varid'>negate</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>  <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-layout'>(</span><span class='hs-varid'>negate</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-67"></a>  <span class='hs-varid'>abs</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>     <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-layout'>(</span><span class='hs-varid'>abs</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-68"></a>  <span class='hs-varid'>signum</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>  <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-layout'>(</span><span class='hs-varid'>signum</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-69"></a>  <span class='hs-varid'>fromInteger</span>       <span class='hs-keyglyph'>=</span> <span class='hs-varid'>toEqual</span> <span class='hs-varop'>.</span> <span class='hs-varid'>fromIntegral</span>
+<a name="line-70"></a>
+<a name="line-71"></a><a name="instance%20Semigroup%20(Equal%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Semigroup</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-72"></a>  <span class='hs-layout'>(</span><span class='hs-varop'>&lt;&gt;</span><span class='hs-layout'>)</span>    <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varop'>+</span><span class='hs-layout'>)</span>
+<a name="line-73"></a>
+<a name="line-74"></a><a name="instance%20Monoid%20(Equal%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Monoid</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-75"></a>  <span class='hs-varid'>mempty</span>  <span class='hs-keyglyph'>=</span> <span class='hs-num'>0</span>
+<a name="line-76"></a>  <span class='hs-varid'>mappend</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varop'>+</span><span class='hs-layout'>)</span>
+<a name="line-77"></a>
+<a name="line-78"></a><a name="instance%20AdditiveGroup%20(Equal%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>AdditiveGroup</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-79"></a>  <span class='hs-varid'>zeroV</span>   <span class='hs-keyglyph'>=</span> <span class='hs-num'>0</span>
+<a name="line-80"></a>  <span class='hs-layout'>(</span><span class='hs-varop'>^+^</span><span class='hs-layout'>)</span>   <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varop'>+</span><span class='hs-layout'>)</span>
+<a name="line-81"></a>  <span class='hs-varid'>negateV</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>negate</span>
 <a name="line-82"></a>
-<a name="line-83"></a><a name="instance%20Semigroup%20(Equal%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Semigroup</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-84"></a>  <span class='hs-layout'>(</span><span class='hs-varop'>&lt;&gt;</span><span class='hs-layout'>)</span>    <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varop'>+</span><span class='hs-layout'>)</span>
-<a name="line-85"></a>
-<a name="line-86"></a><a name="instance%20Monoid%20(Equal%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Monoid</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-87"></a>  <span class='hs-varid'>mempty</span>  <span class='hs-keyglyph'>=</span> <span class='hs-num'>0</span>
-<a name="line-88"></a>  <span class='hs-varid'>mappend</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varop'>+</span><span class='hs-layout'>)</span>
-<a name="line-89"></a>
-<a name="line-90"></a><a name="instance%20AdditiveGroup%20(Equal%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>AdditiveGroup</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-91"></a>  <span class='hs-varid'>zeroV</span>   <span class='hs-keyglyph'>=</span> <span class='hs-num'>0</span>
-<a name="line-92"></a>  <span class='hs-layout'>(</span><span class='hs-varop'>^+^</span><span class='hs-layout'>)</span>   <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varop'>+</span><span class='hs-layout'>)</span>
-<a name="line-93"></a>  <span class='hs-varid'>negateV</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>negate</span>
-<a name="line-94"></a>
-<a name="line-95"></a><a name="instance%20VectorSpace%20(Equal%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>VectorSpace</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-96"></a>  <span class='hs-keyword'>type</span> <span class='hs-conid'>Scalar</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span>
-<a name="line-97"></a>  <span class='hs-layout'>(</span><span class='hs-varop'>*^</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varop'>*</span><span class='hs-layout'>)</span>
-<a name="line-98"></a>
-<a name="line-99"></a><a name="getSize"></a><span class='hs-comment'>-- Convenience to avoid ScopedTypeVariables etc    </span>
-<a name="line-100"></a><span class='hs-definition'>getSize</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Nat</span> <span class='hs-varid'>a</span>
-<a name="line-101"></a><span class='hs-definition'>getSize</span> <span class='hs-keyword'>_</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>nat</span> 
-<a name="line-102"></a>
-<a name="line-103"></a><a name="size"></a><span class='hs-comment'>-- | Size of this type (value not evaluated).</span>
-<a name="line-104"></a><span class='hs-comment'>-- </span>
-<a name="line-105"></a><span class='hs-comment'>-- &gt;&gt;&gt; size (undefined :: Equal N2)</span>
-<a name="line-106"></a><span class='hs-comment'>-- 2</span>
-<a name="line-107"></a><span class='hs-comment'>-- </span>
-<a name="line-108"></a><span class='hs-comment'>-- &gt;&gt;&gt; size (undefined :: Equal N12)</span>
-<a name="line-109"></a><span class='hs-comment'>-- 12</span>
+<a name="line-83"></a><a name="instance%20VectorSpace%20(Equal%20a)"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>VectorSpace</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-84"></a>  <span class='hs-keyword'>type</span> <span class='hs-conid'>Scalar</span> <span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span>
+<a name="line-85"></a>  <span class='hs-layout'>(</span><span class='hs-varop'>*^</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-varop'>*</span><span class='hs-layout'>)</span>
+<a name="line-86"></a>
+<a name="line-87"></a><a name="getSize"></a><span class='hs-comment'>-- Convenience to avoid ScopedTypeVariables etc    </span>
+<a name="line-88"></a><span class='hs-definition'>getSize</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Nat</span> <span class='hs-varid'>a</span>
+<a name="line-89"></a><span class='hs-definition'>getSize</span> <span class='hs-keyword'>_</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>nat</span> 
+<a name="line-90"></a>
+<a name="line-91"></a><a name="size"></a><span class='hs-comment'>{-| Size of this type (value not evaluated).
+<a name="line-92"></a>
+<a name="line-93"></a>&gt;&gt;&gt; size (undefined :: Equal N2)
+<a name="line-94"></a>2
+<a name="line-95"></a>
+<a name="line-96"></a>&gt;&gt;&gt; size (undefined :: Equal N12)
+<a name="line-97"></a>12
+<a name="line-98"></a>-}</span>
+<a name="line-99"></a><span class='hs-definition'>size</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span>
+<a name="line-100"></a><span class='hs-definition'>size</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>natToZ</span> <span class='hs-varop'>.</span> <span class='hs-varid'>getSize</span>
+<a name="line-101"></a>
+<a name="line-102"></a><span class='hs-comment'>-- TODO I got this part wrong</span>
+<a name="line-103"></a><span class='hs-comment'>-- </span>
+<a name="line-104"></a><span class='hs-comment'>-- This type implements limited values (useful for interval *steps*)</span>
+<a name="line-105"></a><span class='hs-comment'>-- An ET-interval is just an int, with a type-level size (divMod is "separate")</span>
+<a name="line-106"></a>
+<a name="line-107"></a><span class='hs-comment'>-- -- | Create an equal-temperament value.</span>
+<a name="line-108"></a><span class='hs-comment'>-- toEqual :: IsNat a =&gt; Int -&gt; Maybe (Equal a)</span>
+<a name="line-109"></a><span class='hs-comment'>-- toEqual = checkSize . Equal</span>
 <a name="line-110"></a><span class='hs-comment'>-- </span>
-<a name="line-111"></a><span class='hs-definition'>size</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span>
-<a name="line-112"></a><span class='hs-definition'>size</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>natToZ</span> <span class='hs-varop'>.</span> <span class='hs-varid'>getSize</span>
-<a name="line-113"></a>
-<a name="line-114"></a><span class='hs-comment'>-- TODO I got this part wrong</span>
-<a name="line-115"></a><span class='hs-comment'>-- </span>
-<a name="line-116"></a><span class='hs-comment'>-- This type implements limited values (useful for interval *steps*)</span>
-<a name="line-117"></a><span class='hs-comment'>-- An ET-interval is just an int, with a type-level size (divMod is "separate")</span>
-<a name="line-118"></a>
-<a name="line-119"></a><span class='hs-comment'>-- -- | Create an equal-temperament value.</span>
-<a name="line-120"></a><span class='hs-comment'>-- toEqual :: IsNat a =&gt; Int -&gt; Maybe (Equal a)</span>
-<a name="line-121"></a><span class='hs-comment'>-- toEqual = checkSize . Equal</span>
-<a name="line-122"></a><span class='hs-comment'>-- </span>
-<a name="line-123"></a><span class='hs-comment'>-- -- | Unsafely create an equal-temperament value.</span>
-<a name="line-124"></a><span class='hs-comment'>-- unsafeToEqual :: IsNat a =&gt; Int -&gt; Equal a</span>
-<a name="line-125"></a><span class='hs-comment'>-- unsafeToEqual n = case toEqual n of</span>
-<a name="line-126"></a><span class='hs-comment'>--   Nothing -&gt; error $ "Bad equal: " ++ show n</span>
-<a name="line-127"></a><span class='hs-comment'>--   Just x  -&gt; x</span>
-<a name="line-128"></a><span class='hs-comment'>-- </span>
-<a name="line-129"></a><span class='hs-comment'>-- checkSize :: IsNat a =&gt; Equal a -&gt; Maybe (Equal a)</span>
-<a name="line-130"></a><span class='hs-comment'>-- checkSize x = if 0 &lt;= fromEqual x &amp;&amp; fromEqual x &lt; size x then Just x else Nothing</span>
-<a name="line-131"></a><span class='hs-comment'>-- </span>
-<a name="line-132"></a>
-<a name="line-133"></a><a name="toEqual"></a><span class='hs-comment'>-- | Create an equal-temperament value.</span>
-<a name="line-134"></a><span class='hs-definition'>toEqual</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span>
-<a name="line-135"></a><span class='hs-definition'>toEqual</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span>
+<a name="line-111"></a><span class='hs-comment'>-- -- | Unsafely create an equal-temperament value.</span>
+<a name="line-112"></a><span class='hs-comment'>-- unsafeToEqual :: IsNat a =&gt; Int -&gt; Equal a</span>
+<a name="line-113"></a><span class='hs-comment'>-- unsafeToEqual n = case toEqual n of</span>
+<a name="line-114"></a><span class='hs-comment'>--   Nothing -&gt; error $ "Bad equal: " ++ show n</span>
+<a name="line-115"></a><span class='hs-comment'>--   Just x  -&gt; x</span>
+<a name="line-116"></a><span class='hs-comment'>-- </span>
+<a name="line-117"></a><span class='hs-comment'>-- checkSize :: IsNat a =&gt; Equal a -&gt; Maybe (Equal a)</span>
+<a name="line-118"></a><span class='hs-comment'>-- checkSize x = if 0 &lt;= fromEqual x &amp;&amp; fromEqual x &lt; size x then Just x else Nothing</span>
+<a name="line-119"></a><span class='hs-comment'>-- </span>
+<a name="line-120"></a>
+<a name="line-121"></a><a name="toEqual"></a><span class='hs-comment'>-- | Create an equal-temperament value.</span>
+<a name="line-122"></a><span class='hs-definition'>toEqual</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span>
+<a name="line-123"></a><span class='hs-definition'>toEqual</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span>
+<a name="line-124"></a>
+<a name="line-125"></a><a name="fromEqual"></a><span class='hs-comment'>-- | Extract an equal-temperament value.</span>
+<a name="line-126"></a><span class='hs-definition'>fromEqual</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span>
+<a name="line-127"></a><span class='hs-definition'>fromEqual</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>getEqual</span>
+<a name="line-128"></a>
+<a name="line-129"></a><a name="equalToRatio"></a><span class='hs-comment'>{-| Convert an equal-temeperament value to a frequency ratio.
+<a name="line-130"></a>
+<a name="line-131"></a>&gt;&gt;&gt; equalToRatio (7 :: Equal12)
+<a name="line-132"></a>1.4983070768766815
+<a name="line-133"></a>
+<a name="line-134"></a>&gt;&gt;&gt; equalToRatio (4 :: Equal12)
+<a name="line-135"></a>1.2599210498948732
 <a name="line-136"></a>
-<a name="line-137"></a><a name="fromEqual"></a><span class='hs-comment'>-- | Extract an equal-temperament value.</span>
-<a name="line-138"></a><span class='hs-definition'>fromEqual</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span>
-<a name="line-139"></a><span class='hs-definition'>fromEqual</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>getEqual</span>
+<a name="line-137"></a>-}</span>
+<a name="line-138"></a><span class='hs-definition'>equalToRatio</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Double</span>
+<a name="line-139"></a><span class='hs-definition'>equalToRatio</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-num'>2</span><span class='hs-varop'>**</span><span class='hs-layout'>(</span><span class='hs-varid'>realToFrac</span> <span class='hs-layout'>(</span><span class='hs-varid'>fromEqual</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-varop'>/</span> <span class='hs-varid'>realToFrac</span> <span class='hs-layout'>(</span><span class='hs-varid'>size</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
 <a name="line-140"></a>
-<a name="line-141"></a><a name="equalToRatio"></a><span class='hs-comment'>-- | Convert an equal-temeperament value to a frequency ratio.</span>
-<a name="line-142"></a><span class='hs-comment'>--</span>
-<a name="line-143"></a><span class='hs-comment'>-- &gt;&gt;&gt; equalToRatio (7 :: Equal12)</span>
-<a name="line-144"></a><span class='hs-comment'>-- 1.4983070768766815</span>
-<a name="line-145"></a><span class='hs-comment'>--</span>
-<a name="line-146"></a><span class='hs-comment'>-- &gt;&gt;&gt; equalToRatio (4 :: Equal12)</span>
-<a name="line-147"></a><span class='hs-comment'>-- 1.2599210498948732</span>
-<a name="line-148"></a><span class='hs-comment'>--</span>
-<a name="line-149"></a><span class='hs-definition'>equalToRatio</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Double</span>
-<a name="line-150"></a><span class='hs-definition'>equalToRatio</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-num'>2</span><span class='hs-varop'>**</span><span class='hs-layout'>(</span><span class='hs-varid'>realToFrac</span> <span class='hs-layout'>(</span><span class='hs-varid'>fromEqual</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-varop'>/</span> <span class='hs-varid'>realToFrac</span> <span class='hs-layout'>(</span><span class='hs-varid'>size</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
-<a name="line-151"></a>
-<a name="line-152"></a><a name="cast"></a><span class='hs-comment'>-- | Safely cast a tempered value to another size.</span>
-<a name="line-153"></a><span class='hs-comment'>--</span>
-<a name="line-154"></a><span class='hs-comment'>-- &gt;&gt;&gt; cast (1 :: Equal12) :: Equal24</span>
-<a name="line-155"></a><span class='hs-comment'>-- 2 :: Equal24</span>
-<a name="line-156"></a><span class='hs-comment'>--</span>
-<a name="line-157"></a><span class='hs-comment'>-- &gt;&gt;&gt; cast (8 :: Equal12) :: Equal6</span>
-<a name="line-158"></a><span class='hs-comment'>-- 4 :: Equal6</span>
-<a name="line-159"></a><span class='hs-comment'>--</span>
-<a name="line-160"></a><span class='hs-comment'>-- &gt;&gt;&gt; (2 :: Equal12) + cast (2 :: Equal24)</span>
-<a name="line-161"></a><span class='hs-comment'>-- 3 :: Equal12</span>
-<a name="line-162"></a><span class='hs-comment'>--</span>
-<a name="line-163"></a><span class='hs-definition'>cast</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>b</span>
-<a name="line-164"></a><span class='hs-definition'>cast</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>cast'</span> <span class='hs-varid'>undefined</span>
-<a name="line-165"></a>
-<a name="line-166"></a><a name="cast'"></a><span class='hs-definition'>cast'</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>b</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>b</span>
-<a name="line-167"></a><span class='hs-definition'>cast'</span> <span class='hs-varid'>bDummy</span> <span class='hs-varid'>aDummy</span><span class='hs-keyglyph'>@</span><span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-varop'>$</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span> <span class='hs-varop'>*</span> <span class='hs-varid'>size</span> <span class='hs-varid'>bDummy</span><span class='hs-layout'>)</span> <span class='hs-varop'>`div`</span> <span class='hs-varid'>size</span> <span class='hs-varid'>aDummy</span>
-<a name="line-168"></a>
-<a name="line-169"></a><a name="Equal6"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>Equal6</span>  <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-conid'>N6</span>
-<a name="line-170"></a><a name="Equal12"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>Equal12</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-conid'>N12</span>
-<a name="line-171"></a><a name="Equal17"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>Equal17</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-conid'>N17</span>
-<a name="line-172"></a><a name="Equal24"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>Equal24</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-conid'>N24</span>
-<a name="line-173"></a><a name="Equal36"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>Equal36</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-conid'>N36</span>
-<a name="line-174"></a>
-<a name="line-175"></a><a name="N20"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>N20</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>N10</span> <span class='hs-conop'>:*:</span> <span class='hs-conid'>N2</span>
-<a name="line-176"></a><a name="N30"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>N30</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>N10</span> <span class='hs-conop'>:*:</span> <span class='hs-conid'>N3</span>
-<a name="line-177"></a><a name="N17"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>N17</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>N10</span> <span class='hs-conop'>:+:</span> <span class='hs-conid'>N7</span>
-<a name="line-178"></a><a name="N24"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>N24</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>N20</span> <span class='hs-conop'>:+:</span> <span class='hs-conid'>N4</span>
-<a name="line-179"></a><a name="N36"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>N36</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>N30</span> <span class='hs-conop'>:+:</span> <span class='hs-conid'>N6</span>
-<a name="line-180"></a>
+<a name="line-141"></a><a name="cast"></a><span class='hs-comment'>{-| Safely cast a tempered value to another size.
+<a name="line-142"></a>
+<a name="line-143"></a>&gt;&gt;&gt; cast (1 :: Equal12) :: Equal24
+<a name="line-144"></a>2 :: Equal24
+<a name="line-145"></a>
+<a name="line-146"></a>&gt;&gt;&gt; cast (8 :: Equal12) :: Equal6
+<a name="line-147"></a>4 :: Equal6
+<a name="line-148"></a>
+<a name="line-149"></a>&gt;&gt;&gt; (2 :: Equal12) + cast (2 :: Equal24)
+<a name="line-150"></a>3 :: Equal12
+<a name="line-151"></a>-}</span>
+<a name="line-152"></a><span class='hs-definition'>cast</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>b</span>
+<a name="line-153"></a><span class='hs-definition'>cast</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>cast'</span> <span class='hs-varid'>undefined</span>
+<a name="line-154"></a>
+<a name="line-155"></a><a name="cast'"></a><span class='hs-definition'>cast'</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>IsNat</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span> <span class='hs-conid'>IsNat</span> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>b</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Equal</span> <span class='hs-varid'>b</span>
+<a name="line-156"></a><span class='hs-definition'>cast'</span> <span class='hs-varid'>bDummy</span> <span class='hs-varid'>aDummy</span><span class='hs-keyglyph'>@</span><span class='hs-layout'>(</span><span class='hs-conid'>Equal</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-varop'>$</span> <span class='hs-layout'>(</span><span class='hs-varid'>a</span> <span class='hs-varop'>*</span> <span class='hs-varid'>size</span> <span class='hs-varid'>bDummy</span><span class='hs-layout'>)</span> <span class='hs-varop'>`div`</span> <span class='hs-varid'>size</span> <span class='hs-varid'>aDummy</span>
+<a name="line-157"></a>
+<a name="line-158"></a><a name="Equal6"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>Equal6</span>  <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-conid'>N6</span>
+<a name="line-159"></a><a name="Equal12"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>Equal12</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-conid'>N12</span>
+<a name="line-160"></a><a name="Equal17"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>Equal17</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-conid'>N17</span>
+<a name="line-161"></a><a name="Equal24"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>Equal24</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-conid'>N24</span>
+<a name="line-162"></a><a name="Equal36"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>Equal36</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Equal</span> <span class='hs-conid'>N36</span>
+<a name="line-163"></a>
+<a name="line-164"></a><a name="N20"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>N20</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>N10</span> <span class='hs-conop'>:*:</span> <span class='hs-conid'>N2</span>
+<a name="line-165"></a><a name="N30"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>N30</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>N10</span> <span class='hs-conop'>:*:</span> <span class='hs-conid'>N3</span>
+<a name="line-166"></a><a name="N17"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>N17</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>N10</span> <span class='hs-conop'>:+:</span> <span class='hs-conid'>N7</span>
+<a name="line-167"></a><a name="N24"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>N24</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>N20</span> <span class='hs-conop'>:+:</span> <span class='hs-conid'>N4</span>
+<a name="line-168"></a><a name="N36"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>N36</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>N30</span> <span class='hs-conop'>:+:</span> <span class='hs-conid'>N6</span>
+<a name="line-169"></a>
 </pre></body>
 </html>

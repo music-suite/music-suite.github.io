@@ -39,94 +39,153 @@
 <a name="line-30"></a>
 <a name="line-31"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span>       <span class='hs-layout'>(</span><span class='hs-conid'>IsPitch</span><span class='hs-layout'>)</span>
 <a name="line-32"></a>
-<a name="line-33"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Codec</span><span class='hs-varop'>.</span><span class='hs-conid'>Midi</span>                <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Track</span><span class='hs-layout'>)</span>
+<a name="line-33"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Codec</span><span class='hs-varop'>.</span><span class='hs-conid'>Midi</span>                <span class='hs-layout'>(</span><span class='hs-conid'>Midi</span><span class='hs-layout'>)</span>
 <a name="line-34"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Applicative</span>
 <a name="line-35"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span>
-<a name="line-36"></a><span class='hs-comment'>-- import           Control.Reactive          hiding (Event)</span>
-<a name="line-37"></a><span class='hs-comment'>-- import qualified Control.Reactive          as R</span>
-<a name="line-38"></a><span class='hs-comment'>-- import           Control.Reactive.Midi</span>
-<a name="line-39"></a>
-<a name="line-40"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span>
-<a name="line-41"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span>
-<a name="line-42"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Articulation</span>
-<a name="line-43"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span>
-<a name="line-44"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Internal</span><span class='hs-varop'>.</span><span class='hs-conid'>Export</span>
-<a name="line-45"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Harmonics</span>
-<a name="line-46"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Part</span>
-<a name="line-47"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span>
-<a name="line-48"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Slide</span>
-<a name="line-49"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Text</span>
-<a name="line-50"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Ties</span>
-<a name="line-51"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Tremolo</span>
-<a name="line-52"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span>
-<a name="line-53"></a>
-<a name="line-54"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Codec</span><span class='hs-varop'>.</span><span class='hs-conid'>Midi</span>                <span class='hs-keyword'>as</span> <span class='hs-conid'>Midi</span>
-<a name="line-55"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>List</span>                 <span class='hs-keyword'>as</span> <span class='hs-conid'>List</span>
-<a name="line-56"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>                  <span class='hs-keyword'>as</span> <span class='hs-conid'>Map</span>
-<a name="line-57"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Lilypond</span>            <span class='hs-keyword'>as</span> <span class='hs-conid'>Lilypond</span>
-<a name="line-58"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>MusicXml</span><span class='hs-varop'>.</span><span class='hs-conid'>Simple</span>     <span class='hs-keyword'>as</span> <span class='hs-conid'>Xml</span>
-<a name="line-59"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Text</span><span class='hs-varop'>.</span><span class='hs-conid'>Pretty</span>               <span class='hs-keyword'>as</span> <span class='hs-conid'>Pretty</span>
-<a name="line-60"></a>
-<a name="line-61"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span>       <span class='hs-keyword'>as</span> <span class='hs-conid'>Pitch</span>
-<a name="line-62"></a><span class='hs-comment'>-- import qualified Data.ByteString.Lazy as ByteString</span>
-<a name="line-63"></a>
-<a name="line-64"></a><a name="IsMidi"></a><span class='hs-comment'>-- |</span>
-<a name="line-65"></a><a name="IsMidi"></a><span class='hs-comment'>-- This constraint includes all note types that can be constructed from a Midi representation.</span>
-<a name="line-66"></a><a name="IsMidi"></a><span class='hs-comment'>--</span>
-<a name="line-67"></a><a name="IsMidi"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>IsMidi</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span>
-<a name="line-68"></a>    <span class='hs-comment'>-- TODO</span>
-<a name="line-69"></a>    <span class='hs-conid'>IsPitch</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span>
-<a name="line-70"></a>    <span class='hs-conid'>HasPart'</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span>
-<a name="line-71"></a>    <span class='hs-conid'>Ord</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
-<a name="line-72"></a>    <span class='hs-conid'>Enum</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
-<a name="line-73"></a>    <span class='hs-comment'>-- HasPitch a,</span>
-<a name="line-74"></a>    <span class='hs-conid'>Num</span> <span class='hs-layout'>(</span><span class='hs-conid'>Pitch</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
-<a name="line-75"></a>    <span class='hs-conid'>HasTremolo</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span>
-<a name="line-76"></a>    <span class='hs-conid'>HasArticulation</span> <span class='hs-varid'>a</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span>
-<a name="line-77"></a>    <span class='hs-conid'>Tiable</span> <span class='hs-varid'>a</span>
-<a name="line-78"></a>    <span class='hs-layout'>)</span>
-<a name="line-79"></a>
-<a name="line-80"></a>
-<a name="line-81"></a><a name="fromMidi"></a><span class='hs-comment'>-- |</span>
-<a name="line-82"></a><span class='hs-comment'>-- Convert a score from a Midi representation.</span>
-<a name="line-83"></a><span class='hs-comment'>--</span>
-<a name="line-84"></a><span class='hs-definition'>fromMidi</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsMidi</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Midi</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Score</span> <span class='hs-varid'>a</span>
-<a name="line-85"></a><span class='hs-definition'>fromMidi</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-86"></a>    <span class='hs-comment'>-- Map each track to a part (scanning for ProgramChange, name etc)</span>
-<a name="line-87"></a>    <span class='hs-comment'>-- Subdivide parts based on channels</span>
-<a name="line-88"></a>    <span class='hs-comment'>-- Set channel 10 tracks to "percussion"</span>
-<a name="line-89"></a>
-<a name="line-90"></a>    <span class='hs-comment'>-- Remove all non-used messages (KeyPressure, ChannelPressure, ProgramChange)</span>
-<a name="line-91"></a>    <span class='hs-comment'>-- Create reactives from variable values</span>
-<a name="line-92"></a>    <span class='hs-comment'>-- Create notes</span>
-<a name="line-93"></a>    <span class='hs-comment'>-- Superimpose variable values</span>
-<a name="line-94"></a>
-<a name="line-95"></a>    <span class='hs-comment'>-- Compose</span>
-<a name="line-96"></a>    <span class='hs-comment'>-- Add meta-information</span>
-<a name="line-97"></a>
-<a name="line-98"></a><span class='hs-comment'>-- TODO</span>
-<a name="line-99"></a>
-<a name="line-100"></a><a name="readMidi"></a><span class='hs-comment'>-- |</span>
-<a name="line-101"></a><span class='hs-comment'>-- Read a Midi score from a file. Fails if the file could not be read or if a parsing</span>
-<a name="line-102"></a><span class='hs-comment'>-- error occurs.</span>
-<a name="line-103"></a><span class='hs-comment'>--</span>
-<a name="line-104"></a><span class='hs-definition'>readMidi</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsMidi</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>FilePath</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>IO</span> <span class='hs-layout'>(</span><span class='hs-conid'>Score</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-105"></a><span class='hs-definition'>readMidi</span> <span class='hs-varid'>path</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-varid'>either</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>x</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>error</span> <span class='hs-varop'>$</span> <span class='hs-str'>"Could not read MIDI file"</span> <span class='hs-varop'>++</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-varid'>id</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>readMidiEither</span> <span class='hs-varid'>path</span>
-<a name="line-106"></a>
-<a name="line-107"></a><a name="readMidiMaybe"></a><span class='hs-comment'>-- |</span>
-<a name="line-108"></a><span class='hs-comment'>-- Read a Midi score from a file. Fails if the file could not be read, and returns</span>
-<a name="line-109"></a><span class='hs-comment'>-- @Nothing@ if a parsing error occurs.</span>
-<a name="line-110"></a><span class='hs-comment'>--</span>
-<a name="line-111"></a><span class='hs-definition'>readMidiMaybe</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsMidi</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>FilePath</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>IO</span> <span class='hs-layout'>(</span><span class='hs-conid'>Maybe</span> <span class='hs-layout'>(</span><span class='hs-conid'>Score</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
-<a name="line-112"></a><span class='hs-definition'>readMidiMaybe</span> <span class='hs-varid'>path</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-varid'>either</span> <span class='hs-layout'>(</span><span class='hs-varid'>const</span> <span class='hs-conid'>Nothing</span><span class='hs-layout'>)</span> <span class='hs-conid'>Just</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>readMidiEither</span> <span class='hs-varid'>path</span>
-<a name="line-113"></a>
-<a name="line-114"></a><a name="readMidiEither"></a><span class='hs-comment'>-- |</span>
-<a name="line-115"></a><span class='hs-comment'>-- Read a Midi score from a file. Fails if the file could not be read, and returns</span>
-<a name="line-116"></a><span class='hs-comment'>-- @Left m@ if a parsing error occurs.</span>
-<a name="line-117"></a><span class='hs-comment'>--</span>
-<a name="line-118"></a><span class='hs-definition'>readMidiEither</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsMidi</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>FilePath</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>IO</span> <span class='hs-layout'>(</span><span class='hs-conid'>Either</span> <span class='hs-conid'>String</span> <span class='hs-layout'>(</span><span class='hs-conid'>Score</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
-<a name="line-119"></a><span class='hs-definition'>readMidiEither</span> <span class='hs-varid'>path</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-varid'>fmap</span> <span class='hs-varid'>fromMidi</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>importFile</span> <span class='hs-varid'>path</span>
-<a name="line-120"></a>
-<a name="line-121"></a>
+<a name="line-36"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Monad</span><span class='hs-varop'>.</span><span class='hs-conid'>Plus</span>
+<a name="line-37"></a><span class='hs-comment'>-- import           Control.Reactive          hiding (Event)</span>
+<a name="line-38"></a><span class='hs-comment'>-- import qualified Control.Reactive          as R</span>
+<a name="line-39"></a><span class='hs-comment'>-- import           Control.Reactive.Midi</span>
+<a name="line-40"></a>
+<a name="line-41"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span>
+<a name="line-42"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span>
+<a name="line-43"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Articulation</span>
+<a name="line-44"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Dynamics</span>
+<a name="line-45"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Internal</span><span class='hs-varop'>.</span><span class='hs-conid'>Export</span>
+<a name="line-46"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Harmonics</span>
+<a name="line-47"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Part</span>
+<a name="line-48"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span>
+<a name="line-49"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Slide</span>
+<a name="line-50"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Text</span>
+<a name="line-51"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Ties</span>
+<a name="line-52"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Score</span><span class='hs-varop'>.</span><span class='hs-conid'>Tremolo</span>
+<a name="line-53"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Time</span>
+<a name="line-54"></a>
+<a name="line-55"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Maybe</span>
+<a name="line-56"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span> <span class='hs-layout'>(</span><span class='hs-conid'>Map</span><span class='hs-layout'>)</span>
+<a name="line-57"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span> <span class='hs-keyword'>as</span> <span class='hs-conid'>Map</span>
+<a name="line-58"></a>
+<a name="line-59"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Codec</span><span class='hs-varop'>.</span><span class='hs-conid'>Midi</span>                <span class='hs-keyword'>as</span> <span class='hs-conid'>Midi</span>
+<a name="line-60"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>List</span>                 <span class='hs-keyword'>as</span> <span class='hs-conid'>List</span>
+<a name="line-61"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Map</span>                  <span class='hs-keyword'>as</span> <span class='hs-conid'>Map</span>
+<a name="line-62"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Text</span><span class='hs-varop'>.</span><span class='hs-conid'>Pretty</span>               <span class='hs-keyword'>as</span> <span class='hs-conid'>Pretty</span>
+<a name="line-63"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Monoid</span>
+<a name="line-64"></a>
+<a name="line-65"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span>       <span class='hs-keyword'>as</span> <span class='hs-conid'>Pitch</span>
+<a name="line-66"></a><span class='hs-comment'>-- import qualified Data.ByteString.Lazy as ByteString</span>
+<a name="line-67"></a>
+<a name="line-68"></a><a name="IsMidi"></a><span class='hs-comment'>-- |</span>
+<a name="line-69"></a><a name="IsMidi"></a><span class='hs-comment'>-- This constraint includes all note types that can be constructed from a Midi representation.</span>
+<a name="line-70"></a><a name="IsMidi"></a><span class='hs-comment'>--</span>
+<a name="line-71"></a><a name="IsMidi"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>IsMidi</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span>
+<a name="line-72"></a>    <span class='hs-comment'>-- TODO</span>
+<a name="line-73"></a>    <span class='hs-conid'>IsPitch</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span>
+<a name="line-74"></a>    <span class='hs-conid'>HasPart'</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span>
+<a name="line-75"></a>    <span class='hs-conid'>Ord</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
+<a name="line-76"></a>    <span class='hs-conid'>Enum</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
+<a name="line-77"></a>    <span class='hs-comment'>-- HasPitch a,</span>
+<a name="line-78"></a>    <span class='hs-conid'>Num</span> <span class='hs-layout'>(</span><span class='hs-conid'>Pitch</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
+<a name="line-79"></a>    <span class='hs-conid'>HasTremolo</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span>
+<a name="line-80"></a>    <span class='hs-conid'>HasArticulation</span> <span class='hs-varid'>a</span> <span class='hs-varid'>a</span><span class='hs-layout'>,</span>
+<a name="line-81"></a>    <span class='hs-conid'>Tiable</span> <span class='hs-varid'>a</span>
+<a name="line-82"></a>    <span class='hs-layout'>)</span>
+<a name="line-83"></a>
+<a name="line-84"></a>
+<a name="line-85"></a><a name="fromMidi"></a><span class='hs-comment'>-- -- type SimpleMidi = [[(Time, Bool, Int, Int)]]  -- outer: track, inner: channel, time, on/off, pitch, vel</span>
+<a name="line-86"></a><span class='hs-comment'>-- -- -- Ignore offset velocities (can't represent them)</span>
+<a name="line-87"></a><span class='hs-comment'>-- -- type SimpleMidi2 = [[(Span, Int, Int)]] -- outer: track, inner: channel, time, pitch, vel</span>
+<a name="line-88"></a><span class='hs-comment'>-- -- </span>
+<a name="line-89"></a><span class='hs-comment'>-- -- foo :: SimpleMidi2</span>
+<a name="line-90"></a><span class='hs-comment'>-- -- foo = undefined</span>
+<a name="line-91"></a><span class='hs-comment'>-- </span>
+<a name="line-92"></a><span class='hs-comment'>-- mapWithIndex :: (Int -&gt; a -&gt; b) -&gt; [a] -&gt; [b]</span>
+<a name="line-93"></a><span class='hs-comment'>-- mapWithIndex f = zipWith f [0..]</span>
+<a name="line-94"></a><span class='hs-comment'>-- </span>
+<a name="line-95"></a><span class='hs-comment'>-- mapWithIndex2 :: (Int -&gt; Int -&gt; a -&gt; b) -&gt; [[a]] -&gt; [b]</span>
+<a name="line-96"></a><span class='hs-comment'>-- mapWithIndex2 f xss = concat $ zipWith (\m -&gt; zipWith (f m) [0..]) [0..] xss</span>
+<a name="line-97"></a><span class='hs-comment'>-- </span>
+<a name="line-98"></a><span class='hs-comment'>-- -- Last time the given key was pressed but not released (non-existant means it is not pressed)</span>
+<a name="line-99"></a><span class='hs-comment'>-- type ChanMap = Map Int Time</span>
+<a name="line-100"></a><span class='hs-comment'>-- </span>
+<a name="line-101"></a><span class='hs-comment'>-- -- |</span>
+<a name="line-102"></a><span class='hs-comment'>-- -- Convert a score from a Midi representation.</span>
+<a name="line-103"></a><span class='hs-comment'>-- --</span>
+<a name="line-104"></a><span class='hs-definition'>fromMidi</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsMidi</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Midi</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Score</span> <span class='hs-varid'>a</span>
+<a name="line-105"></a><span class='hs-definition'>fromMidi</span> <span class='hs-varid'>m</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
+<a name="line-106"></a><span class='hs-comment'>--   where</span>
+<a name="line-107"></a><span class='hs-comment'>-- </span>
+<a name="line-108"></a><span class='hs-comment'>-- toAspects :: [[Event (Midi.Channel,Midi.Key,Midi.Velocity)]] -&gt; [Event (Part,Int,Int)]</span>
+<a name="line-109"></a><span class='hs-comment'>-- toAspects = mapWithIndex (\trackN events -&gt; over (mapped.event) (\(s,(ch,key,vel)) -&gt; undefined))</span>
+<a name="line-110"></a><span class='hs-comment'>--     </span>
+<a name="line-111"></a><span class='hs-comment'>-- getMidi :: Midi.Midi -&gt; [[Event (Midi.Channel,Midi.Key,Midi.Velocity)]]</span>
+<a name="line-112"></a><span class='hs-comment'>-- getMidi (Midi.Midi fileType timeDiv tracks) = id</span>
+<a name="line-113"></a><span class='hs-comment'>--       $ compress (ticksp timeDiv)</span>
+<a name="line-114"></a><span class='hs-comment'>--       $ fmap mcatMaybes</span>
+<a name="line-115"></a><span class='hs-comment'>--       $ fmap snd</span>
+<a name="line-116"></a><span class='hs-comment'>--       $ fmap (List.mapAccumL g mempty)</span>
+<a name="line-117"></a><span class='hs-comment'>--       $ fmap mcatMaybes $ over (mapped.mapped) getMsg tracks</span>
+<a name="line-118"></a><span class='hs-comment'>--   where</span>
+<a name="line-119"></a><span class='hs-comment'>--     g keyStatus (t,onOff,c,p,v) = </span>
+<a name="line-120"></a><span class='hs-comment'>--       ( updateKeys onOff p (fromIntegral t) keyStatus</span>
+<a name="line-121"></a><span class='hs-comment'>--       , (if onOff then Nothing else Just (</span>
+<a name="line-122"></a><span class='hs-comment'>--         (Data.Maybe.fromMaybe 0 (Map.lookup (fromIntegral t) keyStatus)&lt;-&gt;fromIntegral t,(c,p,60))^.event))</span>
+<a name="line-123"></a><span class='hs-comment'>--       )</span>
+<a name="line-124"></a><span class='hs-comment'>--     -- TODO also store dynamics in pitch map (to use onset value rather than offset value)</span>
+<a name="line-125"></a><span class='hs-comment'>--     -- For now just assume 60</span>
+<a name="line-126"></a><span class='hs-comment'>--     updateKeys True  p t = Map.insert p t</span>
+<a name="line-127"></a><span class='hs-comment'>--     updateKeys False p _ = Map.delete p</span>
+<a name="line-128"></a><span class='hs-comment'>-- </span>
+<a name="line-129"></a><span class='hs-comment'>--     -- Amount to compress time (after initially treating each tick as duration 1) </span>
+<a name="line-130"></a><span class='hs-comment'>--     ticksp (Midi.TicksPerBeat n)     = 1 / fromIntegral n</span>
+<a name="line-131"></a><span class='hs-comment'>--     ticksp (Midi.TicksPerSecond _ _) = error "fromMidi: Can not parse TickePerSecond-based files"</span>
+<a name="line-132"></a><span class='hs-comment'>-- </span>
+<a name="line-133"></a><span class='hs-comment'>-- getMsg (t, Midi.NoteOff c p v) = Just (t,False,c,p,v)</span>
+<a name="line-134"></a><span class='hs-comment'>-- getMsg (t, Midi.NoteOn c p 0)  = Just (t,False,c,p,0)</span>
+<a name="line-135"></a><span class='hs-comment'>-- getMsg (t, Midi.NoteOn c p v)  = Just (t,True,c,p,v)</span>
+<a name="line-136"></a><span class='hs-comment'>-- -- TODO key pressure</span>
+<a name="line-137"></a><span class='hs-comment'>-- -- control change</span>
+<a name="line-138"></a><span class='hs-comment'>-- -- program change</span>
+<a name="line-139"></a><span class='hs-comment'>-- -- channel pressure</span>
+<a name="line-140"></a><span class='hs-comment'>-- -- pitch wheel</span>
+<a name="line-141"></a><span class='hs-comment'>-- -- etc.</span>
+<a name="line-142"></a><span class='hs-comment'>-- getMsg _ = Nothing</span>
+<a name="line-143"></a><span class='hs-comment'>--     </span>
+<a name="line-144"></a>
+<a name="line-145"></a>    <span class='hs-comment'>-- Map each track to a part (scanning for ProgramChange, name etc)</span>
+<a name="line-146"></a>    <span class='hs-comment'>-- Subdivide parts based on channels</span>
+<a name="line-147"></a>    <span class='hs-comment'>-- Set channel 10 tracks to "percussion"</span>
+<a name="line-148"></a>
+<a name="line-149"></a>    <span class='hs-comment'>-- Remove all non-used messages (KeyPressure, ChannelPressure, ProgramChange)</span>
+<a name="line-150"></a>    <span class='hs-comment'>-- Create reactives from variable values</span>
+<a name="line-151"></a>    <span class='hs-comment'>-- Create notes</span>
+<a name="line-152"></a>    <span class='hs-comment'>-- Superimpose variable values</span>
+<a name="line-153"></a>
+<a name="line-154"></a>    <span class='hs-comment'>-- Compose</span>
+<a name="line-155"></a>    <span class='hs-comment'>-- Add meta-information</span>
+<a name="line-156"></a>
+<a name="line-157"></a><span class='hs-comment'>-- TODO</span>
+<a name="line-158"></a>
+<a name="line-159"></a><a name="readMidi"></a><span class='hs-comment'>-- |</span>
+<a name="line-160"></a><span class='hs-comment'>-- Read a Midi score from a file. Fails if the file could not be read or if a parsing</span>
+<a name="line-161"></a><span class='hs-comment'>-- error occurs.</span>
+<a name="line-162"></a><span class='hs-comment'>--</span>
+<a name="line-163"></a><span class='hs-definition'>readMidi</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsMidi</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>FilePath</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>IO</span> <span class='hs-layout'>(</span><span class='hs-conid'>Score</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-164"></a><span class='hs-definition'>readMidi</span> <span class='hs-varid'>path</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-varid'>either</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>x</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>error</span> <span class='hs-varop'>$</span> <span class='hs-str'>"Could not read MIDI file"</span> <span class='hs-varop'>++</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-varid'>id</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>readMidiEither</span> <span class='hs-varid'>path</span>
+<a name="line-165"></a>
+<a name="line-166"></a><a name="readMidiMaybe"></a><span class='hs-comment'>-- |</span>
+<a name="line-167"></a><span class='hs-comment'>-- Read a Midi score from a file. Fails if the file could not be read, and returns</span>
+<a name="line-168"></a><span class='hs-comment'>-- @Nothing@ if a parsing error occurs.</span>
+<a name="line-169"></a><span class='hs-comment'>--</span>
+<a name="line-170"></a><span class='hs-definition'>readMidiMaybe</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsMidi</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>FilePath</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>IO</span> <span class='hs-layout'>(</span><span class='hs-conid'>Maybe</span> <span class='hs-layout'>(</span><span class='hs-conid'>Score</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
+<a name="line-171"></a><span class='hs-definition'>readMidiMaybe</span> <span class='hs-varid'>path</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-varid'>either</span> <span class='hs-layout'>(</span><span class='hs-varid'>const</span> <span class='hs-conid'>Nothing</span><span class='hs-layout'>)</span> <span class='hs-conid'>Just</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>readMidiEither</span> <span class='hs-varid'>path</span>
+<a name="line-172"></a>
+<a name="line-173"></a><a name="readMidiEither"></a><span class='hs-comment'>-- |</span>
+<a name="line-174"></a><span class='hs-comment'>-- Read a Midi score from a file. Fails if the file could not be read, and returns</span>
+<a name="line-175"></a><span class='hs-comment'>-- @Left m@ if a parsing error occurs.</span>
+<a name="line-176"></a><span class='hs-comment'>--</span>
+<a name="line-177"></a><span class='hs-definition'>readMidiEither</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>IsMidi</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>FilePath</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>IO</span> <span class='hs-layout'>(</span><span class='hs-conid'>Either</span> <span class='hs-conid'>String</span> <span class='hs-layout'>(</span><span class='hs-conid'>Score</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
+<a name="line-178"></a><span class='hs-definition'>readMidiEither</span> <span class='hs-varid'>path</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-varid'>fmap</span> <span class='hs-varid'>fromMidi</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-conid'>Midi</span><span class='hs-varop'>.</span><span class='hs-varid'>importFile</span> <span class='hs-varid'>path</span>
+<a name="line-179"></a>
+<a name="line-180"></a>
 </pre></body>
 </html>

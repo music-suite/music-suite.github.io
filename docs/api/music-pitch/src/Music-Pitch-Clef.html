@@ -8,144 +8,163 @@
 </head>
 <body>
 <pre><a name="line-1"></a>
-<a name="line-2"></a><span class='hs-comment'>{-# LANGUAGE ConstraintKinds            #-}</span>
-<a name="line-3"></a><span class='hs-comment'>{-# LANGUAGE DeriveDataTypeable         #-}</span>
-<a name="line-4"></a><span class='hs-comment'>{-# LANGUAGE DeriveFoldable             #-}</span>
-<a name="line-5"></a><span class='hs-comment'>{-# LANGUAGE DeriveFunctor              #-}</span>
-<a name="line-6"></a><span class='hs-comment'>{-# LANGUAGE DeriveTraversable          #-}</span>
-<a name="line-7"></a><span class='hs-comment'>{-# LANGUAGE FlexibleContexts           #-}</span>
-<a name="line-8"></a><span class='hs-comment'>{-# LANGUAGE FlexibleInstances          #-}</span>
-<a name="line-9"></a><span class='hs-comment'>{-# LANGUAGE GADTs                      #-}</span>
-<a name="line-10"></a><span class='hs-comment'>{-# LANGUAGE GeneralizedNewtypeDeriving #-}</span>
-<a name="line-11"></a><span class='hs-comment'>{-# LANGUAGE MultiParamTypeClasses      #-}</span>
-<a name="line-12"></a><span class='hs-comment'>{-# LANGUAGE ScopedTypeVariables        #-}</span>
-<a name="line-13"></a><span class='hs-comment'>{-# LANGUAGE TypeFamilies               #-}</span>
-<a name="line-14"></a>
-<a name="line-15"></a><span class='hs-comment'>------------------------------------------------------------------------------------</span>
-<a name="line-16"></a><span class='hs-comment'>-- |</span>
-<a name="line-17"></a><span class='hs-comment'>-- Copyright   : (c) Hans Hoglund, Edward Lilley 2012–2014</span>
-<a name="line-18"></a><span class='hs-comment'>--</span>
-<a name="line-19"></a><span class='hs-comment'>-- License     : BSD-style</span>
-<a name="line-20"></a><span class='hs-comment'>--</span>
-<a name="line-21"></a><span class='hs-comment'>-- Maintainer  : hans@hanshoglund.se</span>
-<a name="line-22"></a><span class='hs-comment'>-- Stability   : experimental</span>
-<a name="line-23"></a><span class='hs-comment'>-- Portability : non-portable (TF,GNTD)</span>
-<a name="line-24"></a><span class='hs-comment'>--</span>
-<a name="line-25"></a><span class='hs-comment'>-- Clefs and staff positions.</span>
-<a name="line-26"></a><span class='hs-comment'>--</span>
-<a name="line-27"></a><span class='hs-comment'>-------------------------------------------------------------------------------------</span>
-<a name="line-28"></a>
-<a name="line-29"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Clef</span> <span class='hs-layout'>(</span>
-<a name="line-30"></a>      <span class='hs-comment'>-- * Clef representation</span>
-<a name="line-31"></a>      <span class='hs-conid'>ClefSymbol</span><span class='hs-layout'>,</span>
-<a name="line-32"></a>      <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span>
-<a name="line-33"></a>      <span class='hs-conid'>Clef</span><span class='hs-layout'>,</span>
-<a name="line-34"></a>      <span class='hs-varid'>symbolName</span><span class='hs-layout'>,</span>
-<a name="line-35"></a>      <span class='hs-varid'>symbolPitch</span><span class='hs-layout'>,</span>
-<a name="line-36"></a>      <span class='hs-varid'>positionPitch</span><span class='hs-layout'>,</span>
-<a name="line-37"></a>      <span class='hs-varid'>pitchPosition</span><span class='hs-layout'>,</span>
-<a name="line-38"></a>      <span class='hs-comment'>-- ** Properties</span>
-<a name="line-39"></a>      <span class='hs-varid'>isModernClef</span><span class='hs-layout'>,</span>
-<a name="line-40"></a>      <span class='hs-varid'>isHistoricalClef</span><span class='hs-layout'>,</span>
-<a name="line-41"></a>      <span class='hs-varid'>isVoiceClef</span><span class='hs-layout'>,</span>
-<a name="line-42"></a>
-<a name="line-43"></a>      <span class='hs-comment'>-- * Standard clefs</span>
-<a name="line-44"></a>      <span class='hs-varid'>trebleClef</span><span class='hs-layout'>,</span>
-<a name="line-45"></a>      <span class='hs-varid'>bassClef</span><span class='hs-layout'>,</span>
-<a name="line-46"></a>      <span class='hs-varid'>sopranoClef</span><span class='hs-layout'>,</span>
-<a name="line-47"></a>      <span class='hs-varid'>mezzoSopranoClef</span><span class='hs-layout'>,</span>
-<a name="line-48"></a>      <span class='hs-varid'>altoClef</span><span class='hs-layout'>,</span>
-<a name="line-49"></a>      <span class='hs-varid'>tenorClef</span><span class='hs-layout'>,</span>
-<a name="line-50"></a>      <span class='hs-varid'>baritoneClef</span><span class='hs-layout'>,</span>
-<a name="line-51"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-52"></a>
-<a name="line-53"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Typeable</span>
+<a name="line-2"></a><span class='hs-comment'>-- | Clefs and staff positions.</span>
+<a name="line-3"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Clef</span>
+<a name="line-4"></a><span class='hs-layout'>(</span>
+<a name="line-5"></a>      <span class='hs-comment'>-- * Staff lines</span>
+<a name="line-6"></a>      <span class='hs-conid'>StaffLines</span><span class='hs-layout'>,</span>
+<a name="line-7"></a>      <span class='hs-conid'>HalfSpaces</span><span class='hs-layout'>,</span>
+<a name="line-8"></a>      <span class='hs-conid'>ClefLine</span><span class='hs-layout'>,</span>
+<a name="line-9"></a>      
+<a name="line-10"></a>      <span class='hs-comment'>-- * Clef representation</span>
+<a name="line-11"></a>      <span class='hs-conid'>ClefSymbol</span><span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
+<a name="line-12"></a>      <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span>
+<a name="line-13"></a>      <span class='hs-conid'>Clef</span><span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
+<a name="line-14"></a>      <span class='hs-varid'>symbolName</span><span class='hs-layout'>,</span>
+<a name="line-15"></a>      <span class='hs-varid'>symbolPitch</span><span class='hs-layout'>,</span>
+<a name="line-16"></a>      <span class='hs-varid'>positionPitch</span><span class='hs-layout'>,</span>
+<a name="line-17"></a>      <span class='hs-varid'>pitchPosition</span><span class='hs-layout'>,</span>
+<a name="line-18"></a>
+<a name="line-19"></a>      <span class='hs-comment'>-- ** Properties</span>
+<a name="line-20"></a>      <span class='hs-varid'>isModernClef</span><span class='hs-layout'>,</span>
+<a name="line-21"></a>      <span class='hs-varid'>isHistoricalClef</span><span class='hs-layout'>,</span>
+<a name="line-22"></a>      <span class='hs-varid'>isVoiceClef</span><span class='hs-layout'>,</span>
+<a name="line-23"></a>
+<a name="line-24"></a>      <span class='hs-comment'>-- * Standard clefs</span>
+<a name="line-25"></a>      <span class='hs-varid'>trebleClef</span><span class='hs-layout'>,</span>
+<a name="line-26"></a>      <span class='hs-varid'>bassClef</span><span class='hs-layout'>,</span>
+<a name="line-27"></a>      <span class='hs-varid'>sopranoClef</span><span class='hs-layout'>,</span>
+<a name="line-28"></a>      <span class='hs-varid'>mezzoSopranoClef</span><span class='hs-layout'>,</span>
+<a name="line-29"></a>      <span class='hs-varid'>altoClef</span><span class='hs-layout'>,</span>
+<a name="line-30"></a>      <span class='hs-varid'>tenorClef</span><span class='hs-layout'>,</span>
+<a name="line-31"></a>      <span class='hs-varid'>baritoneClef</span><span class='hs-layout'>,</span>
+<a name="line-32"></a><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-33"></a>
+<a name="line-34"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Typeable</span>
+<a name="line-35"></a>
+<a name="line-36"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Common</span>
+<a name="line-37"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span>
+<a name="line-38"></a>
+<a name="line-39"></a><a name="StaffLines"></a><span class='hs-comment'>-- | Represents staff number relative middle. Staff zero is either the middle staff, or if using an</span>
+<a name="line-40"></a><a name="StaffLines"></a><span class='hs-comment'>-- even number of lines, the staff below the middle space.</span>
+<a name="line-41"></a><a name="StaffLines"></a><span class='hs-comment'>--</span>
+<a name="line-42"></a><a name="StaffLines"></a><span class='hs-keyword'>newtype</span> <span class='hs-conid'>StaffLines</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>StaffLines</span> <span class='hs-layout'>{</span> <span class='hs-varid'>getStaffLines</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Integer</span> <span class='hs-layout'>}</span>
+<a name="line-43"></a>  <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Eq</span><span class='hs-layout'>,</span> <span class='hs-conid'>Ord</span><span class='hs-layout'>,</span> <span class='hs-conid'>Read</span><span class='hs-layout'>,</span> <span class='hs-conid'>Show</span><span class='hs-layout'>,</span> <span class='hs-conid'>Enum</span><span class='hs-layout'>,</span>
+<a name="line-44"></a>            <span class='hs-conid'>Num</span><span class='hs-layout'>,</span> <span class='hs-conid'>Real</span><span class='hs-layout'>,</span> <span class='hs-conid'>Integral</span><span class='hs-layout'>,</span> <span class='hs-conid'>Typeable</span><span class='hs-layout'>)</span>
+<a name="line-45"></a>
+<a name="line-46"></a><a name="HalfSpaces"></a><span class='hs-comment'>-- | Represents the difference betwee  staff positions (often corresponding to one diatonic step).</span>
+<a name="line-47"></a><a name="HalfSpaces"></a><span class='hs-keyword'>newtype</span> <span class='hs-conid'>HalfSpaces</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>HalfSpaces</span> <span class='hs-layout'>{</span> <span class='hs-varid'>getHalfSpaces</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Integer</span> <span class='hs-layout'>}</span>
+<a name="line-48"></a>  <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Eq</span><span class='hs-layout'>,</span> <span class='hs-conid'>Ord</span><span class='hs-layout'>,</span> <span class='hs-conid'>Read</span><span class='hs-layout'>,</span> <span class='hs-conid'>Show</span><span class='hs-layout'>,</span> <span class='hs-conid'>Enum</span><span class='hs-layout'>,</span>
+<a name="line-49"></a>            <span class='hs-conid'>Num</span><span class='hs-layout'>,</span> <span class='hs-conid'>Real</span><span class='hs-layout'>,</span> <span class='hs-conid'>Integral</span><span class='hs-layout'>,</span> <span class='hs-conid'>Typeable</span><span class='hs-layout'>)</span>
+<a name="line-50"></a>
+<a name="line-51"></a><a name="ClefSymbol"></a><span class='hs-comment'>-- | Common clef symbols</span>
+<a name="line-52"></a><a name="ClefSymbol"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>ClefSymbol</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>GClef</span> <span class='hs-keyglyph'>|</span> <span class='hs-conid'>CClef</span> <span class='hs-keyglyph'>|</span> <span class='hs-conid'>FClef</span> <span class='hs-keyglyph'>|</span> <span class='hs-conid'>PercClef</span> <span class='hs-keyglyph'>|</span> <span class='hs-conid'>NeutralClef</span>
+<a name="line-53"></a>    <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Eq</span><span class='hs-layout'>,</span> <span class='hs-conid'>Ord</span><span class='hs-layout'>,</span> <span class='hs-conid'>Show</span><span class='hs-layout'>,</span> <span class='hs-conid'>Typeable</span><span class='hs-layout'>)</span>
 <a name="line-54"></a>
-<a name="line-55"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>StaffLines</span>
-<a name="line-56"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Common</span>
-<a name="line-57"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span>
-<a name="line-58"></a>
-<a name="line-59"></a><a name="ClefSymbol"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>ClefSymbol</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>GClef</span> <span class='hs-keyglyph'>|</span> <span class='hs-conid'>CClef</span> <span class='hs-keyglyph'>|</span> <span class='hs-conid'>FClef</span> <span class='hs-keyglyph'>|</span> <span class='hs-conid'>PercClef</span> <span class='hs-keyglyph'>|</span> <span class='hs-conid'>NeutralClef</span>
-<a name="line-60"></a>    <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Eq</span><span class='hs-layout'>,</span> <span class='hs-conid'>Ord</span><span class='hs-layout'>,</span> <span class='hs-conid'>Show</span><span class='hs-layout'>,</span> <span class='hs-conid'>Typeable</span><span class='hs-layout'>)</span>
-<a name="line-61"></a>
-<a name="line-62"></a><a name="ClefOctave"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>ClefOctave</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Integer</span>
-<a name="line-63"></a><a name="ClefLine"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>ClefLine</span>   <span class='hs-keyglyph'>=</span> <span class='hs-conid'>StaffLines</span>
-<a name="line-64"></a>
-<a name="line-65"></a><a name="Clef"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>Clef</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>ClefSymbol</span><span class='hs-layout'>,</span> <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span> <span class='hs-conid'>ClefLine</span><span class='hs-layout'>)</span>
-<a name="line-66"></a>
-<a name="line-67"></a><a name="symbolName"></a><span class='hs-definition'>symbolName</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefSymbol</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>String</span>
-<a name="line-68"></a><span class='hs-definition'>symbolName</span> <span class='hs-conid'>GClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>"G clef"</span>
-<a name="line-69"></a><span class='hs-definition'>symbolName</span> <span class='hs-conid'>CClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>"C clef"</span>
-<a name="line-70"></a><span class='hs-definition'>symbolName</span> <span class='hs-conid'>FClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>"F clef"</span>
-<a name="line-71"></a><span class='hs-definition'>symbolName</span> <span class='hs-conid'>PercClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>"Percussion clef"</span>
-<a name="line-72"></a><span class='hs-definition'>symbolName</span> <span class='hs-conid'>NeutralClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>"Neutral clef"</span>
-<a name="line-73"></a>
-<a name="line-74"></a><a name="symbolPitch"></a><span class='hs-definition'>symbolPitch</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefSymbol</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Maybe</span> <span class='hs-conid'>Pitch</span>
-<a name="line-75"></a><span class='hs-definition'>symbolPitch</span> <span class='hs-conid'>GClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Just</span> <span class='hs-varid'>g</span>
-<a name="line-76"></a><span class='hs-definition'>symbolPitch</span> <span class='hs-conid'>CClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Just</span> <span class='hs-varid'>c</span>
-<a name="line-77"></a><span class='hs-definition'>symbolPitch</span> <span class='hs-conid'>FClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Just</span> <span class='hs-varid'>f</span>
-<a name="line-78"></a><span class='hs-definition'>symbolPitch</span> <span class='hs-keyword'>_</span>     <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Nothing</span>
+<a name="line-55"></a><a name="ClefOctave"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>ClefOctave</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Integer</span>
+<a name="line-56"></a><a name="ClefLine"></a><span class='hs-keyword'>type</span> <span class='hs-conid'>ClefLine</span>   <span class='hs-keyglyph'>=</span> <span class='hs-conid'>StaffLines</span>
+<a name="line-57"></a>
+<a name="line-58"></a><a name="Clef"></a><span class='hs-keyword'>newtype</span> <span class='hs-conid'>Clef</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Clef</span> <span class='hs-layout'>{</span> <span class='hs-varid'>getClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-layout'>(</span><span class='hs-conid'>ClefSymbol</span><span class='hs-layout'>,</span> <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span> <span class='hs-conid'>ClefLine</span><span class='hs-layout'>)</span> <span class='hs-layout'>}</span>
+<a name="line-59"></a>  <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Eq</span><span class='hs-layout'>,</span> <span class='hs-conid'>Ord</span><span class='hs-layout'>,</span> <span class='hs-conid'>Typeable</span><span class='hs-layout'>)</span>
+<a name="line-60"></a>
+<a name="line-61"></a><a name="instance%20Show%20Clef"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Show</span> <span class='hs-conid'>Clef</span> <span class='hs-keyword'>where</span>
+<a name="line-62"></a>  <span class='hs-varid'>show</span> <span class='hs-varid'>x</span><span class='hs-keyglyph'>@</span><span class='hs-layout'>(</span><span class='hs-conid'>Clef</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-63"></a>    <span class='hs-keyglyph'>|</span> <span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>trebleClef</span>       <span class='hs-keyglyph'>=</span> <span class='hs-str'>"trebleClef"</span>
+<a name="line-64"></a>    <span class='hs-keyglyph'>|</span> <span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>bassClef</span>         <span class='hs-keyglyph'>=</span> <span class='hs-str'>"bassClef"</span>
+<a name="line-65"></a>    <span class='hs-keyglyph'>|</span> <span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>sopranoClef</span>      <span class='hs-keyglyph'>=</span> <span class='hs-str'>"sopranoClef"</span>
+<a name="line-66"></a>    <span class='hs-keyglyph'>|</span> <span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>mezzoSopranoClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>"mezzoSopranoClef"</span>
+<a name="line-67"></a>    <span class='hs-keyglyph'>|</span> <span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>altoClef</span>         <span class='hs-keyglyph'>=</span> <span class='hs-str'>"altoClef"</span>
+<a name="line-68"></a>    <span class='hs-keyglyph'>|</span> <span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>tenorClef</span>        <span class='hs-keyglyph'>=</span> <span class='hs-str'>"tenorClef"</span>
+<a name="line-69"></a>    <span class='hs-keyglyph'>|</span> <span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>baritoneClef</span>     <span class='hs-keyglyph'>=</span> <span class='hs-str'>"baritoneClef"</span>
+<a name="line-70"></a>    <span class='hs-keyglyph'>|</span><span class='hs-varid'>otherwise</span>             <span class='hs-keyglyph'>=</span> <span class='hs-varid'>show</span> <span class='hs-varid'>a</span>
+<a name="line-71"></a>    
+<a name="line-72"></a><a name="symbolName"></a><span class='hs-comment'>-- | Return the English name of the given clef.</span>
+<a name="line-73"></a><span class='hs-definition'>symbolName</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefSymbol</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>String</span>
+<a name="line-74"></a><span class='hs-definition'>symbolName</span> <span class='hs-conid'>GClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>"G clef"</span>
+<a name="line-75"></a><span class='hs-definition'>symbolName</span> <span class='hs-conid'>CClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>"C clef"</span>
+<a name="line-76"></a><span class='hs-definition'>symbolName</span> <span class='hs-conid'>FClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>"F clef"</span>
+<a name="line-77"></a><span class='hs-definition'>symbolName</span> <span class='hs-conid'>PercClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>"Percussion clef"</span>
+<a name="line-78"></a><span class='hs-definition'>symbolName</span> <span class='hs-conid'>NeutralClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>"Neutral clef"</span>
 <a name="line-79"></a>
-<a name="line-80"></a><a name="pitchPosition"></a><span class='hs-comment'>-- TODO consolidate with common</span>
-<a name="line-81"></a><span class='hs-definition'>pitchPosition</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Pitch</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Maybe</span> <span class='hs-conid'>StaffLines</span>
-<a name="line-82"></a><span class='hs-definition'>pitchPosition</span> <span class='hs-layout'>(</span><span class='hs-varid'>s</span><span class='hs-layout'>,</span><span class='hs-varid'>o</span><span class='hs-layout'>,</span><span class='hs-varid'>l</span><span class='hs-layout'>)</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-83"></a>  <span class='hs-keyword'>where</span>
-<a name="line-84"></a>    <span class='hs-varid'>numbersPerOctave</span> <span class='hs-keyglyph'>=</span> <span class='hs-num'>7</span>
-<a name="line-85"></a>    <span class='hs-varid'>referencePitch</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>symbolPitch</span> <span class='hs-varid'>s</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Maybe</span> <span class='hs-conid'>Pitch</span>
+<a name="line-80"></a><a name="symbolPitch"></a><span class='hs-comment'>-- | Return the pitch implied by the given clef at the middle space or line.</span>
+<a name="line-81"></a><span class='hs-definition'>symbolPitch</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefSymbol</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Maybe</span> <span class='hs-conid'>Pitch</span>
+<a name="line-82"></a><span class='hs-definition'>symbolPitch</span> <span class='hs-conid'>GClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Just</span> <span class='hs-varid'>b'</span>
+<a name="line-83"></a><span class='hs-definition'>symbolPitch</span> <span class='hs-conid'>CClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Just</span> <span class='hs-varid'>c</span>
+<a name="line-84"></a><span class='hs-definition'>symbolPitch</span> <span class='hs-conid'>FClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Just</span> <span class='hs-varid'>d_</span>
+<a name="line-85"></a><span class='hs-definition'>symbolPitch</span> <span class='hs-keyword'>_</span>     <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Nothing</span>
 <a name="line-86"></a>
-<a name="line-87"></a><a name="positionPitch"></a><span class='hs-definition'>positionPitch</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>StaffLines</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Maybe</span> <span class='hs-conid'>Pitch</span>
-<a name="line-88"></a><span class='hs-definition'>positionPitch</span> <span class='hs-layout'>(</span><span class='hs-varid'>s</span><span class='hs-layout'>,</span><span class='hs-varid'>o</span><span class='hs-layout'>,</span><span class='hs-varid'>l</span><span class='hs-layout'>)</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-varid'>upDiatonic</span> <span class='hs-varid'>relativePosition</span><span class='hs-layout'>)</span> <span class='hs-varid'>referencePitch</span>
-<a name="line-89"></a>  <span class='hs-keyword'>where</span>
-<a name="line-90"></a>    <span class='hs-varid'>numbersPerOctave</span> <span class='hs-keyglyph'>=</span> <span class='hs-num'>7</span>
-<a name="line-91"></a>    <span class='hs-varid'>referencePitch</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>symbolPitch</span> <span class='hs-varid'>s</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Maybe</span> <span class='hs-conid'>Pitch</span>
-<a name="line-92"></a>    <span class='hs-varid'>relativePosition</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromIntegral</span> <span class='hs-varop'>$</span> <span class='hs-layout'>(</span><span class='hs-varid'>x</span> <span class='hs-comment'>-</span> <span class='hs-varid'>l</span><span class='hs-layout'>)</span> <span class='hs-varop'>+</span> <span class='hs-varid'>fromIntegral</span> <span class='hs-layout'>(</span><span class='hs-varid'>o</span><span class='hs-varop'>*</span><span class='hs-num'>7</span><span class='hs-layout'>)</span>
+<a name="line-87"></a><a name="pitchPosition"></a><span class='hs-comment'>-- TODO consolidate with common</span>
+<a name="line-88"></a><span class='hs-definition'>pitchPosition</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Pitch</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Maybe</span> <span class='hs-conid'>StaffLines</span>
+<a name="line-89"></a><span class='hs-definition'>pitchPosition</span> <span class='hs-layout'>(</span><span class='hs-conid'>Clef</span> <span class='hs-layout'>(</span><span class='hs-varid'>s</span><span class='hs-layout'>,</span><span class='hs-varid'>o</span><span class='hs-layout'>,</span><span class='hs-varid'>l</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
+<a name="line-90"></a>  <span class='hs-keyword'>where</span>
+<a name="line-91"></a>    <span class='hs-varid'>numbersPerOctave</span> <span class='hs-keyglyph'>=</span> <span class='hs-num'>7</span>
+<a name="line-92"></a>    <span class='hs-varid'>referencePitch</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>symbolPitch</span> <span class='hs-varid'>s</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Maybe</span> <span class='hs-conid'>Pitch</span>
 <a name="line-93"></a>
-<a name="line-94"></a><a name="upDiatonic"></a><span class='hs-comment'>-- TODO implement fully in Pitch.Common.Diatonic</span>
-<a name="line-95"></a><span class='hs-definition'>upDiatonic</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Number</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Pitch</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Pitch</span>
-<a name="line-96"></a><span class='hs-definition'>upDiatonic</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"Not implemented: upDiatonic"</span>
-<a name="line-97"></a>
-<a name="line-98"></a><a name="trebleClef"></a><span class='hs-comment'>{-
-<a name="line-99"></a>TODO
+<a name="line-94"></a><a name="positionPitch"></a><span class='hs-definition'>positionPitch</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>StaffLines</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Maybe</span> <span class='hs-conid'>Pitch</span>
+<a name="line-95"></a><span class='hs-definition'>positionPitch</span> <span class='hs-layout'>(</span><span class='hs-conid'>Clef</span> <span class='hs-layout'>(</span><span class='hs-varid'>s</span><span class='hs-layout'>,</span><span class='hs-varid'>o</span><span class='hs-layout'>,</span><span class='hs-varid'>l</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-varid'>upDiatonic</span> <span class='hs-varid'>relativePosition</span><span class='hs-layout'>)</span> <span class='hs-varid'>referencePitch</span>
+<a name="line-96"></a>  <span class='hs-keyword'>where</span>
+<a name="line-97"></a>    <span class='hs-varid'>numbersPerOctave</span> <span class='hs-keyglyph'>=</span> <span class='hs-num'>7</span>
+<a name="line-98"></a>    <span class='hs-varid'>referencePitch</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>symbolPitch</span> <span class='hs-varid'>s</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Maybe</span> <span class='hs-conid'>Pitch</span>
+<a name="line-99"></a>    <span class='hs-varid'>relativePosition</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromIntegral</span> <span class='hs-varop'>$</span> <span class='hs-layout'>(</span><span class='hs-varid'>x</span> <span class='hs-comment'>-</span> <span class='hs-varid'>l</span><span class='hs-layout'>)</span> <span class='hs-varop'>+</span> <span class='hs-varid'>fromIntegral</span> <span class='hs-layout'>(</span><span class='hs-varid'>o</span><span class='hs-varop'>*</span><span class='hs-num'>7</span><span class='hs-layout'>)</span>
 <a name="line-100"></a>
-<a name="line-101"></a>IsPitch instance?
-<a name="line-102"></a>  What to do with the non-standard pitches, i.e.
-<a name="line-103"></a>  we know what (g :: ClefSymbol) is, but what about (cs :: ClefSymbol)?
-<a name="line-104"></a>  I think 1) error or 2) default to g.
-<a name="line-105"></a>
-<a name="line-106"></a>Map this to Pitch.Common
-<a name="line-107"></a>  Do we make this module 1) depend on Pitch.Common or 2) the other way around?
-<a name="line-108"></a>  If 1), do we need to separate G/C/F in ClefSymbol, maybe just put a single constructor for common pitch.
-<a name="line-109"></a>  In that case, maybe a function isStandardClefPitch (i.e. c/f/g) would be appropriate.
-<a name="line-110"></a>-}</span>
-<a name="line-111"></a><span class='hs-definition'>trebleClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span>
-<a name="line-112"></a><a name="bassClef"></a><span class='hs-definition'>bassClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span>
-<a name="line-113"></a><a name="sopranoClef"></a><span class='hs-definition'>sopranoClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span>
-<a name="line-114"></a><a name="mezzoSopranoClef"></a><span class='hs-definition'>mezzoSopranoClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span>
-<a name="line-115"></a><a name="altoClef"></a><span class='hs-definition'>altoClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span>
-<a name="line-116"></a><a name="tenorClef"></a><span class='hs-definition'>tenorClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span>
-<a name="line-117"></a><a name="baritoneClef"></a><span class='hs-definition'>baritoneClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span>
-<a name="line-118"></a><span class='hs-definition'>trebleClef</span>        <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>GClef</span><span class='hs-layout'>,</span> <span class='hs-comment'>-</span><span class='hs-num'>1</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span> <span class='hs-comment'>-</span><span class='hs-num'>1</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefLine</span><span class='hs-layout'>)</span>
-<a name="line-119"></a><span class='hs-definition'>bassClef</span>          <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>FClef</span><span class='hs-layout'>,</span> <span class='hs-num'>1</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span> <span class='hs-comment'>-</span><span class='hs-num'>1</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefLine</span><span class='hs-layout'>)</span>
-<a name="line-120"></a><span class='hs-definition'>sopranoClef</span>       <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>CClef</span><span class='hs-layout'>,</span> <span class='hs-num'>0</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span> <span class='hs-comment'>-</span><span class='hs-num'>2</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefLine</span><span class='hs-layout'>)</span>
-<a name="line-121"></a><span class='hs-definition'>mezzoSopranoClef</span>  <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>CClef</span><span class='hs-layout'>,</span> <span class='hs-num'>0</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span> <span class='hs-comment'>-</span><span class='hs-num'>1</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefLine</span><span class='hs-layout'>)</span>
-<a name="line-122"></a><span class='hs-definition'>altoClef</span>          <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>CClef</span><span class='hs-layout'>,</span> <span class='hs-num'>0</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span> <span class='hs-num'>0</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefLine</span><span class='hs-layout'>)</span>
-<a name="line-123"></a><span class='hs-definition'>tenorClef</span>         <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>CClef</span><span class='hs-layout'>,</span> <span class='hs-num'>0</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span> <span class='hs-num'>1</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefLine</span><span class='hs-layout'>)</span>
-<a name="line-124"></a><span class='hs-definition'>baritoneClef</span>      <span class='hs-keyglyph'>=</span> <span class='hs-layout'>(</span><span class='hs-conid'>CClef</span><span class='hs-layout'>,</span> <span class='hs-num'>0</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span> <span class='hs-num'>2</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefLine</span><span class='hs-layout'>)</span>
-<a name="line-125"></a>
-<a name="line-126"></a><a name="isModernClef"></a><span class='hs-definition'>isModernClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bool</span>
-<a name="line-127"></a><span class='hs-definition'>isModernClef</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>|</span><span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>trebleClef</span>  <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
-<a name="line-128"></a><span class='hs-definition'>isModernClef</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>|</span><span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>bassClef</span>    <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
-<a name="line-129"></a><span class='hs-definition'>isModernClef</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>|</span><span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>altoClef</span>    <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
-<a name="line-130"></a><span class='hs-definition'>isModernClef</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>|</span><span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>tenorClef</span>   <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
-<a name="line-131"></a><span class='hs-definition'>isModernClef</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>|</span><span class='hs-varid'>otherwise</span>        <span class='hs-keyglyph'>=</span> <span class='hs-conid'>False</span>
-<a name="line-132"></a>
-<a name="line-133"></a><a name="isHistoricalClef"></a><span class='hs-definition'>isHistoricalClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bool</span>
-<a name="line-134"></a><span class='hs-definition'>isHistoricalClef</span> <span class='hs-keyword'>_</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>False</span>
-<a name="line-135"></a>
-<a name="line-136"></a><a name="isVoiceClef"></a><span class='hs-comment'>-- | Is this a voice clef, i.e. a c clef on some staff.</span>
-<a name="line-137"></a><span class='hs-definition'>isVoiceClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bool</span>
-<a name="line-138"></a><span class='hs-definition'>isVoiceClef</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>|</span><span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>altoClef</span>    <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
-<a name="line-139"></a><span class='hs-definition'>isVoiceClef</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>|</span><span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>tenorClef</span>   <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
-<a name="line-140"></a><span class='hs-definition'>isVoiceClef</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>|</span><span class='hs-varid'>otherwise</span>        <span class='hs-keyglyph'>=</span> <span class='hs-conid'>False</span>
+<a name="line-101"></a><a name="upDiatonic"></a><span class='hs-comment'>-- TODO implement fully in Pitch.Common.Diatonic</span>
+<a name="line-102"></a><span class='hs-definition'>upDiatonic</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Number</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Pitch</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Pitch</span>
+<a name="line-103"></a><span class='hs-definition'>upDiatonic</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>upDiatonicP</span> <span class='hs-varid'>c</span> <span class='hs-varop'>.</span> <span class='hs-varid'>fromIntegral</span> <span class='hs-comment'>-- TODO Why c?</span>
+<a name="line-104"></a>
+<a name="line-105"></a><span class='hs-comment'>{-
+<a name="line-106"></a>TODO
+<a name="line-107"></a>
+<a name="line-108"></a>IsPitch instance?
+<a name="line-109"></a>  What to do with the non-standard pitches, i.e.
+<a name="line-110"></a>  we know what (g :: ClefSymbol) is, but what about (cs :: ClefSymbol)?
+<a name="line-111"></a>  I think 1) error or 2) default to g.
+<a name="line-112"></a>
+<a name="line-113"></a>Map this to Pitch.Common
+<a name="line-114"></a>  Do we make this module 1) depend on Pitch.Common or 2) the other way around?
+<a name="line-115"></a>  If 1), do we need to separate G/C/F in ClefSymbol, maybe just put a single constructor for common pitch.
+<a name="line-116"></a>  In that case, maybe a function isStandardClefPitch (i.e. c/f/g) would be appropriate.
+<a name="line-117"></a>-}</span>
+<a name="line-118"></a>
+<a name="line-119"></a><a name="trebleClef"></a><span class='hs-comment'>-- | Standard treble clef.</span>
+<a name="line-120"></a><span class='hs-definition'>trebleClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span>
+<a name="line-121"></a><a name="bassClef"></a><span class='hs-comment'>-- | Standard bass clef.</span>
+<a name="line-122"></a><span class='hs-definition'>bassClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span>
+<a name="line-123"></a><a name="sopranoClef"></a><span class='hs-comment'>-- | Standard soprano clef.</span>
+<a name="line-124"></a><span class='hs-definition'>sopranoClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span>
+<a name="line-125"></a><a name="mezzoSopranoClef"></a><span class='hs-comment'>-- | Standard mezzo soprano clef.</span>
+<a name="line-126"></a><span class='hs-definition'>mezzoSopranoClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span>
+<a name="line-127"></a><a name="altoClef"></a><span class='hs-comment'>-- | Standard alto clef.</span>
+<a name="line-128"></a><span class='hs-definition'>altoClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span>
+<a name="line-129"></a><a name="tenorClef"></a><span class='hs-comment'>-- | Standard tenor clef.</span>
+<a name="line-130"></a><span class='hs-definition'>tenorClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span>
+<a name="line-131"></a><a name="baritoneClef"></a><span class='hs-comment'>-- | Standard baritone clef.</span>
+<a name="line-132"></a><span class='hs-definition'>baritoneClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span>
+<a name="line-133"></a><span class='hs-definition'>trebleClef</span>        <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Clef</span> <span class='hs-layout'>(</span><span class='hs-conid'>GClef</span><span class='hs-layout'>,</span> <span class='hs-comment'>-</span><span class='hs-num'>1</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span> <span class='hs-comment'>-</span><span class='hs-num'>1</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefLine</span><span class='hs-layout'>)</span>
+<a name="line-134"></a><span class='hs-definition'>bassClef</span>          <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Clef</span> <span class='hs-layout'>(</span><span class='hs-conid'>FClef</span><span class='hs-layout'>,</span> <span class='hs-num'>1</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span> <span class='hs-comment'>-</span><span class='hs-num'>1</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefLine</span><span class='hs-layout'>)</span>
+<a name="line-135"></a><span class='hs-definition'>sopranoClef</span>       <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Clef</span> <span class='hs-layout'>(</span><span class='hs-conid'>CClef</span><span class='hs-layout'>,</span> <span class='hs-num'>0</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span> <span class='hs-comment'>-</span><span class='hs-num'>2</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefLine</span><span class='hs-layout'>)</span>
+<a name="line-136"></a><span class='hs-definition'>mezzoSopranoClef</span>  <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Clef</span> <span class='hs-layout'>(</span><span class='hs-conid'>CClef</span><span class='hs-layout'>,</span> <span class='hs-num'>0</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span> <span class='hs-comment'>-</span><span class='hs-num'>1</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefLine</span><span class='hs-layout'>)</span>
+<a name="line-137"></a><span class='hs-definition'>altoClef</span>          <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Clef</span> <span class='hs-layout'>(</span><span class='hs-conid'>CClef</span><span class='hs-layout'>,</span> <span class='hs-num'>0</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span> <span class='hs-num'>0</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefLine</span><span class='hs-layout'>)</span>
+<a name="line-138"></a><span class='hs-definition'>tenorClef</span>         <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Clef</span> <span class='hs-layout'>(</span><span class='hs-conid'>CClef</span><span class='hs-layout'>,</span> <span class='hs-num'>0</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span> <span class='hs-num'>1</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefLine</span><span class='hs-layout'>)</span>
+<a name="line-139"></a><span class='hs-definition'>baritoneClef</span>      <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Clef</span> <span class='hs-layout'>(</span><span class='hs-conid'>CClef</span><span class='hs-layout'>,</span> <span class='hs-num'>0</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefOctave</span><span class='hs-layout'>,</span> <span class='hs-num'>2</span>  <span class='hs-keyglyph'>::</span> <span class='hs-conid'>ClefLine</span><span class='hs-layout'>)</span>
+<a name="line-140"></a>
+<a name="line-141"></a><a name="isModernClef"></a><span class='hs-comment'>-- | Is this a clef used in contemporary notation?</span>
+<a name="line-142"></a><span class='hs-definition'>isModernClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bool</span>
+<a name="line-143"></a><span class='hs-definition'>isModernClef</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>|</span><span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>trebleClef</span>  <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
+<a name="line-144"></a><span class='hs-definition'>isModernClef</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>|</span><span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>bassClef</span>    <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
+<a name="line-145"></a><span class='hs-definition'>isModernClef</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>|</span><span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>altoClef</span>    <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
+<a name="line-146"></a><span class='hs-definition'>isModernClef</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>|</span><span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>tenorClef</span>   <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
+<a name="line-147"></a><span class='hs-definition'>isModernClef</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>|</span><span class='hs-varid'>otherwise</span>        <span class='hs-keyglyph'>=</span> <span class='hs-conid'>False</span>
+<a name="line-148"></a>
+<a name="line-149"></a><a name="isHistoricalClef"></a><span class='hs-comment'>-- | Is this an historical clef?</span>
+<a name="line-150"></a><span class='hs-definition'>isHistoricalClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bool</span>
+<a name="line-151"></a><span class='hs-definition'>isHistoricalClef</span> <span class='hs-keyword'>_</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>False</span>
+<a name="line-152"></a>
+<a name="line-153"></a><a name="isVoiceClef"></a><span class='hs-comment'>-- | Is this a traditional voice clef, i.e. a C clef on some staff.</span>
+<a name="line-154"></a><span class='hs-definition'>isVoiceClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Clef</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bool</span>
+<a name="line-155"></a><span class='hs-definition'>isVoiceClef</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>|</span><span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>altoClef</span>    <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
+<a name="line-156"></a><span class='hs-definition'>isVoiceClef</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>|</span><span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>tenorClef</span>   <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
+<a name="line-157"></a><span class='hs-definition'>isVoiceClef</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>|</span><span class='hs-varid'>otherwise</span>        <span class='hs-keyglyph'>=</span> <span class='hs-conid'>False</span>
+<a name="line-158"></a>
+<a name="line-159"></a>
 </pre></body>
 </html>

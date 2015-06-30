@@ -257,7 +257,7 @@
 <a name="line-248"></a>        f (view (from note) -&gt; (view delta -&gt; (t,u),x)) = TempoRegion0 t u (tempoToDuration x)
 <a name="line-249"></a>
 <a name="line-250"></a>tempoRegions :: Span -&gt; [TempoRegion0] -&gt; [TempoRegion]
-<a name="line-251"></a>tempoRegions s = snd . List.mapAccumL f (_onset s, _onset s) -- XXX offset?
+<a name="line-251"></a>tempoRegions s = snd . List.mapAccumL f (s^.onset, s^.onset) -- XXX offset?
 <a name="line-252"></a>    where
 <a name="line-253"></a>        f (nt,st) (TempoRegion0 _ d x) = ((nt .+^ d, st .+^ (d*x)),
 <a name="line-254"></a>            TempoRegion nt (nt .+^ d) st x

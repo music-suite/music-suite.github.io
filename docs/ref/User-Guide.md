@@ -1466,7 +1466,7 @@ The temporal structures, their instances and the concept of denotational design 
 [HasMeta]: /docs/api/music-score/Music-Score-Meta.html#t:HasMeta
 [HasPitch]: /docs/api/music-score/Music-Score-Pitch.html#t:HasPitch
 [HasPitches]: /docs/api/music-score/Music-Score-Pitch.html#t:HasPitches
-[HasPosition]: /docs/api/music-score/Music-Time-Position.html#t:HasPosition
+[HasPosition]: /docs/api/music-score/Music-Time-Juxtapose.html#t:HasPosition
 [Instrument]: /docs/api/music-parts/Music-Parts-Instrument.html#t:Instrument
 [IsInterval]: /docs/api/music-pitch-literal/Music-Pitch-Literal-Interval.html#t:IsInterval
 [IsPitch]: /docs/api/music-pitch-literal/Music-Pitch-Literal-Pitch.html#t:IsPitch
@@ -1475,11 +1475,11 @@ The temporal structures, their instances and the concept of denotational design 
 [Note]: /docs/api/music-score/Music-Time-Note.html#t:Note
 [Part]: /docs/api/music-score/Music-Score-Part.html#t:Part
 [Reactive]: /docs/api/music-score/Music-Time-Reactive.html#t:Reactive
-[Reversible]: /docs/api/music-score/Music-Time-Reverse.html#t:Reversible
+[Reversible]: /docs/api/music-score/Music-Time-Juxtapose.html#t:Reversible
 [Score]: /docs/api/music-score/Music-Time-Score.html#t:Score
 [Solo]: /docs/api/music-parts/Music-Parts-Solo.html#t:Solo
 [Span]: /docs/api/music-score/Music-Time-Internal-Transform.html#t:Span
-[Splittable]: /docs/api/music-score/Music-Time-Split.html#t:Splittable
+[Splittable]: /docs/api/music-score/Music-Time-Juxtapose.html#t:Splittable
 [Subpart]: /docs/api/music-parts/Music-Parts-Subpart.html#t:Subpart
 [Time]: /docs/api/music-score/Music-Time-Internal-Transform.html#t:Time
 [Track]: /docs/api/music-score/Music-Time-Track.html#t:Track
@@ -1497,7 +1497,9 @@ The temporal structures, their instances and the concept of denotational design 
 [asAccidental]: 
 <!-- Unknown: asAccidental No such identifier: asAccidental-->
 
-[asPitch]: /docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:asPitch
+[asPitch]: 
+<!-- Unknown: asPitch No such identifier: asPitch-->
+
 [attribution]: /docs/api/music-score/Music-Score-Meta-Attribution.html#v:attribution
 [attributions]: /docs/api/music-score/Music-Score-Meta-Attribution.html#v:attributions
 [augment]: /docs/api/music-pitch-literal/Music-Pitch-Augmentable.html#v:augment
@@ -1552,7 +1554,7 @@ The temporal structures, their instances and the concept of denotational design 
 [rehearsalMarkDuring]: /docs/api/music-score/Music-Score-Meta-RehearsalMark.html#v:rehearsalMarkDuring
 [rehearsalMark]: /docs/api/music-score/Music-Score-Meta-RehearsalMark.html#v:rehearsalMark
 [renderTempo]: /docs/api/music-score/Music-Score-Meta-Tempo.html#v:renderTempo
-[rev]: /docs/api/music-score/Music-Time-Reverse.html#v:rev
+[rev]: /docs/api/music-score/Music-Time-Juxtapose.html#v:rev
 [scat]: /docs/api/music-score/Music-Time-Juxtapose.html#v:scat
 [separated]: /docs/api/music-score/Music-Score-Articulation.html#v:separated
 [setMetaAttr]: /docs/api/music-score/Music-Score-Meta.html#v:setMetaAttr

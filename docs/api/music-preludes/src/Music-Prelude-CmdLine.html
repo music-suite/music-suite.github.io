@@ -67,7 +67,7 @@
 <a name="line-58"></a><span class='hs-cpp'>#ifndef GHCI</span>
 <a name="line-59"></a><a name="version"></a><span class='hs-definition'>version</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Paths</span><span class='hs-varop'>.</span><span class='hs-varid'>version</span>
 <a name="line-60"></a><span class='hs-cpp'>#else</span>
-<a name="line-61"></a><span class='hs-definition'>version</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
+<a name="line-61"></a><span class='hs-definition'>version</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>error</span> <span class='hs-str'>"Could not get version"</span>
 <a name="line-62"></a><span class='hs-cpp'>#endif</span>
 <a name="line-63"></a>
 <a name="line-64"></a><a name="versionString"></a><span class='hs-comment'>-- | Current Music Suite version as a string.</span>

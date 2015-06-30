@@ -8,192 +8,314 @@
 </head>
 <body>
 <pre><a name="line-1"></a>
-<a name="line-2"></a><span class='hs-comment'>{-# LANGUAGE DeriveDataTypeable         #-}</span>
-<a name="line-3"></a><span class='hs-comment'>{-# LANGUAGE DeriveFoldable             #-}</span>
-<a name="line-4"></a><span class='hs-comment'>{-# LANGUAGE DeriveFunctor              #-}</span>
-<a name="line-5"></a><span class='hs-comment'>{-# LANGUAGE DeriveTraversable          #-}</span>
-<a name="line-6"></a><span class='hs-comment'>{-# LANGUAGE GeneralizedNewtypeDeriving #-}</span>
-<a name="line-7"></a><span class='hs-comment'>{-# LANGUAGE MultiParamTypeClasses      #-}</span>
-<a name="line-8"></a><span class='hs-comment'>{-# LANGUAGE TypeFamilies               #-}</span>
-<a name="line-9"></a>
-<a name="line-10"></a><span class='hs-comment'>------------------------------------------------------------------------------------</span>
-<a name="line-11"></a><span class='hs-comment'>-- |</span>
-<a name="line-12"></a><span class='hs-comment'>-- Copyright   : (c) Hans Hoglund, Edward Lilley 2012–2014</span>
-<a name="line-13"></a><span class='hs-comment'>--</span>
-<a name="line-14"></a><span class='hs-comment'>-- License     : BSD-style</span>
-<a name="line-15"></a><span class='hs-comment'>--</span>
-<a name="line-16"></a><span class='hs-comment'>-- Maintainer  : hans@hanshoglund.se</span>
-<a name="line-17"></a><span class='hs-comment'>-- Stability   : experimental</span>
-<a name="line-18"></a><span class='hs-comment'>-- Portability : non-portable (TF,GNTD)</span>
-<a name="line-19"></a><span class='hs-comment'>--</span>
-<a name="line-20"></a><span class='hs-comment'>-------------------------------------------------------------------------------------</span>
-<a name="line-21"></a>
-<a name="line-22"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Scale</span> <span class='hs-layout'>(</span>
-<a name="line-23"></a>  <span class='hs-conid'>Mode</span><span class='hs-layout'>,</span>
-<a name="line-24"></a>  <span class='hs-conid'>Scale</span><span class='hs-layout'>,</span>
-<a name="line-25"></a>  <span class='hs-varid'>majorScale</span><span class='hs-layout'>,</span>
-<a name="line-26"></a>  <span class='hs-varid'>pureMinorScale</span><span class='hs-layout'>,</span>
-<a name="line-27"></a>  <span class='hs-varid'>harmonicMinorScale</span><span class='hs-layout'>,</span>
-<a name="line-28"></a>  <span class='hs-varid'>melodicMinorScale</span><span class='hs-layout'>,</span>
-<a name="line-29"></a>  <span class='hs-varid'>aeolian</span><span class='hs-layout'>,</span>
-<a name="line-30"></a>  <span class='hs-varid'>locrian</span><span class='hs-layout'>,</span>
-<a name="line-31"></a>  <span class='hs-varid'>ionian</span><span class='hs-layout'>,</span>
-<a name="line-32"></a>  <span class='hs-varid'>dorian</span><span class='hs-layout'>,</span>
-<a name="line-33"></a>  <span class='hs-varid'>phrygian</span><span class='hs-layout'>,</span>
-<a name="line-34"></a>  <span class='hs-varid'>lydian</span><span class='hs-layout'>,</span>
-<a name="line-35"></a>  <span class='hs-varid'>mixolydian</span><span class='hs-layout'>,</span>
-<a name="line-36"></a>  <span class='hs-varid'>majorPentaTonic</span><span class='hs-layout'>,</span>
-<a name="line-37"></a>  <span class='hs-varid'>minorPentaTonic</span><span class='hs-layout'>,</span>
-<a name="line-38"></a>  <span class='hs-varid'>bluesScale</span><span class='hs-layout'>,</span>
-<a name="line-39"></a>  <span class='hs-varid'>bebopScale</span><span class='hs-layout'>,</span>
-<a name="line-40"></a>  <span class='hs-varid'>wholeTone</span><span class='hs-layout'>,</span>
-<a name="line-41"></a>  <span class='hs-varid'>octatonic</span><span class='hs-layout'>,</span>
-<a name="line-42"></a>  <span class='hs-varid'>firstMode</span><span class='hs-layout'>,</span>
-<a name="line-43"></a>  <span class='hs-varid'>secondMode</span><span class='hs-layout'>,</span>
-<a name="line-44"></a>  <span class='hs-varid'>thirdMode</span><span class='hs-layout'>,</span>
-<a name="line-45"></a>  <span class='hs-varid'>fourthMode</span><span class='hs-layout'>,</span>
-<a name="line-46"></a>  <span class='hs-varid'>fifthMode</span><span class='hs-layout'>,</span>
-<a name="line-47"></a>  <span class='hs-varid'>sixthMode</span><span class='hs-layout'>,</span>
-<a name="line-48"></a>  <span class='hs-varid'>seventhMode</span><span class='hs-layout'>,</span>
-<a name="line-49"></a>
-<a name="line-50"></a>  <span class='hs-conid'>Function</span><span class='hs-layout'>,</span>
-<a name="line-51"></a>  <span class='hs-sel'>_intervals</span><span class='hs-layout'>,</span>
-<a name="line-52"></a>  <span class='hs-sel'>_repeat</span><span class='hs-layout'>,</span>
-<a name="line-53"></a>  <span class='hs-conid'>Chord</span><span class='hs-layout'>,</span>
-<a name="line-54"></a>  <span class='hs-sel'>_tonic</span><span class='hs-layout'>,</span>
-<a name="line-55"></a>  
-<a name="line-56"></a>  <span class='hs-varid'>majorTriad</span><span class='hs-layout'>,</span>
-<a name="line-57"></a>  <span class='hs-varid'>minorTriad</span><span class='hs-layout'>,</span>
-<a name="line-58"></a>  <span class='hs-varid'>augmentedChord</span><span class='hs-layout'>,</span>
-<a name="line-59"></a>  <span class='hs-varid'>diminishedChord</span><span class='hs-layout'>,</span>
-<a name="line-60"></a>  <span class='hs-varid'>halfDiminishedChord</span><span class='hs-layout'>,</span>
-<a name="line-61"></a>  <span class='hs-varid'>majorSeventhChord</span><span class='hs-layout'>,</span>
-<a name="line-62"></a>  
-<a name="line-63"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-64"></a>
-<a name="line-65"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>VectorSpace</span>
-<a name="line-66"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span>
-<a name="line-67"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span>
-<a name="line-68"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span>
-<a name="line-69"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span> <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Mode</span><span class='hs-layout'>)</span> <span class='hs-comment'>-- Test</span>
-<a name="line-70"></a>
-<a name="line-71"></a><a name="Mode"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>Mode</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Mode</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-layout'>(</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-comment'>-- intervals, repeat (usually octave)</span>
-<a name="line-72"></a><a name="Scale"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>Scale</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Scale</span> <span class='hs-varid'>a</span> <span class='hs-layout'>(</span><span class='hs-conid'>Mode</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-comment'>-- root, mode</span>
-<a name="line-73"></a>
-<a name="line-74"></a><a name="Function"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>Function</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Function</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-layout'>(</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-comment'>-- intervals, repeat, repeat (usually octave)</span>
-<a name="line-75"></a><a name="Chord"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span> <span class='hs-layout'>(</span><span class='hs-conid'>Function</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-comment'>-- root, function </span>
-<a name="line-76"></a>
-<a name="line-77"></a><span class='hs-sel'>_intervals</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-layout'>(</span><span class='hs-conid'>Function</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span>
-<a name="line-78"></a><span class='hs-sel'>_intervals</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Function</span> <span class='hs-varid'>is</span> <span class='hs-varid'>r</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>is</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Function</span> <span class='hs-varid'>is</span> <span class='hs-varid'>r</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>f</span> <span class='hs-varid'>is</span>
-<a name="line-79"></a>
-<a name="line-80"></a><span class='hs-sel'>_repeat</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-layout'>(</span><span class='hs-conid'>Function</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
-<a name="line-81"></a><span class='hs-sel'>_repeat</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Function</span> <span class='hs-varid'>is</span> <span class='hs-varid'>r</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>r</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Function</span> <span class='hs-varid'>is</span> <span class='hs-varid'>r</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>f</span> <span class='hs-varid'>r</span>
+<a name="line-2"></a><span class='hs-comment'>-- | Scales and chords.</span>
+<a name="line-3"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Scale</span>
+<a name="line-4"></a><span class='hs-layout'>(</span>
+<a name="line-5"></a>        <span class='hs-comment'>-- * Modes and scales</span>
+<a name="line-6"></a>        <span class='hs-conid'>Mode</span><span class='hs-layout'>,</span>
+<a name="line-7"></a>        <span class='hs-varid'>modeFromSteps</span><span class='hs-layout'>,</span>
+<a name="line-8"></a>        <span class='hs-varid'>modeIntervals</span><span class='hs-layout'>,</span>
+<a name="line-9"></a>        <span class='hs-varid'>modeRepeat</span><span class='hs-layout'>,</span>
+<a name="line-10"></a>        <span class='hs-conid'>Scale</span><span class='hs-layout'>,</span>
+<a name="line-11"></a>        <span class='hs-varid'>scaleTonic</span><span class='hs-layout'>,</span>
+<a name="line-12"></a>        <span class='hs-varid'>scaleMode</span><span class='hs-layout'>,</span>
+<a name="line-13"></a>        <span class='hs-varid'>leadingInterval</span><span class='hs-layout'>,</span>           
+<a name="line-14"></a>        <span class='hs-varid'>invertMode</span><span class='hs-layout'>,</span>                
+<a name="line-15"></a>        <span class='hs-varid'>modeToScale</span><span class='hs-layout'>,</span>
+<a name="line-16"></a>        <span class='hs-varid'>scaleToList</span><span class='hs-layout'>,</span>
+<a name="line-17"></a>
+<a name="line-18"></a>        <span class='hs-comment'>-- * Chord types and chords</span>
+<a name="line-19"></a>        <span class='hs-conid'>Function</span><span class='hs-layout'>,</span>
+<a name="line-20"></a>        <span class='hs-varid'>functionFromSteps</span><span class='hs-layout'>,</span>
+<a name="line-21"></a>        <span class='hs-varid'>functionIntervals</span><span class='hs-layout'>,</span>
+<a name="line-22"></a>        <span class='hs-varid'>functionRepeat</span><span class='hs-layout'>,</span>
+<a name="line-23"></a>        <span class='hs-conid'>Chord</span><span class='hs-layout'>,</span>
+<a name="line-24"></a>        <span class='hs-varid'>chordTonic</span><span class='hs-layout'>,</span>
+<a name="line-25"></a>        <span class='hs-varid'>chordFunction</span><span class='hs-layout'>,</span>
+<a name="line-26"></a>        <span class='hs-varid'>complementInterval</span><span class='hs-layout'>,</span>        
+<a name="line-27"></a>        <span class='hs-varid'>invertChord</span><span class='hs-layout'>,</span>               
+<a name="line-28"></a>        <span class='hs-varid'>functionToChord</span><span class='hs-layout'>,</span>           
+<a name="line-29"></a>        <span class='hs-varid'>chordToList</span><span class='hs-layout'>,</span>               
+<a name="line-30"></a>
+<a name="line-31"></a>        <span class='hs-comment'>-- * Common modes</span>
+<a name="line-32"></a>        <span class='hs-comment'>-- ** Classical modes</span>
+<a name="line-33"></a>        <span class='hs-varid'>majorScale</span><span class='hs-layout'>,</span>
+<a name="line-34"></a>        <span class='hs-varid'>pureMinorScale</span><span class='hs-layout'>,</span>
+<a name="line-35"></a>        <span class='hs-varid'>harmonicMinorScale</span><span class='hs-layout'>,</span>
+<a name="line-36"></a>        <span class='hs-varid'>melodicMinorScaleUp</span><span class='hs-layout'>,</span>
+<a name="line-37"></a>        <span class='hs-comment'>-- ** Church modes</span>
+<a name="line-38"></a>        <span class='hs-varid'>aeolian</span><span class='hs-layout'>,</span>
+<a name="line-39"></a>        <span class='hs-varid'>locrian</span><span class='hs-layout'>,</span>
+<a name="line-40"></a>        <span class='hs-varid'>ionian</span><span class='hs-layout'>,</span>
+<a name="line-41"></a>        <span class='hs-varid'>dorian</span><span class='hs-layout'>,</span>
+<a name="line-42"></a>        <span class='hs-varid'>phrygian</span><span class='hs-layout'>,</span>
+<a name="line-43"></a>        <span class='hs-varid'>lydian</span><span class='hs-layout'>,</span>
+<a name="line-44"></a>        <span class='hs-varid'>mixolydian</span><span class='hs-layout'>,</span>
+<a name="line-45"></a>        <span class='hs-varid'>majorPentaTonic</span><span class='hs-layout'>,</span>
+<a name="line-46"></a>        <span class='hs-varid'>minorPentaTonic</span><span class='hs-layout'>,</span>
+<a name="line-47"></a>        <span class='hs-varid'>bluesMinor</span><span class='hs-layout'>,</span>
+<a name="line-48"></a>        <span class='hs-varid'>bluesMajor</span><span class='hs-layout'>,</span>
+<a name="line-49"></a>        <span class='hs-varid'>bebopScale</span><span class='hs-layout'>,</span>
+<a name="line-50"></a>        
+<a name="line-51"></a>        <span class='hs-comment'>-- ** Miscellaneous modes</span>
+<a name="line-52"></a>        <span class='hs-varid'>wholeTone</span><span class='hs-layout'>,</span>
+<a name="line-53"></a>        <span class='hs-varid'>octatonic</span><span class='hs-layout'>,</span>
+<a name="line-54"></a>        
+<a name="line-55"></a>        <span class='hs-comment'>-- ** Modes of limited transposition</span>
+<a name="line-56"></a>        <span class='hs-varid'>firstMode</span><span class='hs-layout'>,</span>
+<a name="line-57"></a>        <span class='hs-varid'>secondMode</span><span class='hs-layout'>,</span>
+<a name="line-58"></a>        <span class='hs-varid'>thirdMode</span><span class='hs-layout'>,</span>
+<a name="line-59"></a>        <span class='hs-varid'>fourthMode</span><span class='hs-layout'>,</span>
+<a name="line-60"></a>        <span class='hs-varid'>fifthMode</span><span class='hs-layout'>,</span>
+<a name="line-61"></a>        <span class='hs-varid'>sixthMode</span><span class='hs-layout'>,</span>
+<a name="line-62"></a>        <span class='hs-varid'>seventhMode</span><span class='hs-layout'>,</span>
+<a name="line-63"></a>
+<a name="line-64"></a>        <span class='hs-comment'>-- * Common chords</span>
+<a name="line-65"></a>        <span class='hs-varid'>majorTriad</span><span class='hs-layout'>,</span>
+<a name="line-66"></a>        <span class='hs-varid'>minorTriad</span><span class='hs-layout'>,</span>
+<a name="line-67"></a>        <span class='hs-varid'>augmentedChord</span><span class='hs-layout'>,</span>
+<a name="line-68"></a>        <span class='hs-varid'>diminishedChord</span><span class='hs-layout'>,</span>
+<a name="line-69"></a>        <span class='hs-varid'>halfDiminishedChord</span><span class='hs-layout'>,</span>
+<a name="line-70"></a>        <span class='hs-varid'>majorMinorSeventhChord</span><span class='hs-layout'>,</span>
+<a name="line-71"></a>        <span class='hs-varid'>majorMajorSeventhChord</span><span class='hs-layout'>,</span>
+<a name="line-72"></a>  
+<a name="line-73"></a><span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-74"></a>
+<a name="line-75"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>VectorSpace</span>
+<a name="line-76"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>AffineSpace</span>
+<a name="line-77"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span>
+<a name="line-78"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span>
+<a name="line-79"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Literal</span>
+<a name="line-80"></a><span class='hs-keyword'>import</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Pitch</span><span class='hs-varop'>.</span><span class='hs-conid'>Common</span> <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-conid'>Mode</span><span class='hs-layout'>)</span>
+<a name="line-81"></a>
 <a name="line-82"></a>
-<a name="line-83"></a><span class='hs-comment'>{-
-<a name="line-84"></a>_pitches :: Lens' (Chord a) [a]
-<a name="line-85"></a>_pitches f (Chord t xs) = fmap (\xs -&gt; Chord t (fmap (.-. t) xs)) $ f (fmap (.+^ t) $ xs) . _intervals
-<a name="line-86"></a>-}</span>
-<a name="line-87"></a>
-<a name="line-88"></a><span class='hs-sel'>_tonic</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-varid'>a</span>
-<a name="line-89"></a><span class='hs-sel'>_tonic</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>t</span> <span class='hs-varid'>xs</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>t</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Chord</span> <span class='hs-varid'>t</span> <span class='hs-varid'>xs</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span><span class='hs-varid'>f</span> <span class='hs-varid'>t</span>
+<a name="line-83"></a><a name="Mode"></a><span class='hs-comment'>-- | A mode is a list of intervals and a characteristic repeating interval. </span>
+<a name="line-84"></a><a name="Mode"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>Mode</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Mode</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-layout'>(</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-comment'>-- intervals, repeat (usually octave)</span>
+<a name="line-85"></a>
+<a name="line-86"></a><a name="modeFromSteps"></a><span class='hs-comment'>-- |</span>
+<a name="line-87"></a><span class='hs-comment'>-- &gt; [Interval] -&gt; Interval -&gt; Mode Pitch</span>
+<a name="line-88"></a><span class='hs-definition'>modeFromSteps</span> <span class='hs-keyglyph'>::</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Mode</span> <span class='hs-varid'>a</span>
+<a name="line-89"></a><span class='hs-definition'>modeFromSteps</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Mode</span>
 <a name="line-90"></a>
-<a name="line-91"></a><a name="majorScale"></a><span class='hs-definition'>majorScale</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-92"></a><span class='hs-definition'>majorScale</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Mode</span> <span class='hs-keyglyph'>[</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
-<a name="line-93"></a>
-<a name="line-94"></a><a name="pureMinorScale"></a><span class='hs-definition'>pureMinorScale</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-95"></a><span class='hs-definition'>pureMinorScale</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-96"></a>
-<a name="line-97"></a><a name="harmonicMinorScale"></a><span class='hs-definition'>harmonicMinorScale</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-98"></a><span class='hs-definition'>harmonicMinorScale</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-99"></a>
-<a name="line-100"></a><a name="melodicMinorScale"></a><span class='hs-definition'>melodicMinorScale</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-101"></a><span class='hs-definition'>melodicMinorScale</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-102"></a>
-<a name="line-103"></a><a name="aeolian"></a><span class='hs-definition'>aeolian</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-104"></a><span class='hs-definition'>aeolian</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Mode</span> <span class='hs-keyglyph'>[</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
-<a name="line-105"></a>
-<a name="line-106"></a><a name="locrian"></a><span class='hs-definition'>locrian</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-107"></a><span class='hs-definition'>locrian</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-108"></a>
-<a name="line-109"></a><a name="ionian"></a><span class='hs-definition'>ionian</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-110"></a><span class='hs-definition'>ionian</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
+<a name="line-91"></a><a name="modeIntervals"></a><span class='hs-comment'>-- |</span>
+<a name="line-92"></a><span class='hs-comment'>-- &gt; Lens' (Mode Pitch) [Interval]</span>
+<a name="line-93"></a><span class='hs-definition'>modeIntervals</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-layout'>(</span><span class='hs-conid'>Mode</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span>
+<a name="line-94"></a><span class='hs-definition'>modeIntervals</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Mode</span> <span class='hs-varid'>is</span> <span class='hs-varid'>r</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>is</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Mode</span> <span class='hs-varid'>is</span> <span class='hs-varid'>r</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>f</span> <span class='hs-varid'>is</span>
+<a name="line-95"></a>
+<a name="line-96"></a><a name="modeRepeat"></a><span class='hs-comment'>-- |</span>
+<a name="line-97"></a><span class='hs-comment'>-- &gt; Lens' (Mode Pitch) Interval</span>
+<a name="line-98"></a><span class='hs-definition'>modeRepeat</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-layout'>(</span><span class='hs-conid'>Mode</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-99"></a><span class='hs-definition'>modeRepeat</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Mode</span> <span class='hs-varid'>is</span> <span class='hs-varid'>r</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>r</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Mode</span> <span class='hs-varid'>is</span> <span class='hs-varid'>r</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>f</span> <span class='hs-varid'>r</span>
+<a name="line-100"></a>
+<a name="line-101"></a><a name="Scale"></a><span class='hs-comment'>-- | A scale is a mode with a specified tonic.</span>
+<a name="line-102"></a><a name="Scale"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>Scale</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Scale</span> <span class='hs-varid'>a</span> <span class='hs-layout'>(</span><span class='hs-conid'>Mode</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>      <span class='hs-comment'>-- root, mode</span>
+<a name="line-103"></a>
+<a name="line-104"></a><a name="modeToScale"></a><span class='hs-definition'>modeToScale</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AffineSpace</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Mode</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Scale</span> <span class='hs-varid'>a</span>
+<a name="line-105"></a><span class='hs-definition'>modeToScale</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Scale</span>
+<a name="line-106"></a>
+<a name="line-107"></a><a name="scaleTonic"></a><span class='hs-comment'>-- |</span>
+<a name="line-108"></a><span class='hs-comment'>-- &gt; Lens' (Scale Pitch) Pitch</span>
+<a name="line-109"></a><span class='hs-definition'>scaleTonic</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-layout'>(</span><span class='hs-conid'>Scale</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-varid'>a</span>
+<a name="line-110"></a><span class='hs-definition'>scaleTonic</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Scale</span> <span class='hs-varid'>t</span> <span class='hs-varid'>xs</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>t</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Scale</span> <span class='hs-varid'>t</span> <span class='hs-varid'>xs</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span><span class='hs-varid'>f</span> <span class='hs-varid'>t</span>
 <a name="line-111"></a>
-<a name="line-112"></a><a name="dorian"></a><span class='hs-definition'>dorian</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-113"></a><span class='hs-definition'>dorian</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-114"></a>
-<a name="line-115"></a><a name="phrygian"></a><span class='hs-definition'>phrygian</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-116"></a><span class='hs-definition'>phrygian</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-117"></a>
-<a name="line-118"></a><a name="lydian"></a><span class='hs-definition'>lydian</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-119"></a><span class='hs-definition'>lydian</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-120"></a>
-<a name="line-121"></a><a name="mixolydian"></a><span class='hs-definition'>mixolydian</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-122"></a><span class='hs-definition'>mixolydian</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-123"></a>
-<a name="line-124"></a><a name="majorPentaTonic"></a><span class='hs-definition'>majorPentaTonic</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-125"></a><span class='hs-definition'>majorPentaTonic</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-126"></a>
-<a name="line-127"></a><a name="minorPentaTonic"></a><span class='hs-definition'>minorPentaTonic</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-128"></a><span class='hs-definition'>minorPentaTonic</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-129"></a>
-<a name="line-130"></a><a name="bluesScale"></a><span class='hs-definition'>bluesScale</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-131"></a><span class='hs-definition'>bluesScale</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-132"></a>
-<a name="line-133"></a><a name="bebopScale"></a><span class='hs-definition'>bebopScale</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-134"></a><span class='hs-definition'>bebopScale</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
+<a name="line-112"></a><a name="scaleMode"></a><span class='hs-comment'>-- |</span>
+<a name="line-113"></a><span class='hs-comment'>-- &gt; Lens' (Scale Pitch) (Mode Pitch)</span>
+<a name="line-114"></a><span class='hs-definition'>scaleMode</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-layout'>(</span><span class='hs-conid'>Scale</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Mode</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-115"></a><span class='hs-definition'>scaleMode</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Scale</span> <span class='hs-varid'>t</span> <span class='hs-varid'>xs</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>xs</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Scale</span> <span class='hs-varid'>t</span> <span class='hs-varid'>xs</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span><span class='hs-varid'>f</span> <span class='hs-varid'>xs</span>
+<a name="line-116"></a>
+<a name="line-117"></a><a name="leadingInterval"></a><span class='hs-comment'>-- |</span>
+<a name="line-118"></a><span class='hs-comment'>--</span>
+<a name="line-119"></a><span class='hs-comment'>-- &gt;&gt;&gt; leadingInterval majorScale </span>
+<a name="line-120"></a><span class='hs-comment'>-- m2</span>
+<a name="line-121"></a><span class='hs-comment'>-- &gt;&gt;&gt; leadingInterval harmonicMinorScale </span>
+<a name="line-122"></a><span class='hs-comment'>-- m2</span>
+<a name="line-123"></a><span class='hs-comment'>-- &gt;&gt;&gt; leadingInterval pureMinorScale </span>
+<a name="line-124"></a><span class='hs-comment'>-- _M2</span>
+<a name="line-125"></a><span class='hs-comment'>--</span>
+<a name="line-126"></a><span class='hs-definition'>leadingInterval</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AffineSpace</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Mode</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span>
+<a name="line-127"></a><span class='hs-definition'>leadingInterval</span> <span class='hs-layout'>(</span><span class='hs-conid'>Mode</span> <span class='hs-varid'>steps</span> <span class='hs-varid'>repeating</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>repeating</span> <span class='hs-varop'>^-^</span> <span class='hs-varid'>sumV</span> <span class='hs-varid'>steps</span>
+<a name="line-128"></a>
+<a name="line-129"></a><a name="invertMode"></a><span class='hs-definition'>invertMode</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AffineSpace</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Mode</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Mode</span> <span class='hs-varid'>a</span>
+<a name="line-130"></a><span class='hs-definition'>invertMode</span> <span class='hs-num'>0</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>id</span>
+<a name="line-131"></a><span class='hs-definition'>invertMode</span> <span class='hs-varid'>n</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>invertMode</span> <span class='hs-layout'>(</span><span class='hs-varid'>n</span><span class='hs-comment'>-</span><span class='hs-num'>1</span><span class='hs-layout'>)</span> <span class='hs-varop'>.</span> <span class='hs-varid'>invertMode1</span>
+<a name="line-132"></a>  <span class='hs-keyword'>where</span>
+<a name="line-133"></a>    <span class='hs-varid'>invertMode1</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AffineSpace</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Mode</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Mode</span> <span class='hs-varid'>a</span>
+<a name="line-134"></a>    <span class='hs-varid'>invertMode1</span> <span class='hs-varid'>mode</span><span class='hs-keyglyph'>@</span><span class='hs-layout'>(</span><span class='hs-conid'>Mode</span> <span class='hs-varid'>steps</span> <span class='hs-varid'>repeating</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Mode</span> <span class='hs-layout'>(</span><span class='hs-varid'>tail</span> <span class='hs-varid'>steps</span> <span class='hs-varop'>++</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>leadingInterval</span> <span class='hs-varid'>mode</span><span class='hs-keyglyph'>]</span><span class='hs-layout'>)</span> <span class='hs-varid'>repeating</span>
 <a name="line-135"></a>
-<a name="line-136"></a><a name="wholeTone"></a><span class='hs-definition'>wholeTone</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-137"></a><span class='hs-definition'>wholeTone</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-138"></a>
-<a name="line-139"></a><a name="octatonic"></a><span class='hs-definition'>octatonic</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-140"></a><span class='hs-definition'>octatonic</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-141"></a>
-<a name="line-142"></a><a name="firstMode"></a><span class='hs-definition'>firstMode</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-143"></a><span class='hs-definition'>firstMode</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
+<a name="line-136"></a><a name="scaleToList"></a><span class='hs-definition'>scaleToList</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AffineSpace</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Scale</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span>
+<a name="line-137"></a><span class='hs-definition'>scaleToList</span> <span class='hs-layout'>(</span><span class='hs-conid'>Scale</span> <span class='hs-varid'>tonic</span> <span class='hs-varid'>mode</span><span class='hs-keyglyph'>@</span><span class='hs-layout'>(</span><span class='hs-conid'>Mode</span> <span class='hs-varid'>steps</span> <span class='hs-varid'>repeating</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>offsetPoints</span> <span class='hs-varid'>tonic</span> <span class='hs-varid'>steps</span>
+<a name="line-138"></a>  <span class='hs-keyword'>where</span>
+<a name="line-139"></a>    <span class='hs-comment'>-- TODO consolidate</span>
+<a name="line-140"></a>    <span class='hs-varid'>offsetPoints</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AffineSpace</span> <span class='hs-varid'>p</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>p</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>p</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>p</span><span class='hs-keyglyph'>]</span>
+<a name="line-141"></a>    <span class='hs-varid'>offsetPoints</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>scanl</span> <span class='hs-layout'>(</span><span class='hs-varop'>.+^</span><span class='hs-layout'>)</span>
+<a name="line-142"></a>
+<a name="line-143"></a>
 <a name="line-144"></a>
-<a name="line-145"></a><a name="secondMode"></a><span class='hs-definition'>secondMode</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-146"></a><span class='hs-definition'>secondMode</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
+<a name="line-145"></a>
+<a name="line-146"></a><a name="Function"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>Function</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Function</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-layout'>(</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-comment'>-- intervals, repeat, repeat (usually octave)</span>
 <a name="line-147"></a>
-<a name="line-148"></a><a name="thirdMode"></a><span class='hs-definition'>thirdMode</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-149"></a><span class='hs-definition'>thirdMode</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-150"></a>
-<a name="line-151"></a><a name="fourthMode"></a><span class='hs-definition'>fourthMode</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-152"></a><span class='hs-definition'>fourthMode</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-153"></a>
-<a name="line-154"></a><a name="fifthMode"></a><span class='hs-definition'>fifthMode</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-155"></a><span class='hs-definition'>fifthMode</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-156"></a>
-<a name="line-157"></a><a name="sixthMode"></a><span class='hs-definition'>sixthMode</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-158"></a><span class='hs-definition'>sixthMode</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-159"></a>
-<a name="line-160"></a><a name="seventhMode"></a><span class='hs-definition'>seventhMode</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
-<a name="line-161"></a><span class='hs-definition'>seventhMode</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
+<a name="line-148"></a><a name="functionFromSteps"></a><span class='hs-comment'>-- |</span>
+<a name="line-149"></a><span class='hs-comment'>-- &gt; [Interval] -&gt; Interval -&gt; Function Pitch</span>
+<a name="line-150"></a><span class='hs-definition'>functionFromSteps</span> <span class='hs-keyglyph'>::</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Function</span> <span class='hs-varid'>a</span>
+<a name="line-151"></a><span class='hs-definition'>functionFromSteps</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Function</span>
+<a name="line-152"></a>
+<a name="line-153"></a><a name="functionIntervals"></a><span class='hs-comment'>-- |</span>
+<a name="line-154"></a><span class='hs-comment'>-- &gt; Lens' (Function Pitch) [Interval]</span>
+<a name="line-155"></a><span class='hs-definition'>functionIntervals</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-layout'>(</span><span class='hs-conid'>Function</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span>
+<a name="line-156"></a><span class='hs-definition'>functionIntervals</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Function</span> <span class='hs-varid'>is</span> <span class='hs-varid'>r</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>is</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Function</span> <span class='hs-varid'>is</span> <span class='hs-varid'>r</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>f</span> <span class='hs-varid'>is</span>
+<a name="line-157"></a>
+<a name="line-158"></a><a name="functionRepeat"></a><span class='hs-comment'>-- |</span>
+<a name="line-159"></a><span class='hs-comment'>-- &gt; Lens' (Function Pitch) Interval</span>
+<a name="line-160"></a><span class='hs-definition'>functionRepeat</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-layout'>(</span><span class='hs-conid'>Function</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-161"></a><span class='hs-definition'>functionRepeat</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Function</span> <span class='hs-varid'>is</span> <span class='hs-varid'>r</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>r</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Function</span> <span class='hs-varid'>is</span> <span class='hs-varid'>r</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>f</span> <span class='hs-varid'>r</span>
 <a name="line-162"></a>
-<a name="line-163"></a>
+<a name="line-163"></a><a name="Chord"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span> <span class='hs-layout'>(</span><span class='hs-conid'>Function</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>          <span class='hs-comment'>-- root, function</span>
 <a name="line-164"></a>
-<a name="line-165"></a>
-<a name="line-166"></a><a name="majorTriad"></a><span class='hs-definition'>majorTriad</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Function</span> <span class='hs-conid'>Pitch</span>
-<a name="line-167"></a><span class='hs-definition'>majorTriad</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-168"></a>
-<a name="line-169"></a><a name="minorTriad"></a><span class='hs-definition'>minorTriad</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Function</span> <span class='hs-conid'>Pitch</span>
-<a name="line-170"></a><span class='hs-definition'>minorTriad</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-171"></a>
-<a name="line-172"></a><a name="augmentedChord"></a><span class='hs-definition'>augmentedChord</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Function</span> <span class='hs-conid'>Pitch</span>
-<a name="line-173"></a><span class='hs-definition'>augmentedChord</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-174"></a>
-<a name="line-175"></a><a name="diminishedChord"></a><span class='hs-definition'>diminishedChord</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Function</span> <span class='hs-conid'>Pitch</span>
-<a name="line-176"></a><span class='hs-definition'>diminishedChord</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
+<a name="line-165"></a><a name="functionToChord"></a><span class='hs-definition'>functionToChord</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AffineSpace</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Function</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span>
+<a name="line-166"></a><span class='hs-definition'>functionToChord</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Chord</span>
+<a name="line-167"></a>
+<a name="line-168"></a><a name="chordTonic"></a><span class='hs-comment'>-- |</span>
+<a name="line-169"></a><span class='hs-comment'>-- &gt; Lens' (Chord Pitch) Pitch</span>
+<a name="line-170"></a><span class='hs-definition'>chordTonic</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-varid'>a</span>
+<a name="line-171"></a><span class='hs-definition'>chordTonic</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>t</span> <span class='hs-varid'>xs</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>t</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Chord</span> <span class='hs-varid'>t</span> <span class='hs-varid'>xs</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span><span class='hs-varid'>f</span> <span class='hs-varid'>t</span>
+<a name="line-172"></a>
+<a name="line-173"></a><a name="chordFunction"></a><span class='hs-comment'>-- |</span>
+<a name="line-174"></a><span class='hs-comment'>-- &gt; Lens' (Chord Pitch) (Function Pitch)</span>
+<a name="line-175"></a><span class='hs-definition'>chordFunction</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Function</span> <span class='hs-varid'>a</span><span class='hs-layout'>)</span>
+<a name="line-176"></a><span class='hs-definition'>chordFunction</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>t</span> <span class='hs-varid'>xs</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>xs</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Chord</span> <span class='hs-varid'>t</span> <span class='hs-varid'>xs</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span><span class='hs-varid'>f</span> <span class='hs-varid'>xs</span>
 <a name="line-177"></a>
-<a name="line-178"></a><a name="halfDiminishedChord"></a><span class='hs-definition'>halfDiminishedChord</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Function</span> <span class='hs-conid'>Pitch</span>
-<a name="line-179"></a><span class='hs-definition'>halfDiminishedChord</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-180"></a>
-<a name="line-181"></a><a name="majorSeventhChord"></a><span class='hs-definition'>majorSeventhChord</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Function</span> <span class='hs-conid'>Pitch</span>
-<a name="line-182"></a><span class='hs-definition'>majorSeventhChord</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>undefined</span>
-<a name="line-183"></a>
-<a name="line-184"></a>
-<a name="line-185"></a>
-<a name="line-186"></a>
-<a name="line-187"></a>
-<a name="line-188"></a>
+<a name="line-178"></a><a name="complementInterval"></a><span class='hs-comment'>-- |</span>
+<a name="line-179"></a><span class='hs-comment'>--</span>
+<a name="line-180"></a><span class='hs-comment'>-- &gt;&gt;&gt; complementInterval majorTriad</span>
+<a name="line-181"></a><span class='hs-comment'>-- _P4</span>
+<a name="line-182"></a><span class='hs-comment'>-- &gt;&gt;&gt; complementInterval minorTriad</span>
+<a name="line-183"></a><span class='hs-comment'>-- _P4</span>
+<a name="line-184"></a><span class='hs-comment'>-- &gt;&gt;&gt; complementInterval majorMinorSeventhChord</span>
+<a name="line-185"></a><span class='hs-comment'>-- _M2</span>
+<a name="line-186"></a><span class='hs-comment'>--</span>
+<a name="line-187"></a><span class='hs-comment'>-- &gt; Lens' (Function Pitch) Interval</span>
+<a name="line-188"></a><span class='hs-definition'>complementInterval</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AffineSpace</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Function</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Diff</span> <span class='hs-varid'>a</span>
+<a name="line-189"></a><span class='hs-definition'>complementInterval</span> <span class='hs-layout'>(</span><span class='hs-conid'>Function</span> <span class='hs-varid'>leaps</span> <span class='hs-varid'>repeating</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>repeating</span> <span class='hs-varop'>^-^</span> <span class='hs-varid'>sumV</span> <span class='hs-varid'>leaps</span>
+<a name="line-190"></a>
+<a name="line-191"></a><a name="invertChord"></a><span class='hs-definition'>invertChord</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AffineSpace</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Function</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Function</span> <span class='hs-varid'>a</span>
+<a name="line-192"></a><span class='hs-definition'>invertChord</span> <span class='hs-num'>0</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>id</span>
+<a name="line-193"></a><span class='hs-definition'>invertChord</span> <span class='hs-varid'>n</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>invertChord</span> <span class='hs-layout'>(</span><span class='hs-varid'>n</span><span class='hs-comment'>-</span><span class='hs-num'>1</span><span class='hs-layout'>)</span> <span class='hs-varop'>.</span> <span class='hs-varid'>invertChord1</span>
+<a name="line-194"></a>  <span class='hs-keyword'>where</span>
+<a name="line-195"></a>    <span class='hs-varid'>invertChord1</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AffineSpace</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Function</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Function</span> <span class='hs-varid'>a</span>
+<a name="line-196"></a>    <span class='hs-varid'>invertChord1</span> <span class='hs-varid'>function</span><span class='hs-keyglyph'>@</span><span class='hs-layout'>(</span><span class='hs-conid'>Function</span> <span class='hs-varid'>leaps</span> <span class='hs-varid'>repeating</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Function</span> <span class='hs-layout'>(</span><span class='hs-varid'>tail</span> <span class='hs-varid'>leaps</span> <span class='hs-varop'>++</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>complementInterval</span> <span class='hs-varid'>function</span><span class='hs-keyglyph'>]</span><span class='hs-layout'>)</span> <span class='hs-varid'>repeating</span>
+<a name="line-197"></a>
+<a name="line-198"></a><a name="chordToList"></a><span class='hs-comment'>-- | Returns a single inversion of the given chord (no repeats!).</span>
+<a name="line-199"></a><span class='hs-definition'>chordToList</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AffineSpace</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-conid'>Chord</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>a</span><span class='hs-keyglyph'>]</span>
+<a name="line-200"></a><span class='hs-definition'>chordToList</span> <span class='hs-layout'>(</span><span class='hs-conid'>Chord</span> <span class='hs-varid'>tonic</span> <span class='hs-varid'>mode</span><span class='hs-keyglyph'>@</span><span class='hs-layout'>(</span><span class='hs-conid'>Function</span> <span class='hs-varid'>leaps</span> <span class='hs-varid'>repeating</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>offsetPoints</span> <span class='hs-varid'>tonic</span> <span class='hs-varid'>leaps</span>
+<a name="line-201"></a><span class='hs-comment'>-- TODO inversion?</span>
+<a name="line-202"></a>  <span class='hs-keyword'>where</span>
+<a name="line-203"></a>    <span class='hs-comment'>-- TODO consolidate</span>
+<a name="line-204"></a>    <span class='hs-varid'>offsetPoints</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>AffineSpace</span> <span class='hs-varid'>p</span> <span class='hs-keyglyph'>=&gt;</span> <span class='hs-varid'>p</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Diff</span> <span class='hs-varid'>p</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>p</span><span class='hs-keyglyph'>]</span>
+<a name="line-205"></a>    <span class='hs-varid'>offsetPoints</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>scanl</span> <span class='hs-layout'>(</span><span class='hs-varop'>.+^</span><span class='hs-layout'>)</span>
+<a name="line-206"></a>
+<a name="line-207"></a>
+<a name="line-208"></a>
+<a name="line-209"></a>
+<a name="line-210"></a><span class='hs-comment'>-- Common scales</span>
+<a name="line-211"></a>
+<a name="line-212"></a><a name="majorScale"></a><span class='hs-definition'>majorScale</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-213"></a><span class='hs-definition'>majorScale</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>modeFromSteps</span> <span class='hs-keyglyph'>[</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-214"></a>
+<a name="line-215"></a><a name="pureMinorScale"></a><span class='hs-definition'>pureMinorScale</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-216"></a><span class='hs-definition'>pureMinorScale</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>modeFromSteps</span> <span class='hs-keyglyph'>[</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-217"></a>
+<a name="line-218"></a><a name="harmonicMinorScale"></a><span class='hs-definition'>harmonicMinorScale</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-219"></a><span class='hs-definition'>harmonicMinorScale</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>modeFromSteps</span> <span class='hs-keyglyph'>[</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_A2</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-220"></a>
+<a name="line-221"></a><a name="melodicMinorScaleUp"></a><span class='hs-definition'>melodicMinorScaleUp</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-222"></a><span class='hs-definition'>melodicMinorScaleUp</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>modeFromSteps</span> <span class='hs-keyglyph'>[</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-223"></a>
+<a name="line-224"></a><a name="ionian"></a><span class='hs-definition'>ionian</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-225"></a><span class='hs-definition'>ionian</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>invertMode</span> <span class='hs-num'>0</span> <span class='hs-varid'>majorScale</span>
+<a name="line-226"></a>
+<a name="line-227"></a><a name="dorian"></a><span class='hs-definition'>dorian</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-228"></a><span class='hs-definition'>dorian</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>invertMode</span> <span class='hs-num'>1</span> <span class='hs-varid'>majorScale</span>
+<a name="line-229"></a>
+<a name="line-230"></a><a name="phrygian"></a><span class='hs-definition'>phrygian</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-231"></a><span class='hs-definition'>phrygian</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>invertMode</span> <span class='hs-num'>2</span> <span class='hs-varid'>majorScale</span>
+<a name="line-232"></a>
+<a name="line-233"></a><a name="lydian"></a><span class='hs-definition'>lydian</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-234"></a><span class='hs-definition'>lydian</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>invertMode</span> <span class='hs-num'>3</span> <span class='hs-varid'>majorScale</span>
+<a name="line-235"></a>
+<a name="line-236"></a><a name="mixolydian"></a><span class='hs-definition'>mixolydian</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-237"></a><span class='hs-definition'>mixolydian</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>invertMode</span> <span class='hs-num'>4</span> <span class='hs-varid'>majorScale</span>
+<a name="line-238"></a>
+<a name="line-239"></a><a name="aeolian"></a><span class='hs-definition'>aeolian</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-240"></a><span class='hs-definition'>aeolian</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>invertMode</span> <span class='hs-num'>5</span> <span class='hs-varid'>majorScale</span>
+<a name="line-241"></a>
+<a name="line-242"></a><a name="locrian"></a><span class='hs-definition'>locrian</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-243"></a><span class='hs-definition'>locrian</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>invertMode</span> <span class='hs-num'>6</span> <span class='hs-varid'>majorScale</span>
+<a name="line-244"></a>
+<a name="line-245"></a><a name="majorPentaTonic"></a><span class='hs-definition'>majorPentaTonic</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-246"></a><span class='hs-definition'>majorPentaTonic</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>modeFromSteps</span> <span class='hs-keyglyph'>[</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m3</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-247"></a>
+<a name="line-248"></a><a name="bluesMinor"></a><span class='hs-definition'>bluesMinor</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-249"></a><span class='hs-definition'>bluesMinor</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>invertMode</span> <span class='hs-num'>2</span> <span class='hs-varid'>majorPentaTonic</span>
+<a name="line-250"></a>
+<a name="line-251"></a><a name="bluesMajor"></a><span class='hs-definition'>bluesMajor</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-252"></a><span class='hs-definition'>bluesMajor</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>invertMode</span> <span class='hs-num'>3</span> <span class='hs-varid'>majorPentaTonic</span>
+<a name="line-253"></a>
+<a name="line-254"></a><a name="minorPentaTonic"></a><span class='hs-definition'>minorPentaTonic</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-255"></a><span class='hs-definition'>minorPentaTonic</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>invertMode</span> <span class='hs-num'>4</span> <span class='hs-varid'>majorPentaTonic</span>
+<a name="line-256"></a>
+<a name="line-257"></a><a name="bebopScale"></a><span class='hs-definition'>bebopScale</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-258"></a><span class='hs-definition'>bebopScale</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>modeFromSteps</span> <span class='hs-keyglyph'>[</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-259"></a>
+<a name="line-260"></a><a name="wholeTone"></a><span class='hs-definition'>wholeTone</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-261"></a><span class='hs-definition'>wholeTone</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>firstMode</span>
+<a name="line-262"></a>
+<a name="line-263"></a><a name="octatonic"></a><span class='hs-definition'>octatonic</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-264"></a><span class='hs-definition'>octatonic</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>secondMode</span>
+<a name="line-265"></a>
+<a name="line-266"></a><a name="firstMode"></a><span class='hs-definition'>firstMode</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-267"></a><span class='hs-definition'>firstMode</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>modeFromSteps</span> <span class='hs-keyglyph'>[</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-268"></a>
+<a name="line-269"></a><a name="secondMode"></a><span class='hs-definition'>secondMode</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-270"></a><span class='hs-definition'>secondMode</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>modeFromSteps</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_A1</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-271"></a>
+<a name="line-272"></a><a name="thirdMode"></a><span class='hs-definition'>thirdMode</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-273"></a><span class='hs-definition'>thirdMode</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>modeFromSteps</span> <span class='hs-keyglyph'>[</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-274"></a>
+<a name="line-275"></a><a name="fourthMode"></a><span class='hs-definition'>fourthMode</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-276"></a><span class='hs-definition'>fourthMode</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>modeFromSteps</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-varid'>m3</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-varid'>m3</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-277"></a>
+<a name="line-278"></a><a name="fifthMode"></a><span class='hs-definition'>fifthMode</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-279"></a><span class='hs-definition'>fifthMode</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>modeFromSteps</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M3</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M3</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-280"></a>
+<a name="line-281"></a><a name="sixthMode"></a><span class='hs-definition'>sixthMode</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-282"></a><span class='hs-definition'>sixthMode</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>modeFromSteps</span> <span class='hs-keyglyph'>[</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-283"></a>
+<a name="line-284"></a><a name="seventhMode"></a><span class='hs-definition'>seventhMode</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Mode</span> <span class='hs-conid'>Pitch</span>
+<a name="line-285"></a><span class='hs-definition'>seventhMode</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>modeFromSteps</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-varid'>m2</span><span class='hs-layout'>,</span><span class='hs-sel'>_M2</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-286"></a>
+<a name="line-287"></a><span class='hs-comment'>-- Common chords</span>
+<a name="line-288"></a>
+<a name="line-289"></a><a name="majorTriad"></a><span class='hs-definition'>majorTriad</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Function</span> <span class='hs-conid'>Pitch</span>
+<a name="line-290"></a><span class='hs-definition'>majorTriad</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Function</span> <span class='hs-keyglyph'>[</span><span class='hs-sel'>_M3</span><span class='hs-layout'>,</span><span class='hs-varid'>m3</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-291"></a>
+<a name="line-292"></a><a name="minorTriad"></a><span class='hs-definition'>minorTriad</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Function</span> <span class='hs-conid'>Pitch</span>
+<a name="line-293"></a><span class='hs-definition'>minorTriad</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Function</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>m3</span><span class='hs-layout'>,</span><span class='hs-sel'>_M3</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-294"></a>
+<a name="line-295"></a><a name="augmentedChord"></a><span class='hs-definition'>augmentedChord</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Function</span> <span class='hs-conid'>Pitch</span>
+<a name="line-296"></a><span class='hs-definition'>augmentedChord</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Function</span> <span class='hs-keyglyph'>[</span><span class='hs-sel'>_M3</span><span class='hs-layout'>,</span><span class='hs-sel'>_M3</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-297"></a>
+<a name="line-298"></a><a name="diminishedChord"></a><span class='hs-definition'>diminishedChord</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Function</span> <span class='hs-conid'>Pitch</span>
+<a name="line-299"></a><span class='hs-definition'>diminishedChord</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Function</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>m3</span><span class='hs-layout'>,</span><span class='hs-varid'>m3</span><span class='hs-layout'>,</span><span class='hs-sel'>_A2</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-300"></a>
+<a name="line-301"></a><a name="halfDiminishedChord"></a><span class='hs-definition'>halfDiminishedChord</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Function</span> <span class='hs-conid'>Pitch</span>
+<a name="line-302"></a><span class='hs-definition'>halfDiminishedChord</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Function</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>m3</span><span class='hs-layout'>,</span><span class='hs-varid'>m3</span><span class='hs-layout'>,</span><span class='hs-sel'>_M3</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-303"></a>
+<a name="line-304"></a><a name="majorMinorSeventhChord"></a><span class='hs-definition'>majorMinorSeventhChord</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Function</span> <span class='hs-conid'>Pitch</span>
+<a name="line-305"></a><span class='hs-definition'>majorMinorSeventhChord</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Function</span> <span class='hs-keyglyph'>[</span><span class='hs-sel'>_M3</span><span class='hs-layout'>,</span><span class='hs-varid'>m3</span><span class='hs-layout'>,</span><span class='hs-varid'>m3</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-306"></a>
+<a name="line-307"></a><a name="majorMajorSeventhChord"></a><span class='hs-definition'>majorMajorSeventhChord</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Function</span> <span class='hs-conid'>Pitch</span>
+<a name="line-308"></a><span class='hs-definition'>majorMajorSeventhChord</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Function</span> <span class='hs-keyglyph'>[</span><span class='hs-sel'>_M3</span><span class='hs-layout'>,</span><span class='hs-varid'>m3</span><span class='hs-layout'>,</span><span class='hs-sel'>_M3</span><span class='hs-keyglyph'>]</span> <span class='hs-sel'>_P8</span>
+<a name="line-309"></a>
+<a name="line-310"></a>
 </pre></body>
 </html>
