@@ -14,24 +14,35 @@
 <a name="line-5"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
 <a name="line-6"></a>
 <a name="line-7"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Applicative</span>
-<a name="line-8"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span>                    <span class='hs-layout'>(</span><span class='hs-varid'>toListOf</span><span class='hs-layout'>)</span>
-<a name="line-9"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Default</span>
-<a name="line-10"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Functor</span><span class='hs-varop'>.</span><span class='hs-conid'>Adjunction</span>         <span class='hs-layout'>(</span><span class='hs-varid'>unzipR</span><span class='hs-layout'>)</span>
-<a name="line-11"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>List</span>
-<a name="line-12"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Maybe</span>
-<a name="line-13"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
-<a name="line-14"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span><span class='hs-varop'>.</span><span class='hs-conid'>Option</span><span class='hs-varop'>.</span><span class='hs-conid'>Instances</span>
-<a name="line-15"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Traversable</span>                <span class='hs-layout'>(</span><span class='hs-varid'>traverse</span><span class='hs-layout'>)</span>
-<a name="line-16"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Typeable</span>
-<a name="line-17"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Text</span><span class='hs-varop'>.</span><span class='hs-conid'>Numeral</span><span class='hs-varop'>.</span><span class='hs-conid'>Roman</span>              <span class='hs-layout'>(</span><span class='hs-varid'>toRoman</span><span class='hs-layout'>)</span>
-<a name="line-18"></a>
-<a name="line-19"></a><a name="Solo"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>Solo</span>
-<a name="line-20"></a>    <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Solo</span>
-<a name="line-21"></a>    <span class='hs-keyglyph'>|</span> <span class='hs-conid'>Tutti</span>
-<a name="line-22"></a>    <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Eq</span><span class='hs-layout'>,</span> <span class='hs-conid'>Show</span><span class='hs-layout'>,</span> <span class='hs-conid'>Ord</span><span class='hs-layout'>,</span> <span class='hs-conid'>Enum</span><span class='hs-layout'>)</span>
-<a name="line-23"></a>
-<a name="line-24"></a><a name="instance%20Default%20Solo"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Default</span> <span class='hs-conid'>Solo</span> <span class='hs-keyword'>where</span>
-<a name="line-25"></a>    <span class='hs-varid'>def</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Tutti</span>
-<a name="line-26"></a>
+<a name="line-8"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Aeson</span>                      <span class='hs-layout'>(</span><span class='hs-conid'>ToJSON</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span> <span class='hs-conid'>FromJSON</span><span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
+<a name="line-9"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Aeson</span>
+<a name="line-10"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span>                    <span class='hs-layout'>(</span><span class='hs-varid'>toListOf</span><span class='hs-layout'>)</span>
+<a name="line-11"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Default</span>
+<a name="line-12"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Functor</span><span class='hs-varop'>.</span><span class='hs-conid'>Adjunction</span>         <span class='hs-layout'>(</span><span class='hs-varid'>unzipR</span><span class='hs-layout'>)</span>
+<a name="line-13"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>List</span>
+<a name="line-14"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Maybe</span>
+<a name="line-15"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
+<a name="line-16"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span><span class='hs-varop'>.</span><span class='hs-conid'>Option</span><span class='hs-varop'>.</span><span class='hs-conid'>Instances</span>
+<a name="line-17"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Traversable</span>                <span class='hs-layout'>(</span><span class='hs-varid'>traverse</span><span class='hs-layout'>)</span>
+<a name="line-18"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Typeable</span>
+<a name="line-19"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Text</span><span class='hs-varop'>.</span><span class='hs-conid'>Numeral</span><span class='hs-varop'>.</span><span class='hs-conid'>Roman</span>              <span class='hs-layout'>(</span><span class='hs-varid'>toRoman</span><span class='hs-layout'>)</span>
+<a name="line-20"></a>
+<a name="line-21"></a><a name="Solo"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>Solo</span>
+<a name="line-22"></a>    <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Solo</span>
+<a name="line-23"></a>    <span class='hs-keyglyph'>|</span> <span class='hs-conid'>Tutti</span>
+<a name="line-24"></a>    <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Eq</span><span class='hs-layout'>,</span> <span class='hs-conid'>Show</span><span class='hs-layout'>,</span> <span class='hs-conid'>Ord</span><span class='hs-layout'>,</span> <span class='hs-conid'>Enum</span><span class='hs-layout'>)</span>
+<a name="line-25"></a>
+<a name="line-26"></a><a name="instance%20Default%20Solo"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Default</span> <span class='hs-conid'>Solo</span> <span class='hs-keyword'>where</span>
+<a name="line-27"></a>    <span class='hs-varid'>def</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Tutti</span>
+<a name="line-28"></a>
+<a name="line-29"></a><a name="instance%20ToJSON%20Solo"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>ToJSON</span> <span class='hs-conid'>Solo</span> <span class='hs-keyword'>where</span>
+<a name="line-30"></a>  <span class='hs-varid'>toJSON</span> <span class='hs-conid'>Solo</span>  <span class='hs-keyglyph'>=</span> <span class='hs-varid'>toJSON</span> <span class='hs-layout'>(</span><span class='hs-str'>"solo"</span><span class='hs-keyglyph'>::</span><span class='hs-conid'>String</span><span class='hs-layout'>)</span>
+<a name="line-31"></a>  <span class='hs-varid'>toJSON</span> <span class='hs-conid'>Tutti</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>toJSON</span> <span class='hs-layout'>(</span><span class='hs-str'>"tutti"</span><span class='hs-keyglyph'>::</span><span class='hs-conid'>String</span><span class='hs-layout'>)</span>
+<a name="line-32"></a><a name="instance%20FromJSON%20Solo"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>FromJSON</span> <span class='hs-conid'>Solo</span> <span class='hs-keyword'>where</span>
+<a name="line-33"></a>  <span class='hs-varid'>parseJSON</span> <span class='hs-layout'>(</span><span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Aeson</span><span class='hs-varop'>.</span><span class='hs-conid'>String</span> <span class='hs-str'>"solo"</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>return</span> <span class='hs-conid'>Solo</span>
+<a name="line-34"></a>  <span class='hs-varid'>parseJSON</span> <span class='hs-layout'>(</span><span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Aeson</span><span class='hs-varop'>.</span><span class='hs-conid'>String</span> <span class='hs-str'>"tutti"</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>return</span> <span class='hs-conid'>Tutti</span>
+<a name="line-35"></a>  <span class='hs-varid'>parseJSON</span> <span class='hs-keyword'>_</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>empty</span>
+<a name="line-36"></a>
+<a name="line-37"></a>
 </pre></body>
 </html>

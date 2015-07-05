@@ -7,457 +7,485 @@
 <link type='text/css' rel='stylesheet' href='hscolour.css' />
 </head>
 <body>
-<pre><a name="line-1"></a>
-<a name="line-2"></a><span class='hs-comment'>-- | Representation of musical instruments, parts and playing techniques.</span>
-<a name="line-3"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span> <span class='hs-layout'>(</span>
-<a name="line-4"></a>        <span class='hs-comment'>-- * Terminology</span>
-<a name="line-5"></a>        <span class='hs-comment'>-- $terminology</span>
-<a name="line-6"></a>
+<pre><a name="line-1"></a><span class='hs-comment'>{-# LANGUAGE FlexibleContexts #-}</span>
+<a name="line-2"></a>
+<a name="line-3"></a><span class='hs-comment'>-- | Representation of musical instruments, parts and playing techniques.</span>
+<a name="line-4"></a><span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span> <span class='hs-layout'>(</span>
+<a name="line-5"></a>        <span class='hs-comment'>-- * Terminology</span>
+<a name="line-6"></a>        <span class='hs-comment'>-- $terminology</span>
 <a name="line-7"></a>
-<a name="line-8"></a>        <span class='hs-comment'>-- * Subparts</span>
-<a name="line-9"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Division</span><span class='hs-layout'>,</span>
-<a name="line-10"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Subpart</span><span class='hs-layout'>,</span>
-<a name="line-11"></a>
-<a name="line-12"></a>        <span class='hs-comment'>-- * Solo vs. tutti</span>
-<a name="line-13"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Solo</span><span class='hs-layout'>,</span>
-<a name="line-14"></a>        
-<a name="line-15"></a>        <span class='hs-comment'>-- * Instruments</span>
-<a name="line-16"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Instrument</span><span class='hs-layout'>,</span>
-<a name="line-17"></a>
-<a name="line-18"></a>        <span class='hs-comment'>-- * Parts</span>
-<a name="line-19"></a>        <span class='hs-conid'>Part</span><span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
-<a name="line-20"></a>        <span class='hs-sel'>_solo</span><span class='hs-layout'>,</span>
-<a name="line-21"></a>        <span class='hs-sel'>_subpart</span><span class='hs-layout'>,</span>
-<a name="line-22"></a>        <span class='hs-sel'>_instrument</span><span class='hs-layout'>,</span>
-<a name="line-23"></a>        <span class='hs-varid'>divide</span><span class='hs-layout'>,</span>
-<a name="line-24"></a>        <span class='hs-varid'>containsPart</span><span class='hs-layout'>,</span>
-<a name="line-25"></a>        <span class='hs-varid'>smallestPart</span><span class='hs-layout'>,</span>
-<a name="line-26"></a>        <span class='hs-varid'>smallestSubpart</span><span class='hs-layout'>,</span>
-<a name="line-27"></a>        <span class='hs-varid'>largestPart</span><span class='hs-layout'>,</span>
-<a name="line-28"></a>        <span class='hs-varid'>largestSubpart</span><span class='hs-layout'>,</span>
-<a name="line-29"></a>        <span class='hs-varid'>distinctFrom</span><span class='hs-layout'>,</span>
-<a name="line-30"></a>        <span class='hs-varid'>allDistinct</span><span class='hs-layout'>,</span>
-<a name="line-31"></a>        <span class='hs-varid'>solo</span><span class='hs-layout'>,</span>
-<a name="line-32"></a>        <span class='hs-varid'>tutti</span><span class='hs-layout'>,</span>
-<a name="line-33"></a>
-<a name="line-34"></a>        <span class='hs-comment'>-- ** Instruments etc</span>
-<a name="line-35"></a>        <span class='hs-varid'>piccoloFlute</span><span class='hs-layout'>,</span>
-<a name="line-36"></a>        <span class='hs-varid'>flute</span><span class='hs-layout'>,</span>
-<a name="line-37"></a>        <span class='hs-varid'>altoFlute</span><span class='hs-layout'>,</span>
-<a name="line-38"></a>        <span class='hs-varid'>bassFlute</span><span class='hs-layout'>,</span>
-<a name="line-39"></a>
-<a name="line-40"></a>        <span class='hs-varid'>oboe</span><span class='hs-layout'>,</span>
-<a name="line-41"></a>        <span class='hs-varid'>corAnglais</span><span class='hs-layout'>,</span>
-<a name="line-42"></a>        <span class='hs-varid'>heckelphone</span><span class='hs-layout'>,</span>
-<a name="line-43"></a>
-<a name="line-44"></a>        <span class='hs-varid'>ebClarinet</span><span class='hs-layout'>,</span>
-<a name="line-45"></a>        <span class='hs-varid'>clarinet</span><span class='hs-layout'>,</span>
-<a name="line-46"></a>        <span class='hs-varid'>aClarinet</span><span class='hs-layout'>,</span>
-<a name="line-47"></a>        <span class='hs-varid'>bassClarinet</span><span class='hs-layout'>,</span>
-<a name="line-48"></a>
-<a name="line-49"></a>        <span class='hs-varid'>sopranoSax</span><span class='hs-layout'>,</span>
-<a name="line-50"></a>        <span class='hs-varid'>altoSax</span><span class='hs-layout'>,</span>
-<a name="line-51"></a>        <span class='hs-varid'>tenorSax</span><span class='hs-layout'>,</span>
-<a name="line-52"></a>        <span class='hs-varid'>baritoneSax</span><span class='hs-layout'>,</span>
-<a name="line-53"></a>
-<a name="line-54"></a>        <span class='hs-varid'>bassoon</span><span class='hs-layout'>,</span>
-<a name="line-55"></a>        <span class='hs-varid'>contraBassoon</span><span class='hs-layout'>,</span>
-<a name="line-56"></a>
-<a name="line-57"></a>        <span class='hs-varid'>horn</span><span class='hs-layout'>,</span>
-<a name="line-58"></a>        <span class='hs-varid'>piccoloTrumpet</span><span class='hs-layout'>,</span>
-<a name="line-59"></a>        <span class='hs-varid'>trumpet</span><span class='hs-layout'>,</span>
-<a name="line-60"></a>        <span class='hs-varid'>bassTrumpet</span><span class='hs-layout'>,</span>
-<a name="line-61"></a>        <span class='hs-varid'>altoTrombone</span><span class='hs-layout'>,</span>
-<a name="line-62"></a>        <span class='hs-varid'>tenorTrombone</span><span class='hs-layout'>,</span>
-<a name="line-63"></a>        <span class='hs-varid'>trombone</span><span class='hs-layout'>,</span>
-<a name="line-64"></a>        <span class='hs-varid'>bassTrombone</span><span class='hs-layout'>,</span>
-<a name="line-65"></a>        <span class='hs-varid'>tuba</span><span class='hs-layout'>,</span>
-<a name="line-66"></a>
-<a name="line-67"></a>        <span class='hs-varid'>timpani</span><span class='hs-layout'>,</span>
-<a name="line-68"></a>        <span class='hs-varid'>piano</span><span class='hs-layout'>,</span>
-<a name="line-69"></a>
-<a name="line-70"></a>        <span class='hs-varid'>celesta</span><span class='hs-layout'>,</span>
-<a name="line-71"></a>        <span class='hs-varid'>glockenspiel</span><span class='hs-layout'>,</span>
-<a name="line-72"></a>        <span class='hs-varid'>vibraphone</span><span class='hs-layout'>,</span>
-<a name="line-73"></a>        <span class='hs-varid'>marimba</span><span class='hs-layout'>,</span>
-<a name="line-74"></a>        <span class='hs-varid'>xylophone</span><span class='hs-layout'>,</span>
-<a name="line-75"></a>        <span class='hs-varid'>xylorimba</span><span class='hs-layout'>,</span>
-<a name="line-76"></a>        <span class='hs-varid'>tubularBells</span><span class='hs-layout'>,</span>
-<a name="line-77"></a>        <span class='hs-varid'>dulcimer</span><span class='hs-layout'>,</span>
-<a name="line-78"></a>
-<a name="line-79"></a>        <span class='hs-varid'>accordion</span><span class='hs-layout'>,</span>
-<a name="line-80"></a>        <span class='hs-varid'>harmonica</span><span class='hs-layout'>,</span>
-<a name="line-81"></a>
-<a name="line-82"></a>        <span class='hs-varid'>violin</span><span class='hs-layout'>,</span>
-<a name="line-83"></a>        <span class='hs-varid'>viola</span><span class='hs-layout'>,</span>
-<a name="line-84"></a>        <span class='hs-varid'>cello</span><span class='hs-layout'>,</span>
-<a name="line-85"></a>        <span class='hs-varid'>doubleBass</span><span class='hs-layout'>,</span>
-<a name="line-86"></a>
-<a name="line-87"></a>        <span class='hs-comment'>-- ** Ensembles</span>
-<a name="line-88"></a>        <span class='hs-varid'>piccoloFlutes</span><span class='hs-layout'>,</span>
-<a name="line-89"></a>        <span class='hs-varid'>flutes</span><span class='hs-layout'>,</span>
-<a name="line-90"></a>        <span class='hs-varid'>oboes</span><span class='hs-layout'>,</span>
-<a name="line-91"></a>        <span class='hs-varid'>clarinets</span><span class='hs-layout'>,</span>
-<a name="line-92"></a>        <span class='hs-varid'>bassoons</span><span class='hs-layout'>,</span>
-<a name="line-93"></a>
-<a name="line-94"></a>        <span class='hs-varid'>flutes1</span><span class='hs-layout'>,</span>
-<a name="line-95"></a>        <span class='hs-varid'>flutes2</span><span class='hs-layout'>,</span>
-<a name="line-96"></a>        <span class='hs-varid'>oboes1</span><span class='hs-layout'>,</span>
-<a name="line-97"></a>        <span class='hs-varid'>oboes2</span><span class='hs-layout'>,</span>
-<a name="line-98"></a>        <span class='hs-varid'>clarinets1</span><span class='hs-layout'>,</span>
-<a name="line-99"></a>        <span class='hs-varid'>clarinets2</span><span class='hs-layout'>,</span>
-<a name="line-100"></a>
-<a name="line-101"></a>        <span class='hs-varid'>horns</span><span class='hs-layout'>,</span>
-<a name="line-102"></a>        <span class='hs-varid'>highHorns</span><span class='hs-layout'>,</span>
-<a name="line-103"></a>        <span class='hs-varid'>lowHorns</span><span class='hs-layout'>,</span>
-<a name="line-104"></a>        <span class='hs-varid'>trumpets</span><span class='hs-layout'>,</span>
-<a name="line-105"></a>        <span class='hs-varid'>trombones</span><span class='hs-layout'>,</span>
-<a name="line-106"></a>        <span class='hs-varid'>trumpets1</span><span class='hs-layout'>,</span>
-<a name="line-107"></a>        <span class='hs-varid'>trumpets2</span><span class='hs-layout'>,</span>
-<a name="line-108"></a>        <span class='hs-varid'>trombones1</span><span class='hs-layout'>,</span>
-<a name="line-109"></a>        <span class='hs-varid'>trombones2</span><span class='hs-layout'>,</span>
-<a name="line-110"></a>        <span class='hs-varid'>tubas</span><span class='hs-layout'>,</span>
-<a name="line-111"></a>
-<a name="line-112"></a>        <span class='hs-varid'>violins</span><span class='hs-layout'>,</span>
-<a name="line-113"></a>        <span class='hs-varid'>violins1</span><span class='hs-layout'>,</span>
-<a name="line-114"></a>        <span class='hs-varid'>violins2</span><span class='hs-layout'>,</span>
-<a name="line-115"></a>        <span class='hs-varid'>violas</span><span class='hs-layout'>,</span>
-<a name="line-116"></a>        <span class='hs-varid'>cellos</span><span class='hs-layout'>,</span>
-<a name="line-117"></a>        <span class='hs-varid'>doubleBasses</span><span class='hs-layout'>,</span>
-<a name="line-118"></a>
-<a name="line-119"></a>        <span class='hs-varid'>harp</span><span class='hs-layout'>,</span>
-<a name="line-120"></a>
-<a name="line-121"></a>        <span class='hs-comment'>-- ** Default values</span>
-<a name="line-122"></a>        <span class='hs-varid'>defaultClef</span><span class='hs-layout'>,</span>
-<a name="line-123"></a>        <span class='hs-varid'>defaultMidiProgram</span><span class='hs-layout'>,</span>
-<a name="line-124"></a>        <span class='hs-varid'>defaultMidiChannel</span><span class='hs-layout'>,</span>
-<a name="line-125"></a>        <span class='hs-varid'>defaultMidiNote</span><span class='hs-layout'>,</span>
+<a name="line-8"></a>
+<a name="line-9"></a>        <span class='hs-comment'>-- * Subparts</span>
+<a name="line-10"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Division</span><span class='hs-layout'>,</span>
+<a name="line-11"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Subpart</span><span class='hs-layout'>,</span>
+<a name="line-12"></a>
+<a name="line-13"></a>        <span class='hs-comment'>-- * Solo vs. tutti</span>
+<a name="line-14"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Solo</span><span class='hs-layout'>,</span>
+<a name="line-15"></a>        
+<a name="line-16"></a>        <span class='hs-comment'>-- * Instruments</span>
+<a name="line-17"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Instrument</span><span class='hs-layout'>,</span>
+<a name="line-18"></a>
+<a name="line-19"></a>        <span class='hs-comment'>-- * Parts</span>
+<a name="line-20"></a>        <span class='hs-conid'>Part</span><span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
+<a name="line-21"></a>        <span class='hs-sel'>_solo</span><span class='hs-layout'>,</span>
+<a name="line-22"></a>        <span class='hs-sel'>_subpart</span><span class='hs-layout'>,</span>
+<a name="line-23"></a>        <span class='hs-sel'>_instrument</span><span class='hs-layout'>,</span>
+<a name="line-24"></a>        <span class='hs-varid'>divide</span><span class='hs-layout'>,</span>
+<a name="line-25"></a>        <span class='hs-varid'>containsPart</span><span class='hs-layout'>,</span>
+<a name="line-26"></a>        <span class='hs-varid'>smallestPart</span><span class='hs-layout'>,</span>
+<a name="line-27"></a>        <span class='hs-varid'>smallestSubpart</span><span class='hs-layout'>,</span>
+<a name="line-28"></a>        <span class='hs-varid'>largestPart</span><span class='hs-layout'>,</span>
+<a name="line-29"></a>        <span class='hs-varid'>largestSubpart</span><span class='hs-layout'>,</span>
+<a name="line-30"></a>        <span class='hs-varid'>distinctFrom</span><span class='hs-layout'>,</span>
+<a name="line-31"></a>        <span class='hs-varid'>allDistinct</span><span class='hs-layout'>,</span>
+<a name="line-32"></a>        <span class='hs-varid'>solo</span><span class='hs-layout'>,</span>
+<a name="line-33"></a>        <span class='hs-varid'>tutti</span><span class='hs-layout'>,</span>
+<a name="line-34"></a>
+<a name="line-35"></a>        <span class='hs-comment'>-- ** Instruments etc</span>
+<a name="line-36"></a>        <span class='hs-varid'>piccoloFlute</span><span class='hs-layout'>,</span>
+<a name="line-37"></a>        <span class='hs-varid'>flute</span><span class='hs-layout'>,</span>
+<a name="line-38"></a>        <span class='hs-varid'>altoFlute</span><span class='hs-layout'>,</span>
+<a name="line-39"></a>        <span class='hs-varid'>bassFlute</span><span class='hs-layout'>,</span>
+<a name="line-40"></a>
+<a name="line-41"></a>        <span class='hs-varid'>oboe</span><span class='hs-layout'>,</span>
+<a name="line-42"></a>        <span class='hs-varid'>corAnglais</span><span class='hs-layout'>,</span>
+<a name="line-43"></a>        <span class='hs-varid'>heckelphone</span><span class='hs-layout'>,</span>
+<a name="line-44"></a>
+<a name="line-45"></a>        <span class='hs-varid'>ebClarinet</span><span class='hs-layout'>,</span>
+<a name="line-46"></a>        <span class='hs-varid'>clarinet</span><span class='hs-layout'>,</span>
+<a name="line-47"></a>        <span class='hs-varid'>aClarinet</span><span class='hs-layout'>,</span>
+<a name="line-48"></a>        <span class='hs-varid'>bassClarinet</span><span class='hs-layout'>,</span>
+<a name="line-49"></a>
+<a name="line-50"></a>        <span class='hs-varid'>sopranoSax</span><span class='hs-layout'>,</span>
+<a name="line-51"></a>        <span class='hs-varid'>altoSax</span><span class='hs-layout'>,</span>
+<a name="line-52"></a>        <span class='hs-varid'>tenorSax</span><span class='hs-layout'>,</span>
+<a name="line-53"></a>        <span class='hs-varid'>baritoneSax</span><span class='hs-layout'>,</span>
+<a name="line-54"></a>
+<a name="line-55"></a>        <span class='hs-varid'>bassoon</span><span class='hs-layout'>,</span>
+<a name="line-56"></a>        <span class='hs-varid'>contraBassoon</span><span class='hs-layout'>,</span>
+<a name="line-57"></a>
+<a name="line-58"></a>        <span class='hs-varid'>horn</span><span class='hs-layout'>,</span>
+<a name="line-59"></a>        <span class='hs-varid'>piccoloTrumpet</span><span class='hs-layout'>,</span>
+<a name="line-60"></a>        <span class='hs-varid'>trumpet</span><span class='hs-layout'>,</span>
+<a name="line-61"></a>        <span class='hs-varid'>bassTrumpet</span><span class='hs-layout'>,</span>
+<a name="line-62"></a>        <span class='hs-varid'>altoTrombone</span><span class='hs-layout'>,</span>
+<a name="line-63"></a>        <span class='hs-varid'>tenorTrombone</span><span class='hs-layout'>,</span>
+<a name="line-64"></a>        <span class='hs-varid'>trombone</span><span class='hs-layout'>,</span>
+<a name="line-65"></a>        <span class='hs-varid'>bassTrombone</span><span class='hs-layout'>,</span>
+<a name="line-66"></a>        <span class='hs-varid'>tuba</span><span class='hs-layout'>,</span>
+<a name="line-67"></a>
+<a name="line-68"></a>        <span class='hs-varid'>timpani</span><span class='hs-layout'>,</span>
+<a name="line-69"></a>        <span class='hs-varid'>piano</span><span class='hs-layout'>,</span>
+<a name="line-70"></a>
+<a name="line-71"></a>        <span class='hs-varid'>celesta</span><span class='hs-layout'>,</span>
+<a name="line-72"></a>        <span class='hs-varid'>glockenspiel</span><span class='hs-layout'>,</span>
+<a name="line-73"></a>        <span class='hs-varid'>vibraphone</span><span class='hs-layout'>,</span>
+<a name="line-74"></a>        <span class='hs-varid'>marimba</span><span class='hs-layout'>,</span>
+<a name="line-75"></a>        <span class='hs-varid'>xylophone</span><span class='hs-layout'>,</span>
+<a name="line-76"></a>        <span class='hs-varid'>xylorimba</span><span class='hs-layout'>,</span>
+<a name="line-77"></a>        <span class='hs-varid'>tubularBells</span><span class='hs-layout'>,</span>
+<a name="line-78"></a>        <span class='hs-varid'>dulcimer</span><span class='hs-layout'>,</span>
+<a name="line-79"></a>
+<a name="line-80"></a>        <span class='hs-varid'>accordion</span><span class='hs-layout'>,</span>
+<a name="line-81"></a>        <span class='hs-varid'>harmonica</span><span class='hs-layout'>,</span>
+<a name="line-82"></a>
+<a name="line-83"></a>        <span class='hs-varid'>violin</span><span class='hs-layout'>,</span>
+<a name="line-84"></a>        <span class='hs-varid'>viola</span><span class='hs-layout'>,</span>
+<a name="line-85"></a>        <span class='hs-varid'>cello</span><span class='hs-layout'>,</span>
+<a name="line-86"></a>        <span class='hs-varid'>doubleBass</span><span class='hs-layout'>,</span>
+<a name="line-87"></a>
+<a name="line-88"></a>        <span class='hs-comment'>-- ** Ensembles</span>
+<a name="line-89"></a>        <span class='hs-varid'>piccoloFlutes</span><span class='hs-layout'>,</span>
+<a name="line-90"></a>        <span class='hs-varid'>flutes</span><span class='hs-layout'>,</span>
+<a name="line-91"></a>        <span class='hs-varid'>altoFlutes</span><span class='hs-layout'>,</span>
+<a name="line-92"></a>        <span class='hs-varid'>oboes</span><span class='hs-layout'>,</span>
+<a name="line-93"></a>        <span class='hs-varid'>corAnglaises</span><span class='hs-layout'>,</span>
+<a name="line-94"></a>        <span class='hs-varid'>clarinets</span><span class='hs-layout'>,</span>
+<a name="line-95"></a>        <span class='hs-varid'>ebClarinets</span><span class='hs-layout'>,</span>
+<a name="line-96"></a>        <span class='hs-varid'>bassClarinets</span><span class='hs-layout'>,</span>
+<a name="line-97"></a>        <span class='hs-varid'>bassoons</span><span class='hs-layout'>,</span>
+<a name="line-98"></a>        <span class='hs-varid'>contraBassoons</span><span class='hs-layout'>,</span>
+<a name="line-99"></a>
+<a name="line-100"></a>        <span class='hs-varid'>flutes1</span><span class='hs-layout'>,</span>
+<a name="line-101"></a>        <span class='hs-varid'>flutes2</span><span class='hs-layout'>,</span>
+<a name="line-102"></a>        <span class='hs-varid'>oboes1</span><span class='hs-layout'>,</span>
+<a name="line-103"></a>        <span class='hs-varid'>oboes2</span><span class='hs-layout'>,</span>
+<a name="line-104"></a>        <span class='hs-varid'>clarinets1</span><span class='hs-layout'>,</span>
+<a name="line-105"></a>        <span class='hs-varid'>clarinets2</span><span class='hs-layout'>,</span>
+<a name="line-106"></a>
+<a name="line-107"></a>        <span class='hs-varid'>horns</span><span class='hs-layout'>,</span>
+<a name="line-108"></a>        <span class='hs-varid'>highHorns</span><span class='hs-layout'>,</span>
+<a name="line-109"></a>        <span class='hs-varid'>lowHorns</span><span class='hs-layout'>,</span>
+<a name="line-110"></a>        <span class='hs-varid'>trumpets</span><span class='hs-layout'>,</span>
+<a name="line-111"></a>        <span class='hs-varid'>trombones</span><span class='hs-layout'>,</span>
+<a name="line-112"></a>        <span class='hs-varid'>trumpets1</span><span class='hs-layout'>,</span>
+<a name="line-113"></a>        <span class='hs-varid'>trumpets2</span><span class='hs-layout'>,</span>
+<a name="line-114"></a>        <span class='hs-varid'>trombones1</span><span class='hs-layout'>,</span>
+<a name="line-115"></a>        <span class='hs-varid'>trombones2</span><span class='hs-layout'>,</span>
+<a name="line-116"></a>        <span class='hs-varid'>tubas</span><span class='hs-layout'>,</span>
+<a name="line-117"></a>
+<a name="line-118"></a>        <span class='hs-varid'>violins</span><span class='hs-layout'>,</span>
+<a name="line-119"></a>        <span class='hs-varid'>violins1</span><span class='hs-layout'>,</span>
+<a name="line-120"></a>        <span class='hs-varid'>violins2</span><span class='hs-layout'>,</span>
+<a name="line-121"></a>        <span class='hs-varid'>violas</span><span class='hs-layout'>,</span>
+<a name="line-122"></a>        <span class='hs-varid'>cellos</span><span class='hs-layout'>,</span>
+<a name="line-123"></a>        <span class='hs-varid'>doubleBasses</span><span class='hs-layout'>,</span>
+<a name="line-124"></a>
+<a name="line-125"></a>        <span class='hs-varid'>harp</span><span class='hs-layout'>,</span>
 <a name="line-126"></a>
-<a name="line-127"></a>        <span class='hs-comment'>-- -- * Orchestration</span>
-<a name="line-128"></a>        <span class='hs-comment'>-- doubleParts,</span>
-<a name="line-129"></a>        <span class='hs-comment'>-- doublePartsInOctave,</span>
-<a name="line-130"></a>
-<a name="line-131"></a>        <span class='hs-comment'>-- * Basic</span>
-<a name="line-132"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Basic</span>
-<a name="line-133"></a>
-<a name="line-134"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
-<a name="line-135"></a>
-<a name="line-136"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Applicative</span>
-<a name="line-137"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span>                    <span class='hs-layout'>(</span><span class='hs-varid'>toListOf</span><span class='hs-layout'>,</span> <span class='hs-conid'>Lens</span><span class='hs-layout'>,</span> <span class='hs-conid'>Lens'</span><span class='hs-layout'>)</span>
-<a name="line-138"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Default</span>
-<a name="line-139"></a><span class='hs-comment'>-- import           Data.Monoid</span>
-<a name="line-140"></a><span class='hs-comment'>-- import           Control.Lens (set)</span>
-<a name="line-141"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Functor</span><span class='hs-varop'>.</span><span class='hs-conid'>Adjunction</span>         <span class='hs-layout'>(</span><span class='hs-varid'>unzipR</span><span class='hs-layout'>)</span>
-<a name="line-142"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>List</span>
-<a name="line-143"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Maybe</span>
-<a name="line-144"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
-<a name="line-145"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span><span class='hs-varop'>.</span><span class='hs-conid'>Option</span><span class='hs-varop'>.</span><span class='hs-conid'>Instances</span>
-<a name="line-146"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Traversable</span>                <span class='hs-layout'>(</span><span class='hs-varid'>traverse</span><span class='hs-layout'>)</span>
-<a name="line-147"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Typeable</span>
-<a name="line-148"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Text</span><span class='hs-varop'>.</span><span class='hs-conid'>Numeral</span><span class='hs-varop'>.</span><span class='hs-conid'>Roman</span>              <span class='hs-layout'>(</span><span class='hs-varid'>toRoman</span><span class='hs-layout'>)</span>
-<a name="line-149"></a>
-<a name="line-150"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Basic</span>
-<a name="line-151"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Subpart</span>
-<a name="line-152"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Division</span>
-<a name="line-153"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Solo</span>
-<a name="line-154"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Instrument</span>
-<a name="line-155"></a>
-<a name="line-156"></a><span class='hs-comment'>{- $terminology
+<a name="line-127"></a>        <span class='hs-comment'>-- ** Default values</span>
+<a name="line-128"></a>        <span class='hs-varid'>defaultClef</span><span class='hs-layout'>,</span>
+<a name="line-129"></a>        <span class='hs-varid'>defaultMidiProgram</span><span class='hs-layout'>,</span>
+<a name="line-130"></a>        <span class='hs-varid'>defaultMidiChannel</span><span class='hs-layout'>,</span>
+<a name="line-131"></a>        <span class='hs-varid'>defaultMidiNote</span><span class='hs-layout'>,</span>
+<a name="line-132"></a>
+<a name="line-133"></a>        <span class='hs-comment'>-- -- * Orchestration</span>
+<a name="line-134"></a>        <span class='hs-comment'>-- doubleParts,</span>
+<a name="line-135"></a>        <span class='hs-comment'>-- doublePartsInOctave,</span>
+<a name="line-136"></a>
+<a name="line-137"></a>        <span class='hs-comment'>-- * Basic</span>
+<a name="line-138"></a>        <span class='hs-keyword'>module</span> <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Basic</span>
+<a name="line-139"></a>
+<a name="line-140"></a>  <span class='hs-layout'>)</span> <span class='hs-keyword'>where</span>
+<a name="line-141"></a>
+<a name="line-142"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Applicative</span>
+<a name="line-143"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Control</span><span class='hs-varop'>.</span><span class='hs-conid'>Lens</span>                    <span class='hs-layout'>(</span><span class='hs-varid'>toListOf</span><span class='hs-layout'>,</span> <span class='hs-conid'>Lens</span><span class='hs-layout'>,</span> <span class='hs-conid'>Lens'</span><span class='hs-layout'>,</span> <span class='hs-layout'>(</span><span class='hs-varop'>^.</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
+<a name="line-144"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Aeson</span>                      <span class='hs-layout'>(</span><span class='hs-conid'>ToJSON</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span> <span class='hs-conid'>FromJSON</span><span class='hs-layout'>(</span><span class='hs-keyglyph'>..</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span>
+<a name="line-145"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Aeson</span>
+<a name="line-146"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Default</span>
+<a name="line-147"></a><span class='hs-comment'>-- import           Data.Monoid</span>
+<a name="line-148"></a><span class='hs-comment'>-- import           Control.Lens (set)</span>
+<a name="line-149"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Functor</span><span class='hs-varop'>.</span><span class='hs-conid'>Adjunction</span>         <span class='hs-layout'>(</span><span class='hs-varid'>unzipR</span><span class='hs-layout'>)</span>
+<a name="line-150"></a><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>List</span>
+<a name="line-151"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Maybe</span>
+<a name="line-152"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span>
+<a name="line-153"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Semigroup</span><span class='hs-varop'>.</span><span class='hs-conid'>Option</span><span class='hs-varop'>.</span><span class='hs-conid'>Instances</span>
+<a name="line-154"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Traversable</span>                <span class='hs-layout'>(</span><span class='hs-varid'>traverse</span><span class='hs-layout'>)</span>
+<a name="line-155"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Typeable</span>
+<a name="line-156"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Text</span><span class='hs-varop'>.</span><span class='hs-conid'>Numeral</span><span class='hs-varop'>.</span><span class='hs-conid'>Roman</span>              <span class='hs-layout'>(</span><span class='hs-varid'>toRoman</span><span class='hs-layout'>)</span>
 <a name="line-157"></a>
-<a name="line-158"></a>Parts represent a subset of a group of performers. It is mainly used for instrumental and
-<a name="line-159"></a>vocal music, but some concetps may be useful in electronic music as well.
-<a name="line-160"></a>
-<a name="line-161"></a>-   'Section' refers to a set of instrumentfamilies related by sound production method (i.e. woodwind).
-<a name="line-162"></a>
-<a name="line-163"></a>-   'Family' refers to a set of instrument or voice types, which typically differ in size (i.e. saxophones).
-<a name="line-164"></a>
-<a name="line-165"></a>-   'Instrument' refers to a set of instruments or voice types of a given type (i.e. soprano saxophones).
-<a name="line-166"></a>    Perhaps confusingly, this includes vocal types such as alto, tenor etc as well. However, there is
-<a name="line-167"></a>    no good general term that incorporate both /instrument/ and /voice type/.
+<a name="line-158"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Basic</span>
+<a name="line-159"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Subpart</span>
+<a name="line-160"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Division</span>
+<a name="line-161"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Solo</span>
+<a name="line-162"></a><span class='hs-keyword'>import</span>           <span class='hs-conid'>Music</span><span class='hs-varop'>.</span><span class='hs-conid'>Parts</span><span class='hs-varop'>.</span><span class='hs-conid'>Instrument</span>
+<a name="line-163"></a>
+<a name="line-164"></a><span class='hs-comment'>{- $terminology
+<a name="line-165"></a>
+<a name="line-166"></a>Parts represent a subset of a group of performers. It is mainly used for instrumental and
+<a name="line-167"></a>vocal music, but some concetps may be useful in electronic music as well.
 <a name="line-168"></a>
-<a name="line-169"></a>-   A 'Part' is made up of an 'Instrument' and a 'Division' (i.e. Violin I). Solo parts are treated
-<a name="line-170"></a>    separately, so i.e. /Violin solo II/ (as in a double concerto) is distinct from /Violin II/.
-<a name="line-171"></a>
-<a name="line-172"></a>-}</span>
-<a name="line-173"></a>
-<a name="line-174"></a><a name="Part"></a><span class='hs-comment'>-- | A part is a subdivided group of instruments of a given type.</span>
-<a name="line-175"></a><a name="Part"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Part</span> <span class='hs-conid'>Solo</span> <span class='hs-conid'>Instrument</span> <span class='hs-conid'>Subpart</span>
-<a name="line-176"></a>    <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Eq</span><span class='hs-layout'>,</span> <span class='hs-conid'>Ord</span><span class='hs-layout'>)</span>
-<a name="line-177"></a>
-<a name="line-178"></a><a name="instance%20Show%20Part"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Show</span> <span class='hs-conid'>Part</span> <span class='hs-keyword'>where</span>
-<a name="line-179"></a>    <span class='hs-varid'>show</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-conid'>Solo</span> <span class='hs-varid'>instr</span> <span class='hs-varid'>subp</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>"Solo "</span> <span class='hs-varop'>++</span> <span class='hs-varid'>show</span> <span class='hs-varid'>instr</span> <span class='hs-varop'>++</span> <span class='hs-varid'>addS</span> <span class='hs-layout'>(</span><span class='hs-varid'>show</span> <span class='hs-varid'>subp</span><span class='hs-layout'>)</span>
-<a name="line-180"></a>        <span class='hs-keyword'>where</span>
-<a name="line-181"></a>            <span class='hs-varid'>addS</span> <span class='hs-str'>""</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>""</span>
-<a name="line-182"></a>            <span class='hs-varid'>addS</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>" "</span> <span class='hs-varop'>++</span> <span class='hs-varid'>x</span>
-<a name="line-183"></a>    <span class='hs-varid'>show</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-keyword'>_</span> <span class='hs-varid'>instr</span> <span class='hs-varid'>subp</span><span class='hs-layout'>)</span>    <span class='hs-keyglyph'>=</span> <span class='hs-varid'>show</span> <span class='hs-varid'>instr</span> <span class='hs-varop'>++</span> <span class='hs-varid'>addS</span> <span class='hs-layout'>(</span><span class='hs-varid'>show</span> <span class='hs-varid'>subp</span><span class='hs-layout'>)</span>
-<a name="line-184"></a>        <span class='hs-keyword'>where</span>
-<a name="line-185"></a>            <span class='hs-varid'>addS</span> <span class='hs-str'>""</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>""</span>
-<a name="line-186"></a>            <span class='hs-varid'>addS</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>" "</span> <span class='hs-varop'>++</span> <span class='hs-varid'>x</span>
-<a name="line-187"></a>
-<a name="line-188"></a><a name="instance%20Enum%20Part"></a><span class='hs-comment'>-- Bad instance (?)</span>
-<a name="line-189"></a><a name="instance%20Enum%20Part"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Enum</span> <span class='hs-conid'>Part</span> <span class='hs-keyword'>where</span>
-<a name="line-190"></a>    <span class='hs-varid'>toEnum</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Part</span> <span class='hs-conid'>Tutti</span> <span class='hs-layout'>(</span><span class='hs-varid'>toEnum</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-varid'>def</span>
-<a name="line-191"></a>    <span class='hs-varid'>fromEnum</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>solo</span> <span class='hs-varid'>instr</span> <span class='hs-varid'>subp</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromEnum</span> <span class='hs-varid'>instr</span>
-<a name="line-192"></a>
-<a name="line-193"></a><a name="instance%20Monoid%20Part"></a><span class='hs-comment'>-- Semantics: Monoid (Option . First)</span>
-<a name="line-194"></a><a name="instance%20Monoid%20Part"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Monoid</span> <span class='hs-conid'>Part</span> <span class='hs-keyword'>where</span>
-<a name="line-195"></a>  <span class='hs-varid'>mempty</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>def</span>
-<a name="line-196"></a>  <span class='hs-varid'>mappend</span> <span class='hs-varid'>x</span> <span class='hs-varid'>y</span>
-<a name="line-197"></a>    <span class='hs-keyglyph'>|</span> <span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>mempty</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>y</span>
-<a name="line-198"></a>    <span class='hs-keyglyph'>|</span><span class='hs-varid'>otherwise</span>   <span class='hs-keyglyph'>=</span> <span class='hs-varid'>x</span> 
-<a name="line-199"></a>
-<a name="line-200"></a><a name="instance%20Semigroup%20Part"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Semigroup</span> <span class='hs-conid'>Part</span> <span class='hs-keyword'>where</span>
-<a name="line-201"></a>  <span class='hs-layout'>(</span><span class='hs-varop'>&lt;&gt;</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>mappend</span>
-<a name="line-202"></a>
-<a name="line-203"></a><a name="instance%20Default%20Part"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Default</span> <span class='hs-conid'>Part</span> <span class='hs-keyword'>where</span>
-<a name="line-204"></a>  <span class='hs-varid'>def</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Part</span> <span class='hs-varid'>def</span> <span class='hs-varid'>def</span> <span class='hs-varid'>def</span>
-<a name="line-205"></a>
-<a name="line-206"></a><a name="containsPart"></a><span class='hs-comment'>-- |</span>
-<a name="line-207"></a><span class='hs-comment'>-- @a \`containsPart\` b@ holds if the set of players represented by a is an improper subset of the</span>
-<a name="line-208"></a><span class='hs-comment'>-- set of players represented by b.</span>
-<a name="line-209"></a><span class='hs-definition'>containsPart</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bool</span>
-<a name="line-210"></a><span class='hs-conid'>Part</span> <span class='hs-varid'>solo1</span> <span class='hs-varid'>instr1</span> <span class='hs-varid'>subp1</span> <span class='hs-varop'>`containsPart`</span> <span class='hs-conid'>Part</span> <span class='hs-varid'>solo2</span> <span class='hs-varid'>instr2</span> <span class='hs-varid'>subp2</span> <span class='hs-keyglyph'>=</span>
-<a name="line-211"></a>        <span class='hs-varid'>solo1</span> <span class='hs-varop'>==</span> <span class='hs-varid'>solo2</span>
-<a name="line-212"></a>        <span class='hs-varop'>&amp;&amp;</span> <span class='hs-varid'>instr1</span> <span class='hs-varop'>==</span> <span class='hs-varid'>instr2</span>
-<a name="line-213"></a>        <span class='hs-varop'>&amp;&amp;</span> <span class='hs-varid'>subp1</span> <span class='hs-varop'>`containsSubpart`</span> <span class='hs-varid'>subp2</span>
-<a name="line-214"></a>
-<a name="line-215"></a><a name="smallestPart"></a><span class='hs-definition'>smallestPart</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span>
-<a name="line-216"></a><span class='hs-definition'>smallestPart</span> <span class='hs-varid'>p1</span><span class='hs-keyglyph'>@</span><span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-keyword'>_</span> <span class='hs-keyword'>_</span> <span class='hs-varid'>sp1</span><span class='hs-layout'>)</span> <span class='hs-varid'>p2</span><span class='hs-keyglyph'>@</span><span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-keyword'>_</span> <span class='hs-keyword'>_</span> <span class='hs-varid'>sp2</span><span class='hs-layout'>)</span>
-<a name="line-217"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>sp1</span> <span class='hs-varop'>`smallestSubpart`</span> <span class='hs-varid'>sp2</span> <span class='hs-varop'>==</span> <span class='hs-varid'>sp1</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>p1</span>
-<a name="line-218"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>sp1</span> <span class='hs-varop'>`smallestSubpart`</span> <span class='hs-varid'>sp2</span> <span class='hs-varop'>==</span> <span class='hs-varid'>sp2</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>p2</span>
-<a name="line-219"></a>
-<a name="line-220"></a><a name="smallestSubpart"></a><span class='hs-definition'>smallestSubpart</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Subpart</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Subpart</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Subpart</span>
-<a name="line-221"></a><span class='hs-definition'>smallestSubpart</span> <span class='hs-varid'>x</span> <span class='hs-varid'>y</span>
-<a name="line-222"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>x</span> <span class='hs-varop'>`isProperSubpartOf`</span> <span class='hs-varid'>y</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>x</span>
-<a name="line-223"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>y</span> <span class='hs-varop'>`isProperSubpartOf`</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>y</span>
-<a name="line-224"></a>  <span class='hs-comment'>-- arbitrarily:</span>
-<a name="line-225"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>otherwise</span>               <span class='hs-keyglyph'>=</span> <span class='hs-varid'>x</span>
-<a name="line-226"></a>
-<a name="line-227"></a><a name="largestPart"></a><span class='hs-definition'>largestPart</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span>
-<a name="line-228"></a><span class='hs-definition'>largestPart</span> <span class='hs-varid'>p1</span><span class='hs-keyglyph'>@</span><span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-keyword'>_</span> <span class='hs-keyword'>_</span> <span class='hs-varid'>sp1</span><span class='hs-layout'>)</span> <span class='hs-varid'>p2</span><span class='hs-keyglyph'>@</span><span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-keyword'>_</span> <span class='hs-keyword'>_</span> <span class='hs-varid'>sp2</span><span class='hs-layout'>)</span>
-<a name="line-229"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>sp1</span> <span class='hs-varop'>`largestSubpart`</span> <span class='hs-varid'>sp2</span> <span class='hs-varop'>==</span> <span class='hs-varid'>sp1</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>p1</span>
-<a name="line-230"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>sp1</span> <span class='hs-varop'>`largestSubpart`</span> <span class='hs-varid'>sp2</span> <span class='hs-varop'>==</span> <span class='hs-varid'>sp2</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>p2</span>
-<a name="line-231"></a>
-<a name="line-232"></a><a name="largestSubpart"></a><span class='hs-definition'>largestSubpart</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Subpart</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Subpart</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Subpart</span>
-<a name="line-233"></a><span class='hs-definition'>largestSubpart</span> <span class='hs-varid'>x</span> <span class='hs-varid'>y</span>
-<a name="line-234"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>x</span> <span class='hs-varop'>`isProperSubpartOf`</span> <span class='hs-varid'>y</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>y</span>
-<a name="line-235"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>y</span> <span class='hs-varop'>`isProperSubpartOf`</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>x</span>
-<a name="line-236"></a>  <span class='hs-comment'>-- arbitrarily:</span>
-<a name="line-237"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>otherwise</span>               <span class='hs-keyglyph'>=</span> <span class='hs-varid'>x</span>
-<a name="line-238"></a>
-<a name="line-239"></a>
-<a name="line-240"></a><a name="allDistinct"></a><span class='hs-comment'>-- | Returns 'True' iff all given parts are distinct (as per 'distinctFrom').</span>
-<a name="line-241"></a><span class='hs-definition'>allDistinct</span> <span class='hs-keyglyph'>::</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Part</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bool</span>
-<a name="line-242"></a><span class='hs-definition'>allDistinct</span> <span class='hs-conid'>[]</span>     <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
-<a name="line-243"></a><span class='hs-definition'>allDistinct</span> <span class='hs-layout'>(</span><span class='hs-varid'>x</span><span class='hs-conop'>:</span><span class='hs-varid'>xs</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>all</span> <span class='hs-layout'>(</span><span class='hs-varid'>distinctFrom</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-varid'>xs</span> <span class='hs-varop'>&amp;&amp;</span> <span class='hs-varid'>allDistinct</span> <span class='hs-varid'>xs</span>
-<a name="line-244"></a>
-<a name="line-245"></a><a name="distinctFrom"></a><span class='hs-comment'>-- | Returns 'True' iff x and y are completely distinct, i.e. neither contains the other.</span>
-<a name="line-246"></a><span class='hs-comment'>-- </span>
-<a name="line-247"></a><span class='hs-comment'>-- &gt;&gt;&gt; violins `distinctFrom` trumpets</span>
-<a name="line-248"></a><span class='hs-comment'>-- True</span>
-<a name="line-249"></a><span class='hs-comment'>-- &gt;&gt;&gt; violins `distinctFrom` violins</span>
-<a name="line-250"></a><span class='hs-comment'>-- False</span>
-<a name="line-251"></a><span class='hs-comment'>-- &gt;&gt;&gt; violins `distinctFrom` violins1</span>
-<a name="line-252"></a><span class='hs-comment'>-- False</span>
-<a name="line-253"></a><span class='hs-comment'>-- &gt;&gt;&gt; violins1 `distinctFrom` violins</span>
-<a name="line-254"></a><span class='hs-comment'>-- False</span>
-<a name="line-255"></a><span class='hs-comment'>-- &gt;&gt;&gt; violins1 `distinctFrom` violins2</span>
-<a name="line-256"></a><span class='hs-comment'>-- True</span>
-<a name="line-257"></a><span class='hs-comment'>--</span>
-<a name="line-258"></a><span class='hs-definition'>distinctFrom</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bool</span>
-<a name="line-259"></a><span class='hs-definition'>distinctFrom</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>s1</span> <span class='hs-varid'>i1</span> <span class='hs-varid'>sp1</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>s2</span> <span class='hs-varid'>i2</span> <span class='hs-varid'>sp2</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>s1</span> <span class='hs-varop'>/=</span> <span class='hs-varid'>s2</span> <span class='hs-varop'>||</span> <span class='hs-varid'>i1</span> <span class='hs-varop'>/=</span> <span class='hs-varid'>i2</span> <span class='hs-varop'>||</span> <span class='hs-varid'>noneSubpart</span>
-<a name="line-260"></a>  <span class='hs-keyword'>where</span>
-<a name="line-261"></a>    <span class='hs-comment'>-- Is this needed?</span>
-<a name="line-262"></a>    <span class='hs-varid'>noneSubpart</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>not</span> <span class='hs-layout'>(</span><span class='hs-varid'>sp1</span> <span class='hs-varop'>`isSubpartOf`</span> <span class='hs-varid'>sp2</span><span class='hs-layout'>)</span> <span class='hs-varop'>&amp;&amp;</span> <span class='hs-varid'>not</span> <span class='hs-layout'>(</span><span class='hs-varid'>sp2</span> <span class='hs-varop'>`isSubpartOf`</span> <span class='hs-varid'>sp1</span><span class='hs-layout'>)</span>
-<a name="line-263"></a>
-<a name="line-264"></a>
-<a name="line-265"></a>    
-<a name="line-266"></a>    <span class='hs-comment'>-- if equal</span>
-<a name="line-267"></a>    <span class='hs-comment'>-- [pa',pb'] = divide 2 pa</span>
-<a name="line-268"></a>
-<a name="line-269"></a><span class='hs-sel'>_solo</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-conid'>Part</span> <span class='hs-conid'>Solo</span>
-<a name="line-270"></a><span class='hs-sel'>_solo</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>s</span> <span class='hs-varid'>i</span> <span class='hs-varid'>u</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>s</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-varid'>s</span> <span class='hs-varid'>i</span> <span class='hs-varid'>u</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>f</span> <span class='hs-varid'>s</span>
-<a name="line-271"></a>
-<a name="line-272"></a><span class='hs-sel'>_subpart</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-conid'>Part</span> <span class='hs-conid'>Subpart</span>
-<a name="line-273"></a><span class='hs-sel'>_subpart</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>s</span> <span class='hs-varid'>i</span> <span class='hs-varid'>u</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>u</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-varid'>s</span> <span class='hs-varid'>i</span> <span class='hs-varid'>u</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>f</span> <span class='hs-varid'>u</span>
-<a name="line-274"></a>
-<a name="line-275"></a><span class='hs-sel'>_instrument</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-conid'>Part</span> <span class='hs-conid'>Instrument</span>
-<a name="line-276"></a><span class='hs-sel'>_instrument</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>s</span> <span class='hs-varid'>i</span> <span class='hs-varid'>u</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>i</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-varid'>s</span> <span class='hs-varid'>i</span> <span class='hs-varid'>u</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>f</span> <span class='hs-varid'>i</span>
-<a name="line-277"></a>
-<a name="line-278"></a><a name="divide"></a><span class='hs-comment'>-- | Divide a part into @n@ subparts.</span>
-<a name="line-279"></a><span class='hs-definition'>divide</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Part</span><span class='hs-keyglyph'>]</span>
-<a name="line-280"></a><span class='hs-definition'>divide</span> <span class='hs-varid'>n</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>solo</span> <span class='hs-varid'>instr</span> <span class='hs-varid'>subp</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>x</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-varid'>solo</span> <span class='hs-varid'>instr</span> <span class='hs-layout'>(</span><span class='hs-varid'>subp</span> <span class='hs-varop'>&lt;&gt;</span> <span class='hs-conid'>Subpart</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>x</span><span class='hs-keyglyph'>]</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>divisions</span> <span class='hs-varid'>n</span>
-<a name="line-281"></a>
-<a name="line-282"></a><a name="solo"></a><span class='hs-definition'>solo</span> <span class='hs-varid'>instr</span>      <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Part</span> <span class='hs-conid'>Solo</span> <span class='hs-varid'>instr</span> <span class='hs-varid'>def</span>
-<a name="line-283"></a><a name="tutti"></a><span class='hs-definition'>tutti</span> <span class='hs-varid'>instr</span>     <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Part</span> <span class='hs-conid'>Tutti</span> <span class='hs-varid'>instr</span> <span class='hs-varid'>def</span>
-<a name="line-284"></a>
-<a name="line-285"></a>
-<a name="line-286"></a><a name="piccoloFlute"></a><span class='hs-definition'>piccoloFlute</span>    <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>72</span>
-<a name="line-287"></a><a name="flute"></a><span class='hs-definition'>flute</span>           <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>73</span>
-<a name="line-288"></a><a name="altoFlute"></a><span class='hs-definition'>altoFlute</span>       <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"wind.flutes.flute.alto"</span>
-<a name="line-289"></a><a name="bassFlute"></a><span class='hs-definition'>bassFlute</span>       <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"wind.flutes.flute.bass"</span>
-<a name="line-290"></a>
-<a name="line-291"></a><a name="oboe"></a><span class='hs-definition'>oboe</span>            <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>68</span>
-<a name="line-292"></a><a name="corAnglais"></a><span class='hs-definition'>corAnglais</span>      <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>69</span>
-<a name="line-293"></a><a name="heckelphone"></a><span class='hs-definition'>heckelphone</span>     <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"wind.reed.oboes.heckelphone"</span>
+<a name="line-169"></a>-   'Section' refers to a set of instrumentfamilies related by sound production method (i.e. woodwind).
+<a name="line-170"></a>
+<a name="line-171"></a>-   'Family' refers to a set of instrument or voice types, which typically differ in size (i.e. saxophones).
+<a name="line-172"></a>
+<a name="line-173"></a>-   'Instrument' refers to a set of instruments or voice types of a given type (i.e. soprano saxophones).
+<a name="line-174"></a>    Perhaps confusingly, this includes vocal types such as alto, tenor etc as well. However, there is
+<a name="line-175"></a>    no good general term that incorporate both /instrument/ and /voice type/.
+<a name="line-176"></a>
+<a name="line-177"></a>-   A 'Part' is made up of an 'Instrument' and a 'Division' (i.e. Violin I). Solo parts are treated
+<a name="line-178"></a>    separately, so i.e. /Violin solo II/ (as in a double concerto) is distinct from /Violin II/.
+<a name="line-179"></a>
+<a name="line-180"></a>-}</span>
+<a name="line-181"></a>
+<a name="line-182"></a><a name="Part"></a><span class='hs-comment'>-- | A part is a subdivided group of instruments of a given type.</span>
+<a name="line-183"></a><a name="Part"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Part</span> <span class='hs-conid'>Solo</span> <span class='hs-conid'>Instrument</span> <span class='hs-conid'>Subpart</span>
+<a name="line-184"></a>    <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Eq</span><span class='hs-layout'>,</span> <span class='hs-conid'>Ord</span><span class='hs-layout'>)</span>
+<a name="line-185"></a>
+<a name="line-186"></a><a name="instance%20Show%20Part"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Show</span> <span class='hs-conid'>Part</span> <span class='hs-keyword'>where</span>
+<a name="line-187"></a>    <span class='hs-varid'>show</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-conid'>Solo</span> <span class='hs-varid'>instr</span> <span class='hs-varid'>subp</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>"Solo "</span> <span class='hs-varop'>++</span> <span class='hs-varid'>show</span> <span class='hs-varid'>instr</span> <span class='hs-varop'>++</span> <span class='hs-varid'>addS</span> <span class='hs-layout'>(</span><span class='hs-varid'>show</span> <span class='hs-varid'>subp</span><span class='hs-layout'>)</span>
+<a name="line-188"></a>        <span class='hs-keyword'>where</span>
+<a name="line-189"></a>            <span class='hs-varid'>addS</span> <span class='hs-str'>""</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>""</span>
+<a name="line-190"></a>            <span class='hs-varid'>addS</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>" "</span> <span class='hs-varop'>++</span> <span class='hs-varid'>x</span>
+<a name="line-191"></a>    <span class='hs-varid'>show</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-keyword'>_</span> <span class='hs-varid'>instr</span> <span class='hs-varid'>subp</span><span class='hs-layout'>)</span>    <span class='hs-keyglyph'>=</span> <span class='hs-varid'>show</span> <span class='hs-varid'>instr</span> <span class='hs-varop'>++</span> <span class='hs-varid'>addS</span> <span class='hs-layout'>(</span><span class='hs-varid'>show</span> <span class='hs-varid'>subp</span><span class='hs-layout'>)</span>
+<a name="line-192"></a>        <span class='hs-keyword'>where</span>
+<a name="line-193"></a>            <span class='hs-varid'>addS</span> <span class='hs-str'>""</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>""</span>
+<a name="line-194"></a>            <span class='hs-varid'>addS</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-str'>" "</span> <span class='hs-varop'>++</span> <span class='hs-varid'>x</span>
+<a name="line-195"></a>
+<a name="line-196"></a><a name="instance%20Enum%20Part"></a><span class='hs-comment'>-- Bad instance (?)</span>
+<a name="line-197"></a><a name="instance%20Enum%20Part"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Enum</span> <span class='hs-conid'>Part</span> <span class='hs-keyword'>where</span>
+<a name="line-198"></a>    <span class='hs-varid'>toEnum</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Part</span> <span class='hs-conid'>Tutti</span> <span class='hs-layout'>(</span><span class='hs-varid'>toEnum</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-varid'>def</span>
+<a name="line-199"></a>    <span class='hs-varid'>fromEnum</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>solo</span> <span class='hs-varid'>instr</span> <span class='hs-varid'>subp</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromEnum</span> <span class='hs-varid'>instr</span>
+<a name="line-200"></a>
+<a name="line-201"></a><a name="instance%20Monoid%20Part"></a><span class='hs-comment'>-- Semantics: Monoid (Option . First)</span>
+<a name="line-202"></a><a name="instance%20Monoid%20Part"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Monoid</span> <span class='hs-conid'>Part</span> <span class='hs-keyword'>where</span>
+<a name="line-203"></a>  <span class='hs-varid'>mempty</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>def</span>
+<a name="line-204"></a>  <span class='hs-varid'>mappend</span> <span class='hs-varid'>x</span> <span class='hs-varid'>y</span>
+<a name="line-205"></a>    <span class='hs-keyglyph'>|</span> <span class='hs-varid'>x</span> <span class='hs-varop'>==</span> <span class='hs-varid'>mempty</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>y</span>
+<a name="line-206"></a>    <span class='hs-keyglyph'>|</span><span class='hs-varid'>otherwise</span>   <span class='hs-keyglyph'>=</span> <span class='hs-varid'>x</span> 
+<a name="line-207"></a>
+<a name="line-208"></a><a name="instance%20Semigroup%20Part"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Semigroup</span> <span class='hs-conid'>Part</span> <span class='hs-keyword'>where</span>
+<a name="line-209"></a>  <span class='hs-layout'>(</span><span class='hs-varop'>&lt;&gt;</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>mappend</span>
+<a name="line-210"></a>
+<a name="line-211"></a><a name="instance%20Default%20Part"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>Default</span> <span class='hs-conid'>Part</span> <span class='hs-keyword'>where</span>
+<a name="line-212"></a>  <span class='hs-varid'>def</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Part</span> <span class='hs-varid'>def</span> <span class='hs-varid'>def</span> <span class='hs-varid'>def</span>
+<a name="line-213"></a>
+<a name="line-214"></a><a name="instance%20ToJSON%20Part"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>ToJSON</span> <span class='hs-conid'>Part</span> <span class='hs-keyword'>where</span>
+<a name="line-215"></a>  <span class='hs-varid'>toJSON</span> <span class='hs-varid'>p</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Aeson</span><span class='hs-varop'>.</span><span class='hs-varid'>object</span> <span class='hs-keyglyph'>[</span>
+<a name="line-216"></a>    <span class='hs-layout'>(</span><span class='hs-str'>"instrument"</span><span class='hs-layout'>,</span> <span class='hs-varid'>toJSON</span> <span class='hs-varop'>$</span><span class='hs-varid'>p</span><span class='hs-varop'>^.</span><span class='hs-sel'>_instrument</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
+<a name="line-217"></a>    <span class='hs-layout'>(</span><span class='hs-str'>"subpart"</span><span class='hs-layout'>,</span>    <span class='hs-varid'>toJSON</span> <span class='hs-varop'>$</span><span class='hs-varid'>p</span><span class='hs-varop'>^.</span><span class='hs-sel'>_subpart</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span>
+<a name="line-218"></a>    <span class='hs-layout'>(</span><span class='hs-str'>"solo"</span><span class='hs-layout'>,</span>       <span class='hs-varid'>toJSON</span> <span class='hs-varop'>$</span><span class='hs-varid'>p</span><span class='hs-varop'>^.</span><span class='hs-sel'>_solo</span><span class='hs-layout'>)</span>
+<a name="line-219"></a>    <span class='hs-keyglyph'>]</span>
+<a name="line-220"></a>
+<a name="line-221"></a><a name="instance%20FromJSON%20Part"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>FromJSON</span> <span class='hs-conid'>Part</span> <span class='hs-keyword'>where</span>
+<a name="line-222"></a>  <span class='hs-varid'>parseJSON</span> <span class='hs-layout'>(</span><span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Aeson</span><span class='hs-varop'>.</span><span class='hs-conid'>Object</span> <span class='hs-varid'>v</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-keyword'>do</span>
+<a name="line-223"></a>    <span class='hs-varid'>s</span> <span class='hs-keyglyph'>&lt;-</span> <span class='hs-varid'>v</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Aeson</span><span class='hs-varop'>..:</span> <span class='hs-str'>"solo"</span>
+<a name="line-224"></a>    <span class='hs-varid'>i</span> <span class='hs-keyglyph'>&lt;-</span> <span class='hs-varid'>v</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Aeson</span><span class='hs-varop'>..:</span> <span class='hs-str'>"instrument"</span>
+<a name="line-225"></a>    <span class='hs-varid'>u</span> <span class='hs-keyglyph'>&lt;-</span> <span class='hs-varid'>v</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Aeson</span><span class='hs-varop'>..:</span> <span class='hs-str'>"subpart"</span>
+<a name="line-226"></a>    <span class='hs-varid'>return</span> <span class='hs-varop'>$</span> <span class='hs-conid'>Part</span> <span class='hs-varid'>s</span> <span class='hs-varid'>i</span> <span class='hs-varid'>u</span>
+<a name="line-227"></a>  <span class='hs-varid'>parseJSON</span> <span class='hs-keyword'>_</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>empty</span>
+<a name="line-228"></a>
+<a name="line-229"></a><a name="containsPart"></a><span class='hs-comment'>-- |</span>
+<a name="line-230"></a><span class='hs-comment'>-- @a \`containsPart\` b@ holds if the set of players represented by a is an improper subset of the</span>
+<a name="line-231"></a><span class='hs-comment'>-- set of players represented by b.</span>
+<a name="line-232"></a><span class='hs-definition'>containsPart</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bool</span>
+<a name="line-233"></a><span class='hs-conid'>Part</span> <span class='hs-varid'>solo1</span> <span class='hs-varid'>instr1</span> <span class='hs-varid'>subp1</span> <span class='hs-varop'>`containsPart`</span> <span class='hs-conid'>Part</span> <span class='hs-varid'>solo2</span> <span class='hs-varid'>instr2</span> <span class='hs-varid'>subp2</span> <span class='hs-keyglyph'>=</span>
+<a name="line-234"></a>        <span class='hs-varid'>solo1</span> <span class='hs-varop'>==</span> <span class='hs-varid'>solo2</span>
+<a name="line-235"></a>        <span class='hs-varop'>&amp;&amp;</span> <span class='hs-varid'>instr1</span> <span class='hs-varop'>==</span> <span class='hs-varid'>instr2</span>
+<a name="line-236"></a>        <span class='hs-varop'>&amp;&amp;</span> <span class='hs-varid'>subp1</span> <span class='hs-varop'>`containsSubpart`</span> <span class='hs-varid'>subp2</span>
+<a name="line-237"></a>
+<a name="line-238"></a><a name="smallestPart"></a><span class='hs-definition'>smallestPart</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span>
+<a name="line-239"></a><span class='hs-definition'>smallestPart</span> <span class='hs-varid'>p1</span><span class='hs-keyglyph'>@</span><span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-keyword'>_</span> <span class='hs-keyword'>_</span> <span class='hs-varid'>sp1</span><span class='hs-layout'>)</span> <span class='hs-varid'>p2</span><span class='hs-keyglyph'>@</span><span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-keyword'>_</span> <span class='hs-keyword'>_</span> <span class='hs-varid'>sp2</span><span class='hs-layout'>)</span>
+<a name="line-240"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>sp1</span> <span class='hs-varop'>`smallestSubpart`</span> <span class='hs-varid'>sp2</span> <span class='hs-varop'>==</span> <span class='hs-varid'>sp1</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>p1</span>
+<a name="line-241"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>sp1</span> <span class='hs-varop'>`smallestSubpart`</span> <span class='hs-varid'>sp2</span> <span class='hs-varop'>==</span> <span class='hs-varid'>sp2</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>p2</span>
+<a name="line-242"></a>
+<a name="line-243"></a><a name="smallestSubpart"></a><span class='hs-definition'>smallestSubpart</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Subpart</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Subpart</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Subpart</span>
+<a name="line-244"></a><span class='hs-definition'>smallestSubpart</span> <span class='hs-varid'>x</span> <span class='hs-varid'>y</span>
+<a name="line-245"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>x</span> <span class='hs-varop'>`isProperSubpartOf`</span> <span class='hs-varid'>y</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>x</span>
+<a name="line-246"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>y</span> <span class='hs-varop'>`isProperSubpartOf`</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>y</span>
+<a name="line-247"></a>  <span class='hs-comment'>-- arbitrarily:</span>
+<a name="line-248"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>otherwise</span>               <span class='hs-keyglyph'>=</span> <span class='hs-varid'>x</span>
+<a name="line-249"></a>
+<a name="line-250"></a><a name="largestPart"></a><span class='hs-definition'>largestPart</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span>
+<a name="line-251"></a><span class='hs-definition'>largestPart</span> <span class='hs-varid'>p1</span><span class='hs-keyglyph'>@</span><span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-keyword'>_</span> <span class='hs-keyword'>_</span> <span class='hs-varid'>sp1</span><span class='hs-layout'>)</span> <span class='hs-varid'>p2</span><span class='hs-keyglyph'>@</span><span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-keyword'>_</span> <span class='hs-keyword'>_</span> <span class='hs-varid'>sp2</span><span class='hs-layout'>)</span>
+<a name="line-252"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>sp1</span> <span class='hs-varop'>`largestSubpart`</span> <span class='hs-varid'>sp2</span> <span class='hs-varop'>==</span> <span class='hs-varid'>sp1</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>p1</span>
+<a name="line-253"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>sp1</span> <span class='hs-varop'>`largestSubpart`</span> <span class='hs-varid'>sp2</span> <span class='hs-varop'>==</span> <span class='hs-varid'>sp2</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>p2</span>
+<a name="line-254"></a>
+<a name="line-255"></a><a name="largestSubpart"></a><span class='hs-definition'>largestSubpart</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Subpart</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Subpart</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Subpart</span>
+<a name="line-256"></a><span class='hs-definition'>largestSubpart</span> <span class='hs-varid'>x</span> <span class='hs-varid'>y</span>
+<a name="line-257"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>x</span> <span class='hs-varop'>`isProperSubpartOf`</span> <span class='hs-varid'>y</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>y</span>
+<a name="line-258"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>y</span> <span class='hs-varop'>`isProperSubpartOf`</span> <span class='hs-varid'>x</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>x</span>
+<a name="line-259"></a>  <span class='hs-comment'>-- arbitrarily:</span>
+<a name="line-260"></a>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>otherwise</span>               <span class='hs-keyglyph'>=</span> <span class='hs-varid'>x</span>
+<a name="line-261"></a>
+<a name="line-262"></a>
+<a name="line-263"></a><a name="allDistinct"></a><span class='hs-comment'>-- | Returns 'True' iff all given parts are distinct (as per 'distinctFrom').</span>
+<a name="line-264"></a><span class='hs-definition'>allDistinct</span> <span class='hs-keyglyph'>::</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Part</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bool</span>
+<a name="line-265"></a><span class='hs-definition'>allDistinct</span> <span class='hs-conid'>[]</span>     <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
+<a name="line-266"></a><span class='hs-definition'>allDistinct</span> <span class='hs-layout'>(</span><span class='hs-varid'>x</span><span class='hs-conop'>:</span><span class='hs-varid'>xs</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>all</span> <span class='hs-layout'>(</span><span class='hs-varid'>distinctFrom</span> <span class='hs-varid'>x</span><span class='hs-layout'>)</span> <span class='hs-varid'>xs</span> <span class='hs-varop'>&amp;&amp;</span> <span class='hs-varid'>allDistinct</span> <span class='hs-varid'>xs</span>
+<a name="line-267"></a>
+<a name="line-268"></a><a name="distinctFrom"></a><span class='hs-comment'>-- | Returns 'True' iff x and y are completely distinct, i.e. neither contains the other.</span>
+<a name="line-269"></a><span class='hs-comment'>-- </span>
+<a name="line-270"></a><span class='hs-comment'>-- &gt;&gt;&gt; violins `distinctFrom` trumpets</span>
+<a name="line-271"></a><span class='hs-comment'>-- True</span>
+<a name="line-272"></a><span class='hs-comment'>-- &gt;&gt;&gt; violins `distinctFrom` violins</span>
+<a name="line-273"></a><span class='hs-comment'>-- False</span>
+<a name="line-274"></a><span class='hs-comment'>-- &gt;&gt;&gt; violins `distinctFrom` violins1</span>
+<a name="line-275"></a><span class='hs-comment'>-- False</span>
+<a name="line-276"></a><span class='hs-comment'>-- &gt;&gt;&gt; violins1 `distinctFrom` violins</span>
+<a name="line-277"></a><span class='hs-comment'>-- False</span>
+<a name="line-278"></a><span class='hs-comment'>-- &gt;&gt;&gt; violins1 `distinctFrom` violins2</span>
+<a name="line-279"></a><span class='hs-comment'>-- True</span>
+<a name="line-280"></a><span class='hs-comment'>--</span>
+<a name="line-281"></a><span class='hs-definition'>distinctFrom</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bool</span>
+<a name="line-282"></a><span class='hs-definition'>distinctFrom</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>s1</span> <span class='hs-varid'>i1</span> <span class='hs-varid'>sp1</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>s2</span> <span class='hs-varid'>i2</span> <span class='hs-varid'>sp2</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>s1</span> <span class='hs-varop'>/=</span> <span class='hs-varid'>s2</span> <span class='hs-varop'>||</span> <span class='hs-varid'>i1</span> <span class='hs-varop'>/=</span> <span class='hs-varid'>i2</span> <span class='hs-varop'>||</span> <span class='hs-varid'>noneSubpart</span>
+<a name="line-283"></a>  <span class='hs-keyword'>where</span>
+<a name="line-284"></a>    <span class='hs-comment'>-- Is this needed?</span>
+<a name="line-285"></a>    <span class='hs-varid'>noneSubpart</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>not</span> <span class='hs-layout'>(</span><span class='hs-varid'>sp1</span> <span class='hs-varop'>`isSubpartOf`</span> <span class='hs-varid'>sp2</span><span class='hs-layout'>)</span> <span class='hs-varop'>&amp;&amp;</span> <span class='hs-varid'>not</span> <span class='hs-layout'>(</span><span class='hs-varid'>sp2</span> <span class='hs-varop'>`isSubpartOf`</span> <span class='hs-varid'>sp1</span><span class='hs-layout'>)</span>
+<a name="line-286"></a>
+<a name="line-287"></a>
+<a name="line-288"></a>    
+<a name="line-289"></a>    <span class='hs-comment'>-- if equal</span>
+<a name="line-290"></a>    <span class='hs-comment'>-- [pa',pb'] = divide 2 pa</span>
+<a name="line-291"></a>
+<a name="line-292"></a><span class='hs-sel'>_solo</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-conid'>Part</span> <span class='hs-conid'>Solo</span>
+<a name="line-293"></a><span class='hs-sel'>_solo</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>s</span> <span class='hs-varid'>i</span> <span class='hs-varid'>u</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>s</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-varid'>s</span> <span class='hs-varid'>i</span> <span class='hs-varid'>u</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>f</span> <span class='hs-varid'>s</span>
 <a name="line-294"></a>
-<a name="line-295"></a><a name="ebClarinet"></a><span class='hs-definition'>ebClarinet</span>      <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"wind.reed.clarinet.eflat"</span>
-<a name="line-296"></a><a name="clarinet"></a><span class='hs-definition'>clarinet</span>        <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>71</span>
-<a name="line-297"></a><a name="aClarinet"></a><span class='hs-definition'>aClarinet</span>       <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"wind.reed.clarinet.a"</span>
-<a name="line-298"></a><a name="bassClarinet"></a><span class='hs-definition'>bassClarinet</span>    <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"wind.reed.clarinet.bass"</span>
-<a name="line-299"></a>
-<a name="line-300"></a><a name="sopranoSax"></a><span class='hs-definition'>sopranoSax</span>      <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>64</span>
-<a name="line-301"></a><a name="altoSax"></a><span class='hs-definition'>altoSax</span>         <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>65</span>
-<a name="line-302"></a><a name="tenorSax"></a><span class='hs-definition'>tenorSax</span>        <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>66</span>
-<a name="line-303"></a><a name="baritoneSax"></a><span class='hs-definition'>baritoneSax</span>     <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>67</span>
+<a name="line-295"></a><span class='hs-sel'>_subpart</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-conid'>Part</span> <span class='hs-conid'>Subpart</span>
+<a name="line-296"></a><span class='hs-sel'>_subpart</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>s</span> <span class='hs-varid'>i</span> <span class='hs-varid'>u</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>u</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-varid'>s</span> <span class='hs-varid'>i</span> <span class='hs-varid'>u</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>f</span> <span class='hs-varid'>u</span>
+<a name="line-297"></a>
+<a name="line-298"></a><span class='hs-sel'>_instrument</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Lens'</span> <span class='hs-conid'>Part</span> <span class='hs-conid'>Instrument</span>
+<a name="line-299"></a><span class='hs-sel'>_instrument</span> <span class='hs-varid'>f</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>s</span> <span class='hs-varid'>i</span> <span class='hs-varid'>u</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>i</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-varid'>s</span> <span class='hs-varid'>i</span> <span class='hs-varid'>u</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>f</span> <span class='hs-varid'>i</span>
+<a name="line-300"></a>
+<a name="line-301"></a><a name="divide"></a><span class='hs-comment'>-- | Divide a part into @n@ subparts.</span>
+<a name="line-302"></a><span class='hs-definition'>divide</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Part</span><span class='hs-keyglyph'>]</span>
+<a name="line-303"></a><span class='hs-definition'>divide</span> <span class='hs-varid'>n</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-varid'>solo</span> <span class='hs-varid'>instr</span> <span class='hs-varid'>subp</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fmap</span> <span class='hs-layout'>(</span><span class='hs-keyglyph'>\</span><span class='hs-varid'>x</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Part</span> <span class='hs-varid'>solo</span> <span class='hs-varid'>instr</span> <span class='hs-layout'>(</span><span class='hs-varid'>subp</span> <span class='hs-varop'>&lt;&gt;</span> <span class='hs-conid'>Subpart</span> <span class='hs-keyglyph'>[</span><span class='hs-varid'>x</span><span class='hs-keyglyph'>]</span><span class='hs-layout'>)</span><span class='hs-layout'>)</span> <span class='hs-varop'>$</span> <span class='hs-varid'>divisions</span> <span class='hs-varid'>n</span>
 <a name="line-304"></a>
-<a name="line-305"></a><a name="bassoon"></a><span class='hs-definition'>bassoon</span>         <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>70</span>
-<a name="line-306"></a><a name="contraBassoon"></a><span class='hs-definition'>contraBassoon</span>   <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"wind.reed.contrabassoon"</span>
+<a name="line-305"></a><a name="solo"></a><span class='hs-definition'>solo</span> <span class='hs-varid'>instr</span>      <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Part</span> <span class='hs-conid'>Solo</span> <span class='hs-varid'>instr</span> <span class='hs-varid'>def</span>
+<a name="line-306"></a><a name="tutti"></a><span class='hs-definition'>tutti</span> <span class='hs-varid'>instr</span>     <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Part</span> <span class='hs-conid'>Tutti</span> <span class='hs-varid'>instr</span> <span class='hs-varid'>def</span>
 <a name="line-307"></a>
-<a name="line-308"></a><a name="horn"></a><span class='hs-definition'>horn</span>            <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>60</span>
-<a name="line-309"></a><a name="piccoloTrumpet"></a><span class='hs-definition'>piccoloTrumpet</span>  <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"brass.trumpet.piccolo"</span>
-<a name="line-310"></a><a name="trumpet"></a><span class='hs-definition'>trumpet</span>         <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>56</span>
-<a name="line-311"></a><a name="bassTrumpet"></a><span class='hs-definition'>bassTrumpet</span>     <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"brass.trumpet.bass"</span>
-<a name="line-312"></a><a name="altoTrombone"></a><span class='hs-definition'>altoTrombone</span>    <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"brass.trombone.alto"</span>
-<a name="line-313"></a><a name="trombone"></a><span class='hs-definition'>trombone</span>        <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tenorTrombone</span>
-<a name="line-314"></a><a name="tenorTrombone"></a><span class='hs-definition'>tenorTrombone</span>   <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>57</span>
-<a name="line-315"></a><a name="bassTrombone"></a><span class='hs-definition'>bassTrombone</span>    <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"brass.trombone.bass"</span>
-<a name="line-316"></a><a name="tuba"></a><span class='hs-definition'>tuba</span>            <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>58</span>
+<a name="line-308"></a>
+<a name="line-309"></a><a name="piccoloFlute"></a><span class='hs-definition'>piccoloFlute</span>    <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>72</span>
+<a name="line-310"></a><a name="flute"></a><span class='hs-definition'>flute</span>           <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>73</span>
+<a name="line-311"></a><a name="altoFlute"></a><span class='hs-definition'>altoFlute</span>       <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"wind.flutes.flute.alto"</span>
+<a name="line-312"></a><a name="bassFlute"></a><span class='hs-definition'>bassFlute</span>       <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"wind.flutes.flute.bass"</span>
+<a name="line-313"></a>
+<a name="line-314"></a><a name="oboe"></a><span class='hs-definition'>oboe</span>            <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>68</span>
+<a name="line-315"></a><a name="corAnglais"></a><span class='hs-definition'>corAnglais</span>      <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>69</span>
+<a name="line-316"></a><a name="heckelphone"></a><span class='hs-definition'>heckelphone</span>     <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"wind.reed.oboes.heckelphone"</span>
 <a name="line-317"></a>
-<a name="line-318"></a><a name="timpani"></a><span class='hs-definition'>timpani</span>         <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>47</span>
-<a name="line-319"></a><a name="piano"></a><span class='hs-definition'>piano</span>           <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>0</span>
-<a name="line-320"></a>
-<a name="line-321"></a><a name="celesta"></a><span class='hs-definition'>celesta</span>         <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>8</span>
-<a name="line-322"></a><a name="glockenspiel"></a><span class='hs-definition'>glockenspiel</span>    <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>9</span>
-<a name="line-323"></a><a name="vibraphone"></a><span class='hs-definition'>vibraphone</span>      <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>11</span>
-<a name="line-324"></a><a name="marimba"></a><span class='hs-definition'>marimba</span>         <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>12</span>
-<a name="line-325"></a><a name="xylophone"></a><span class='hs-definition'>xylophone</span>       <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>13</span>
-<a name="line-326"></a><a name="xylorimba"></a><span class='hs-definition'>xylorimba</span>       <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"pitched-percussion.xylorimba"</span>
-<a name="line-327"></a><a name="tubularBells"></a><span class='hs-definition'>tubularBells</span>    <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>14</span>
-<a name="line-328"></a><a name="dulcimer"></a><span class='hs-definition'>dulcimer</span>        <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>15</span>
-<a name="line-329"></a>
-<a name="line-330"></a><a name="accordion"></a><span class='hs-definition'>accordion</span>       <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>21</span>
-<a name="line-331"></a><a name="harmonica"></a><span class='hs-definition'>harmonica</span>       <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>22</span>
-<a name="line-332"></a>
-<a name="line-333"></a><a name="violin"></a><span class='hs-definition'>violin</span>          <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>40</span>
-<a name="line-334"></a><a name="viola"></a><span class='hs-definition'>viola</span>           <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>41</span>
-<a name="line-335"></a><a name="cello"></a><span class='hs-definition'>cello</span>           <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>42</span>
-<a name="line-336"></a><a name="doubleBass"></a><span class='hs-definition'>doubleBass</span>      <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>43</span>
-<a name="line-337"></a>
-<a name="line-338"></a>
-<a name="line-339"></a>
-<a name="line-340"></a><a name="defaultMidiProgram"></a><span class='hs-definition'>defaultMidiProgram</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span>
-<a name="line-341"></a><span class='hs-definition'>defaultMidiProgram</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-keyword'>_</span> <span class='hs-varid'>instr</span> <span class='hs-keyword'>_</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMaybe</span> <span class='hs-num'>0</span> <span class='hs-varop'>$</span> <span class='hs-varid'>toMidiProgram</span> <span class='hs-varid'>instr</span>
-<a name="line-342"></a>
-<a name="line-343"></a><a name="defaultMidiNote"></a><span class='hs-definition'>defaultMidiNote</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span>
-<a name="line-344"></a><span class='hs-definition'>defaultMidiNote</span> <span class='hs-keyword'>_</span> <span class='hs-keyglyph'>=</span> <span class='hs-num'>0</span>
-<a name="line-345"></a>
-<a name="line-346"></a><a name="defaultMidiChannel"></a><span class='hs-definition'>defaultMidiChannel</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span>
-<a name="line-347"></a><span class='hs-definition'>defaultMidiChannel</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>gmMidiChannel</span> <span class='hs-varop'>.</span> <span class='hs-varid'>defaultMidiProgram</span>
-<a name="line-348"></a>
-<a name="line-349"></a><a name="defaultScoreOrder"></a><span class='hs-definition'>defaultScoreOrder</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Double</span>
-<a name="line-350"></a><span class='hs-definition'>defaultScoreOrder</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>gmScoreOrder</span> <span class='hs-varop'>.</span> <span class='hs-varid'>defaultMidiProgram</span>
-<a name="line-351"></a>
-<a name="line-352"></a><a name="defaultClef"></a><span class='hs-definition'>defaultClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span>
-<a name="line-353"></a><span class='hs-definition'>defaultClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>gmClef</span> <span class='hs-varop'>.</span> <span class='hs-varid'>defaultMidiProgram</span>
-<a name="line-354"></a><span class='hs-comment'>{-
-<a name="line-355"></a>    ## Terminology: Voice vs Part
-<a name="line-356"></a>
-<a name="line-357"></a>    A voice is a container of notes (non-overlapping)
-<a name="line-358"></a>
-<a name="line-359"></a>    A part is an identifier for a set of singers/musicians AND all the notes in a score
-<a name="line-360"></a>    designated for this set of performers. Part extraction has the type
+<a name="line-318"></a><a name="ebClarinet"></a><span class='hs-definition'>ebClarinet</span>      <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"wind.reed.clarinet.eflat"</span>
+<a name="line-319"></a><a name="clarinet"></a><span class='hs-definition'>clarinet</span>        <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>71</span>
+<a name="line-320"></a><a name="aClarinet"></a><span class='hs-definition'>aClarinet</span>       <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"wind.reed.clarinet.a"</span>
+<a name="line-321"></a><a name="bassClarinet"></a><span class='hs-definition'>bassClarinet</span>    <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"wind.reed.clarinet.bass"</span>
+<a name="line-322"></a>
+<a name="line-323"></a><a name="sopranoSax"></a><span class='hs-definition'>sopranoSax</span>      <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>64</span>
+<a name="line-324"></a><a name="altoSax"></a><span class='hs-definition'>altoSax</span>         <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>65</span>
+<a name="line-325"></a><a name="tenorSax"></a><span class='hs-definition'>tenorSax</span>        <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>66</span>
+<a name="line-326"></a><a name="baritoneSax"></a><span class='hs-definition'>baritoneSax</span>     <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>67</span>
+<a name="line-327"></a>
+<a name="line-328"></a><a name="bassoon"></a><span class='hs-definition'>bassoon</span>         <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>70</span>
+<a name="line-329"></a><a name="contraBassoon"></a><span class='hs-definition'>contraBassoon</span>   <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"wind.reed.contrabassoon"</span>
+<a name="line-330"></a>
+<a name="line-331"></a><a name="horn"></a><span class='hs-definition'>horn</span>            <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>60</span>
+<a name="line-332"></a><a name="piccoloTrumpet"></a><span class='hs-definition'>piccoloTrumpet</span>  <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"brass.trumpet.piccolo"</span>
+<a name="line-333"></a><a name="trumpet"></a><span class='hs-definition'>trumpet</span>         <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>56</span>
+<a name="line-334"></a><a name="bassTrumpet"></a><span class='hs-definition'>bassTrumpet</span>     <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"brass.trumpet.bass"</span>
+<a name="line-335"></a><a name="altoTrombone"></a><span class='hs-definition'>altoTrombone</span>    <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"brass.trombone.alto"</span>
+<a name="line-336"></a><a name="trombone"></a><span class='hs-definition'>trombone</span>        <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tenorTrombone</span>
+<a name="line-337"></a><a name="tenorTrombone"></a><span class='hs-definition'>tenorTrombone</span>   <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>57</span>
+<a name="line-338"></a><a name="bassTrombone"></a><span class='hs-definition'>bassTrombone</span>    <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"brass.trombone.bass"</span>
+<a name="line-339"></a><a name="tuba"></a><span class='hs-definition'>tuba</span>            <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>58</span>
+<a name="line-340"></a>
+<a name="line-341"></a><a name="timpani"></a><span class='hs-definition'>timpani</span>         <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>47</span>
+<a name="line-342"></a><a name="piano"></a><span class='hs-definition'>piano</span>           <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>0</span>
+<a name="line-343"></a>
+<a name="line-344"></a><a name="celesta"></a><span class='hs-definition'>celesta</span>         <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>8</span>
+<a name="line-345"></a><a name="glockenspiel"></a><span class='hs-definition'>glockenspiel</span>    <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>9</span>
+<a name="line-346"></a><a name="vibraphone"></a><span class='hs-definition'>vibraphone</span>      <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>11</span>
+<a name="line-347"></a><a name="marimba"></a><span class='hs-definition'>marimba</span>         <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>12</span>
+<a name="line-348"></a><a name="xylophone"></a><span class='hs-definition'>xylophone</span>       <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>13</span>
+<a name="line-349"></a><a name="xylorimba"></a><span class='hs-definition'>xylorimba</span>       <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMusicXmlSoundId</span> <span class='hs-str'>"pitched-percussion.xylorimba"</span>
+<a name="line-350"></a><a name="tubularBells"></a><span class='hs-definition'>tubularBells</span>    <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>14</span>
+<a name="line-351"></a><a name="dulcimer"></a><span class='hs-definition'>dulcimer</span>        <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>15</span>
+<a name="line-352"></a>
+<a name="line-353"></a><a name="accordion"></a><span class='hs-definition'>accordion</span>       <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>21</span>
+<a name="line-354"></a><a name="harmonica"></a><span class='hs-definition'>harmonica</span>       <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>22</span>
+<a name="line-355"></a>
+<a name="line-356"></a><a name="violin"></a><span class='hs-definition'>violin</span>          <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>40</span>
+<a name="line-357"></a><a name="viola"></a><span class='hs-definition'>viola</span>           <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>41</span>
+<a name="line-358"></a><a name="cello"></a><span class='hs-definition'>cello</span>           <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>42</span>
+<a name="line-359"></a><a name="doubleBass"></a><span class='hs-definition'>doubleBass</span>      <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>43</span>
+<a name="line-360"></a>
 <a name="line-361"></a>
-<a name="line-362"></a>        extractParts :: HasPart a =&gt; Score a -&gt; [Score a]
-<a name="line-363"></a>
-<a name="line-364"></a>    I.e. in a score for piano and ensemble, certain notes may be *in the piano part*, i.e.
-<a name="line-365"></a>    designated for the piano. Typically, a part is monophonic or polyphonic. A monophonic
-<a name="line-366"></a>    part is a voice, i.e.
-<a name="line-367"></a>
-<a name="line-368"></a>        -- | Are there overlapping notes?
-<a name="line-369"></a>        isMonophonic :: Score a -&gt; Bool
-<a name="line-370"></a>
-<a name="line-371"></a>        -- | Fails for polyphonic scores.
-<a name="line-372"></a>        s_oreToVoice :: Score a -&gt; Voice (Maybe a)
-<a name="line-373"></a>
-<a name="line-374"></a>    A polyphonic score contains several voices, i.e.
-<a name="line-375"></a>
-<a name="line-376"></a>        s_oreToVoices :: Score a -&gt; [Voice (Maybe a)]
-<a name="line-377"></a>
-<a name="line-378"></a>
-<a name="line-379"></a>    A part is any type a that satisfies (Ord a, Show a).
-<a name="line-380"></a>    Optionally, we may add a contraint (HasPartName a), i.e.
+<a name="line-362"></a>
+<a name="line-363"></a><a name="defaultMidiProgram"></a><span class='hs-definition'>defaultMidiProgram</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span>
+<a name="line-364"></a><span class='hs-definition'>defaultMidiProgram</span> <span class='hs-layout'>(</span><span class='hs-conid'>Part</span> <span class='hs-keyword'>_</span> <span class='hs-varid'>instr</span> <span class='hs-keyword'>_</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMaybe</span> <span class='hs-num'>0</span> <span class='hs-varop'>$</span> <span class='hs-varid'>toMidiProgram</span> <span class='hs-varid'>instr</span>
+<a name="line-365"></a>
+<a name="line-366"></a><a name="defaultMidiNote"></a><span class='hs-definition'>defaultMidiNote</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span>
+<a name="line-367"></a><span class='hs-definition'>defaultMidiNote</span> <span class='hs-keyword'>_</span> <span class='hs-keyglyph'>=</span> <span class='hs-num'>0</span>
+<a name="line-368"></a>
+<a name="line-369"></a><a name="defaultMidiChannel"></a><span class='hs-definition'>defaultMidiChannel</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span>
+<a name="line-370"></a><span class='hs-definition'>defaultMidiChannel</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>gmMidiChannel</span> <span class='hs-varop'>.</span> <span class='hs-varid'>defaultMidiProgram</span>
+<a name="line-371"></a>
+<a name="line-372"></a><a name="defaultScoreOrder"></a><span class='hs-definition'>defaultScoreOrder</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Double</span>
+<a name="line-373"></a><span class='hs-definition'>defaultScoreOrder</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>gmScoreOrder</span> <span class='hs-varop'>.</span> <span class='hs-varid'>defaultMidiProgram</span>
+<a name="line-374"></a>
+<a name="line-375"></a><a name="defaultClef"></a><span class='hs-definition'>defaultClef</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Part</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span>
+<a name="line-376"></a><span class='hs-definition'>defaultClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>gmClef</span> <span class='hs-varop'>.</span> <span class='hs-varid'>defaultMidiProgram</span>
+<a name="line-377"></a><span class='hs-comment'>{-
+<a name="line-378"></a>    ## Terminology: Voice vs Part
+<a name="line-379"></a>
+<a name="line-380"></a>    A voice is a container of notes (non-overlapping)
 <a name="line-381"></a>
-<a name="line-382"></a>        class HasPartName a where
-<a name="line-383"></a>            partName :: a -&gt; String
-<a name="line-384"></a>            partAbbr :: a -&gt; String
-<a name="line-385"></a>
+<a name="line-382"></a>    A part is an identifier for a set of singers/musicians AND all the notes in a score
+<a name="line-383"></a>    designated for this set of performers. Part extraction has the type
+<a name="line-384"></a>
+<a name="line-385"></a>        extractParts :: HasPart a =&gt; Score a -&gt; [Score a]
 <a name="line-386"></a>
-<a name="line-387"></a>    These contraints are used when printing scores (to get the order of the parts and their name).
-<a name="line-388"></a>
-<a name="line-389"></a>        Vln1, Vln2 etc.
+<a name="line-387"></a>    I.e. in a score for piano and ensemble, certain notes may be *in the piano part*, i.e.
+<a name="line-388"></a>    designated for the piano. Typically, a part is monophonic or polyphonic. A monophonic
+<a name="line-389"></a>    part is a voice, i.e.
 <a name="line-390"></a>
-<a name="line-391"></a>    Often we want to group parts, i.e.
-<a name="line-392"></a>
-<a name="line-393"></a>        Chorus {
-<a name="line-394"></a>            Sop  { Sop1 Sop2 }
-<a name="line-395"></a>            Alto { Alto1 Alto2 }
-<a name="line-396"></a>            Ten  { Ten1 Ten 2 }
-<a name="line-397"></a>            Bass { Bass1 Bass2 }
-<a name="line-398"></a>        }
-<a name="line-399"></a>        Orchestra {
-<a name="line-400"></a>            Woodwinds { ... }
-<a name="line-401"></a>            Brass { ... }
-<a name="line-402"></a>            Perc { ... }
-<a name="line-403"></a>            Strings { ... }
-<a name="line-404"></a>        }
-<a name="line-405"></a>
-<a name="line-406"></a>
-<a name="line-407"></a>    isInGroup :: Group -&gt; Part -&gt; Bool
-<a name="line-408"></a>    partGroups :: Part -&gt; [Group]
+<a name="line-391"></a>        -- | Are there overlapping notes?
+<a name="line-392"></a>        isMonophonic :: Score a -&gt; Bool
+<a name="line-393"></a>
+<a name="line-394"></a>        -- | Fails for polyphonic scores.
+<a name="line-395"></a>        s_oreToVoice :: Score a -&gt; Voice (Maybe a)
+<a name="line-396"></a>
+<a name="line-397"></a>    A polyphonic score contains several voices, i.e.
+<a name="line-398"></a>
+<a name="line-399"></a>        s_oreToVoices :: Score a -&gt; [Voice (Maybe a)]
+<a name="line-400"></a>
+<a name="line-401"></a>
+<a name="line-402"></a>    A part is any type a that satisfies (Ord a, Show a).
+<a name="line-403"></a>    Optionally, we may add a contraint (HasPartName a), i.e.
+<a name="line-404"></a>
+<a name="line-405"></a>        class HasPartName a where
+<a name="line-406"></a>            partName :: a -&gt; String
+<a name="line-407"></a>            partAbbr :: a -&gt; String
+<a name="line-408"></a>
 <a name="line-409"></a>
-<a name="line-410"></a>
-<a name="line-411"></a>    partGroup :: (Part -&gt; [Group] -&gt; a) -&gt; Group -&gt; a
-<a name="line-412"></a>    tree :: (a -&gt; [Tree a] -&gt; b) -&gt; Tree a -&gt; b
+<a name="line-410"></a>    These contraints are used when printing scores (to get the order of the parts and their name).
+<a name="line-411"></a>
+<a name="line-412"></a>        Vln1, Vln2 etc.
 <a name="line-413"></a>
-<a name="line-414"></a>
-<a name="line-415"></a>    data MyPart
-<a name="line-416"></a>        = Fl
-<a name="line-417"></a>        | Sop
-<a name="line-418"></a>        | Vl1
-<a name="line-419"></a>        | Vl2
-<a name="line-420"></a>        | Pno
-<a name="line-421"></a>
-<a name="line-422"></a>-}</span>
-<a name="line-423"></a>
-<a name="line-424"></a><a name="piccoloFlutes"></a><span class='hs-definition'>piccoloFlutes</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>piccoloFlute</span>
-<a name="line-425"></a><a name="flutes"></a><span class='hs-definition'>flutes</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>flute</span>
-<a name="line-426"></a><a name="oboes"></a><span class='hs-definition'>oboes</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>oboe</span>
-<a name="line-427"></a><a name="clarinets"></a><span class='hs-definition'>clarinets</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>clarinet</span>
-<a name="line-428"></a><a name="bassoons"></a><span class='hs-definition'>bassoons</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>bassoon</span>
+<a name="line-414"></a>    Often we want to group parts, i.e.
+<a name="line-415"></a>
+<a name="line-416"></a>        Chorus {
+<a name="line-417"></a>            Sop  { Sop1 Sop2 }
+<a name="line-418"></a>            Alto { Alto1 Alto2 }
+<a name="line-419"></a>            Ten  { Ten1 Ten 2 }
+<a name="line-420"></a>            Bass { Bass1 Bass2 }
+<a name="line-421"></a>        }
+<a name="line-422"></a>        Orchestra {
+<a name="line-423"></a>            Woodwinds { ... }
+<a name="line-424"></a>            Brass { ... }
+<a name="line-425"></a>            Perc { ... }
+<a name="line-426"></a>            Strings { ... }
+<a name="line-427"></a>        }
+<a name="line-428"></a>
 <a name="line-429"></a>
-<a name="line-430"></a><span class='hs-keyglyph'>[</span><span class='hs-varid'>flutes1</span><span class='hs-layout'>,</span> <span class='hs-varid'>flutes2</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>divide</span> <span class='hs-num'>2</span> <span class='hs-varid'>flutes</span>
-<a name="line-431"></a><span class='hs-keyglyph'>[</span><span class='hs-varid'>oboes1</span><span class='hs-layout'>,</span> <span class='hs-varid'>oboes2</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>divide</span> <span class='hs-num'>2</span> <span class='hs-varid'>oboes</span>
-<a name="line-432"></a><span class='hs-keyglyph'>[</span><span class='hs-varid'>clarinets1</span><span class='hs-layout'>,</span> <span class='hs-varid'>clarinets2</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>divide</span> <span class='hs-num'>2</span> <span class='hs-varid'>clarinets</span>
+<a name="line-430"></a>    isInGroup :: Group -&gt; Part -&gt; Bool
+<a name="line-431"></a>    partGroups :: Part -&gt; [Group]
+<a name="line-432"></a>
 <a name="line-433"></a>
-<a name="line-434"></a>
-<a name="line-435"></a><a name="horns"></a><span class='hs-definition'>horns</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>horn</span>
-<a name="line-436"></a><a name="highHorns"></a><span class='hs-definition'>highHorns</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>zipWith</span> <span class='hs-layout'>(</span><span class='hs-varop'>!!</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-varid'>repeat</span> <span class='hs-varop'>$</span> <span class='hs-varid'>divide</span> <span class='hs-num'>4</span> <span class='hs-varid'>horns</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>[</span><span class='hs-num'>0</span><span class='hs-layout'>,</span><span class='hs-num'>2</span><span class='hs-keyglyph'>]</span>
-<a name="line-437"></a><a name="lowHorns"></a><span class='hs-definition'>lowHorns</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>zipWith</span> <span class='hs-layout'>(</span><span class='hs-varop'>!!</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-varid'>repeat</span> <span class='hs-varop'>$</span> <span class='hs-varid'>divide</span> <span class='hs-num'>4</span> <span class='hs-varid'>horns</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>[</span><span class='hs-num'>1</span><span class='hs-layout'>,</span><span class='hs-num'>3</span><span class='hs-keyglyph'>]</span>
-<a name="line-438"></a><a name="trumpets"></a><span class='hs-definition'>trumpets</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>trumpet</span>
-<a name="line-439"></a><a name="trombones"></a><span class='hs-definition'>trombones</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>trombone</span>
-<a name="line-440"></a><span class='hs-keyglyph'>[</span><span class='hs-varid'>trumpets1</span><span class='hs-layout'>,</span> <span class='hs-varid'>trumpets2</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>divide</span> <span class='hs-num'>2</span> <span class='hs-varid'>trumpets</span>
-<a name="line-441"></a><span class='hs-keyglyph'>[</span><span class='hs-varid'>trombones1</span><span class='hs-layout'>,</span> <span class='hs-varid'>trombones2</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>divide</span> <span class='hs-num'>2</span> <span class='hs-varid'>trombones</span>
-<a name="line-442"></a><a name="tubas"></a><span class='hs-definition'>tubas</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>tuba</span>
-<a name="line-443"></a>
-<a name="line-444"></a><a name="violins"></a><span class='hs-definition'>violins</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>violin</span>
-<a name="line-445"></a><span class='hs-keyglyph'>[</span><span class='hs-varid'>violins1</span><span class='hs-layout'>,</span> <span class='hs-varid'>violins2</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>divide</span> <span class='hs-num'>2</span> <span class='hs-varid'>violins</span>
-<a name="line-446"></a><a name="violas"></a><span class='hs-definition'>violas</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>viola</span>
-<a name="line-447"></a><a name="cellos"></a><span class='hs-definition'>cellos</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>cello</span>
-<a name="line-448"></a><a name="doubleBasses"></a><span class='hs-definition'>doubleBasses</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>doubleBass</span>
-<a name="line-449"></a>
-<a name="line-450"></a><a name="harp'"></a><span class='hs-definition'>harp'</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>46</span>
-<a name="line-451"></a><a name="harp"></a><span class='hs-definition'>harp</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>harp'</span>
+<a name="line-434"></a>    partGroup :: (Part -&gt; [Group] -&gt; a) -&gt; Group -&gt; a
+<a name="line-435"></a>    tree :: (a -&gt; [Tree a] -&gt; b) -&gt; Tree a -&gt; b
+<a name="line-436"></a>
+<a name="line-437"></a>
+<a name="line-438"></a>    data MyPart
+<a name="line-439"></a>        = Fl
+<a name="line-440"></a>        | Sop
+<a name="line-441"></a>        | Vl1
+<a name="line-442"></a>        | Vl2
+<a name="line-443"></a>        | Pno
+<a name="line-444"></a>
+<a name="line-445"></a>-}</span>
+<a name="line-446"></a>
+<a name="line-447"></a><a name="piccoloFlutes"></a><span class='hs-definition'>piccoloFlutes</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>piccoloFlute</span>
+<a name="line-448"></a><a name="flutes"></a><span class='hs-definition'>flutes</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>flute</span>
+<a name="line-449"></a><a name="oboes"></a><span class='hs-definition'>oboes</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>oboe</span>
+<a name="line-450"></a><a name="clarinets"></a><span class='hs-definition'>clarinets</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>clarinet</span>
+<a name="line-451"></a><a name="bassoons"></a><span class='hs-definition'>bassoons</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>bassoon</span>
 <a name="line-452"></a>
+<a name="line-453"></a><span class='hs-keyglyph'>[</span><span class='hs-varid'>flutes1</span><span class='hs-layout'>,</span> <span class='hs-varid'>flutes2</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>divide</span> <span class='hs-num'>2</span> <span class='hs-varid'>flutes</span>
+<a name="line-454"></a><a name="altoFlutes"></a><span class='hs-definition'>altoFlutes</span>     <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>altoFlute</span>
+<a name="line-455"></a><span class='hs-keyglyph'>[</span><span class='hs-varid'>oboes1</span><span class='hs-layout'>,</span> <span class='hs-varid'>oboes2</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>divide</span> <span class='hs-num'>2</span> <span class='hs-varid'>oboes</span>
+<a name="line-456"></a><a name="corAnglaises"></a><span class='hs-definition'>corAnglaises</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>corAnglais</span>
+<a name="line-457"></a><span class='hs-keyglyph'>[</span><span class='hs-varid'>clarinets1</span><span class='hs-layout'>,</span> <span class='hs-varid'>clarinets2</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>divide</span> <span class='hs-num'>2</span> <span class='hs-varid'>clarinets</span>
+<a name="line-458"></a><a name="ebClarinets"></a><span class='hs-definition'>ebClarinets</span>    <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>ebClarinet</span>
+<a name="line-459"></a><a name="bassClarinets"></a><span class='hs-definition'>bassClarinets</span>  <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>bassClarinet</span>
+<a name="line-460"></a><a name="contraBassoons"></a><span class='hs-definition'>contraBassoons</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>contraBassoon</span>
+<a name="line-461"></a>
+<a name="line-462"></a>
+<a name="line-463"></a><a name="horns"></a><span class='hs-definition'>horns</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>horn</span>
+<a name="line-464"></a><a name="highHorns"></a><span class='hs-definition'>highHorns</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>zipWith</span> <span class='hs-layout'>(</span><span class='hs-varop'>!!</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-varid'>repeat</span> <span class='hs-varop'>$</span> <span class='hs-varid'>divide</span> <span class='hs-num'>4</span> <span class='hs-varid'>horns</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>[</span><span class='hs-num'>0</span><span class='hs-layout'>,</span><span class='hs-num'>2</span><span class='hs-keyglyph'>]</span>
+<a name="line-465"></a><a name="lowHorns"></a><span class='hs-definition'>lowHorns</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>zipWith</span> <span class='hs-layout'>(</span><span class='hs-varop'>!!</span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><span class='hs-varid'>repeat</span> <span class='hs-varop'>$</span> <span class='hs-varid'>divide</span> <span class='hs-num'>4</span> <span class='hs-varid'>horns</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>[</span><span class='hs-num'>1</span><span class='hs-layout'>,</span><span class='hs-num'>3</span><span class='hs-keyglyph'>]</span>
+<a name="line-466"></a><a name="trumpets"></a><span class='hs-definition'>trumpets</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>trumpet</span>
+<a name="line-467"></a><a name="trombones"></a><span class='hs-definition'>trombones</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>trombone</span>
+<a name="line-468"></a><span class='hs-keyglyph'>[</span><span class='hs-varid'>trumpets1</span><span class='hs-layout'>,</span> <span class='hs-varid'>trumpets2</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>divide</span> <span class='hs-num'>2</span> <span class='hs-varid'>trumpets</span>
+<a name="line-469"></a><span class='hs-keyglyph'>[</span><span class='hs-varid'>trombones1</span><span class='hs-layout'>,</span> <span class='hs-varid'>trombones2</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>divide</span> <span class='hs-num'>2</span> <span class='hs-varid'>trombones</span>
+<a name="line-470"></a><a name="tubas"></a><span class='hs-definition'>tubas</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>tuba</span>
+<a name="line-471"></a>
+<a name="line-472"></a><a name="violins"></a><span class='hs-definition'>violins</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>violin</span>
+<a name="line-473"></a><span class='hs-keyglyph'>[</span><span class='hs-varid'>violins1</span><span class='hs-layout'>,</span> <span class='hs-varid'>violins2</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>divide</span> <span class='hs-num'>2</span> <span class='hs-varid'>violins</span>
+<a name="line-474"></a><a name="violas"></a><span class='hs-definition'>violas</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>viola</span>
+<a name="line-475"></a><a name="cellos"></a><span class='hs-definition'>cellos</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>cello</span>
+<a name="line-476"></a><a name="doubleBasses"></a><span class='hs-definition'>doubleBasses</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>doubleBass</span>
+<a name="line-477"></a>
+<a name="line-478"></a><a name="harp'"></a><span class='hs-definition'>harp'</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>fromMidiProgram</span> <span class='hs-num'>46</span>
+<a name="line-479"></a><a name="harp"></a><span class='hs-definition'>harp</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>tutti</span> <span class='hs-varid'>harp'</span>
+<a name="line-480"></a>
 </pre></body>
 </html>

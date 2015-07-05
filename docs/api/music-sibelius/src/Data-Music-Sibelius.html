@@ -154,10 +154,10 @@
 <a name="line-145"></a>    <span class='hs-keyword'>deriving</span> <span class='hs-layout'>(</span><span class='hs-conid'>Eq</span><span class='hs-layout'>,</span> <span class='hs-conid'>Ord</span><span class='hs-layout'>,</span> <span class='hs-conid'>Show</span><span class='hs-layout'>)</span>
 <a name="line-146"></a><a name="instance%20FromJSON%20SibeliusText"></a><span class='hs-keyword'>instance</span> <span class='hs-conid'>FromJSON</span> <span class='hs-conid'>SibeliusText</span> <span class='hs-keyword'>where</span>
 <a name="line-147"></a>    <span class='hs-varid'>parseJSON</span> <span class='hs-layout'>(</span><span class='hs-conid'>Object</span> <span class='hs-varid'>v</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>SibeliusText</span>
-<a name="line-148"></a>        <span class='hs-varop'>&lt;$&gt;</span> <span class='hs-varid'>v</span> <span class='hs-varop'>.:</span> <span class='hs-str'>"voice"</span> 
-<a name="line-149"></a>        <span class='hs-varop'>&lt;*&gt;</span> <span class='hs-varid'>v</span> <span class='hs-varop'>.:</span> <span class='hs-str'>"position"</span>
-<a name="line-150"></a>        <span class='hs-varop'>&lt;*&gt;</span> <span class='hs-varid'>v</span> <span class='hs-varop'>.:</span> <span class='hs-str'>"text"</span>
-<a name="line-151"></a>        <span class='hs-varop'>&lt;*&gt;</span> <span class='hs-varid'>v</span> <span class='hs-varop'>.:</span> <span class='hs-str'>"style"</span>
+<a name="line-148"></a>        <span class='hs-varop'>&lt;$&gt;</span> <span class='hs-varid'>v</span> <span class='hs-varop'>.:</span>  <span class='hs-str'>"voice"</span> 
+<a name="line-149"></a>        <span class='hs-varop'>&lt;*&gt;</span> <span class='hs-varid'>v</span> <span class='hs-varop'>.:</span>  <span class='hs-str'>"position"</span>
+<a name="line-150"></a>        <span class='hs-varop'>&lt;*&gt;</span> <span class='hs-varid'>v</span> <span class='hs-varop'>.:</span>  <span class='hs-str'>"text"</span>
+<a name="line-151"></a>        <span class='hs-varop'>&lt;*&gt;</span> <span class='hs-varid'>v</span> <span class='hs-varop'>.:?</span> <span class='hs-str'>"style"</span>
 <a name="line-152"></a>     
 <a name="line-153"></a><a name="SibeliusClef"></a><span class='hs-keyword'>data</span> <span class='hs-conid'>SibeliusClef</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>SibeliusClef</span> <span class='hs-layout'>{</span>
 <a name="line-154"></a>            <span class='hs-varid'>clefVoice</span>               <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Int</span><span class='hs-layout'>,</span>
