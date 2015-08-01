@@ -160,12 +160,12 @@ Offset and duration is not limited to simple numbers. Here are some more complex
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='6256baca7a4a5c03.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='1edc473b107d869.mid'>[listen]</a></div>
 
-![](6256baca7a4a5c03x.png)
+![](1edc473b107d869x.png)
 
 ```haskell
-c^*(9/8) |> d^*(7/8)
+c|*(9/8) |> d|*(7/8)
 
 ```
 
@@ -173,12 +173,12 @@ c^*(9/8) |> d^*(7/8)
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='dfed5fe3eb74928.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='644e4aebee360312.mid'>[listen]</a></div>
 
-![](dfed5fe3eb74928x.png)
+![](644e4aebee360312x.png)
 
 ```haskell
-stretch (2/3) (scat [c,d,e]) |> f^*2
+stretch (2/3) (scat [c,d,e]) |> f|*2
 
 ```
 
@@ -186,16 +186,16 @@ stretch (2/3) (scat [c,d,e]) |> f^*2
 
 As you can see, note values, tuplets and ties are added automatically
 
-The `^*` and `^/` operators can be used as shorthands for `delay` and `compress`.
+The `|*` and `|/` operators can be used as shorthands for `delay` and `compress`.
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='4f084f1952630d62.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='5fefb250ef328df8.mid'>[listen]</a></div>
 
-![](4f084f1952630d62x.png)
+![](5fefb250ef328df8x.png)
 
 ```haskell
-(c |> d |> e |> c |> d^*2 |> d^*2)^/16
+(c |> d |> e |> c |> d|*2 |> d|*2)|/16
 
 ```
 
@@ -272,15 +272,15 @@ Here is a more complex example:
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='766377a8008a72de.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='c135b8b327589e4.mid'>[listen]</a></div>
 
-![](766377a8008a72dex.png)
+![](c135b8b327589e4x.png)
 
 ```haskell
 let            
-    scale = scat [c,d,e,f,g,a,g,f]^/8
+    scale = scat [c,d,e,f,g,a,g,f]|/8
     triad a = a <> up _M3 a <> up _P5 a
-in up _P8 scale </> (triad c)^/2 |> (triad g_)^/2
+in up _P8 scale </> (triad c)|/2 |> (triad g_)|/2
 
 ```
 
@@ -290,12 +290,12 @@ As a shorthand for `x |> y |> z ..`, we can write [`scat`][scat] `[x, y, z]` (sh
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='2f35e3e0e2ed2a9.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='75387f0ecf07ed2f.mid'>[listen]</a></div>
 
-![](2f35e3e0e2ed2a9x.png)
+![](75387f0ecf07ed2fx.png)
 
 ```haskell
-scat [c,e..g]^/4
+scat [c,e..g]|/4
 
 ```
 
@@ -305,12 +305,12 @@ For `x <> y <> z ..`, we can write [`pcat`][pcat] `[x, y, z]` (short for *parall
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='10dd63b892f7364a.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='6167bd1821e1d158.mid'>[listen]</a></div>
 
-![](10dd63b892f7364ax.png)
+![](6167bd1821e1d158x.png)
 
 ```haskell
-pcat [c,e..g]^/2
+pcat [c,e..g]|/2
 
 ```
 
@@ -540,22 +540,22 @@ Some basic articulation functions are [`legato`][legato], [`staccato`][staccato]
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='513ffd34306fe543.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='6a7290123e0f1e7b.mid'>[listen]</a></div>
 
-![](513ffd34306fe543x.png)
+![](6a7290123e0f1e7bx.png)
 
 ```haskell
-legato (scat [c..g]^/8)
+legato (scat [c..g]|/8)
     </>
-staccato (scat [c..g]^/8)
+staccato (scat [c..g]|/8)
     </>
-portato (scat [c..g]^/8)
+portato (scat [c..g]|/8)
     </>
-tenuto (scat [c..g]^/8)
+tenuto (scat [c..g]|/8)
     </>
-separated (scat [c..g]^/8)
+separated (scat [c..g]|/8)
     </>
-staccatissimo (scat [c..g]^/8)
+staccatissimo (scat [c..g]|/8)
 
 ```
 
@@ -566,14 +566,14 @@ staccatissimo (scat [c..g]^/8)
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='2b6f7c06545d06fe.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='1ec3a978b81083e2.mid'>[listen]</a></div>
 
-![](2b6f7c06545d06fex.png)
+![](1ec3a978b81083e2x.png)
 
 ```haskell
-accent (scat [c..g]^/8)
+accent (scat [c..g]|/8)
     </>
-marcato (scat [c..g]^/8)
+marcato (scat [c..g]|/8)
 
 ```
 
@@ -584,14 +584,14 @@ marcato (scat [c..g]^/8)
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='673f78909bc2f782.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='1003d657c7e41346.mid'>[listen]</a></div>
 
-![](673f78909bc2f782x.png)
+![](1003d657c7e41346x.png)
 
 ```haskell
-accentLast (scat [c..g]^/8)
+accentLast (scat [c..g]|/8)
     </>
-accentAll (scat [c..g]^/8)
+accentAll (scat [c..g]|/8)
 
 ```
 
@@ -601,15 +601,15 @@ Applying articulations over multiple parts:
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='35785d82c9870216.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='4e44c65bef76adc.mid'>[listen]</a></div>
 
-![](35785d82c9870216x.png)
+![](4e44c65bef76adcx.png)
 
 ```haskell
 let
-    p1 = scat [c..c']^/4
-    p2 = delay (1/4) $ scat [c..c']^/4
-    p3 = delay (3/4) $ scat [c..c']^/4
+    p1 = scat [c..c']|/4
+    p2 = delay (1/4) $ scat [c..c']|/4
+    p3 = delay (3/4) $ scat [c..c']|/4
 in (accent . legato) (p1 </> p2 </> p3)
 
 ```
@@ -639,12 +639,12 @@ TODO
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='66b80c6224eada81.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='39cef03e499affd9.mid'>[listen]</a></div>
 
-![](66b80c6224eada81x.png)
+![](39cef03e499affd9x.png)
 
 ```haskell
-tremolo 2 $ times 2 $ (c |> d)^/2
+tremolo 2 $ times 2 $ (c |> d)|/2
 
 ```
 
@@ -659,12 +659,12 @@ TODO chord tremolo
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='53ec95ac1de17e43.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='39ce49830d4547b3.mid'>[listen]</a></div>
 
-![](53ec95ac1de17e43x.png)
+![](39ce49830d4547b3x.png)
 
 ```haskell
-glissando $ scat [c,d]^/2
+glissando $ scat [c,d]|/2
 
 ```
 
@@ -676,16 +676,16 @@ Use the [`harmonic`][harmonic] function:
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='233d44093180d816.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='32148961e1f7cd18.mid'>[listen]</a></div>
 
-![](233d44093180d816x.png)
+![](32148961e1f7cd18x.png)
 
 ```haskell
-(harmonic 1 $ c^/2)
+(harmonic 1 $ c|/2)
     </>
-(harmonic 2 $ c^/2)
+(harmonic 2 $ c|/2)
     </>
-(harmonic 3 $ c^/2)
+(harmonic 3 $ c|/2)
 
 ```
 
@@ -704,12 +704,12 @@ TODO
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='6934c41494386194.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='9705deac18f248e.mid'>[listen]</a></div>
 
-![](6934c41494386194x.png)
+![](9705deac18f248ex.png)
 
 ```haskell
-text "pizz." $ c^/2
+text "pizz." $ c|/2
 
 ```
 
@@ -763,12 +763,12 @@ TODO add explicit rests etc
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='a7ef465bd0ee974.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='2d85632f9fbc29e6.mid'>[listen]</a></div>
 
-![](a7ef465bd0ee974x.png)
+![](2d85632f9fbc29e6x.png)
 
 ```haskell
-mcatMaybes $ times 4 (accentAll g^*2 |> rest |> scat [d,d]^/2)^/8 
+mcatMaybes $ times 4 (accentAll g|*2 |> rest |> scat [d,d]|/2)|/8 
 
 ```
 
@@ -786,13 +786,13 @@ mcatMaybes $ times 4 (accentAll g^*2 |> rest |> scat [d,d]^/2)^/8
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='3883bfd54ea6f896.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='2ef7d21eb3d63550.mid'>[listen]</a></div>
 
-![](3883bfd54ea6f896x.png)
+![](2ef7d21eb3d63550x.png)
 
 ```haskell
 let
-    melody = accent $ legato $ scat [d, scat [g,fs]^/2,bb^*2]^/4
+    melody = accent $ legato $ scat [d, scat [g,fs]|/2,bb|*2]|/4
 in melody |> rev melody
 
 ```
@@ -803,13 +803,13 @@ in melody |> rev melody
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='59ebbac2f5b6a2f.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='7d5b65e57f30ce41.mid'>[listen]</a></div>
 
-![](59ebbac2f5b6a2fx.png)
+![](7d5b65e57f30ce41x.png)
 
 ```haskell
 let
-    melody = legato $ scat [c,d,e,c]^/16
+    melody = legato $ scat [c,d,e,c]|/16
 in times 4 $ melody
 
 ```
@@ -833,21 +833,12 @@ scat [e,d,f,e] <> c
 
 ## Onset and duration
 
-<div class='haskell-music'>
-
-<div class='haskell-music-listen'><a href='72a47c9d519a70bd.mid'>[listen]</a></div>
-
-![](72a47c9d519a70bdx.png)
-
-```haskell
+```music+haskellx
 let                
-    melody = asScore $ legato $ scat [scat [c,d,e,c], scat [e,f], g^*2]
+    melody = asScore $ legato $ scat [scat [c,d,e,c], scat [e,f], g|*2]
     pedal  = asScore $ delayTime (melody^.onset) $ stretch (melody^.duration) $ c_
 in compress 4 $ melody </> pedal
-
 ```
-
-</div>
 
 ## Pitch
 
@@ -855,16 +846,16 @@ in compress 4 $ melody </> pedal
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='41ac46372ebdf043.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='59471af4523858ff.mid'>[listen]</a></div>
 
-![](41ac46372ebdf043x.png)
+![](59471af4523858ffx.png)
 
 ```haskell
-(scat [c..g]^*(2/5))
+(scat [c..g]|*(2/5))
     </>
-(invertPitches c $ scat [c..g]^*(2/5))
+(invertPitches c $ scat [c..g]|*(2/5))
     </>
-(invertPitches e $ scat [c..g]^*(2/5))
+(invertPitches e $ scat [c..g]|*(2/5))
 
 ```
 
@@ -999,12 +990,12 @@ A [`Voice`][Voice] represents a single voice of music. It consists of a sequence
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='16cf79cdceb9f1dc.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='5116c32884c4447c.mid'>[listen]</a></div>
 
-![](16cf79cdceb9f1dcx.png)
+![](5116c32884c4447cx.png)
 
 ```haskell
-stretch (1/4) $ scat [c..a]^/2 |> b |> c'^*4
+stretch (1/4) $ scat [c..a]|/2 |> b |> c'|*4
 
 ```
 
@@ -1012,12 +1003,12 @@ stretch (1/4) $ scat [c..a]^/2 |> b |> c'^*4
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='145bbc6f88e82e18.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='18242a3ca51b3278.mid'>[listen]</a></div>
 
-![](145bbc6f88e82e18x.png)
+![](18242a3ca51b3278x.png)
 
 ```haskell
-stretch (1/2) $ scat [c..e]^/3 |> f |> g^*2
+stretch (1/2) $ scat [c..e]|/3 |> f |> g|*2
 
 ```
 
@@ -1087,12 +1078,12 @@ Title, subtitle etc is grouped together as a single type `Title`, thus an arbitr
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='28e4b79978d7eabe.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='36944bc61ca24134.mid'>[listen]</a></div>
 
-![](28e4b79978d7eabex.png)
+![](36944bc61ca24134x.png)
 
 ```haskell
-title "Frere Jaques" $ scat [c,d,e,c]^/4
+title "Frere Jaques" $ scat [c,d,e,c]|/4
 
 ```
 
@@ -1117,12 +1108,12 @@ composer "Anonymous" $ scat [c,d,e,c]
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='539b90fe4b4c4124.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='1ec9903705dbdaea.mid'>[listen]</a></div>
 
-![](539b90fe4b4c4124x.png)
+![](1ec9903705dbdaeax.png)
 
 ```haskell
-composer "Anonymous" $ lyricist "Anonymous" $ arranger "Hans" $ scat [c,d,e,c]^/4
+composer "Anonymous" $ lyricist "Anonymous" $ arranger "Hans" $ scat [c,d,e,c]|/4
 
 ```
 

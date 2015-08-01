@@ -27,13 +27,13 @@ To generate music we write an *expressions* such as this one:
 
 <div class='haskell-music'>
 
-<div class='haskell-music-listen'><a href='77fe359350a2c685.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='bd193fce5dbf2a7.mid'>[listen]</a></div>
 
-![](77fe359350a2c685x.png)
+![](bd193fce5dbf2a7x.png)
 
 ```haskell
 let
-    m = staccato (scat [c,d,e,c]^/2) |> ab |> b_ |> legato (d |> c)^*2
+    m = staccato (scat [c,d,e,c]|/2) |> ab |> b_ |> legato (d |> c)|*2
 in stretch (1/8) m
 
 ```
@@ -49,9 +49,9 @@ up m6 . compress 2
 
 Applied to the above music we get:
 
-<div class='haskell-music-listen'><a href='553782edbeb93558.mid'>[listen]</a></div>
+<div class='haskell-music-listen'><a href='7eb0a8c9b8d5fa58.mid'>[listen]</a></div>
 
-![](553782edbeb93558x.png)
+![](7eb0a8c9b8d5fa58x.png)
 
 ### Input and output
 

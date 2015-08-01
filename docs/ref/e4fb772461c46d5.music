@@ -1,0 +1,4 @@
+let                
+    melody = asScore $ legato $ scat [scat [c,d,e,c], scat [e,f], g|*2]
+    pedal  = asScore $ delayTime (melody^.onset) $ stretch (melody^.duration) $ c_
+in compress 4 $ melody </> pedal

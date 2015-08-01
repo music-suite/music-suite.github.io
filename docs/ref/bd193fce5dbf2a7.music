@@ -1,0 +1,3 @@
+let
+    m = staccato (scat [c,d,e,c]|/2) |> ab |> b_ |> legato (d |> c)|*2
+in stretch (1/8) m

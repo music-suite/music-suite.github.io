@@ -1,0 +1,3 @@
+accentLast (scat [c..g]|/8)
+    </>
+accentAll (scat [c..g]|/8)
