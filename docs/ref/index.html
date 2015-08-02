@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title>The Music Suite</title>
+  <title>Music Suite</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -31,7 +31,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
     <div class="navbar navbar-static-top">
     <div class="navbar-inner">
       <div class="container">
-        <span class="doc-title">The Music Suite</span>
+        <span class="doc-title">Music Suite</span>
         <ul class="nav pull-right doc-info">
                             </ul>
       </div>
@@ -45,7 +45,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
           <li class="nav-header">Table of Contents</li>
         </ul>
         <ul>
-        <li><a href="#the-music-suite">The Music Suite</a><ul>
+        <li><a href="#music-suite">Music Suite</a><ul>
         <li><a href="#an-example">An example</a></li>
         <li><a href="#input-and-output">Input and output</a></li>
         <li><a href="#version-numbers-and-stability">Version numbers and stability</a></li>
@@ -116,31 +116,14 @@ code > span.er { color: #ff0000; font-weight: bold; }
         <li><a href="#vextab">Vextab</a></li>
         <li><a href="#sibelius">Sibelius</a></li>
         </ul></li>
-        <li><a href="#customizing-music-representation">Customizing music representation</a><ul>
-        <li><a href="#adding-an-new-representation">Adding an new representation</a></li>
-        <li><a href="#adding-a-new-aspect">Adding a new aspect</a></li>
-        <li><a href="#adding-a-time-structure">Adding a time structure</a></li>
-        </ul></li>
-        <li><a href="#acknowledgements">Acknowledgements</a></li>
+        <li><a href="#related-work-and-libraries">Related work and libraries</a></li>
         </ul>
         </div>
       </div>
             <div class="span9">
-            <h2 id="the-music-suite">The Music Suite</h2>
-<p>The Music Suite is a language for description, analysis, composition and manipulation of music. It is <a href="http://www.haskell.org/haskellwiki/Embedded_domain_specific_language">embedded</a> in the Haskell language, meaning that it is both a language in its own right and a set of Haskell libraries.</p>
-<p>The Music Suite defines many common musical structures, which can be combined in many ways to form a suitable representation for almost any kind of music. Standard notation is included as a special case. The Music Suite differs from many other music representation systems in that it allows <em>continuous</em> representation of pitch, dynamics and other musical aspects, in addition to the common <em>discrete</em> representations.</p>
-<!--
-It is based on the [Haskell][Haskell] language. It is designed with three goals in mind:
-
-* Describe what the music *is*, rather than how it is to be performed.
-* Avoid imposing stylistic or theoretical assumptions on the music.
-* Include common notation and theory as a *special case*.
-
-The Music Suite is both a language in its own right and a Haskell library. Being embedded in Haskell has several advantages, it allow the developers to focus on the contents and the users to make use of any feature in the Haskell language.
--->
-<!--
-The Music Suite uses several advanced language constructs internally and requires a relatively new Haskell compiler (see [Installing the Suite](#installing-the-suite)).
--->
+            <h2 id="music-suite">Music Suite</h2>
+<p>Music Suite is a language for describing music, based on Haskell.</p>
+<p>It allow representation and manipulation of music in a very general sense, that is compatible with standard notation and supporting a variety of <a href="#import-and-export">import and export formats</a>. The use of Haskell allow for music to be created, transformed or analyzed using the full expressive power of the Haskell language.</p>
 <h3 id="an-example">An example</h3>
 <p>To generate music we write an <em>expressions</em> such as this one:</p>
 <div class="haskell-music">
@@ -221,22 +204,14 @@ $ ./test</code></pre>
 <p>In this case the resulting program will generate and open a file called <code>test.pdf</code> containing the output seen above.</p>
 <p>Music files and Haskell files using <code>open</code> are equivalent in every aspect. In fact, the <code>music2...</code> programs are simple utilities that substitutes a single expression into a Haskell module such as the one above and executes the resulting main function.</p>
 <h2 id="interactive-use">Interactive use</h2>
-<p>An advantage of Haskell files is that you can load them into a Haskell interpreter.</p>
+<p>An advantage of Haskell files is that you can load them into a Haskell interpreter (i.e. GHCI).</p>
 <p>TODO configuration</p>
-<p>Here is an example <code>.ghci</code> file.</p>
-<pre><code>:m + Music.Prelude
-:def! open  (\x -&gt; return $ &quot;open  $ asScore $ &quot;++ x)
-:def! play  (\x -&gt; return $ &quot;play  $ asScore $ &quot;++ x)
-:def! write (\x -&gt; return $ &quot;write $ asScore $ &quot;++ x)
-putStrLn &quot;Welcome to the Music Suite!&quot;
-putStrLn &quot;Try :open &lt;music&gt; or :play &lt;music&gt;&quot;</code></pre>
+<p>In the interpreter, the <a href="!--%20Unknown:%20display%20No%20such%20identifier:%20display--"><code>display</code></a> and <a href="!--%20Unknown:%20audify%20No%20such%20identifier:%20audify--"><code>audify</code></a> functions are the most convenient ways of inspecting music. Note that because these functions are overloaded you may be required to provide a specific type signature.</p>
+<pre class="hs"><code>&gt;&gt;&gt; display $ ([c,g,bb]^.chord :: Chord Pitch)
+&gt;&gt;&gt; audify  $ (c :: Pitch)
+&gt;&gt;&gt; display $ ([c,g,bb]^.chord :: Chord Pitch)
+&gt;&gt;&gt; audify  $ [1,2,1]^.rhythm</code></pre>
 <h1 id="writing-music">Writing music</h1>
-<p>This chapter will cover how to use the Music Suite to <em>write</em> music. Later on we will cover how to <em>import</em> and <em>transform</em> music.</p>
-<p>One of the main points of the Music Suite is to avoid committing to a <em>single</em>, closed music representation. Instead it provides a set of types and type constructors that can be used to construct an arbitrary representation of music.</p>
-<p>Usually you will not want to invent a new representation from scratch, but rather start with a standard representation and customize it when needed. The default representation is defined in the <code>Music.Prelude</code> module, which imported in all music files by default.</p>
-<!--
-See [Customizing the Music Representation](#customizing-music-representation) for other examples.
--->
 <h2 id="time-and-duration">Time and Duration</h2>
 <p>A single note can be entered by its name. This will render a note in the middle octave with a duration of one. Note that note values and durations correspond exactly, a duration of <code>1</code> is a whole note, a duration of <code>1/2</code> is a half note, and so on.</p>
 <div class="haskell-music">
@@ -658,7 +633,6 @@ accentAll (scat [c<span class="fu">..</span>g]<span class="fu">|/</span><span cl
 </div>
 <p>TODO how part separation works w.r.t. division etc</p>
 <p><a href="/docs/api/music-score/Music-Time-Score.html#v:simultaneous"><code>simultaneous</code></a></p>
-<p><a href="!--%20Unknown:%20simult%20No%20such%20identifier:%20simult--"><code>simult</code></a></p>
 <h2 id="rests">Rests</h2>
 <p>Similar to chords, there is usually no need to handle rests explicitly.</p>
 <p>TODO add explicit rests etc</p>
@@ -835,7 +809,7 @@ TODO
 <h2 id="time-duration-and-span">Time, duration and span</h2>
 <p>Time points and vectors are represented by two types <a href="/docs/api/music-score/Music-Score-Meta-Time.html#v:time"><code>Time</code></a> and <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#t:Duration"><code>Duration</code></a>. The difference between these types is similar to the distinction between points and vectors in ordinary geometry. One way of thinking about time vs. duration is that duration are always <em>relative</em> (i.e. the duration between the start of two notes), while <em>time</em> is absolute.</p>
 <p>Time points form an affine space over durations, so we can use the operators <a href="/docs/api/music-pitch/Music-Pitch.html#v:-46--43--94-"><code>.+^</code></a> and <a href="/docs/api/music-pitch/Music-Pitch.html#v:-46--45--46-"><code>.-.</code></a> to convert between the two.</p>
-<p>The <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#t:Span"><code>Span</code></a> type represents a <em>slice</em> of time. We can represent spans in exactly three ways: as two points representing <em>onset</em> and <em>offset</em>, as one point representing <em>onset</em> and a duration, or alternatively as a point representing <em>offset</em> and a duration. To convert between these representations, we can use <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#v:range"><code>range</code></a>, <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#v:delta"><code>delta</code></a> and <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#v:codelta"><code>codelta</code></a>, which are <em>isomorphisms</em> using the definition from the <code>lens</code> package.</p>
+<p>The <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#t:Span"><code>Span</code></a> type represents a <em>slice</em> of time. We can represent spans in exactly three ways: as two points representing <em>onset</em> and <em>offset</em>, as one point representing <em>onset</em> and a duration, or alternatively as a point representing <em>offset</em> and a duration. To convert between these representations, we can use <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#v:onsetAndOffset"><code>onsetAndOffset</code></a>, <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#v:onsetAndDuration"><code>onsetAndDuration</code></a> and <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#v:durationAndOffset"><code>durationAndOffset</code></a>, which are <em>isomorphisms</em> using the definition from the <code>lens</code> package.</p>
 <h2 id="rests-notes-and-chords">Rests, Notes and Chords</h2>
 <p><a href="/docs/api/music-score/Music-Time-Note.html#t:Note"><code>Note</code></a></p>
 <h2 id="voices">Voices</h2>
@@ -975,7 +949,6 @@ in trackToScore (1/8) y
 </div>
 <pre class="sourceCode haskell"><code class="sourceCode haskell">compress <span class="dv">4</span> <span class="fu">$</span> timeSignature (<span class="dv">4</span><span class="fu">/</span><span class="dv">4</span>) (scat [c,d,e,c,d,e,f,d,g,d]) <span class="fu">|&gt;</span> timeSignature (<span class="dv">3</span><span class="fu">/</span><span class="dv">4</span>) (scat [a,g,f,g,f,e])</code></pre>
 </div>
-<p>TODO adapt getBarDurations and getBarTimeSignatures to actually do this</p>
 <p>TODO repeats</p>
 <h2 id="clefs">Clefs</h2>
 <p>To set the clef for a whole passage, use <a href="/docs/api/music-score/Music-Score-Meta-Clef.html#v:clef"><code>clef</code></a>. The clef is used by most notation backends and ignored by audio backends.</p>
@@ -1110,25 +1083,37 @@ You can read and write MIDI files using the functions [`readMidi`][readMidi] and
 <!--
 This feature could of course also be used to convert Sibelius scores to other formats such as Guido or ABC without having to write in the ManuScript language used by Sibelius.
 -->
-<h1 id="customizing-music-representation">Customizing music representation</h1>
-<h2 id="adding-an-new-representation">Adding an new representation</h2>
-<p>You can use your own representation for all standard musical aspects.</p>
-<p>TODO</p>
-<h2 id="adding-a-new-aspect">Adding a new aspect</h2>
-<p>It is also possible to make the Suite work with completely <em>new</em> aspects.</p>
-<p>TODO</p>
-<h2 id="adding-a-time-structure">Adding a time structure</h2>
-<p>TODO</p>
-<ul>
-<li>Create a type of kind <code>* -&gt; *</code>.</li>
-<li>Add instances for the standard classes <a href="/docs/api/music-score/Music-Score.html#t:Functor"><code>Functor</code></a>, <a href="/docs/api/music-score/Music-Score.html#t:Applicative"><code>Applicative</code></a> and (if possible) <a href="/docs/api/music-score/Music-Score.html#t:Monad"><code>Monad</code></a> or <a href="!--%20Unknown:%20Comonad%20No%20such%20identifier:%20Comonad--"><code>Comonad</code></a>.</li>
-<li>If your representation supports <em>parallel</em> composition it should be a trivial (non-lifted) <a href="/docs/api/music-pitch/Music-Pitch.html#t:Monoid"><code>Monoid</code></a>. It it also supports sequential composition, it should support <a href="/docs/api/music-score/Music-Time-Internal-Transform.html#t:Transformable"><code>Transformable</code></a> and <a href="/docs/api/music-score/Music-Time-Juxtapose.html#t:HasPosition"><code>HasPosition</code></a>.</li>
-<li>Optionally, add instances for <a href="/docs/api/music-score/Music-Time-Juxtapose.html#t:Splittable"><code>Splittable</code></a> and <a href="/docs/api/music-score/Music-Time-Juxtapose.html#t:Reversible"><code>Reversible</code></a>.</li>
-</ul>
-<h1 id="acknowledgements">Acknowledgements</h1>
-<p>The Music Suite is indebted to many other previous libraries and computer music environments, particularly <a href="http://commonmusic.sourceforge.net/">Common Music</a>, <a href="http://www2.siba.fi/PWGL/">PWGL</a>, <a href="http://cycling74.com/products/max/">Max/MSP</a>, <a href="http://supercollider.sourceforge.net/">SuperCollider</a>, <a href="http://audacity.sourceforge.net/help/nyquist">nyquist</a>, <a href="http://music21-mit.blogspot.se/">music21</a>, <a href="http://guidolib.sourceforge.net/">Guido</a>, <a href="http://lilypond.org/">Lilypond</a> and <a href="https://pypi.python.org/pypi/Abjad/2.3">Abjad</a>. Some of the ideas for the quantization algorithms came from <a href="http://fomus.sourceforge.net/">Fomus</a>.</p>
-<p>The Music Suite obviously ows much to the previous Haskell libraries for music representation, including <a href="http://www.haskell.org/haskellwiki/Haskore">Haskore</a>, <a href="http://haskell.cs.yale.edu/euterpea/">Euterpea</a> and <a href="http://hackage.haskell.org/package/temporal-media">temporal-media</a>. The idea of defining a custom internal representation, but relying on standardized formats for input and output comes from <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a>. The idea of splitting the library into a set of packages (and the name) comes from the <a href="https://github.com/haskell-suite">Haskell Suite</a>.</p>
-<p>The temporal structures, their instances and the concept of denotational design comes from <a href="http://www.haskell.org/haskellwiki/Reactive">Reactive</a> (and its predecessors). <a href="http://projects.haskell.org/diagrams/">Diagrams</a> provided the daring example and some general influences on the design.</p>
+<!--
+
+# Customizing music representation
+
+## Adding an new representation
+
+You can use your own representation for all standard musical aspects.
+
+TODO
+
+## Adding a new aspect
+
+It is also possible to make the Suite work with completely *new* aspects.
+
+TODO
+
+## Adding a time structure
+
+TODO
+
+- Create a type of kind `* -> *`.
+- Add instances for the standard classes [`Functor`][Functor], [`Applicative`][Applicative] and (if possible) [`Monad`][Monad] or [`Comonad`][Comonad].
+- If your representation supports *parallel* composition it should be a trivial (non-lifted) [`Monoid`][Monoid]. It it also supports sequential composition, it should support [`Transformable`][Transformable] and [`HasPosition`][HasPosition].
+- Optionally, add instances for [`Splittable`][Splittable] and [`Reversible`][Reversible].
+
+-->
+<h1 id="related-work-and-libraries">Related work and libraries</h1>
+<p>The Music Suite is indebted to many other previous libraries and computer music environments, particularly <a href="http://commonmusic.sourceforge.net/">Common Music</a>, <a href="http://www2.siba.fi/PWGL/">PWGL</a>, <a href="http://audacity.sourceforge.net/help/nyquist">nyquist</a>, <a href="http://music21-mit.blogspot.se/">music21</a>, <a href="http://lilypond.org/">Lilypond</a> and <a href="https://pypi.python.org/pypi/Abjad/2.3">Abjad</a>. Some of the ideas for the quantization algorithms came from <a href="http://fomus.sourceforge.net/">Fomus</a>.</p>
+<p>The work of Paul Hudak and the the Yale Haskell group, including <a href="http://www.haskell.org/haskellwiki/Haskore">Haskore</a>, <a href="http://haskell.cs.yale.edu/euterpea/">Euterpea</a> is a major influence. The and <a href="http://hackage.haskell.org/package/temporal-media">temporal-media</a> package is a similar take on these ideas. The popular <a href="http://yaxu.org/tidal/">Tidal</a> language provide a way of expressing infinite time structures, similar to the ones defined in <code>music-score</code>.</p>
+<p>The idea of defining a custom internal representation, but relying on standardized formats for input and output is influenced by <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a>. The idea of splitting the library into a set of packages (and the name) comes from the <a href="https://github.com/haskell-suite">Haskell Suite</a>.</p>
+<p>The temporal structures, their instances and more general design philosophy comes from Conal Elliott's <a href="http://www.haskell.org/haskellwiki/Reactive">Reactive</a> (and its predecessors). Brent Yorgey's <a href="http://projects.haskell.org/diagrams/">Diagrams</a> provided the separation of points and vectors which was a main influence.</p>
 <script src="js/jasmid/stream.js"></script>
 <script src="js/jasmid/midifile.js"></script>
 <script src="js/jasmid/replayer.js"></script>
@@ -1137,7 +1122,7 @@ This feature could of course also be used to convert Sibelius scores to other fo
 <script src="js/base64binary.js" type="text/javascript"></script>
 <script src="js/main.js" type="text/javascript"></script>
 <hr />
-<p><em>Copyright Hans Jacob Höglund 2012–2013</em></p>
+<p><em>Copyright Hans Jacob Höglund 2012–2015</em></p>
 <p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This documentation is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
             </div>
     </div>

@@ -60,34 +60,22 @@ Music files and Haskell files using `open` are equivalent in every aspect. In fa
 
 ## Interactive use
 
-An advantage of Haskell files is that you can load them into a Haskell interpreter.
+An advantage of Haskell files is that you can load them into a Haskell interpreter (i.e. GHCI).
 
 TODO configuration
 
-Here is an example `.ghci` file.
+In the interpreter, the [`display`][display] and [`audify`][audify] functions are the most convenient ways of inspecting music. Note that because these functions are overloaded you may be required to provide a specific type signature.
 
+```hs
+>>> display $ ([c,g,bb]^.chord :: Chord Pitch)
+>>> audify  $ (c :: Pitch)
+>>> display $ ([c,g,bb]^.chord :: Chord Pitch)
+>>> audify  $ [1,2,1]^.rhythm
 ```
-:m + Music.Prelude
-:def! open  (\x -> return $ "open  $ asScore $ "++ x)
-:def! play  (\x -> return $ "play  $ asScore $ "++ x)
-:def! write (\x -> return $ "write $ asScore $ "++ x)
-putStrLn "Welcome to the Music Suite!"
-putStrLn "Try :open <music> or :play <music>"
-```
+
 
 
 # Writing music
-
-This chapter will cover how to use the Music Suite to *write* music. Later on we will cover how to *import* and *transform* music.
-
-One of the main points of the Music Suite is to avoid committing to a *single*, closed music representation. Instead it provides a set of types and type constructors that can be used to construct an arbitrary representation of music. 
-
-Usually you will not want to invent a new representation from scratch, but rather start with a standard representation and customize it when needed. The default representation is defined in the `Music.Prelude` module, which imported in all music files by default. 
-
-<!--
-See [Customizing the Music Representation](#customizing-music-representation) for other examples.
--->
-
 
 ## Time and Duration
 
@@ -751,7 +739,6 @@ TODO how part separation works w.r.t. division etc
 
 [`simultaneous`][simultaneous]
 
-[`simult`][simult]
 
 ## Rests
 
@@ -978,7 +965,7 @@ Time points and vectors are represented by two types [`Time`][Time] and [`Durati
 
 Time points form an affine space over durations, so we can use the operators [`.+^`][.+^] and [`.-.`][.-.] to convert between the two.
 
-The [`Span`][Span] type represents a *slice* of time. We can represent spans in exactly three ways: as two points representing *onset* and *offset*, as one point representing *onset* and a duration, or alternatively as a point representing *offset* and a duration. To convert between these representations, we can use [`range`][range], [`delta`][delta] and [`codelta`][codelta], which are *isomorphisms* using the definition from the `lens` package.
+The [`Span`][Span] type represents a *slice* of time. We can represent spans in exactly three ways: as two points representing *onset* and *offset*, as one point representing *onset* and a duration, or alternatively as a point representing *offset* and a duration. To convert between these representations, we can use [`onsetAndOffset`][onsetAndOffset], [`onsetAndDuration`][onsetAndDuration] and [`durationAndOffset`][durationAndOffset], which are *isomorphisms* using the definition from the `lens` package.
 
 ## Rests, Notes and Chords
 
@@ -1201,8 +1188,6 @@ compress 4 $ timeSignature (4/4) (scat [c,d,e,c,d,e,f,d,g,d]) |> timeSignature (
 
 </div>
 
-TODO adapt getBarDurations and getBarTimeSignatures to actually do this
-
 TODO repeats
 
 ## Clefs
@@ -1398,6 +1383,8 @@ This feature could of course also be used to convert Sibelius scores to other fo
 
 
 
+<!--
+
 # Customizing music representation
 
 ## Adding an new representation
@@ -1421,14 +1408,17 @@ TODO
 - If your representation supports *parallel* composition it should be a trivial (non-lifted) [`Monoid`][Monoid]. It it also supports sequential composition, it should support [`Transformable`][Transformable] and [`HasPosition`][HasPosition].
 - Optionally, add instances for [`Splittable`][Splittable] and [`Reversible`][Reversible].
 
+-->
 
-# Acknowledgements
+# Related work and libraries
 
-The Music Suite is indebted to many other previous libraries and computer music environments, particularly [Common Music][common-music], [PWGL][pwgl], [Max/MSP][max-msp], [SuperCollider][supercollider], [nyquist][nyquist], [music21][music21], [Guido][guido], [Lilypond][lilypond] and [Abjad][abjad]. Some of the ideas for the quantization algorithms came from [Fomus][fomus].
+The Music Suite is indebted to many other previous libraries and computer music environments, particularly [Common Music][common-music], [PWGL][pwgl], [nyquist][nyquist], [music21][music21], [Lilypond][lilypond] and [Abjad][abjad]. Some of the ideas for the quantization algorithms came from [Fomus][fomus].
 
-The Music Suite obviously ows much to the previous Haskell libraries for music representation, including [Haskore][haskore], [Euterpea][euterpea] and [temporal-media][temporal-media]. The idea of defining a custom internal representation, but relying on standardized formats for input and output comes from [Pandoc][pandoc]. The idea of splitting the library into a set of packages (and the name) comes from the [Haskell Suite][haskell-suite].
+The work of Paul Hudak and the the Yale Haskell group, including [Haskore][haskore], [Euterpea][euterpea] is a major influence. The  and [temporal-media][temporal-media] package is a similar take on these ideas. The popular [Tidal][tidal] language provide a way of expressing infinite time structures, similar to the ones defined in `music-score`.
 
-The temporal structures, their instances and the concept of denotational design comes from [Reactive][reactive] (and its predecessors). [Diagrams][diagrams] provided the daring example and some general influences on the design.
+The idea of defining a custom internal representation, but relying on standardized formats for input and output is influenced by [Pandoc][pandoc]. The idea of splitting the library into a set of packages (and the name) comes from the [Haskell Suite][haskell-suite].
+
+The temporal structures, their instances and more general design philosophy comes from Conal Elliott's [Reactive][reactive] (and its predecessors). Brent Yorgey's [Diagrams][diagrams] provided the separation of points and vectors which was a main influence.
 
 
 <script src="js/jasmid/stream.js"></script>
@@ -1493,19 +1483,24 @@ The temporal structures, their instances and the concept of denotational design 
 
 [attribution]: /docs/api/music-score/Music-Score-Meta-Attribution.html#v:attribution
 [attributions]: /docs/api/music-score/Music-Score-Meta-Attribution.html#v:attributions
+[audify]: 
+<!-- Unknown: audify No such identifier: audify-->
+
 [augment]: /docs/api/music-pitch-literal/Music-Pitch-Augmentable.html#v:augment
 [barline]: /docs/api/music-score/Music-Score-Meta-Barline.html#v:barline
 [below]: /docs/api/music-score/Music-Score-Pitch.html#v:below
 [clefDuring]: /docs/api/music-score/Music-Score-Meta-Clef.html#v:clefDuring
 [clef]: /docs/api/music-score/Music-Score-Meta-Clef.html#v:clef
-[codelta]: /docs/api/music-score/Music-Time-Internal-Transform.html#v:codelta
 [composer]: /docs/api/music-score/Music-Score-Meta-Attribution.html#v:composer
 [compoundTime]: /docs/api/music-score/Music-Score-Meta-Time.html#v:compoundTime
 [compress]: /docs/api/music-score/Music-Time-Internal-Transform.html#v:compress
-[delta]: /docs/api/music-score/Music-Time-Internal-Transform.html#v:delta
 [diminish]: /docs/api/music-pitch-literal/Music-Pitch-Augmentable.html#v:diminish
+[display]: 
+<!-- Unknown: display No such identifier: display-->
+
 [doubleBarline]: /docs/api/music-score/Music-Score-Meta-Barline.html#v:doubleBarline
 [down]: /docs/api/music-score/Music-Score-Pitch.html#v:down
+[durationAndOffset]: /docs/api/music-score/Music-Time-Internal-Transform.html#v:durationAndOffset
 [finalBarline]: /docs/api/music-score/Music-Score-Meta-Barline.html#v:finalBarline
 [flat]: /docs/api/music-pitch/Music-Pitch-Common-Pitch.html#v:flat
 [flatten]: /docs/api/music-pitch-literal/Music-Pitch-Alterable.html#v:flatten
@@ -1527,6 +1522,8 @@ The temporal structures, their instances and the concept of denotational design 
 [octavesDown]: /docs/api/music-score/Music-Score-Pitch.html#v:octavesDown
 [octavesUp]: /docs/api/music-score/Music-Score-Pitch.html#v:octavesUp
 [octaves]: /docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:octaves
+[onsetAndDuration]: /docs/api/music-score/Music-Time-Internal-Transform.html#v:onsetAndDuration
+[onsetAndOffset]: /docs/api/music-score/Music-Time-Internal-Transform.html#v:onsetAndOffset
 [pcat]: /docs/api/music-score/Music-Time-Juxtapose.html#v:pcat
 [pitch']: /docs/api/music-score/Music-Score-Pitch.html#v:pitch'
 [pitch]: /docs/api/music-score/Music-Score-Pitch.html#v:pitch
@@ -1540,7 +1537,6 @@ The temporal structures, their instances and the concept of denotational design 
 
 [portato]: /docs/api/music-score/Music-Score-Articulation.html#v:portato
 [quality]: /docs/api/music-pitch/Music-Pitch-Common-Quality.html#v:quality
-[range]: /docs/api/music-score/Music-Time-Internal-Transform.html#v:range
 [readMidi]: /docs/api/music-score/Music-Score-Import-Midi.html#v:readMidi
 [rehearsalMarkDuring]: /docs/api/music-score/Music-Score-Meta-RehearsalMark.html#v:rehearsalMarkDuring
 [rehearsalMark]: /docs/api/music-score/Music-Score-Meta-RehearsalMark.html#v:rehearsalMark
@@ -1554,9 +1550,6 @@ The temporal structures, their instances and the concept of denotational design 
 [sharpen]: /docs/api/music-pitch-literal/Music-Pitch-Alterable.html#v:sharpen
 [showAnnotations]: /docs/api/music-score/Music-Score-Meta-Annotations.html#v:showAnnotations
 [simple]: /docs/api/music-pitch/Music-Pitch-Common-Interval.html#v:simple
-[simult]: 
-<!-- Unknown: simult No such identifier: simult-->
-
 [simultaneous]: /docs/api/music-score/Music-Time-Score.html#v:simultaneous
 [slide]: /docs/api/music-score/Music-Score-Slide.html#v:slide
 [staccatissimo]: /docs/api/music-score/Music-Score-Articulation.html#v:staccatissimo
@@ -1609,12 +1602,13 @@ The temporal structures, their instances and the concept of denotational design 
 [euterpea]:         http://haskell.cs.yale.edu/euterpea/
 [haskell]:          http://haskell.org
 [pandoc]:           http://johnmacfarlane.net/pandoc/
+[tidal]:            http://yaxu.org/tidal/
 
 [declaration-style]: http://www.haskell.org/haskellwiki/Declaration_vs._expression_style
 
 ----
 
-*Copyright Hans Jacob Höglund 2012–2013*
+*Copyright Hans Jacob Höglund 2012–2015*
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This documentation is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
